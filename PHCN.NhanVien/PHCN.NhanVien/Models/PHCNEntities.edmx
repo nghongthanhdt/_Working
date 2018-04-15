@@ -1,0 +1,501 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PHCNModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BaiViet">
+          <Key>
+            <PropertyRef Name="MaBaiViet" />
+          </Key>
+          <Property Name="MaBaiViet" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TieuDe" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="NoiDung" Type="ntext" />
+          <Property Name="LoaiBaiViet" Type="int" Nullable="false" />
+          <Property Name="Xoa" Type="bit" Nullable="false" />
+          <Property Name="NgayXoa" Type="datetime" />
+          <Property Name="NguoiXoa" Type="nvarchar" MaxLength="50" />
+          <Property Name="Ngay" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FileDinhKem">
+          <Key>
+            <PropertyRef Name="MaFile" />
+          </Key>
+          <Property Name="MaFile" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaBaiViet" Type="int" Nullable="false" />
+          <Property Name="TenFile" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="TenFileFull" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="PhanMoRong" Type="nvarchar" MaxLength="10" />
+          <Property Name="NgayTaiLen" Type="datetime" Nullable="false" />
+          <Property Name="Xoa" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GuiNhan">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaBaiViet" Type="int" Nullable="false" />
+          <Property Name="NguoiGui" Type="int" Nullable="false" />
+          <Property Name="NguoiNhan" Type="int" Nullable="false" />
+          <Property Name="DaNhan" Type="bit" />
+          <Property Name="DaXem" Type="bit" />
+          <Property Name="QuanTrong" Type="bit" />
+          <Property Name="DaXoa" Type="bit" />
+          <Property Name="GhiChu" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="KhoaPhong">
+          <Key>
+            <PropertyRef Name="MaKhoa" />
+          </Key>
+          <Property Name="MaKhoa" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="TenKhoa" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="STT" Type="int" Nullable="false" />
+          <Property Name="Xoa" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LoaiBaiViet">
+          <Key>
+            <PropertyRef Name="MaLoai" />
+          </Key>
+          <Property Name="MaLoai" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenLoai" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="STT" Type="int" Nullable="false" />
+          <Property Name="MauSac" Type="nvarchar" MaxLength="10" />
+          <Property Name="Xoa" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Loi">
+          <Key>
+            <PropertyRef Name="MaLoi" />
+          </Key>
+          <Property Name="MaLoi" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TenLoi" Type="nvarchar" MaxLength="2000" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NhanVien">
+          <Key>
+            <PropertyRef Name="MaNhanVien" />
+          </Key>
+          <Property Name="MaNhanVien" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaKhoa" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="HoTen" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TenDangNhap" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MatKhau" Type="nvarchar" MaxLength="50" />
+          <Property Name="STT" Type="int" Nullable="false" />
+          <Property Name="Xoa" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_BaiViet_LoaiBaiViet">
+          <End Role="LoaiBaiViet" Type="Self.LoaiBaiViet" Multiplicity="1" />
+          <End Role="BaiViet" Type="Self.BaiViet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiBaiViet">
+              <PropertyRef Name="MaLoai" />
+            </Principal>
+            <Dependent Role="BaiViet">
+              <PropertyRef Name="LoaiBaiViet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FileDinhKem_BaiViet">
+          <End Role="BaiViet" Type="Self.BaiViet" Multiplicity="1" />
+          <End Role="FileDinhKem" Type="Self.FileDinhKem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BaiViet">
+              <PropertyRef Name="MaBaiViet" />
+            </Principal>
+            <Dependent Role="FileDinhKem">
+              <PropertyRef Name="MaBaiViet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GuiNhan_BaiViet">
+          <End Role="BaiViet" Type="Self.BaiViet" Multiplicity="1" />
+          <End Role="GuiNhan" Type="Self.GuiNhan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BaiViet">
+              <PropertyRef Name="MaBaiViet" />
+            </Principal>
+            <Dependent Role="GuiNhan">
+              <PropertyRef Name="MaBaiViet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GuiNhan_NhanVien_NguoiGui">
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="1" />
+          <End Role="GuiNhan" Type="Self.GuiNhan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="MaNhanVien" />
+            </Principal>
+            <Dependent Role="GuiNhan">
+              <PropertyRef Name="NguoiGui" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GuiNhan_NhanVien_NguoiNhan">
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="1" />
+          <End Role="GuiNhan" Type="Self.GuiNhan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="MaNhanVien" />
+            </Principal>
+            <Dependent Role="GuiNhan">
+              <PropertyRef Name="NguoiNhan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NhanVien_KhoaPhong">
+          <End Role="KhoaPhong" Type="Self.KhoaPhong" Multiplicity="1" />
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhoaPhong">
+              <PropertyRef Name="MaKhoa" />
+            </Principal>
+            <Dependent Role="NhanVien">
+              <PropertyRef Name="MaKhoa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PHCNModelStoreContainer">
+          <EntitySet Name="BaiViet" EntityType="Self.BaiViet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FileDinhKem" EntityType="Self.FileDinhKem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GuiNhan" EntityType="Self.GuiNhan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KhoaPhong" EntityType="Self.KhoaPhong" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoaiBaiViet" EntityType="Self.LoaiBaiViet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Loi" EntityType="Self.Loi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NhanVien" EntityType="Self.NhanVien" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BaiViet_LoaiBaiViet" Association="Self.FK_BaiViet_LoaiBaiViet">
+            <End Role="LoaiBaiViet" EntitySet="LoaiBaiViet" />
+            <End Role="BaiViet" EntitySet="BaiViet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FileDinhKem_BaiViet" Association="Self.FK_FileDinhKem_BaiViet">
+            <End Role="BaiViet" EntitySet="BaiViet" />
+            <End Role="FileDinhKem" EntitySet="FileDinhKem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GuiNhan_BaiViet" Association="Self.FK_GuiNhan_BaiViet">
+            <End Role="BaiViet" EntitySet="BaiViet" />
+            <End Role="GuiNhan" EntitySet="GuiNhan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GuiNhan_NhanVien_NguoiGui" Association="Self.FK_GuiNhan_NhanVien_NguoiGui">
+            <End Role="NhanVien" EntitySet="NhanVien" />
+            <End Role="GuiNhan" EntitySet="GuiNhan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GuiNhan_NhanVien_NguoiNhan" Association="Self.FK_GuiNhan_NhanVien_NguoiNhan">
+            <End Role="NhanVien" EntitySet="NhanVien" />
+            <End Role="GuiNhan" EntitySet="GuiNhan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NhanVien_KhoaPhong" Association="Self.FK_NhanVien_KhoaPhong">
+            <End Role="KhoaPhong" EntitySet="KhoaPhong" />
+            <End Role="NhanVien" EntitySet="NhanVien" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PHCNModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="GuiNhan">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaBaiViet" Type="Int32" Nullable="false" />
+          <Property Name="NguoiGui" Type="Int32" Nullable="false" />
+          <Property Name="NguoiNhan" Type="Int32" Nullable="false" />
+          <Property Name="DaNhan" Type="Boolean" />
+          <Property Name="DaXem" Type="Boolean" />
+          <Property Name="QuanTrong" Type="Boolean" />
+          <Property Name="DaXoa" Type="Boolean" />
+          <Property Name="GhiChu" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="NhanVien" Relationship="Self.FK_GuiNhan_NhanVien_NguoiGui" FromRole="GuiNhan" ToRole="NhanVien" />
+          <NavigationProperty Name="NhanVien1" Relationship="Self.FK_GuiNhan_NhanVien_NguoiNhan" FromRole="GuiNhan" ToRole="NhanVien" />
+          <NavigationProperty Name="BaiViet" Relationship="PHCNModel.FK_GuiNhan_BaiViet" FromRole="GuiNhan" ToRole="BaiViet" />
+        </EntityType>
+        <EntityType Name="KhoaPhong">
+          <Key>
+            <PropertyRef Name="MaKhoa" />
+          </Key>
+          <Property Name="MaKhoa" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TenKhoa" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="STT" Type="Int32" Nullable="false" />
+          <Property Name="Xoa" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="NhanVien" Relationship="Self.FK_NhanVien_KhoaPhong" FromRole="KhoaPhong" ToRole="NhanVien" />
+        </EntityType>
+        <EntityType Name="LoaiBaiViet">
+          <Key>
+            <PropertyRef Name="MaLoai" />
+          </Key>
+          <Property Name="MaLoai" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenLoai" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="STT" Type="Int32" Nullable="false" />
+          <Property Name="MauSac" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BaiViet" Relationship="PHCNModel.FK_BaiViet_LoaiBaiViet" FromRole="LoaiBaiViet" ToRole="BaiViet" />
+          <Property Name="Xoa" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NhanVien">
+          <Key>
+            <PropertyRef Name="MaNhanVien" />
+          </Key>
+          <Property Name="MaNhanVien" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaKhoa" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HoTen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TenDangNhap" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MatKhau" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="STT" Type="Int32" Nullable="false" />
+          <Property Name="Xoa" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="GuiNhan" Relationship="Self.FK_GuiNhan_NhanVien_NguoiGui" FromRole="NhanVien" ToRole="GuiNhan" />
+          <NavigationProperty Name="GuiNhan1" Relationship="Self.FK_GuiNhan_NhanVien_NguoiNhan" FromRole="NhanVien" ToRole="GuiNhan" />
+          <NavigationProperty Name="KhoaPhong" Relationship="Self.FK_NhanVien_KhoaPhong" FromRole="NhanVien" ToRole="KhoaPhong" />
+        </EntityType>
+        <Association Name="FK_GuiNhan_NhanVien_NguoiGui">
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="1" />
+          <End Role="GuiNhan" Type="Self.GuiNhan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="MaNhanVien" />
+            </Principal>
+            <Dependent Role="GuiNhan">
+              <PropertyRef Name="NguoiGui" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GuiNhan_NhanVien_NguoiNhan">
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="1" />
+          <End Role="GuiNhan" Type="Self.GuiNhan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="MaNhanVien" />
+            </Principal>
+            <Dependent Role="GuiNhan">
+              <PropertyRef Name="NguoiNhan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NhanVien_KhoaPhong">
+          <End Role="KhoaPhong" Type="Self.KhoaPhong" Multiplicity="1" />
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhoaPhong">
+              <PropertyRef Name="MaKhoa" />
+            </Principal>
+            <Dependent Role="NhanVien">
+              <PropertyRef Name="MaKhoa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PHCNEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="GuiNhan" EntityType="Self.GuiNhan" />
+          <EntitySet Name="KhoaPhong" EntityType="Self.KhoaPhong" />
+          <EntitySet Name="LoaiBaiViet" EntityType="Self.LoaiBaiViet" />
+          <EntitySet Name="NhanVien" EntityType="Self.NhanVien" />
+          <AssociationSet Name="FK_GuiNhan_NhanVien_NguoiGui" Association="Self.FK_GuiNhan_NhanVien_NguoiGui">
+            <End Role="NhanVien" EntitySet="NhanVien" />
+            <End Role="GuiNhan" EntitySet="GuiNhan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GuiNhan_NhanVien_NguoiNhan" Association="Self.FK_GuiNhan_NhanVien_NguoiNhan">
+            <End Role="NhanVien" EntitySet="NhanVien" />
+            <End Role="GuiNhan" EntitySet="GuiNhan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NhanVien_KhoaPhong" Association="Self.FK_NhanVien_KhoaPhong">
+            <End Role="KhoaPhong" EntitySet="KhoaPhong" />
+            <End Role="NhanVien" EntitySet="NhanVien" />
+          </AssociationSet>
+          <EntitySet Name="BaiViet" EntityType="PHCNModel.BaiViet" />
+          <AssociationSet Name="FK_BaiViet_LoaiBaiViet" Association="PHCNModel.FK_BaiViet_LoaiBaiViet">
+            <End Role="LoaiBaiViet" EntitySet="LoaiBaiViet" />
+            <End Role="BaiViet" EntitySet="BaiViet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GuiNhan_BaiViet" Association="PHCNModel.FK_GuiNhan_BaiViet">
+            <End Role="BaiViet" EntitySet="BaiViet" />
+            <End Role="GuiNhan" EntitySet="GuiNhan" />
+          </AssociationSet>
+          <EntitySet Name="Loi" EntityType="PHCNModel.Loi" />
+          <EntitySet Name="FileDinhKem" EntityType="PHCNModel.FileDinhKem" />
+          <AssociationSet Name="FK_FileDinhKem_BaiViet" Association="PHCNModel.FK_FileDinhKem_BaiViet">
+            <End Role="BaiViet" EntitySet="BaiViet" />
+            <End Role="FileDinhKem" EntitySet="FileDinhKem" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="BaiViet">
+          <Key>
+            <PropertyRef Name="MaBaiViet" />
+          </Key>
+          <Property Name="MaBaiViet" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TieuDe" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LoaiBaiViet" Type="Int32" Nullable="false" />
+          <Property Name="Xoa" Type="Boolean" Nullable="false" />
+          <Property Name="NgayXoa" Type="DateTime" Precision="3" />
+          <Property Name="NguoiXoa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Ngay" Type="DateTime" Precision="3" Nullable="false" />
+          <NavigationProperty Name="LoaiBaiViet1" Relationship="PHCNModel.FK_BaiViet_LoaiBaiViet" FromRole="BaiViet" ToRole="LoaiBaiViet" />
+          <NavigationProperty Name="GuiNhan" Relationship="PHCNModel.FK_GuiNhan_BaiViet" FromRole="BaiViet" ToRole="GuiNhan" />
+          <NavigationProperty Name="FileDinhKem" Relationship="PHCNModel.FK_FileDinhKem_BaiViet" FromRole="BaiViet" ToRole="FileDinhKem" />
+        </EntityType>
+        <Association Name="FK_BaiViet_LoaiBaiViet">
+          <End Type="PHCNModel.LoaiBaiViet" Role="LoaiBaiViet" Multiplicity="1" />
+          <End Type="PHCNModel.BaiViet" Role="BaiViet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiBaiViet">
+              <PropertyRef Name="MaLoai" />
+            </Principal>
+            <Dependent Role="BaiViet">
+              <PropertyRef Name="LoaiBaiViet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GuiNhan_BaiViet">
+          <End Type="PHCNModel.BaiViet" Role="BaiViet" Multiplicity="1" />
+          <End Type="PHCNModel.GuiNhan" Role="GuiNhan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BaiViet">
+              <PropertyRef Name="MaBaiViet" />
+            </Principal>
+            <Dependent Role="GuiNhan">
+              <PropertyRef Name="MaBaiViet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Loi">
+          <Key>
+            <PropertyRef Name="MaLoi" />
+          </Key>
+          <Property Name="MaLoi" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TenLoi" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="FileDinhKem">
+          <Key>
+            <PropertyRef Name="MaFile" />
+          </Key>
+          <Property Name="MaFile" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaBaiViet" Type="Int32" Nullable="false" />
+          <Property Name="TenFile" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="TenFileFull" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="PhanMoRong" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="NgayTaiLen" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Xoa" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="BaiViet" Relationship="PHCNModel.FK_FileDinhKem_BaiViet" FromRole="FileDinhKem" ToRole="BaiViet" />
+        </EntityType>
+        <Association Name="FK_FileDinhKem_BaiViet">
+          <End Type="PHCNModel.BaiViet" Role="BaiViet" Multiplicity="1" />
+          <End Type="PHCNModel.FileDinhKem" Role="FileDinhKem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BaiViet">
+              <PropertyRef Name="MaBaiViet" />
+            </Principal>
+            <Dependent Role="FileDinhKem">
+              <PropertyRef Name="MaBaiViet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PHCNModelStoreContainer" CdmEntityContainer="PHCNEntities">
+          <EntitySetMapping Name="GuiNhan">
+            <EntityTypeMapping TypeName="PHCNModel.GuiNhan">
+              <MappingFragment StoreEntitySet="GuiNhan">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MaBaiViet" ColumnName="MaBaiViet" />
+                <ScalarProperty Name="NguoiGui" ColumnName="NguoiGui" />
+                <ScalarProperty Name="NguoiNhan" ColumnName="NguoiNhan" />
+                <ScalarProperty Name="DaNhan" ColumnName="DaNhan" />
+                <ScalarProperty Name="DaXem" ColumnName="DaXem" />
+                <ScalarProperty Name="QuanTrong" ColumnName="QuanTrong" />
+                <ScalarProperty Name="DaXoa" ColumnName="DaXoa" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KhoaPhong">
+            <EntityTypeMapping TypeName="PHCNModel.KhoaPhong">
+              <MappingFragment StoreEntitySet="KhoaPhong">
+                <ScalarProperty Name="MaKhoa" ColumnName="MaKhoa" />
+                <ScalarProperty Name="TenKhoa" ColumnName="TenKhoa" />
+                <ScalarProperty Name="STT" ColumnName="STT" />
+                <ScalarProperty Name="Xoa" ColumnName="Xoa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoaiBaiViet">
+            <EntityTypeMapping TypeName="PHCNModel.LoaiBaiViet">
+              <MappingFragment StoreEntitySet="LoaiBaiViet">
+                <ScalarProperty Name="Xoa" ColumnName="Xoa" />
+                <ScalarProperty Name="MaLoai" ColumnName="MaLoai" />
+                <ScalarProperty Name="TenLoai" ColumnName="TenLoai" />
+                <ScalarProperty Name="STT" ColumnName="STT" />
+                <ScalarProperty Name="MauSac" ColumnName="MauSac" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NhanVien">
+            <EntityTypeMapping TypeName="PHCNModel.NhanVien">
+              <MappingFragment StoreEntitySet="NhanVien">
+                <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
+                <ScalarProperty Name="MaKhoa" ColumnName="MaKhoa" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="TenDangNhap" ColumnName="TenDangNhap" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+                <ScalarProperty Name="STT" ColumnName="STT" />
+                <ScalarProperty Name="Xoa" ColumnName="Xoa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BaiViet">
+            <EntityTypeMapping TypeName="PHCNModel.BaiViet">
+              <MappingFragment StoreEntitySet="BaiViet">
+                <ScalarProperty Name="Ngay" ColumnName="Ngay" />
+                <ScalarProperty Name="NguoiXoa" ColumnName="NguoiXoa" />
+                <ScalarProperty Name="NgayXoa" ColumnName="NgayXoa" />
+                <ScalarProperty Name="Xoa" ColumnName="Xoa" />
+                <ScalarProperty Name="LoaiBaiViet" ColumnName="LoaiBaiViet" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
+                <ScalarProperty Name="MaBaiViet" ColumnName="MaBaiViet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Loi">
+            <EntityTypeMapping TypeName="PHCNModel.Loi">
+              <MappingFragment StoreEntitySet="Loi">
+                <ScalarProperty Name="TenLoi" ColumnName="TenLoi" />
+                <ScalarProperty Name="MaLoi" ColumnName="MaLoi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FileDinhKem">
+            <EntityTypeMapping TypeName="PHCNModel.FileDinhKem">
+              <MappingFragment StoreEntitySet="FileDinhKem">
+                <ScalarProperty Name="Xoa" ColumnName="Xoa" />
+                <ScalarProperty Name="NgayTaiLen" ColumnName="NgayTaiLen" />
+                <ScalarProperty Name="PhanMoRong" ColumnName="PhanMoRong" />
+                <ScalarProperty Name="TenFileFull" ColumnName="TenFileFull" />
+                <ScalarProperty Name="TenFile" ColumnName="TenFile" />
+                <ScalarProperty Name="MaBaiViet" ColumnName="MaBaiViet" />
+                <ScalarProperty Name="MaFile" ColumnName="MaFile" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

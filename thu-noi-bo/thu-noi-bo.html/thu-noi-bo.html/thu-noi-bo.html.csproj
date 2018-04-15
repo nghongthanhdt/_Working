@@ -560,6 +560,7 @@
     <Content Include="dist\treelist\css\styles.css" />
     <Content Include="dist\treelist\index.html" />
     <Content Include="dist\treelist\js\checktree.js" />
+    <Content Include="xem-thu.html" />
     <Content Include="soan-thu.html" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">

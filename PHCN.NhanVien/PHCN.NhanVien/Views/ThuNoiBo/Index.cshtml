@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Thư nội bộ";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+    int _maNhanVienDangNhap = 1;
+}
+
+
+                        <!-- Jumbotron
+                                        ================================================== -->
+                        <div style="width:100%; height:400px; overflow:scroll;" id="divDanhSachThu">
+                            
+                        </div>
+
+                        <script>
+                            $(document).ready(function () {                                
+                                //var url = 'http://localhost:11225/ThuNoiBo/_pDanhSachThu'
+                                var url = '@Url.Action("_pDanhSachThu", "ThuNoiBo", new { maNhanVienDangNhap = _maNhanVienDangNhap } )';
+                                var danhSachThu = $.get(url, function (data) {
+                                    $("#divDanhSachThu").html(data);
+                                });                                
+                            });
+                        </script>
+  

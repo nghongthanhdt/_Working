@@ -1,0 +1,122 @@
+﻿
+@{
+    ViewBag.Title = "Soạn thư";
+    ViewBag.PanelTitle = "Soạn thư";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    
+    var idBaiViet = HttpContext.Current.Request.RequestContext.RouteData.Values["id"];
+}
+<script>
+    var idBaiViet = @idBaiViet;
+</script>
+
+<!-- Jumbotron
+                                ================================================== -->
+<script src="~/Content/ckeditor/ckeditor.js"></script>
+<script src="~/scripts/jquery.form.min.js"></script>
+<script src="~/Content/treelist/js/checktree.js"></script>
+<div class="row">
+    <div class="col-xs-12">
+        <form role="form">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Tiêu đề</label>
+                <input class="form-control" id="exampleInputEmail1" placeholder="">
+            </div>
+
+        </form>
+    </div>
+</div>
+<textarea id="txtNoiDung"></textarea>
+<script>
+                    CKEDITOR.replace( 'txtNoiDung');
+</script>
+
+
+
+<div id="divDanhSachFileDinhKem">
+
+</div>
+<script>
+    function loadDanhSachFileDinhKem() {
+        var url = '@Url.Action("_pDanhSachFileDinhKem", "ThuNoiBo", new { id = idBaiViet } )';
+        var danhSachFileDinhKem = $.get(url, function (data) {
+            $("#divDanhSachFileDinhKem").html(data);
+        });
+
+        
+    }
+    
+    $(document).ready(function () {        
+        loadDanhSachFileDinhKem();
+
+
+        
+    });
+</script>
+
+<button class="btn btn-success" style="width:230px;">Gửi</button>
+<button class="btn btn-default btn-sm" id="btnThemFileDinhKem">Thêm file đính kèm...</button>
+<div class="form-group" style="display:none;">
+    <form id="formFileDinhKem" action="@Url.Action("UploadFile", "Upload")" method="post" enctype="multipart/form-data">
+        <label for="exampleInputFile">Thêm file</label>
+        <input id="fileuploadDinhKem" type="file" name="file">
+        <input type="hidden" value="@idBaiViet" name="id" />
+        <!--<p class="help-block">Example block-level help text here.</p>-->
+        @*<input type="submit" name="Submit" id="btnSubmit" value="Upload" style="" />*@
+    </form>
+</div>
+
+<script>
+    $("#btnThemFileDinhKem").click(function () {
+        $("input#fileuploadDinhKem").trigger('click'); 
+    });
+    
+    $("input#fileuploadDinhKem").on('change', function(){
+        //alert("gone");
+        $("form#formFileDinhKem").ajaxSubmit({
+            type: "post",
+            success: function() {
+                $("input#fileuploadDinhKem").val(null);
+                loadDanhSachFileDinhKem();
+            }
+        });
+    });
+
+
+</script>
+
+<div class="">
+    <h4 class="content-row-title">Nhận thư</h4>
+    <ul class="checktree">
+        <li>
+            <input id="administration" type="checkbox"><label for="administration" style="font-size:16px; margin-left:10px; color:#003407;">BỆNH VIỆN PHỤC HỒI CHỨC NĂNG ĐỒNG THÁP</label>
+            <ul>
+                <li>
+                    <input id="president" type="checkbox"><label for="president" style="font-size:14px; margin-left:10px; text-transform:uppercase;">Ban giám đốc</label>
+                    <ul>
+
+                        <li><input id="manager2" type="checkbox"><label for="manager2" style="font-weight:normal;font-size:14px; margin-left:10px; ">BS. Nguyễn Thị Nhiệm</label></li>
+                        <li><input id="manager3" type="checkbox"><label for="manager3" style="font-weight:normal;font-size:14px; margin-left:10px; ">CN. Nguyễn Văn Sĩ</label></li>
+                    </ul>
+                </li>
+                <li>
+                    <input id="president2" type="checkbox"><label for="president2" style="font-size:14px; margin-left:10px; text-transform:uppercase;">Phòng Kế hoạch tổng hợp</label>
+                    <ul>
+
+                        <li><input id="manager4" type="checkbox"><label for="manager4" style="font-weight:normal;font-size:14px; margin-left:10px; ">YS. Lê Thị Thùy Hương</label></li>
+                        <li><input id="manager5" type="checkbox"><label for="manager5" style="font-weight:normal;font-size:14px; margin-left:10px; ">BS. Võ Trọng Hoàng</label></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+
+
+<script>
+	$(function(){
+		$("ul.checktree").checktree();
+	});
+</script>
+
