@@ -1,4 +1,9 @@
-﻿
+﻿@{ 
+    int _maNhanVienDangNhap = 1;
+}
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,10 +73,10 @@
 
                 </ul>
                 <div class="list-group">
-                    <a href="#" class="list-group-item active">Hộp thư đến</a>
-                    <a href="#" class="list-group-item">Thư đã gửi</a>
-                    <a href="#" class="list-group-item">Thư nháp</a>
-                    <a href="#" class="list-group-item">Thùng rác</a>
+                    <a href="@Url.Action("Index", "ThuNoiBo", new { maNhanVienDangNhap = _maNhanVienDangNhap, trangThai = "ThuDen"})" class="list-group-item active">Hộp thư đến</a>
+                    <a href="@Url.Action("Index", "ThuNoiBo", new { maNhanVienDangNhap = _maNhanVienDangNhap, trangThai = "DaGui"})" class="list-group-item">Thư đã gửi</a>
+                    @*<a href="@Url.Action("Index", "ThuNoiBo", new { maNhanVienDangNhap = _maNhanVienDangNhap, trangThai = "ThuNhap"})" class="list-group-item">Thư nháp</a>*@
+                    <a href="@Url.Action("Index", "ThuNoiBo", new { maNhanVienDangNhap = _maNhanVienDangNhap, trangThai = "DaXoa"})" class="list-group-item">Thùng rác</a>
 
 
 

@@ -161,10 +161,14 @@
             url: url,
             data: param,
             success: function (result) {
-                alert(result);
+                if (result == "true") {
+                    //window.location = @Url.Action("");
+                }
             },
             dataType: "html"
         });
+
+
 
 
 

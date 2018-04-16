@@ -12,13 +12,37 @@ namespace PHCN.NhanVien.Controllers
         PHCNEntities db = new PHCNEntities();
         int _maNhanVienDangNhap = 1;
         // GET: ThuNoiBo
+
         public ActionResult Index()
         {
+            ViewBag.TrangThai = "ThuDen";
+            if (this.Request.QueryString["box"] != null && this.Request.QueryString["box"] != "")
+            {
+                ViewBag.TrangThai = this.Request.QueryString["box"].ToString();
+            }
             return View();
         }
-        public ActionResult _pDanhSachThu(int maNhanVienDangNhap)
+        public ActionResult _pDanhSachThu(int maNhanVienDangNhap, string trangThai)
         {
-            var listGuiNhan = db.GuiNhan.Where(x => x.NguoiNhan == maNhanVienDangNhap && x.BaiViet.Xoa == false).OrderByDescending(x => x.BaiViet.MaBaiViet).ToList();
+            List<GuiNhan> listGuiNhan = new List<GuiNhan>();
+            switch (trangThai)
+            {
+                case "ThuDen":
+                    listGuiNhan = db.GuiNhan.Where(x => x.NguoiNhan == maNhanVienDangNhap && x.BaiViet.Xoa == false && x.DaNhan == true && x.QuanTrong == false).OrderByDescending(x => x.BaiViet.MaBaiViet).ToList();
+                    break;
+                case "DaGui":
+                    listGuiNhan = db.GuiNhan.Where(x => x.NguoiNhan == maNhanVienDangNhap && x.BaiViet.Xoa == false && x.NguoiGui == maNhanVienDangNhap).OrderByDescending(x => x.BaiViet.MaBaiViet).ToList();
+                    break;
+                case "QuanTrong":
+                    listGuiNhan = db.GuiNhan.Where(x => x.NguoiNhan == maNhanVienDangNhap && x.BaiViet.Xoa == false && x.DaNhan == true && x.QuanTrong == true).OrderByDescending(x => x.BaiViet.MaBaiViet).ToList();
+                    break;
+                case "DaXoa":
+                    listGuiNhan = db.GuiNhan.Where(x => x.NguoiNhan == maNhanVienDangNhap && x.BaiViet.Xoa == false && x.DaNhan == true && x.QuanTrong == false && x.DaXoa == true).OrderByDescending(x => x.BaiViet.MaBaiViet).ToList();
+                    break;
+                default:
+                    //listGuiNhan = null;//db.GuiNhan.Where(x => x.NguoiNhan == maNhanVienDangNhap && x.BaiViet.Xoa == false).OrderByDescending(x => x.BaiViet.MaBaiViet).ToList();
+                    break;
+            }
             ViewBag.ListGuiNhan = listGuiNhan;
             return PartialView("_pDanhSachThu");
         }
@@ -62,12 +86,11 @@ namespace PHCN.NhanVien.Controllers
             }
             
         }
-
-
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult GuiThu(int maBaiViet, string tieuDe, string noiDung, int nguoiGui, string listNguoiNhan)
         {
+            // ajax
             // maBaiViet = 1
             // tieuDe = ...
             // noiDung = ...
@@ -81,8 +104,6 @@ namespace PHCN.NhanVien.Controllers
                 baiViet.NoiDung = noiDung;
                 baiViet.Ngay = CodeController.GetServerDateTime();
                 baiViet.Xoa = false;
-
-
                 var listIntNguoiNhan = listNguoiNhan.Split(',').Select(Int32.Parse).ToList();
                 foreach (var item in listIntNguoiNhan)
                 {
@@ -96,11 +117,7 @@ namespace PHCN.NhanVien.Controllers
                     gn.GhiChu = "";
                     baiViet.GuiNhan.Add(gn);
                 }
-
-
-
                 db.SaveChanges();
-
                 return Content("true");
             } catch (Exception ex)
             {
