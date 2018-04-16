@@ -28,6 +28,7 @@ namespace PHCN.NhanVien.Models
         public string MatKhau { get; set; }
         public int STT { get; set; }
         public bool Xoa { get; set; }
+        public bool NhanThu { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GuiNhan> GuiNhan { get; set; }

@@ -10,6 +10,7 @@ namespace PHCN.NhanVien.Controllers
     public class ThuNoiBoController : Controller
     {
         PHCNEntities db = new PHCNEntities();
+        int _maNhanVienDangNhap = 1;
         // GET: ThuNoiBo
         public ActionResult Index()
         {
@@ -31,6 +32,7 @@ namespace PHCN.NhanVien.Controllers
         }
         public ActionResult SoanThu(string id)
         {
+            ViewBag.MaNhanVienDangNhap = _maNhanVienDangNhap;
             int newMaBaiViet = 0;
             if (id == null || id == "")
             {
@@ -57,6 +59,52 @@ namespace PHCN.NhanVien.Controllers
                     return RedirectToAction("ThongBao", "Loi", new { id = "khongtimthaybaiviet"});
                 }
                 
+            }
+            
+        }
+
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult GuiThu(int maBaiViet, string tieuDe, string noiDung, int nguoiGui, string listNguoiNhan)
+        {
+            // maBaiViet = 1
+            // tieuDe = ...
+            // noiDung = ...
+            // nguoiDung = 1
+            // listNguoiNhan = 2,3,4
+
+            try
+            {
+                BaiViet baiViet = db.BaiViet.Find(maBaiViet);
+                baiViet.TieuDe = tieuDe;
+                baiViet.NoiDung = noiDung;
+                baiViet.Ngay = CodeController.GetServerDateTime();
+                baiViet.Xoa = false;
+
+
+                var listIntNguoiNhan = listNguoiNhan.Split(',').Select(Int32.Parse).ToList();
+                foreach (var item in listIntNguoiNhan)
+                {
+                    GuiNhan gn = new GuiNhan();
+                    gn.NguoiGui = nguoiGui;
+                    gn.NguoiNhan = item;
+                    gn.DaNhan = true;
+                    gn.DaXem = false;
+                    gn.QuanTrong = false;
+                    gn.DaXoa = false;
+                    gn.GhiChu = "";
+                    baiViet.GuiNhan.Add(gn);
+                }
+
+
+
+                db.SaveChanges();
+
+                return Content("true");
+            } catch (Exception ex)
+            {
+                return Content(ex.Message);
             }
             
         }

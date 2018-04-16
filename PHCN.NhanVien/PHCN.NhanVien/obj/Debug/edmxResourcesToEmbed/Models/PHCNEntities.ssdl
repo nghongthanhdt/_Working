@@ -76,6 +76,7 @@
     <Property Name="MatKhau" Type="nvarchar" MaxLength="50" />
     <Property Name="STT" Type="int" Nullable="false" />
     <Property Name="Xoa" Type="bit" Nullable="false" />
+    <Property Name="NhanThu" Type="bit" Nullable="false" />
   </EntityType>
   <Association Name="FK_BaiViet_LoaiBaiViet">
     <End Role="LoaiBaiViet" Type="Self.LoaiBaiViet" Multiplicity="1" />
