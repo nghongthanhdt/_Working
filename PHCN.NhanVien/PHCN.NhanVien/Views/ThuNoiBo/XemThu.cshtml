@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewBag.Title = "XemThu";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+    var nhanVienDangNhap = (PHCN.NhanVien.Models.NhanVien)Session["NhanVienDangNhap"];
+    if (nhanVienDangNhap == null) { Response.Redirect(Url.Action("DangNhap", "Home")); }
+    int _maNhanVienDangNhap = nhanVienDangNhap.MaNhanVien;
+
+
+    PHCN.NhanVien.Models.BaiViet baiViet = (PHCN.NhanVien.Models.BaiViet)ViewBag.BaiViet;
+    PHCN.NhanVien.Models.GuiNhan guiNhan = baiViet.GuiNhan.Where(x => x.STTGui == 1).First();
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <form novalidate="" role="form" class="">
+            <div class="form-group">
+                Người gửi
+                <br />
+                <strong>@guiNhan.NhanVien.HoTen</strong> - <a href="javascript:void(0);">Người nhận</a> - 14/04/2018 05:05:00 PM
+
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Tiêu đề</label>
+                <input class="form-control disabled" id="exampleInputEmail1" value="Thông báo V/v chuyển đổi phần mềm quản lý bệnh viện" disabled="disabled" />
+
+
+            </div>
+
+        </form>
+
+    </div>
+</div>
+<label for="exampleInputEmail1">Nội dung</label>
+<div class="well">
+
+    <p>This is the easiest way of using CKEditor if additional third-party plugins are not used. Using CKEditor from CDN involves the following steps:</p>
+
+    <ol>
+        <li>Adding a <code>&lt;script&gt;</code> tag that loads <code>ckeditor.js</code> from CDN. For more information refer to the <a href="http://cdn.ckeditor.com/" rel="noopener" target="_blank">CDN documentation</a>.</li>
+        <li>
+            In case of using third-party plugins:
+            <ol>
+                <li>Downloading them manually from the <a href="https://ckeditor.com/cke4/addons/plugins/all" rel="noopener" target="_blank">Add-ons Repository</a>.</li>
+                <li>Downloading plugin requir<span style="font-size:18px">ements manually.</span></li>
+            </ol>
+        </li>
+        <li>Enabling additional plugins manually through CKEDITOR.config.extraPlugins.</li>
+    </ol>
+
+
+</div>
+
+<!--<textarea id="txtNoiDung"></textarea>
+<script>
+  CKEDITOR.replace( 'txtNoiDung');
+</script>-->
+<table class="table table-condensed">
+    <thead>
+        <tr>
+
+            <th colspan="2">File đính kèm</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="width:10%;"><i class="fa fa-file-text-o"></i></td>
+            <td>File 1</td>
+
+        </tr>
+        <tr>
+            <td><i class="fa fa-file-text-o"></i></td>
+            <td>File 2</td>
+
+        </tr>
+
+    </tbody>
+
+</table>
+
+<button class="btn btn-primary">Trở lại</button>
+<button class="btn btn-default">Đánh dấu quan trọng</button>
+<button class="btn btn-default">Xóa thư</button>
+
+
+<script>
+	$(function(){
+		$("ul.checktree").checktree();
+	});
+</script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>

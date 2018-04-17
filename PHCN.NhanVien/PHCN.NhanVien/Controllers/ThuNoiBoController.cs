@@ -10,7 +10,7 @@ namespace PHCN.NhanVien.Controllers
     public class ThuNoiBoController : Controller
     {
         PHCNEntities db = new PHCNEntities();
-        int _maNhanVienDangNhap = 1;
+        int _maNhanVienDangNhap = 0;
         // GET: ThuNoiBo
 
         public ActionResult Index()
@@ -22,29 +22,57 @@ namespace PHCN.NhanVien.Controllers
             }
             return View();
         }
-        public ActionResult _pDanhSachThu(int maNhanVienDangNhap, string trangThai)
+        public ActionResult _pDanhSachThu(string trangThai)
         {
-            List<GuiNhan> listGuiNhan = new List<GuiNhan>();
-            switch (trangThai)
+            PHCN.NhanVien.Models.NhanVien nhanVienDangNhap = (PHCN.NhanVien.Models.NhanVien)Session["NhanVienDangNhap"];
+            if (nhanVienDangNhap != null)
             {
-                case "ThuDen":
-                    listGuiNhan = db.GuiNhan.Where(x => x.NguoiNhan == maNhanVienDangNhap && x.BaiViet.Xoa == false && x.DaNhan == true && x.QuanTrong == false).OrderByDescending(x => x.BaiViet.MaBaiViet).ToList();
-                    break;
-                case "DaGui":
-                    listGuiNhan = db.GuiNhan.Where(x => x.NguoiNhan == maNhanVienDangNhap && x.BaiViet.Xoa == false && x.NguoiGui == maNhanVienDangNhap).OrderByDescending(x => x.BaiViet.MaBaiViet).ToList();
-                    break;
-                case "QuanTrong":
-                    listGuiNhan = db.GuiNhan.Where(x => x.NguoiNhan == maNhanVienDangNhap && x.BaiViet.Xoa == false && x.DaNhan == true && x.QuanTrong == true).OrderByDescending(x => x.BaiViet.MaBaiViet).ToList();
-                    break;
-                case "DaXoa":
-                    listGuiNhan = db.GuiNhan.Where(x => x.NguoiNhan == maNhanVienDangNhap && x.BaiViet.Xoa == false && x.DaNhan == true && x.QuanTrong == false && x.DaXoa == true).OrderByDescending(x => x.BaiViet.MaBaiViet).ToList();
-                    break;
-                default:
-                    //listGuiNhan = null;//db.GuiNhan.Where(x => x.NguoiNhan == maNhanVienDangNhap && x.BaiViet.Xoa == false).OrderByDescending(x => x.BaiViet.MaBaiViet).ToList();
-                    break;
+                List<GuiNhan> listBaiViet = new List<GuiNhan>();
+                switch (trangThai)
+                {
+                    case "ThuDen":
+                        listBaiViet = db.GuiNhan.Where(x => x.NguoiNhan == nhanVienDangNhap.MaNhanVien 
+                                                                && x.Xoa == false 
+                                                                && x.DaNhan == true 
+                                                                && x.QuanTrong == false 
+                                                                && x.DaXoa == false).OrderByDescending(x => x.BaiViet.MaBaiViet).ToList();                        
+                        break;
+                    case "DaGui":
+                        listBaiViet = db.GuiNhan.Where(x => x.NguoiGui == nhanVienDangNhap.MaNhanVien 
+                                                                && x.Xoa == false 
+                                                                && x.DaNhan == true 
+                                                                && x.QuanTrong == false 
+                                                                && x.DaXoa == false
+                                                                && x.STTGui == 1).OrderByDescending(x => x.BaiViet.MaBaiViet).ToList();
+                        // gửi cho 5 người thì bảng GuiNhan cột STTGui se đánh số từ 1 đến 5, nên chỉ cần lấy ra STTGui là 1
+                        break;
+                    case "QuanTrong":
+                        listBaiViet = db.GuiNhan.Where(x => x.NguoiNhan == nhanVienDangNhap.MaNhanVien 
+                                                                && x.Xoa == false 
+                                                                && x.DaNhan == true 
+                                                                && x.QuanTrong == true 
+                                                                && x.DaXoa == false).OrderByDescending(x => x.BaiViet.MaBaiViet).ToList();
+                        break;
+                    case "DaXoa":
+                        listBaiViet = db.GuiNhan.Where(x => x.NguoiNhan == nhanVienDangNhap.MaNhanVien
+                                                                && x.Xoa == false
+                                                                && x.DaNhan == true
+                                                                && x.QuanTrong == false
+                                                                && x.DaXoa == true).OrderByDescending(x => x.BaiViet.MaBaiViet).ToList();
+                        break;
+                    default:
+                        //listGuiNhan = null;//db.GuiNhan.Where(x => x.NguoiNhan == maNhanVienDangNhap && x.BaiViet.Xoa == false).OrderByDescending(x => x.BaiViet.MaBaiViet).ToList();
+                        break;
+                }
+                ViewBag.ListBaiViet = listBaiViet;
+                return PartialView("_pDanhSachThu");
+            } else
+            {
+                string result = "Phiên làm việc hết hạn, vui lòng click <a href='" + Url.Action("DangNhap", "Home") + "'>vào đây</a> " + "để đăng nhập lại.";
+                return Content(result);
             }
-            ViewBag.ListGuiNhan = listGuiNhan;
-            return PartialView("_pDanhSachThu");
+
+            
         }
         public ActionResult _pDanhSachFileDinhKem(int id)
         {
@@ -56,7 +84,13 @@ namespace PHCN.NhanVien.Controllers
         }
         public ActionResult SoanThu(string id)
         {
-            ViewBag.MaNhanVienDangNhap = _maNhanVienDangNhap;
+            PHCN.NhanVien.Models.NhanVien nhanVienDangNhap = (PHCN.NhanVien.Models.NhanVien)Session["NhanVienDangNhap"];
+
+            if (nhanVienDangNhap == null)
+            {
+                return RedirectToAction("DangNhap", "Home");
+            }
+            ViewBag.MaNhanVienDangNhap = nhanVienDangNhap.MaNhanVien;
             int newMaBaiViet = 0;
             if (id == null || id == "")
             {
@@ -105,8 +139,10 @@ namespace PHCN.NhanVien.Controllers
                 baiViet.Ngay = CodeController.GetServerDateTime();
                 baiViet.Xoa = false;
                 var listIntNguoiNhan = listNguoiNhan.Split(',').Select(Int32.Parse).ToList();
+                int i = 1;
                 foreach (var item in listIntNguoiNhan)
                 {
+                    
                     GuiNhan gn = new GuiNhan();
                     gn.NguoiGui = nguoiGui;
                     gn.NguoiNhan = item;
@@ -115,7 +151,9 @@ namespace PHCN.NhanVien.Controllers
                     gn.QuanTrong = false;
                     gn.DaXoa = false;
                     gn.GhiChu = "";
+                    gn.STTGui = i;
                     baiViet.GuiNhan.Add(gn);
+                    i++;
                 }
                 db.SaveChanges();
                 return Content("true");
@@ -124,6 +162,16 @@ namespace PHCN.NhanVien.Controllers
                 return Content(ex.Message);
             }
             
+        }
+
+        public ActionResult XemThu(int id)
+        {
+
+            
+            BaiViet baiViet = db.BaiViet.Find(id);
+            ViewBag.BaiViet = baiViet;
+            
+            return View();
         }
     }
 }

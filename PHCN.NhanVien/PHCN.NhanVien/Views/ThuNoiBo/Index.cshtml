@@ -3,7 +3,10 @@
     ViewBag.Title = "Thư nội bộ";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 
-    int _maNhanVienDangNhap = 1;
+
+    var nhanVienDangNhap = (PHCN.NhanVien.Models.NhanVien)Session["NhanVienDangNhap"];
+    if (nhanVienDangNhap == null) { Response.Redirect(Url.Action("DangNhap", "Home")); }
+    int _maNhanVienDangNhap = nhanVienDangNhap.MaNhanVien;
     string _trangThai = ViewBag.TrangThai.ToString();
 
 }

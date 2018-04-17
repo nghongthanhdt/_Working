@@ -30,10 +30,10 @@ namespace PHCN.NhanVien.Models
         public bool Xoa { get; set; }
         public bool NhanThu { get; set; }
     
+        public virtual KhoaPhong KhoaPhong { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GuiNhan> GuiNhan { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GuiNhan> GuiNhan1 { get; set; }
-        public virtual KhoaPhong KhoaPhong { get; set; }
     }
 }

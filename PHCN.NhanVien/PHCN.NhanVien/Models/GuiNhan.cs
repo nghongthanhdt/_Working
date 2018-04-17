@@ -23,6 +23,8 @@ namespace PHCN.NhanVien.Models
         public Nullable<bool> QuanTrong { get; set; }
         public Nullable<bool> DaXoa { get; set; }
         public string GhiChu { get; set; }
+        public bool Xoa { get; set; }
+        public int STTGui { get; set; }
     
         public virtual BaiViet BaiViet { get; set; }
         public virtual NhanVien NhanVien { get; set; }

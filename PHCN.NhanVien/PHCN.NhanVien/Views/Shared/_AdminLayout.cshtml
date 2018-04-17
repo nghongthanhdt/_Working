@@ -1,5 +1,9 @@
 ﻿@{ 
-    int _maNhanVienDangNhap = 1;
+    var nhanVienDangNhap = (PHCN.NhanVien.Models.NhanVien)Session["NhanVienDangNhap"];
+
+    int _maNhanVienDangNhap = nhanVienDangNhap.MaNhanVien;
+
+
 }
 
 
@@ -45,11 +49,11 @@
 
                     <!-- <li class="disabled"><a href="#">Link</a></li> -->
                     <li class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Nguyễn Hồng Thanh<b class="caret"></b></a>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">@nhanVienDangNhap.HoTen<b class="caret"></b></a>
                         <ul role="menu" class="dropdown-menu">
                             <!--<li class="dropdown-header">Setting</li>-->
 
-                            <li class="disabled"><a href="#">Thoát</a></li>
+                            <li class="disabled"><a href="@Url.Action("Logout", "Home")">Thoát</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -64,19 +68,20 @@
             <div class="col-xs-6 col-sm-3 sidebar-offcanvas" role="navigation">
                 <ul class="list-group panel">
                     <li class="list-group-item">
-                        <button class="btn btn-success" style="width:100%">
+                        <a href="@Url.Action("SoanThu","ThuNoiBo")" class="btn btn-success" style="width:100%">
                             Soạn thư
-                        </button>
+                        </a>
                     </li>
 
 
 
                 </ul>
                 <div class="list-group">
-                    <a href="@Url.Action("Index", "ThuNoiBo", new { maNhanVienDangNhap = _maNhanVienDangNhap, trangThai = "ThuDen"})" class="list-group-item active">Hộp thư đến</a>
-                    <a href="@Url.Action("Index", "ThuNoiBo", new { maNhanVienDangNhap = _maNhanVienDangNhap, trangThai = "DaGui"})" class="list-group-item">Thư đã gửi</a>
+                    <a href="@Url.Action("Index", "ThuNoiBo", new { box = "ThuDen"})" class="list-group-item active">Hộp thư đến</a>
+                    <a href="@Url.Action("Index", "ThuNoiBo", new { box = "QuanTrong"})" class="list-group-item">Quan trọng</a>
+                    <a href="@Url.Action("Index", "ThuNoiBo", new { box = "DaGui"})" class="list-group-item">Thư đã gửi</a>
                     @*<a href="@Url.Action("Index", "ThuNoiBo", new { maNhanVienDangNhap = _maNhanVienDangNhap, trangThai = "ThuNhap"})" class="list-group-item">Thư nháp</a>*@
-                    <a href="@Url.Action("Index", "ThuNoiBo", new { maNhanVienDangNhap = _maNhanVienDangNhap, trangThai = "DaXoa"})" class="list-group-item">Thùng rác</a>
+                    <a href="@Url.Action("Index", "ThuNoiBo", new { box = "DaXoa"})" class="list-group-item">Thùng rác</a>
 
 
 
@@ -105,6 +110,8 @@
             <div class="copyright clearfix">
                 <p><b>BỆNH VIỆN PHỤC HỒI CHỨC NĂNG ĐỒNG THÁP</b>&nbsp;&nbsp;&nbsp;&nbsp;</p>
                 <p>Bản quyền thuộc về Nguyễn Hồng Thanh - <a href="javascript:void(0);">ng.hong.thanh@gmail.com</a></p>
+                <br/>
+                Session time out: @Session.Timeout
             </div>
         </div>
     </div>

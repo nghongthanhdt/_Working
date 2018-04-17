@@ -1,7 +1,7 @@
 ﻿
 @{ 
-     var listGuiNhan = ViewBag.ListGuiNhan;
-
+    List< PHCN.NhanVien.Models.GuiNhan> listBaiViet = ViewBag.ListBaiViet;
+    int stt = 1;
 }
 
 <table class="table table-condensed">
@@ -14,13 +14,15 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (PHCN.NhanVien.Models.GuiNhan item in listGuiNhan)
+
+        
+        @foreach (PHCN.NhanVien.Models.GuiNhan item in listBaiViet)
         {
+            
             <tr>
-                <td>1</td>
-                <td>
-                    
-                    <a href="javascript:void(0);">@item.BaiViet.TieuDe</a>
+                <td>@stt</td>
+                <td>                    
+                    <a href="@Url.Action("XemThu", "ThuNoiBo", new { id = item.MaBaiViet})">@item.BaiViet.TieuDe</a>
                 </td>
                 <td>@item.NhanVien.HoTen</td> @*(người gửi)*@
                 <td>@item.BaiViet.Ngay</td>

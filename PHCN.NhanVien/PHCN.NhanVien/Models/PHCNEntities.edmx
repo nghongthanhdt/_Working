@@ -43,6 +43,8 @@
           <Property Name="QuanTrong" Type="bit" />
           <Property Name="DaXoa" Type="bit" />
           <Property Name="GhiChu" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Xoa" Type="bit" Nullable="false" />
+          <Property Name="STTGui" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="KhoaPhong">
           <Key>
@@ -192,23 +194,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PHCNModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="GuiNhan">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MaBaiViet" Type="Int32" Nullable="false" />
-          <Property Name="NguoiGui" Type="Int32" Nullable="false" />
-          <Property Name="NguoiNhan" Type="Int32" Nullable="false" />
-          <Property Name="DaNhan" Type="Boolean" />
-          <Property Name="DaXem" Type="Boolean" />
-          <Property Name="QuanTrong" Type="Boolean" />
-          <Property Name="DaXoa" Type="Boolean" />
-          <Property Name="GhiChu" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="BaiViet" Relationship="PHCNModel.FK_GuiNhan_BaiViet" FromRole="GuiNhan" ToRole="BaiViet" />
-          <NavigationProperty Name="NhanVien" Relationship="PHCNModel.FK_GuiNhan_NhanVien_NguoiGui" FromRole="GuiNhan" ToRole="NhanVien" />
-          <NavigationProperty Name="NhanVien1" Relationship="PHCNModel.FK_GuiNhan_NhanVien_NguoiNhan" FromRole="GuiNhan" ToRole="NhanVien" />
-        </EntityType>
         <EntityType Name="KhoaPhong">
           <Key>
             <PropertyRef Name="MaKhoa" />
@@ -231,17 +216,12 @@
           <Property Name="Xoa" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityContainer Name="PHCNEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="GuiNhan" EntityType="Self.GuiNhan" />
           <EntitySet Name="KhoaPhong" EntityType="Self.KhoaPhong" />
           <EntitySet Name="LoaiBaiViet" EntityType="Self.LoaiBaiViet" />
           <EntitySet Name="BaiViet" EntityType="PHCNModel.BaiViet" />
           <AssociationSet Name="FK_BaiViet_LoaiBaiViet" Association="PHCNModel.FK_BaiViet_LoaiBaiViet">
             <End Role="LoaiBaiViet" EntitySet="LoaiBaiViet" />
             <End Role="BaiViet" EntitySet="BaiViet" />
-          </AssociationSet>
-          <AssociationSet Name="FK_GuiNhan_BaiViet" Association="PHCNModel.FK_GuiNhan_BaiViet">
-            <End Role="BaiViet" EntitySet="BaiViet" />
-            <End Role="GuiNhan" EntitySet="GuiNhan" />
           </AssociationSet>
           <EntitySet Name="Loi" EntityType="PHCNModel.Loi" />
           <EntitySet Name="FileDinhKem" EntityType="PHCNModel.FileDinhKem" />
@@ -250,6 +230,15 @@
             <End Role="FileDinhKem" EntitySet="FileDinhKem" />
           </AssociationSet>
           <EntitySet Name="NhanVien" EntityType="PHCNModel.NhanVien" />
+          <AssociationSet Name="FK_NhanVien_KhoaPhong" Association="PHCNModel.FK_NhanVien_KhoaPhong">
+            <End Role="KhoaPhong" EntitySet="KhoaPhong" />
+            <End Role="NhanVien" EntitySet="NhanVien" />
+          </AssociationSet>
+          <EntitySet Name="GuiNhan" EntityType="PHCNModel.GuiNhan" />
+          <AssociationSet Name="FK_GuiNhan_BaiViet" Association="PHCNModel.FK_GuiNhan_BaiViet">
+            <End Role="BaiViet" EntitySet="BaiViet" />
+            <End Role="GuiNhan" EntitySet="GuiNhan" />
+          </AssociationSet>
           <AssociationSet Name="FK_GuiNhan_NhanVien_NguoiGui" Association="PHCNModel.FK_GuiNhan_NhanVien_NguoiGui">
             <End Role="NhanVien" EntitySet="NhanVien" />
             <End Role="GuiNhan" EntitySet="GuiNhan" />
@@ -258,11 +247,7 @@
             <End Role="NhanVien" EntitySet="NhanVien" />
             <End Role="GuiNhan" EntitySet="GuiNhan" />
           </AssociationSet>
-          <AssociationSet Name="FK_NhanVien_KhoaPhong" Association="PHCNModel.FK_NhanVien_KhoaPhong">
-            <End Role="KhoaPhong" EntitySet="KhoaPhong" />
-            <End Role="NhanVien" EntitySet="NhanVien" />
-          </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="BaiViet">
           <Key>
             <PropertyRef Name="MaBaiViet" />
@@ -276,8 +261,8 @@
           <Property Name="NguoiXoa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Ngay" Type="DateTime" Precision="3" Nullable="false" />
           <NavigationProperty Name="LoaiBaiViet1" Relationship="PHCNModel.FK_BaiViet_LoaiBaiViet" FromRole="BaiViet" ToRole="LoaiBaiViet" />
-          <NavigationProperty Name="GuiNhan" Relationship="PHCNModel.FK_GuiNhan_BaiViet" FromRole="BaiViet" ToRole="GuiNhan" />
           <NavigationProperty Name="FileDinhKem" Relationship="PHCNModel.FK_FileDinhKem_BaiViet" FromRole="BaiViet" ToRole="FileDinhKem" />
+          <NavigationProperty Name="GuiNhan" Relationship="PHCNModel.FK_GuiNhan_BaiViet" FromRole="BaiViet" ToRole="GuiNhan" />
         </EntityType>
         <Association Name="FK_BaiViet_LoaiBaiViet">
           <End Type="PHCNModel.LoaiBaiViet" Role="LoaiBaiViet" Multiplicity="1" />
@@ -288,18 +273,6 @@
             </Principal>
             <Dependent Role="BaiViet">
               <PropertyRef Name="LoaiBaiViet" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_GuiNhan_BaiViet">
-          <End Type="PHCNModel.BaiViet" Role="BaiViet" Multiplicity="1" />
-          <End Type="PHCNModel.GuiNhan" Role="GuiNhan" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BaiViet">
-              <PropertyRef Name="MaBaiViet" />
-            </Principal>
-            <Dependent Role="GuiNhan">
-              <PropertyRef Name="MaBaiViet" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -347,10 +320,53 @@
           <Property Name="STT" Type="Int32" Nullable="false" />
           <Property Name="Xoa" Type="Boolean" Nullable="false" />
           <Property Name="NhanThu" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="KhoaPhong" Relationship="PHCNModel.FK_NhanVien_KhoaPhong" FromRole="NhanVien" ToRole="KhoaPhong" />
           <NavigationProperty Name="GuiNhan" Relationship="PHCNModel.FK_GuiNhan_NhanVien_NguoiGui" FromRole="NhanVien" ToRole="GuiNhan" />
           <NavigationProperty Name="GuiNhan1" Relationship="PHCNModel.FK_GuiNhan_NhanVien_NguoiNhan" FromRole="NhanVien" ToRole="GuiNhan" />
-          <NavigationProperty Name="KhoaPhong" Relationship="PHCNModel.FK_NhanVien_KhoaPhong" FromRole="NhanVien" ToRole="KhoaPhong" />
         </EntityType>
+        <Association Name="FK_NhanVien_KhoaPhong">
+          <End Type="PHCNModel.KhoaPhong" Role="KhoaPhong" Multiplicity="1" />
+          <End Type="PHCNModel.NhanVien" Role="NhanVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhoaPhong">
+              <PropertyRef Name="MaKhoa" />
+            </Principal>
+            <Dependent Role="NhanVien">
+              <PropertyRef Name="MaKhoa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="GuiNhan">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaBaiViet" Type="Int32" Nullable="false" />
+          <Property Name="NguoiGui" Type="Int32" Nullable="false" />
+          <Property Name="NguoiNhan" Type="Int32" Nullable="false" />
+          <Property Name="DaNhan" Type="Boolean" />
+          <Property Name="DaXem" Type="Boolean" />
+          <Property Name="QuanTrong" Type="Boolean" />
+          <Property Name="DaXoa" Type="Boolean" />
+          <Property Name="GhiChu" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Xoa" Type="Boolean" Nullable="false" />
+          <Property Name="STTGui" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BaiViet" Relationship="PHCNModel.FK_GuiNhan_BaiViet" FromRole="GuiNhan" ToRole="BaiViet" />
+          <NavigationProperty Name="NhanVien" Relationship="PHCNModel.FK_GuiNhan_NhanVien_NguoiGui" FromRole="GuiNhan" ToRole="NhanVien" />
+          <NavigationProperty Name="NhanVien1" Relationship="PHCNModel.FK_GuiNhan_NhanVien_NguoiNhan" FromRole="GuiNhan" ToRole="NhanVien" />
+        </EntityType>
+        <Association Name="FK_GuiNhan_BaiViet">
+          <End Type="PHCNModel.BaiViet" Role="BaiViet" Multiplicity="1" />
+          <End Type="PHCNModel.GuiNhan" Role="GuiNhan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BaiViet">
+              <PropertyRef Name="MaBaiViet" />
+            </Principal>
+            <Dependent Role="GuiNhan">
+              <PropertyRef Name="MaBaiViet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_GuiNhan_NhanVien_NguoiGui">
           <End Type="PHCNModel.NhanVien" Role="NhanVien" Multiplicity="1" />
           <End Type="PHCNModel.GuiNhan" Role="GuiNhan" Multiplicity="*" />
@@ -375,39 +391,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_NhanVien_KhoaPhong">
-          <End Type="PHCNModel.KhoaPhong" Role="KhoaPhong" Multiplicity="1" />
-          <End Type="PHCNModel.NhanVien" Role="NhanVien" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="KhoaPhong">
-              <PropertyRef Name="MaKhoa" />
-            </Principal>
-            <Dependent Role="NhanVien">
-              <PropertyRef Name="MaKhoa" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="PHCNModelStoreContainer" CdmEntityContainer="PHCNEntities">
-          <EntitySetMapping Name="GuiNhan">
-            <EntityTypeMapping TypeName="PHCNModel.GuiNhan">
-              <MappingFragment StoreEntitySet="GuiNhan">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="MaBaiViet" ColumnName="MaBaiViet" />
-                <ScalarProperty Name="NguoiGui" ColumnName="NguoiGui" />
-                <ScalarProperty Name="NguoiNhan" ColumnName="NguoiNhan" />
-                <ScalarProperty Name="DaNhan" ColumnName="DaNhan" />
-                <ScalarProperty Name="DaXem" ColumnName="DaXem" />
-                <ScalarProperty Name="QuanTrong" ColumnName="QuanTrong" />
-                <ScalarProperty Name="DaXoa" ColumnName="DaXoa" />
-                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="KhoaPhong">
             <EntityTypeMapping TypeName="PHCNModel.KhoaPhong">
               <MappingFragment StoreEntitySet="KhoaPhong">
@@ -475,6 +464,23 @@
                 <ScalarProperty Name="HoTen" ColumnName="HoTen" />
                 <ScalarProperty Name="MaKhoa" ColumnName="MaKhoa" />
                 <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GuiNhan">
+            <EntityTypeMapping TypeName="PHCNModel.GuiNhan">
+              <MappingFragment StoreEntitySet="GuiNhan">
+                <ScalarProperty Name="STTGui" ColumnName="STTGui" />
+                <ScalarProperty Name="Xoa" ColumnName="Xoa" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="DaXoa" ColumnName="DaXoa" />
+                <ScalarProperty Name="QuanTrong" ColumnName="QuanTrong" />
+                <ScalarProperty Name="DaXem" ColumnName="DaXem" />
+                <ScalarProperty Name="DaNhan" ColumnName="DaNhan" />
+                <ScalarProperty Name="NguoiNhan" ColumnName="NguoiNhan" />
+                <ScalarProperty Name="NguoiGui" ColumnName="NguoiGui" />
+                <ScalarProperty Name="MaBaiViet" ColumnName="MaBaiViet" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
