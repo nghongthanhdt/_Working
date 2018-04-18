@@ -603,6 +603,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CodeController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoiController.cs" />
     <Compile Include="Controllers\ThuNoiBoController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
@@ -686,6 +687,8 @@
     <Content Include="Content\js\site.min.map" />
     <Content Include="scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="scripts\jquery-3.3.1.min.map" />
+    <Content Include="Views\Home\DangNhap.cshtml" />
+    <Content Include="Views\ThuNoiBo\XemThu.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -698,6 +701,7 @@
     <Folder Include="Content\FileManager\" />
     <Folder Include="Views\Code\" />
     <Folder Include="Views\Lib\" />
+    <Folder Include="Views\test\" />
     <Folder Include="Views\Upload\" />
   </ItemGroup>
   <ItemGroup>

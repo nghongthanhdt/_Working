@@ -3,8 +3,38 @@
     ViewBag.Title = "Thư nội bộ";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 
-    int _maNhanVienDangNhap = 1;
+
+    var nhanVienDangNhap = (PHCN.NhanVien.Models.NhanVien)Session["NhanVienDangNhap"];
+    if (nhanVienDangNhap == null) { Response.Redirect(Url.Action("DangNhap", "Home")); }
+    int _maNhanVienDangNhap = nhanVienDangNhap.MaNhanVien;
     string _trangThai = ViewBag.TrangThai.ToString();
+    string box = "";
+    try
+    {
+        box = Request.QueryString["box"].ToString();
+    }
+    catch { }
+
+    ViewBag.PanelTitle = "";
+    switch(box)
+    {
+        case "ThuDen":
+            ViewBag.PanelTitle = "Thư đến";
+            break;
+        case "QuanTrong":
+            ViewBag.PanelTitle = "Thư quan trọng";
+            break;
+        case "DaGui":
+            ViewBag.PanelTitle = "Thư đã gửi";
+            break;
+        case "DaXoa":
+            ViewBag.PanelTitle = "Thư đã xóa";
+            break;
+        default:
+            ViewBag.PanelTitle = "Hộp thư đến";
+            break;
+
+    }
 
 }
 
@@ -18,7 +48,7 @@
 </div>
 
 <script>
-    $(document).ready(function () {                                
+    $(document).ready(function () {
         //var url = 'http://localhost:11225/ThuNoiBo/_pDanhSachThu'
         var url = '@Url.Action("_pDanhSachThu", "ThuNoiBo")';
 
@@ -27,15 +57,21 @@
             trangThai:_trangThai
         }
         $.ajax({
-            type: "POST",
+    type: "POST",
             url: url,
             data: param,
             success: function (data) {
                 $("#divDanhSachThu").html(data);
-            },
+                if (_trangThai == "DaGui") {
+                    $("#btnDanhDauQuanTrong").hide();
+                    $("#btnDanhDauXoa").hide();
+                }
+        },
             dataType: "html"
         });
 
+
+        
 
         
                                    

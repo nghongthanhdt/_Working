@@ -1,21 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="PHCNModelStoreContainer" CdmEntityContainer="PHCNEntities">
-    <EntitySetMapping Name="GuiNhan">
-      <EntityTypeMapping TypeName="PHCNModel.GuiNhan">
-        <MappingFragment StoreEntitySet="GuiNhan">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="MaBaiViet" ColumnName="MaBaiViet" />
-          <ScalarProperty Name="NguoiGui" ColumnName="NguoiGui" />
-          <ScalarProperty Name="NguoiNhan" ColumnName="NguoiNhan" />
-          <ScalarProperty Name="DaNhan" ColumnName="DaNhan" />
-          <ScalarProperty Name="DaXem" ColumnName="DaXem" />
-          <ScalarProperty Name="QuanTrong" ColumnName="QuanTrong" />
-          <ScalarProperty Name="DaXoa" ColumnName="DaXoa" />
-          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="KhoaPhong">
       <EntityTypeMapping TypeName="PHCNModel.KhoaPhong">
         <MappingFragment StoreEntitySet="KhoaPhong">
@@ -83,6 +68,23 @@
           <ScalarProperty Name="HoTen" ColumnName="HoTen" />
           <ScalarProperty Name="MaKhoa" ColumnName="MaKhoa" />
           <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GuiNhan">
+      <EntityTypeMapping TypeName="PHCNModel.GuiNhan">
+        <MappingFragment StoreEntitySet="GuiNhan">
+          <ScalarProperty Name="STTGui" ColumnName="STTGui" />
+          <ScalarProperty Name="Xoa" ColumnName="Xoa" />
+          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+          <ScalarProperty Name="DaXoa" ColumnName="DaXoa" />
+          <ScalarProperty Name="QuanTrong" ColumnName="QuanTrong" />
+          <ScalarProperty Name="DaXem" ColumnName="DaXem" />
+          <ScalarProperty Name="DaNhan" ColumnName="DaNhan" />
+          <ScalarProperty Name="NguoiNhan" ColumnName="NguoiNhan" />
+          <ScalarProperty Name="NguoiGui" ColumnName="NguoiGui" />
+          <ScalarProperty Name="MaBaiViet" ColumnName="MaBaiViet" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

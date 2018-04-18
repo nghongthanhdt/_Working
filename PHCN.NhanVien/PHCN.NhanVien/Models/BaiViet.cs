@@ -17,8 +17,8 @@ namespace PHCN.NhanVien.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public BaiViet()
         {
-            this.GuiNhan = new HashSet<GuiNhan>();
             this.FileDinhKem = new HashSet<FileDinhKem>();
+            this.GuiNhan = new HashSet<GuiNhan>();
         }
     
         public int MaBaiViet { get; set; }
@@ -32,8 +32,8 @@ namespace PHCN.NhanVien.Models
     
         public virtual LoaiBaiViet LoaiBaiViet1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GuiNhan> GuiNhan { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FileDinhKem> FileDinhKem { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GuiNhan> GuiNhan { get; set; }
     }
 }

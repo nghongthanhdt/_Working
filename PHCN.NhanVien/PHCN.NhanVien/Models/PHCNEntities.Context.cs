@@ -25,12 +25,12 @@ namespace PHCN.NhanVien.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<GuiNhan> GuiNhan { get; set; }
         public virtual DbSet<KhoaPhong> KhoaPhong { get; set; }
         public virtual DbSet<LoaiBaiViet> LoaiBaiViet { get; set; }
         public virtual DbSet<BaiViet> BaiViet { get; set; }
         public virtual DbSet<Loi> Loi { get; set; }
         public virtual DbSet<FileDinhKem> FileDinhKem { get; set; }
         public virtual DbSet<NhanVien> NhanVien { get; set; }
+        public virtual DbSet<GuiNhan> GuiNhan { get; set; }
     }
 }

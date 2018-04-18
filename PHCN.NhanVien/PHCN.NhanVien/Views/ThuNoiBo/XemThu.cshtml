@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "XemThu";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+    var nhanVienDangNhap = (PHCN.NhanVien.Models.NhanVien)Session["NhanVienDangNhap"];
+    if (nhanVienDangNhap == null) { Response.Redirect(Url.Action("DangNhap", "Home")); }
+    int _maNhanVienDangNhap = nhanVienDangNhap.MaNhanVien;
+
+
+    PHCN.NhanVien.Models.BaiViet baiViet = (PHCN.NhanVien.Models.BaiViet)ViewBag.BaiViet;
+    PHCN.NhanVien.Models.GuiNhan guiNhan = baiViet.GuiNhan.Where(x => x.STTGui == 1).First();
+
+    ViewBag.PanelTitle = "" + baiViet.TieuDe;
+    var idBaiViet = baiViet.MaBaiViet;
+}
+
+<script>
+    var idBaiViet = @baiViet.MaBaiViet;
+    var maNhanVienDangNhap = @_maNhanVienDangNhap;
+</script>
+
+
+@*<label for="exampleInputEmail1">Nội dung</label>*@
+<div class="well">
+    @Html.Raw(baiViet.NoiDung)
+</div>
+<div class="pull-right">
+    Người gửi: <strong>@guiNhan.NhanVien.HoTen</strong> - <a href="javascript:void(0);">Người nhận</a> - @baiViet.Ngay
+</div>
+<!--<textarea id="txtNoiDung"></textarea>
+<script>
+  CKEDITOR.replace( 'txtNoiDung');
+</script>-->
+<div id="divDanhSachFileDinhKem">
+    @*lấy ajax hiển thị ra đây*@
+</div>
+<script>
+
+    function loadDanhSachFileDinhKem() {
+        var url = '@Url.Action("_pDanhSachFileDinhKem", "ThuNoiBo", new { id = idBaiViet, xem = true } )';
+        var danhSachFileDinhKem = $.get(url, function (data) {
+            $("#divDanhSachFileDinhKem").html(data);
+        });
+    }
+    $(document).ready(function () {
+        loadDanhSachFileDinhKem();
+    });
+</script>
+
+<a href="javascript:history.back();" class="btn btn-primary">Trở lại</a>
+
+
+@if (guiNhan.NguoiGui != guiNhan.NguoiNhan && guiNhan.NguoiGui != _maNhanVienDangNhap)
+{
+
+    <a class="btn @((guiNhan.QuanTrong == true)?"btn-warning":"btn-default")" id="btnDanhDauQuanTrong">
+        @if (guiNhan.QuanTrong == true)
+        { <i class="glyphicon glyphicon-ok"></i> } Quan trọng
+    </a>
+        <button class="btn btn-default" id="btnDanhDauXoa">
+            @if (guiNhan.DaXoa != true)
+            {
+                <span>Xóa thư</span>
+            }
+            else
+            {
+                <span>Trả về thư đến</span>
+            }
+        </button>
+
+}
+
+
+
+
+
+
+<script>
+    $("#btnDanhDauQuanTrong").click(function () {
+        var url = '@Url.Action("DanhDauQuanTrong", "ThuNoiBo", new { id = guiNhan.ID})';
+        $.get(url, function (result) {
+            if (result == "true") window.location = window.location;
+        });
+
+    });
+    $("#btnDanhDauXoa").click(function () {
+        var url = '@Url.Action("DanhDauXoa", "ThuNoiBo", new { id = guiNhan.ID})';
+        $.get(url, function (result) {
+            if (result == "true") window.location = '@Url.Action("Index", "ThuNoiBo")';
+        });
+    });
+</script>
