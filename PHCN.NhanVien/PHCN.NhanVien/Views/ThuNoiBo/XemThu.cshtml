@@ -10,97 +10,84 @@
 
     PHCN.NhanVien.Models.BaiViet baiViet = (PHCN.NhanVien.Models.BaiViet)ViewBag.BaiViet;
     PHCN.NhanVien.Models.GuiNhan guiNhan = baiViet.GuiNhan.Where(x => x.STTGui == 1).First();
+
+    ViewBag.PanelTitle = "" + baiViet.TieuDe;
+    var idBaiViet = baiViet.MaBaiViet;
 }
 
-<div class="row">
-    <div class="col-xs-12">
-        <form novalidate="" role="form" class="">
-            <div class="form-group">
-                Người gửi
-                <br />
-                <strong>@guiNhan.NhanVien.HoTen</strong> - <a href="javascript:void(0);">Người nhận</a> - 14/04/2018 05:05:00 PM
-
-            </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Tiêu đề</label>
-                <input class="form-control disabled" id="exampleInputEmail1" value="Thông báo V/v chuyển đổi phần mềm quản lý bệnh viện" disabled="disabled" />
+<script>
+    var idBaiViet = @baiViet.MaBaiViet;
+    var maNhanVienDangNhap = @_maNhanVienDangNhap;
+</script>
 
 
-            </div>
-
-        </form>
-
-    </div>
-</div>
-<label for="exampleInputEmail1">Nội dung</label>
+@*<label for="exampleInputEmail1">Nội dung</label>*@
 <div class="well">
-
-    <p>This is the easiest way of using CKEditor if additional third-party plugins are not used. Using CKEditor from CDN involves the following steps:</p>
-
-    <ol>
-        <li>Adding a <code>&lt;script&gt;</code> tag that loads <code>ckeditor.js</code> from CDN. For more information refer to the <a href="http://cdn.ckeditor.com/" rel="noopener" target="_blank">CDN documentation</a>.</li>
-        <li>
-            In case of using third-party plugins:
-            <ol>
-                <li>Downloading them manually from the <a href="https://ckeditor.com/cke4/addons/plugins/all" rel="noopener" target="_blank">Add-ons Repository</a>.</li>
-                <li>Downloading plugin requir<span style="font-size:18px">ements manually.</span></li>
-            </ol>
-        </li>
-        <li>Enabling additional plugins manually through CKEDITOR.config.extraPlugins.</li>
-    </ol>
-
-
+    @Html.Raw(baiViet.NoiDung)
 </div>
-
+<div class="pull-right">
+    Người gửi: <strong>@guiNhan.NhanVien.HoTen</strong> - <a href="javascript:void(0);">Người nhận</a> - @baiViet.Ngay
+</div>
 <!--<textarea id="txtNoiDung"></textarea>
 <script>
   CKEDITOR.replace( 'txtNoiDung');
 </script>-->
-<table class="table table-condensed">
-    <thead>
-        <tr>
+<div id="divDanhSachFileDinhKem">
+    @*lấy ajax hiển thị ra đây*@
+</div>
+<script>
 
-            <th colspan="2">File đính kèm</th>
+    function loadDanhSachFileDinhKem() {
+        var url = '@Url.Action("_pDanhSachFileDinhKem", "ThuNoiBo", new { id = idBaiViet, xem = true } )';
+        var danhSachFileDinhKem = $.get(url, function (data) {
+            $("#divDanhSachFileDinhKem").html(data);
+        });
+    }
+    $(document).ready(function () {
+        loadDanhSachFileDinhKem();
+    });
+</script>
 
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td style="width:10%;"><i class="fa fa-file-text-o"></i></td>
-            <td>File 1</td>
+<a href="javascript:history.back();" class="btn btn-primary">Trở lại</a>
 
-        </tr>
-        <tr>
-            <td><i class="fa fa-file-text-o"></i></td>
-            <td>File 2</td>
 
-        </tr>
+@if (guiNhan.NguoiGui != guiNhan.NguoiNhan && guiNhan.NguoiGui != _maNhanVienDangNhap)
+{
 
-    </tbody>
+    <a class="btn @((guiNhan.QuanTrong == true)?"btn-warning":"btn-default")" id="btnDanhDauQuanTrong">
+        @if (guiNhan.QuanTrong == true)
+        { <i class="glyphicon glyphicon-ok"></i> } Quan trọng
+    </a>
+        <button class="btn btn-default" id="btnDanhDauXoa">
+            @if (guiNhan.DaXoa != true)
+            {
+                <span>Xóa thư</span>
+            }
+            else
+            {
+                <span>Trả về thư đến</span>
+            }
+        </button>
 
-</table>
+}
 
-<button class="btn btn-primary">Trở lại</button>
-<button class="btn btn-default">Đánh dấu quan trọng</button>
-<button class="btn btn-default">Xóa thư</button>
+
+
+
 
 
 <script>
-	$(function(){
-		$("ul.checktree").checktree();
-	});
-</script>
-<script type="text/javascript">
+    $("#btnDanhDauQuanTrong").click(function () {
+        var url = '@Url.Action("DanhDauQuanTrong", "ThuNoiBo", new { id = guiNhan.ID})';
+        $.get(url, function (result) {
+            if (result == "true") window.location = window.location;
+        });
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-36251023-1']);
-  _gaq.push(['_setDomainName', 'jqueryscript.net']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
+    });
+    $("#btnDanhDauXoa").click(function () {
+        var url = '@Url.Action("DanhDauXoa", "ThuNoiBo", new { id = guiNhan.ID})';
+        $.get(url, function (result) {
+            if (result == "true") window.location = '@Url.Action("Index", "ThuNoiBo")';
+        });
+    });
 </script>

@@ -18,15 +18,17 @@
         
         @foreach (PHCN.NhanVien.Models.GuiNhan item in listBaiViet)
         {
-            
+
             <tr>
-                <td>@stt</td>
+                <td>@(stt++)</td>
                 <td>                    
-                    <a href="@Url.Action("XemThu", "ThuNoiBo", new { id = item.MaBaiViet})">@item.BaiViet.TieuDe</a>
+                    <a href="@Url.Action("XemThu", "ThuNoiBo", new { id = item.MaBaiViet })">@item.BaiViet.TieuDe</a>
                 </td>
                 <td>@item.NhanVien.HoTen</td> @*(người gửi)*@
                 <td>@item.BaiViet.Ngay</td>
             </tr>
+
+            
         }
         
     </tbody>

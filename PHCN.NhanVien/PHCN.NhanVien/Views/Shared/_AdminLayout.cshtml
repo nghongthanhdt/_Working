@@ -2,7 +2,12 @@
     var nhanVienDangNhap = (PHCN.NhanVien.Models.NhanVien)Session["NhanVienDangNhap"];
 
     int _maNhanVienDangNhap = nhanVienDangNhap.MaNhanVien;
-
+    string box = "";
+    try
+    {
+        box = Request.QueryString["box"].ToString();
+    }
+    catch { }
 
 }
 
@@ -77,11 +82,11 @@
 
                 </ul>
                 <div class="list-group">
-                    <a href="@Url.Action("Index", "ThuNoiBo", new { box = "ThuDen"})" class="list-group-item active">Hộp thư đến</a>
-                    <a href="@Url.Action("Index", "ThuNoiBo", new { box = "QuanTrong"})" class="list-group-item">Quan trọng</a>
-                    <a href="@Url.Action("Index", "ThuNoiBo", new { box = "DaGui"})" class="list-group-item">Thư đã gửi</a>
+                    <a href="@Url.Action("Index", "ThuNoiBo", new { box = "ThuDen"})" class="list-group-item @((box=="ThuDen")?"active":"")">Hộp thư đến</a>
+                    <a href="@Url.Action("Index", "ThuNoiBo", new { box = "QuanTrong"})" class="list-group-item @((box=="QuanTrong")?"active":"")">Quan trọng</a>
+                    <a href="@Url.Action("Index", "ThuNoiBo", new { box = "DaGui"})" class="list-group-item @((box=="DaGui")?"active":"")">Thư đã gửi</a>
                     @*<a href="@Url.Action("Index", "ThuNoiBo", new { maNhanVienDangNhap = _maNhanVienDangNhap, trangThai = "ThuNhap"})" class="list-group-item">Thư nháp</a>*@
-                    <a href="@Url.Action("Index", "ThuNoiBo", new { box = "DaXoa"})" class="list-group-item">Thùng rác</a>
+                    <a href="@Url.Action("Index", "ThuNoiBo", new { box = "DaXoa"})" class="list-group-item @((box=="DaXoa")?"active":"")">Thùng rác</a>
 
 
 

@@ -36,7 +36,7 @@
 <script>
     
     function loadDanhSachFileDinhKem() {
-        var url = '@Url.Action("_pDanhSachFileDinhKem", "ThuNoiBo", new { id = idBaiViet } )';
+        var url = '@Url.Action("_pDanhSachFileDinhKem", "ThuNoiBo", new { id = idBaiViet, xem = false } )';
         var danhSachFileDinhKem = $.get(url, function (data) {
             $("#divDanhSachFileDinhKem").html(data);
         });        

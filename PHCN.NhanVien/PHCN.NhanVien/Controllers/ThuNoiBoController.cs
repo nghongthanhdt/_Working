@@ -61,7 +61,7 @@ namespace PHCN.NhanVien.Controllers
                                                                 && x.DaXoa == true).OrderByDescending(x => x.BaiViet.MaBaiViet).ToList();
                         break;
                     default:
-                        //listGuiNhan = null;//db.GuiNhan.Where(x => x.NguoiNhan == maNhanVienDangNhap && x.BaiViet.Xoa == false).OrderByDescending(x => x.BaiViet.MaBaiViet).ToList();
+
                         break;
                 }
                 ViewBag.ListBaiViet = listBaiViet;
@@ -74,12 +74,15 @@ namespace PHCN.NhanVien.Controllers
 
             
         }
-        public ActionResult _pDanhSachFileDinhKem(int id)
+        public ActionResult _pDanhSachFileDinhKem(int id, bool xem = false)
         {
             // id là mã bài viết
+            // nếu xem == true thì ẩn đi nút xóa
             BaiViet bv = db.BaiViet.Find(id);
             var listFileDinhKem = bv.FileDinhKem.Where(x => x.Xoa == false).OrderBy(x => x.MaFile).ToList();
             ViewBag.ListFileDinhKem = listFileDinhKem;
+            ViewBag.Xem = xem;
+
             return PartialView();
         }
         public ActionResult SoanThu(string id)
@@ -172,6 +175,25 @@ namespace PHCN.NhanVien.Controllers
             ViewBag.BaiViet = baiViet;
             
             return View();
+        }
+
+        public ActionResult DanhDauQuanTrong(int id)
+        {
+            // id của GuiNhan
+            GuiNhan gn = db.GuiNhan.Find(id);
+            if (gn.QuanTrong == false) gn.QuanTrong = true; else gn.QuanTrong = false;
+            db.SaveChanges();
+            return Content("true");
+        }
+
+        public ActionResult DanhDauXoa(int id)
+        {
+            // id của GuiNhan
+            GuiNhan gn = db.GuiNhan.Find(id);
+            gn.QuanTrong = false;
+            if (gn.DaXoa == true) gn.DaXoa = false; else gn.DaXoa = true;
+            db.SaveChanges();
+            return Content("true");
         }
     }
 }

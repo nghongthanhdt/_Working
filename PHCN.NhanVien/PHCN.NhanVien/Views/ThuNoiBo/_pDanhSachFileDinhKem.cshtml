@@ -1,5 +1,7 @@
 ﻿@{
     List<PHCN.NhanVien.Models.FileDinhKem> listFileDinhKem = (List<PHCN.NhanVien.Models.FileDinhKem>)ViewBag.ListFileDinhKem;
+    bool xem = (bool)ViewBag.Xem;
+
 }
 
 
@@ -11,7 +13,10 @@
             <tr>
 
                 <th>File đính kèm</th>
-                <th style="width:10%;">Xóa</th>
+                @if (!xem)
+                {
+                    <th style="width:10%;">Xóa</th>
+                }                
             </tr>
         </thead>
         <tbody>
@@ -21,15 +26,17 @@
                 <tr>
                     <td>
                         <i class="fa fa-file-text-o" style="margin-left:20px;"></i>
-                        <a href="#" style="margin-left:20px;">@item.TenFile</a>
+                        <a href="~/Content/FileManager/@item.TenFileFull" style="margin-left:20px;">@item.TenFile</a>
                     </td>
+                    @if (!xem)
+                    {
+                        <td>
+                            <a href="javascript:void(0);">
+                                <span class="glyphicon glyphicon-remove btnXoaFileDinhKem" data-ma-file="@item.MaFile" style="color:#ff6a00;"></span>
+                            </a>
 
-                    <td>
-                        <a href="javascript:void(0);">
-                            <span class="glyphicon glyphicon-remove btnXoaFileDinhKem" data-ma-file="@item.MaFile" style="color:#ff6a00;"></span>
-                        </a>
-
-                    </td>
+                        </td>
+                    }                 
                 </tr>
             }
 
@@ -39,22 +46,23 @@
 
     </table>
 
-    <script>
-    function bindbtnXoaFileDinhKem() {
-        $(".btnXoaFileDinhKem").unbind("click").click(function () {
-            var maFile = $(this).data("ma-file");
-            var url = '@Url.Action("XoaFileDinhKem", "Upload")' + '/' + maFile;
-            $.post(url, function (data) {
-                if (data == "true") {
-                    loadDanhSachFileDinhKem();
-                } else {
-                    alert(data);
-                }
-            });
-        });
-    }
-    bindbtnXoaFileDinhKem();
-    </script>
+        <script>
+            function bindbtnXoaFileDinhKem() {
+                $(".btnXoaFileDinhKem").unbind("click").click(function () {
+                    var maFile = $(this).data("ma-file");
+                    var url = '@Url.Action("XoaFileDinhKem", "Upload")' + '/' + maFile;
+                    $.post(url, function (data) {
+                        if (data == "true") {
+                            loadDanhSachFileDinhKem();
+                        } else {
+                            alert(data);
+                        }
+                    });
+                });
+            }
+            bindbtnXoaFileDinhKem();
+        </script>
+
 
 }
 else

@@ -97,3 +97,4 @@ D:\_Working\PHCN.NhanVien\PHCN.NhanVien\bin\System.Web.Helpers.xml
 D:\_Working\PHCN.NhanVien\PHCN.NhanVien\bin\System.Web.Mvc.xml
 D:\_Working\PHCN.NhanVien\PHCN.NhanVien\obj\Debug\PHCN.NhanVien.dll
 D:\_Working\PHCN.NhanVien\PHCN.NhanVien\obj\Debug\PHCN.NhanVien.pdb
+D:\_Working\PHCN.NhanVien\PHCN.NhanVien\obj\Debug\PHCN.NhanVien.csprojResolveAssemblyReference.cache
