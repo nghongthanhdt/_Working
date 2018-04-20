@@ -171,6 +171,7 @@
   </data>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   <data name="simpleButton2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAADB0RVh0VGl0
@@ -230,6 +231,9 @@
 =======
   <data name="simpleButton3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
 >>>>>>> parent of 7cc184d... 19/04/2018
+=======
+  <data name="simpleButton3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+>>>>>>> parent of 7cc184d... 19/04/2018
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAACN0RVh0VGl0
         bGUAQ2FuY2VsO1N0b3A7RXhpdDtCYXJzO1JpYmJvbjtMlpayAAALFUlEQVRYR5WXB1RVxxaGx/dSfEGM
@@ -285,12 +289,16 @@
   </data>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   <metadata name="notifyIconMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>501, 56</value>
   </metadata>
   <data name="notifyIconMain.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
 =======
   <data name="menuHienThu.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+=======
+  <data name="simpleButton2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+>>>>>>> parent of 7cc184d... 19/04/2018
 =======
   <data name="simpleButton2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
 >>>>>>> parent of 7cc184d... 19/04/2018
@@ -339,6 +347,7 @@
         gg==
 </value>
   </data>
+<<<<<<< HEAD
 <<<<<<< HEAD
   <data name="menuDenHopThu.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1339,10 +1348,15 @@
   <data name="btnDong.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
 >>>>>>> 7cc184d12fa681bbc87ec541914e5921c474f4f7
 =======
+=======
+>>>>>>> parent of 7cc184d... 19/04/2018
   <metadata name="notifyIconMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
   <data name="notifyIconMain.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+<<<<<<< HEAD
+>>>>>>> parent of 7cc184d... 19/04/2018
+=======
 >>>>>>> parent of 7cc184d... 19/04/2018
     <value>
         AAABAAIAgIAAAAEAIAAoCAEAJgAAAAAAAAABACAAVTcAAE4IAQAoAAAAgAAAAAABAAABACAAAAAAAAAA

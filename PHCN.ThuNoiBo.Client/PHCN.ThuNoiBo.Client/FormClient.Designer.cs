@@ -59,6 +59,7 @@
             this.tabTienIch = new DevExpress.XtraTab.XtraTabPage();
             this.notifyIconMain = new System.Windows.Forms.NotifyIcon(this.components);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
             this.button1 = new System.Windows.Forms.Button();
 
@@ -68,6 +69,8 @@
             this.menuThoat = new System.Windows.Forms.ToolStripMenuItem();
             this.btnDong = new DevExpress.XtraEditors.SimpleButton();
 
+=======
+>>>>>>> parent of 7cc184d... 19/04/2018
 =======
 >>>>>>> parent of 7cc184d... 19/04/2018
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
@@ -157,6 +160,7 @@
             // tabCauHinh
             // 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
             this.tabCauHinh.Controls.Add(this.simpleButton2);
             this.tabCauHinh.Controls.Add(this.simpleButton3);
@@ -173,6 +177,10 @@
             this.tabCauHinh.Controls.Add(this.simpleButton3);
             this.tabCauHinh.Controls.Add(this.simpleButton2);
 >>>>>>> parent of 7cc184d... 19/04/2018
+=======
+            this.tabCauHinh.Controls.Add(this.simpleButton3);
+            this.tabCauHinh.Controls.Add(this.simpleButton2);
+>>>>>>> parent of 7cc184d... 19/04/2018
             this.tabCauHinh.Controls.Add(this.groupBox2);
             this.tabCauHinh.Controls.Add(this.groupBox1);
             this.tabCauHinh.Enabled = true;
@@ -183,6 +191,9 @@
             // 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 7cc184d... 19/04/2018
 =======
 >>>>>>> parent of 7cc184d... 19/04/2018
             // simpleButton3
@@ -200,7 +211,11 @@
             this.simpleButton2.Appearance.Options.UseFont = true;
             this.simpleButton2.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton2.Image")));
 <<<<<<< HEAD
+<<<<<<< HEAD
             this.simpleButton2.Location = new System.Drawing.Point(22, 54);
+=======
+            this.simpleButton2.Location = new System.Drawing.Point(19, 248);
+>>>>>>> parent of 7cc184d... 19/04/2018
 =======
             this.simpleButton2.Location = new System.Drawing.Point(19, 248);
 >>>>>>> parent of 7cc184d... 19/04/2018
@@ -208,6 +223,7 @@
             this.simpleButton2.Size = new System.Drawing.Size(202, 39);
             this.simpleButton2.TabIndex = 3;
             this.simpleButton2.Text = "Cập nhật cấu hình";
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
             // label9
@@ -286,6 +302,8 @@
 >>>>>>> 7cc184d12fa681bbc87ec541914e5921c474f4f7
 =======
 >>>>>>> parent of 7cc184d... 19/04/2018
+=======
+>>>>>>> parent of 7cc184d... 19/04/2018
             // 
             // groupBox2
             // 
@@ -305,6 +323,7 @@
             this.groupBox2.Text = "Kết nối";
             // 
             // textBox4
+<<<<<<< HEAD
             // 
             this.textBox4.Location = new System.Drawing.Point(102, 69);
             this.textBox4.Name = "textBox4";
@@ -312,6 +331,15 @@
             this.textBox4.TabIndex = 1;
             this.textBox4.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
+=======
+            // 
+            this.textBox4.Location = new System.Drawing.Point(102, 69);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(209, 21);
+            this.textBox4.TabIndex = 1;
+            this.textBox4.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            // 
+>>>>>>> parent of 7cc184d... 19/04/2018
             // label7
             // 
             this.label7.AutoSize = true;
@@ -394,6 +422,7 @@
             this.textBox1.Size = new System.Drawing.Size(209, 21);
             this.textBox1.TabIndex = 1;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+<<<<<<< HEAD
             // 
             // label1
             // 
@@ -406,6 +435,20 @@
             // 
             // textBox3
             // 
+=======
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(53, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(43, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Họ tên:";
+            // 
+            // textBox3
+            // 
+>>>>>>> parent of 7cc184d... 19/04/2018
             this.textBox3.Location = new System.Drawing.Point(102, 43);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(209, 21);
@@ -451,6 +494,7 @@
             this.notifyIconMain.Text = "Mail nội bộ";
             this.notifyIconMain.Visible = true;
             this.notifyIconMain.DoubleClick += new System.EventHandler(this.notifyIconMain_DoubleClick);
+<<<<<<< HEAD
 <<<<<<< HEAD
             this.notifyIconMain.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIconMain_MouseDoubleClick);
             // 
@@ -507,11 +551,14 @@
 >>>>>>> 7cc184d12fa681bbc87ec541914e5921c474f4f7
 =======
 >>>>>>> parent of 7cc184d... 19/04/2018
+=======
+>>>>>>> parent of 7cc184d... 19/04/2018
             // 
             // FormClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
             this.ClientSize = new System.Drawing.Size(391, 382);
@@ -523,11 +570,15 @@
 =======
             this.ClientSize = new System.Drawing.Size(391, 382);
 >>>>>>> parent of 7cc184d... 19/04/2018
+=======
+            this.ClientSize = new System.Drawing.Size(391, 382);
+>>>>>>> parent of 7cc184d... 19/04/2018
             this.Controls.Add(this.xtraTabControl1);
             this.Controls.Add(this.labelControl2);
             this.Name = "FormClient";
             this.Text = "Form1";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormClient_FormClosed);
+<<<<<<< HEAD
 <<<<<<< HEAD
             this.Load += new System.EventHandler(this.FormClient_Load);
 <<<<<<< HEAD
@@ -539,14 +590,20 @@
 =======
             this.Resize += new System.EventHandler(this.FormClient_Resize);
 >>>>>>> parent of 7cc184d... 19/04/2018
+=======
+            this.Resize += new System.EventHandler(this.FormClient_Resize);
+>>>>>>> parent of 7cc184d... 19/04/2018
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
             this.xtraTabControl1.ResumeLayout(false);
             this.tabHopThu.ResumeLayout(false);
             this.tabHopThu.PerformLayout();
             this.tabCauHinh.ResumeLayout(false);
 <<<<<<< HEAD
+<<<<<<< HEAD
             this.tabCauHinh.PerformLayout();
 >>>>>>> 7cc184d12fa681bbc87ec541914e5921c474f4f7
+=======
+>>>>>>> parent of 7cc184d... 19/04/2018
 =======
 >>>>>>> parent of 7cc184d... 19/04/2018
             this.groupBox2.ResumeLayout(false);
@@ -590,6 +647,7 @@
         private System.Windows.Forms.NotifyIcon notifyIconMain;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         private System.Windows.Forms.Button button1;
 =======
         private DevExpress.XtraEditors.SimpleButton btnDong;
@@ -603,6 +661,8 @@
         private System.Windows.Forms.CheckBox checkboxShowOnStart;
         private System.Windows.Forms.CheckBox checkboxAutoStart;
 >>>>>>> 7cc184d12fa681bbc87ec541914e5921c474f4f7
+=======
+>>>>>>> parent of 7cc184d... 19/04/2018
 =======
 >>>>>>> parent of 7cc184d... 19/04/2018
     }

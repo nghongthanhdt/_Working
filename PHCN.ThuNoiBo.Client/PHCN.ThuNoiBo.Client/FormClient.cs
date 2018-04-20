@@ -29,6 +29,7 @@ namespace PHCN.ThuNoiBo.Client
         private void FormClient_Resize(object sender, EventArgs e)
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
             
@@ -66,6 +67,9 @@ namespace PHCN.ThuNoiBo.Client
 =======
             if (FormWindowState.Minimized == this.WindowState)
 >>>>>>> parent of 7cc184d... 19/04/2018
+=======
+            if (FormWindowState.Minimized == this.WindowState)
+>>>>>>> parent of 7cc184d... 19/04/2018
             {
                 notifyIconMain.Visible = true;
                 notifyIconMain.BalloonTipTitle = "Bệnh viện Phục hồi chức năng Đồng Tháp";
@@ -82,6 +86,7 @@ namespace PHCN.ThuNoiBo.Client
 
         }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         private void btnCapNhatCauHinh_Click(object sender, EventArgs e)
 
@@ -102,8 +107,28 @@ namespace PHCN.ThuNoiBo.Client
         }
 
         private void FormClient_FormClosed(object sender, FormClosedEventArgs e)
+=======
+
+
+        private void notifyIconMain_DoubleClick(object sender, EventArgs e)
+>>>>>>> parent of 7cc184d... 19/04/2018
+        {
+            // Show the form when the user double clicks on the notify icon.
+
+<<<<<<< HEAD
+=======
+            // Set the WindowState to normal if the form is minimized.
+            if (this.WindowState == FormWindowState.Minimized)
+                this.WindowState = FormWindowState.Normal;
+
+            // Activate the form.
+            this.Activate();
+        }
+
+        private void FormClient_FormClosed(object sender, FormClosedEventArgs e)
         {
 
+>>>>>>> parent of 7cc184d... 19/04/2018
         }
     }
 }
