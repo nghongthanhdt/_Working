@@ -43,7 +43,6 @@
             this.checkboxAutoGetMail = new System.Windows.Forms.CheckBox();
             this.checkboxShowOnStart = new System.Windows.Forms.CheckBox();
             this.checkboxAutoStart = new System.Windows.Forms.CheckBox();
-            this.btnBoQua = new DevExpress.XtraEditors.SimpleButton();
             this.btnCapNhatCauHinh = new DevExpress.XtraEditors.SimpleButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtConnectPassword = new System.Windows.Forms.TextBox();
@@ -64,6 +63,7 @@
             this.menuDenHopThu = new System.Windows.Forms.ToolStripMenuItem();
             this.menuThoat = new System.Windows.Forms.ToolStripMenuItem();
             this.btnDong = new DevExpress.XtraEditors.SimpleButton();
+            this.btnBoQua = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.tabHopThu.SuspendLayout();
@@ -118,7 +118,7 @@
             // 
             // simpleButton1
             // 
-            this.simpleButton1.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.Image")));
+            //this.simpleButton1.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.Image")));
             this.simpleButton1.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleRight;
             this.simpleButton1.Location = new System.Drawing.Point(174, 130);
             this.simpleButton1.Name = "simpleButton1";
@@ -224,19 +224,11 @@
             this.checkboxAutoStart.Text = "Khởi động cùng Windows";
             this.checkboxAutoStart.UseVisualStyleBackColor = true;
             // 
-            // btnBoQua
-            // 
-            this.btnBoQua.Location = new System.Drawing.Point(349, 143);
-            this.btnBoQua.Name = "btnBoQua";
-            this.btnBoQua.Size = new System.Drawing.Size(202, 26);
-            this.btnBoQua.TabIndex = 3;
-            this.btnBoQua.Text = "Bỏ qua";
-            // 
             // btnCapNhatCauHinh
             // 
             this.btnCapNhatCauHinh.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             this.btnCapNhatCauHinh.Appearance.Options.UseFont = true;
-            this.btnCapNhatCauHinh.Image = ((System.Drawing.Image)(resources.GetObject("btnCapNhatCauHinh.Image")));
+            //this.btnCapNhatCauHinh.Image = ((System.Drawing.Image)(resources.GetObject("btnCapNhatCauHinh.Image")));
             this.btnCapNhatCauHinh.Location = new System.Drawing.Point(349, 98);
             this.btnCapNhatCauHinh.Name = "btnCapNhatCauHinh";
             this.btnCapNhatCauHinh.Size = new System.Drawing.Size(202, 39);
@@ -263,6 +255,7 @@
             // 
             this.txtConnectPassword.Location = new System.Drawing.Point(102, 69);
             this.txtConnectPassword.Name = "txtConnectPassword";
+            this.txtConnectPassword.PasswordChar = '*';
             this.txtConnectPassword.Size = new System.Drawing.Size(209, 21);
             this.txtConnectPassword.TabIndex = 1;
             this.txtConnectPassword.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
@@ -367,7 +360,7 @@
             // notifyIconMain
             // 
             this.notifyIconMain.ContextMenuStrip = this.contextMenuStripClient;
-            this.notifyIconMain.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIconMain.Icon")));
+            //this.notifyIconMain.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIconMain.Icon")));
             this.notifyIconMain.Text = "Mail nội bộ";
             this.notifyIconMain.Visible = true;
             this.notifyIconMain.DoubleClick += new System.EventHandler(this.notifyIconMain_DoubleClick);
@@ -385,14 +378,14 @@
             // menuHienThu
             // 
             this.menuHienThu.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.menuHienThu.Image = ((System.Drawing.Image)(resources.GetObject("menuHienThu.Image")));
+            //this.menuHienThu.Image = ((System.Drawing.Image)(resources.GetObject("menuHienThu.Image")));
             this.menuHienThu.Name = "menuHienThu";
             this.menuHienThu.Size = new System.Drawing.Size(140, 22);
             this.menuHienThu.Text = "Hiển thị";
             // 
             // menuDenHopThu
             // 
-            this.menuDenHopThu.Image = ((System.Drawing.Image)(resources.GetObject("menuDenHopThu.Image")));
+            //this.menuDenHopThu.Image = ((System.Drawing.Image)(resources.GetObject("menuDenHopThu.Image")));
             this.menuDenHopThu.Name = "menuDenHopThu";
             this.menuDenHopThu.Size = new System.Drawing.Size(140, 22);
             this.menuDenHopThu.Text = "Đến hộp thư";
@@ -405,7 +398,7 @@
             // 
             // btnDong
             // 
-            this.btnDong.Image = ((System.Drawing.Image)(resources.GetObject("btnDong.Image")));
+            //this.btnDong.Image = ((System.Drawing.Image)(resources.GetObject("btnDong.Image")));
             this.btnDong.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleRight;
             this.btnDong.Location = new System.Drawing.Point(483, 12);
             this.btnDong.Name = "btnDong";
@@ -413,6 +406,15 @@
             this.btnDong.TabIndex = 1;
             this.btnDong.Text = "Đóng";
             this.btnDong.Click += new System.EventHandler(this.btnDong_Click);
+            // 
+            // btnBoQua
+            // 
+            this.btnBoQua.Location = new System.Drawing.Point(349, 143);
+            this.btnBoQua.Name = "btnBoQua";
+            this.btnBoQua.Size = new System.Drawing.Size(202, 26);
+            this.btnBoQua.TabIndex = 3;
+            this.btnBoQua.Text = "Bỏ qua";
+            this.btnBoQua.Click += new System.EventHandler(this.btnBoQua_Click);
             // 
             // FormClient
             // 
@@ -426,6 +428,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormClient";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BỆNH VIỆN PHỤC HỒI CHỨC NĂNG ĐỒNG THÁP";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormClient_FormClosed);
             this.Load += new System.EventHandler(this.FormClient_Load);
@@ -468,7 +471,6 @@
         private System.Windows.Forms.TextBox txtAccountPassword;
         private System.Windows.Forms.TextBox txtAccountUserName;
         private System.Windows.Forms.Label label3;
-        private DevExpress.XtraEditors.SimpleButton btnBoQua;
         private DevExpress.XtraEditors.SimpleButton btnCapNhatCauHinh;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.NotifyIcon notifyIconMain;
@@ -482,6 +484,7 @@
         private System.Windows.Forms.CheckBox checkboxAutoGetMail;
         private System.Windows.Forms.CheckBox checkboxShowOnStart;
         private System.Windows.Forms.CheckBox checkboxAutoStart;
+        private DevExpress.XtraEditors.SimpleButton btnBoQua;
     }
 }
 

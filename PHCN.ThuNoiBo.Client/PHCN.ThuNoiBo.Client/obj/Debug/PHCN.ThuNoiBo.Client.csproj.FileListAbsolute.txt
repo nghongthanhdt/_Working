@@ -85,6 +85,7 @@ D:\_Working\PHCN.ThuNoiBo.Client\PHCN.ThuNoiBo.Client\bin\Debug\es\DevExpress.Pd
 D:\_Working\PHCN.ThuNoiBo.Client\PHCN.ThuNoiBo.Client\bin\Debug\ja\DevExpress.Pdf.v16.1.Core.resources.dll
 D:\_Working\PHCN.ThuNoiBo.Client\PHCN.ThuNoiBo.Client\bin\Debug\ru\DevExpress.Pdf.v16.1.Core.resources.dll
 D:\_Working\PHCN.ThuNoiBo.Client\PHCN.ThuNoiBo.Client\obj\Debug\PHCN.ThuNoiBo.Client.csprojResolveAssemblyReference.cache
-D:\_Working\PHCN.ThuNoiBo.Client\PHCN.ThuNoiBo.Client\obj\Debug\PHCN.ThuNoiBo.Client.FormClient.resources
 D:\_Working\PHCN.ThuNoiBo.Client\PHCN.ThuNoiBo.Client\obj\Debug\PHCN.ThuNoiBo.Client.Properties.Resources.resources
 D:\_Working\PHCN.ThuNoiBo.Client\PHCN.ThuNoiBo.Client\obj\Debug\PHCN.ThuNoiBo.Client.csproj.GenerateResource.Cache
+D:\_Working\PHCN.ThuNoiBo.Client\PHCN.ThuNoiBo.Client\obj\Debug\PHCN.ThuNoiBo.Client.FormMatKhauAdmin.resources
+D:\_Working\PHCN.ThuNoiBo.Client\PHCN.ThuNoiBo.Client\obj\Debug\PHCN.ThuNoiBo.Client.UserLogin.resources

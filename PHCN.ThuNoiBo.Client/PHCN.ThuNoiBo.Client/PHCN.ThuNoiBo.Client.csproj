@@ -52,16 +52,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientConfig.cs" />
-    <Compile Include="FormClient.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="FormClient.cs" />
     <Compile Include="FormClient.Designer.cs">
       <DependentUpon>FormClient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMatKhauAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMatKhauAdmin.Designer.cs">
+      <DependentUpon>FormMatKhauAdmin.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormClient.resx">
       <DependentUpon>FormClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMatKhauAdmin.resx">
+      <DependentUpon>FormMatKhauAdmin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
