@@ -35,13 +35,7 @@ namespace PHCN.ThuNoiBo.Client
                 notifyIconMain.BalloonTipText = "Hệ thống thư nội bộ";
                 notifyIconMain.ShowBalloonTip(500);
                 this.Hide();
-            }
-            else if (FormWindowState.Normal == this.WindowState)
-            {
-                notifyIconMain.Visible = false;
-                this.Show();
-                this.Activate();
-            }
+            }            
 
         }
 
@@ -49,17 +43,22 @@ namespace PHCN.ThuNoiBo.Client
 
         private void notifyIconMain_DoubleClick(object sender, EventArgs e)
         {
-            // Show the form when the user double clicks on the notify icon.
 
-            // Set the WindowState to normal if the form is minimized.
-            if (this.WindowState == FormWindowState.Minimized)
-                this.WindowState = FormWindowState.Normal;
-
-            // Activate the form.
-            this.Activate();
         }
 
         private void FormClient_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
+        }
+
+        private void notifyIconMain_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            this.Show(); //Hiển thị Form
+            this.WindowState = FormWindowState.Normal; //Trở về trạng thái bình thường
+            this.Activate();
+        }
+
+        private void FormClient_Load(object sender, EventArgs e)
         {
 
         }

@@ -58,10 +58,9 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.tabTienIch = new DevExpress.XtraTab.XtraTabPage();
             this.notifyIconMain = new System.Windows.Forms.NotifyIcon(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
-            this.tabHopThu.SuspendLayout();
-            this.tabCauHinh.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -94,6 +93,7 @@
             this.tabHopThu.Controls.Add(this.simpleButton1);
             this.tabHopThu.Controls.Add(this.labelControl3);
             this.tabHopThu.Controls.Add(this.labelControl1);
+            this.tabHopThu.Enabled = true;
             this.tabHopThu.Name = "tabHopThu";
             this.tabHopThu.Size = new System.Drawing.Size(361, 305);
             this.tabHopThu.Text = "Hộp thư";
@@ -145,10 +145,11 @@
             // 
             // tabCauHinh
             // 
-            this.tabCauHinh.Controls.Add(this.simpleButton3);
             this.tabCauHinh.Controls.Add(this.simpleButton2);
+            this.tabCauHinh.Controls.Add(this.simpleButton3);
             this.tabCauHinh.Controls.Add(this.groupBox2);
             this.tabCauHinh.Controls.Add(this.groupBox1);
+            this.tabCauHinh.Enabled = true;
             this.tabCauHinh.Name = "tabCauHinh";
             this.tabCauHinh.Size = new System.Drawing.Size(361, 305);
             this.tabCauHinh.Text = "Cấu hình";
@@ -168,7 +169,7 @@
             this.simpleButton2.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             this.simpleButton2.Appearance.Options.UseFont = true;
             this.simpleButton2.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton2.Image")));
-            this.simpleButton2.Location = new System.Drawing.Point(19, 248);
+            this.simpleButton2.Location = new System.Drawing.Point(22, 54);
             this.simpleButton2.Name = "simpleButton2";
             this.simpleButton2.Size = new System.Drawing.Size(202, 39);
             this.simpleButton2.TabIndex = 3;
@@ -327,6 +328,7 @@
             // 
             // tabTienIch
             // 
+            this.tabTienIch.Enabled = true;
             this.tabTienIch.Name = "tabTienIch";
             this.tabTienIch.Size = new System.Drawing.Size(361, 305);
             this.tabTienIch.Text = "Tiện ích";
@@ -337,23 +339,32 @@
             this.notifyIconMain.Text = "Mail nội bộ";
             this.notifyIconMain.Visible = true;
             this.notifyIconMain.DoubleClick += new System.EventHandler(this.notifyIconMain_DoubleClick);
+            this.notifyIconMain.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIconMain_MouseDoubleClick);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(268, 158);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // FormClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(391, 382);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.xtraTabControl1);
             this.Controls.Add(this.labelControl2);
             this.Name = "FormClient";
             this.Text = "Form1";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormClient_FormClosed);
+            this.Load += new System.EventHandler(this.FormClient_Load);
             this.Resize += new System.EventHandler(this.FormClient_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
             this.xtraTabControl1.ResumeLayout(false);
-            this.tabHopThu.ResumeLayout(false);
-            this.tabHopThu.PerformLayout();
-            this.tabCauHinh.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -393,6 +404,7 @@
         private DevExpress.XtraEditors.SimpleButton simpleButton2;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.NotifyIcon notifyIconMain;
+        private System.Windows.Forms.Button button1;
     }
 }
 
