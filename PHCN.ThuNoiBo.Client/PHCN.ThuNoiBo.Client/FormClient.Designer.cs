@@ -33,44 +33,60 @@
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.tabHopThu = new DevExpress.XtraTab.XtraTabPage();
-            this.label8 = new System.Windows.Forms.Label();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
-            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.lblThongBao = new System.Windows.Forms.Label();
+            this.btnDenHopThu = new DevExpress.XtraEditors.SimpleButton();
+            this.lblTenKhoa = new DevExpress.XtraEditors.LabelControl();
+            this.lblHoTen = new DevExpress.XtraEditors.LabelControl();
             this.tabCauHinh = new DevExpress.XtraTab.XtraTabPage();
+            this.txtPort = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.txtAutoGetMailTimer = new System.Windows.Forms.TextBox();
             this.checkboxAutoGetMail = new System.Windows.Forms.CheckBox();
             this.checkboxShowOnStart = new System.Windows.Forms.CheckBox();
             this.checkboxAutoStart = new System.Windows.Forms.CheckBox();
             this.btnBoQua = new DevExpress.XtraEditors.SimpleButton();
+            this.btnLuuCauHinh = new DevExpress.XtraEditors.SimpleButton();
             this.btnCapNhatCauHinh = new DevExpress.XtraEditors.SimpleButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtWebServer = new System.Windows.Forms.TextBox();
             this.txtConnectPassword = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.txtConnectUSerName = new System.Windows.Forms.TextBox();
+            this.txtConnectUserName = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.txtConnectServer = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtAccountPassword = new System.Windows.Forms.TextBox();
+            this.txtTenKhoa = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtHoTen = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.txtAccountUserName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tabTienIch = new DevExpress.XtraTab.XtraTabPage();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtLinkHopThu = new System.Windows.Forms.TextBox();
             this.notifyIconMain = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStripClient = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuHienThu = new System.Windows.Forms.ToolStripMenuItem();
             this.menuDenHopThu = new System.Windows.Forms.ToolStripMenuItem();
             this.menuThoat = new System.Windows.Forms.ToolStripMenuItem();
             this.btnDong = new DevExpress.XtraEditors.SimpleButton();
+            this.btnThoatChuongTrinh = new DevExpress.XtraEditors.SimpleButton();
+            this.statusStripClient = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.tabHopThu.SuspendLayout();
             this.tabCauHinh.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.tabTienIch.SuspendLayout();
             this.contextMenuStripClient.SuspendLayout();
+            this.statusStripClient.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelControl2
@@ -88,7 +104,7 @@
             this.xtraTabControl1.Location = new System.Drawing.Point(13, 37);
             this.xtraTabControl1.Name = "xtraTabControl1";
             this.xtraTabControl1.SelectedTabPage = this.tabHopThu;
-            this.xtraTabControl1.Size = new System.Drawing.Size(572, 263);
+            this.xtraTabControl1.Size = new System.Drawing.Size(554, 341);
             this.xtraTabControl1.TabIndex = 1;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.tabHopThu,
@@ -97,78 +113,88 @@
             // 
             // tabHopThu
             // 
-            this.tabHopThu.Controls.Add(this.label8);
-            this.tabHopThu.Controls.Add(this.simpleButton1);
-            this.tabHopThu.Controls.Add(this.labelControl3);
-            this.tabHopThu.Controls.Add(this.labelControl1);
+            this.tabHopThu.Controls.Add(this.lblThongBao);
+            this.tabHopThu.Controls.Add(this.btnDenHopThu);
+            this.tabHopThu.Controls.Add(this.lblTenKhoa);
+            this.tabHopThu.Controls.Add(this.lblHoTen);
             this.tabHopThu.Name = "tabHopThu";
-            this.tabHopThu.Size = new System.Drawing.Size(566, 235);
+            this.tabHopThu.Size = new System.Drawing.Size(548, 313);
             this.tabHopThu.Text = "Hộp thư";
             // 
-            // label8
+            // lblThongBao
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Tahoma", 10F);
-            this.label8.ForeColor = System.Drawing.Color.Red;
-            this.label8.Location = new System.Drawing.Point(237, 92);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(89, 17);
-            this.label8.TabIndex = 2;
-            this.label8.Text = "Có 3 thư mới";
+            this.lblThongBao.AutoSize = true;
+            this.lblThongBao.Font = new System.Drawing.Font("Tahoma", 10F);
+            this.lblThongBao.ForeColor = System.Drawing.Color.Red;
+            this.lblThongBao.Location = new System.Drawing.Point(237, 92);
+            this.lblThongBao.Name = "lblThongBao";
+            this.lblThongBao.Size = new System.Drawing.Size(89, 17);
+            this.lblThongBao.TabIndex = 2;
+            this.lblThongBao.Text = "Có 3 thư mới";
             // 
-            // simpleButton1
+            // btnDenHopThu
             // 
-            this.simpleButton1.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.Image")));
-            this.simpleButton1.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleRight;
-            this.simpleButton1.Location = new System.Drawing.Point(174, 130);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(227, 47);
-            this.simpleButton1.TabIndex = 1;
-            this.simpleButton1.Text = "ĐẾN HỘP THƯ";
+            this.btnDenHopThu.Image = ((System.Drawing.Image)(resources.GetObject("btnDenHopThu.Image")));
+            this.btnDenHopThu.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleRight;
+            this.btnDenHopThu.Location = new System.Drawing.Point(174, 130);
+            this.btnDenHopThu.Name = "btnDenHopThu";
+            this.btnDenHopThu.Size = new System.Drawing.Size(227, 47);
+            this.btnDenHopThu.TabIndex = 1;
+            this.btnDenHopThu.Text = "ĐẾN HỘP THƯ";
+            this.btnDenHopThu.Click += new System.EventHandler(this.btnDenHopThu_Click);
             // 
-            // labelControl3
+            // lblTenKhoa
             // 
-            this.labelControl3.Appearance.Font = new System.Drawing.Font("Tahoma", 12F);
-            this.labelControl3.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.labelControl3.Appearance.Options.UseFont = true;
-            this.labelControl3.Appearance.Options.UseForeColor = true;
-            this.labelControl3.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.labelControl3.LineLocation = DevExpress.XtraEditors.LineLocation.Center;
-            this.labelControl3.LineVisible = true;
-            this.labelControl3.Location = new System.Drawing.Point(24, 23);
-            this.labelControl3.Name = "labelControl3";
-            this.labelControl3.Size = new System.Drawing.Size(528, 19);
-            this.labelControl3.TabIndex = 0;
-            this.labelControl3.Text = "PHÒNG CÔNG NGHỆ THÔNG TIN";
+            this.lblTenKhoa.Appearance.Font = new System.Drawing.Font("Tahoma", 12F);
+            this.lblTenKhoa.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.lblTenKhoa.Appearance.Options.UseFont = true;
+            this.lblTenKhoa.Appearance.Options.UseForeColor = true;
+            this.lblTenKhoa.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.lblTenKhoa.LineLocation = DevExpress.XtraEditors.LineLocation.Center;
+            this.lblTenKhoa.LineVisible = true;
+            this.lblTenKhoa.Location = new System.Drawing.Point(24, 23);
+            this.lblTenKhoa.Name = "lblTenKhoa";
+            this.lblTenKhoa.Size = new System.Drawing.Size(528, 19);
+            this.lblTenKhoa.TabIndex = 0;
+            this.lblTenKhoa.Text = "PHÒNG CÔNG NGHỆ THÔNG TIN";
             // 
-            // labelControl1
+            // lblHoTen
             // 
-            this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            this.labelControl1.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Appearance.Options.UseForeColor = true;
-            this.labelControl1.LineVisible = true;
-            this.labelControl1.Location = new System.Drawing.Point(199, 70);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(164, 19);
-            this.labelControl1.TabIndex = 0;
-            this.labelControl1.Text = "Nguyễn Hồng Thanh";
+            this.lblHoTen.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.lblHoTen.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblHoTen.Appearance.Options.UseFont = true;
+            this.lblHoTen.Appearance.Options.UseForeColor = true;
+            this.lblHoTen.LineVisible = true;
+            this.lblHoTen.Location = new System.Drawing.Point(199, 70);
+            this.lblHoTen.Name = "lblHoTen";
+            this.lblHoTen.Size = new System.Drawing.Size(164, 19);
+            this.lblHoTen.TabIndex = 0;
+            this.lblHoTen.Text = "Nguyễn Hồng Thanh";
             // 
             // tabCauHinh
             // 
+            this.tabCauHinh.Controls.Add(this.txtPort);
             this.tabCauHinh.Controls.Add(this.label9);
             this.tabCauHinh.Controls.Add(this.txtAutoGetMailTimer);
             this.tabCauHinh.Controls.Add(this.checkboxAutoGetMail);
             this.tabCauHinh.Controls.Add(this.checkboxShowOnStart);
             this.tabCauHinh.Controls.Add(this.checkboxAutoStart);
             this.tabCauHinh.Controls.Add(this.btnBoQua);
+            this.tabCauHinh.Controls.Add(this.btnLuuCauHinh);
             this.tabCauHinh.Controls.Add(this.btnCapNhatCauHinh);
             this.tabCauHinh.Controls.Add(this.groupBox2);
             this.tabCauHinh.Controls.Add(this.groupBox1);
             this.tabCauHinh.Name = "tabCauHinh";
-            this.tabCauHinh.Size = new System.Drawing.Size(566, 235);
+            this.tabCauHinh.Size = new System.Drawing.Size(548, 313);
             this.tabCauHinh.Text = "Cấu hình";
             this.tabCauHinh.Paint += new System.Windows.Forms.PaintEventHandler(this.tabCauHinh_Paint);
+            // 
+            // txtPort
+            // 
+            this.txtPort.Location = new System.Drawing.Point(280, 121);
+            this.txtPort.Name = "txtPort";
+            this.txtPort.Size = new System.Drawing.Size(50, 21);
+            this.txtPort.TabIndex = 2;
             // 
             // label9
             // 
@@ -226,11 +252,23 @@
             // 
             // btnBoQua
             // 
-            this.btnBoQua.Location = new System.Drawing.Point(349, 143);
+            this.btnBoQua.Image = ((System.Drawing.Image)(resources.GetObject("btnBoQua.Image")));
+            this.btnBoQua.Location = new System.Drawing.Point(349, 175);
             this.btnBoQua.Name = "btnBoQua";
-            this.btnBoQua.Size = new System.Drawing.Size(202, 26);
+            this.btnBoQua.Size = new System.Drawing.Size(184, 26);
             this.btnBoQua.TabIndex = 3;
             this.btnBoQua.Text = "Bỏ qua";
+            this.btnBoQua.Click += new System.EventHandler(this.btnBoQua_Click);
+            // 
+            // btnLuuCauHinh
+            // 
+            this.btnLuuCauHinh.Image = ((System.Drawing.Image)(resources.GetObject("btnLuuCauHinh.Image")));
+            this.btnLuuCauHinh.Location = new System.Drawing.Point(349, 143);
+            this.btnLuuCauHinh.Name = "btnLuuCauHinh";
+            this.btnLuuCauHinh.Size = new System.Drawing.Size(184, 26);
+            this.btnLuuCauHinh.TabIndex = 3;
+            this.btnLuuCauHinh.Text = "Lưu";
+            this.btnLuuCauHinh.Click += new System.EventHandler(this.btnLuu_Click);
             // 
             // btnCapNhatCauHinh
             // 
@@ -239,50 +277,71 @@
             this.btnCapNhatCauHinh.Image = ((System.Drawing.Image)(resources.GetObject("btnCapNhatCauHinh.Image")));
             this.btnCapNhatCauHinh.Location = new System.Drawing.Point(349, 98);
             this.btnCapNhatCauHinh.Name = "btnCapNhatCauHinh";
-            this.btnCapNhatCauHinh.Size = new System.Drawing.Size(202, 39);
+            this.btnCapNhatCauHinh.Size = new System.Drawing.Size(184, 39);
             this.btnCapNhatCauHinh.TabIndex = 3;
             this.btnCapNhatCauHinh.Text = "Cập nhật cấu hình";
             this.btnCapNhatCauHinh.Click += new System.EventHandler(this.btnCapNhatCauHinh_Click);
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.txtWebServer);
             this.groupBox2.Controls.Add(this.txtConnectPassword);
+            this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.txtConnectUSerName);
+            this.groupBox2.Controls.Add(this.txtConnectUserName);
             this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.txtConnectServer);
             this.groupBox2.Location = new System.Drawing.Point(19, 13);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(324, 109);
+            this.groupBox2.Size = new System.Drawing.Size(324, 143);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Kết nối";
+            // 
+            // txtWebServer
+            // 
+            this.txtWebServer.Location = new System.Drawing.Point(102, 108);
+            this.txtWebServer.Name = "txtWebServer";
+            this.txtWebServer.Size = new System.Drawing.Size(116, 21);
+            this.txtWebServer.TabIndex = 1;
+            this.txtWebServer.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // txtConnectPassword
             // 
             this.txtConnectPassword.Location = new System.Drawing.Point(102, 69);
             this.txtConnectPassword.Name = "txtConnectPassword";
+            this.txtConnectPassword.PasswordChar = '*';
             this.txtConnectPassword.Size = new System.Drawing.Size(209, 21);
             this.txtConnectPassword.TabIndex = 1;
             this.txtConnectPassword.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(31, 111);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(68, 13);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "Web Server:";
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(45, 18);
+            this.label4.Location = new System.Drawing.Point(31, 18);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(51, 13);
+            this.label4.Size = new System.Drawing.Size(65, 13);
             this.label4.TabIndex = 0;
-            this.label4.Text = "Máy chủ:";
+            this.label4.Text = "SQL Server:";
             // 
-            // txtConnectUSerName
+            // txtConnectUserName
             // 
-            this.txtConnectUSerName.Location = new System.Drawing.Point(102, 42);
-            this.txtConnectUSerName.Name = "txtConnectUSerName";
-            this.txtConnectUSerName.Size = new System.Drawing.Size(209, 21);
-            this.txtConnectUSerName.TabIndex = 1;
-            this.txtConnectUSerName.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.txtConnectUserName.Location = new System.Drawing.Point(102, 42);
+            this.txtConnectUserName.Name = "txtConnectUserName";
+            this.txtConnectUserName.Size = new System.Drawing.Size(209, 21);
+            this.txtConnectUserName.TabIndex = 1;
+            this.txtConnectUserName.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // label5
             // 
@@ -292,6 +351,15 @@
             this.label5.Size = new System.Drawing.Size(83, 13);
             this.label5.TabIndex = 0;
             this.label5.Text = "Tên đăng nhập:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(224, 111);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(31, 13);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "Port:";
             // 
             // label6
             // 
@@ -313,15 +381,20 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.txtAccountPassword);
+            this.groupBox1.Controls.Add(this.txtTenKhoa);
+            this.groupBox1.Controls.Add(this.label11);
+            this.groupBox1.Controls.Add(this.txtHoTen);
+            this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.txtAccountUserName);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Location = new System.Drawing.Point(19, 128);
+            this.groupBox1.Location = new System.Drawing.Point(19, 162);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(324, 85);
+            this.groupBox1.Size = new System.Drawing.Size(324, 133);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Tài khoản";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // txtAccountPassword
             // 
@@ -331,6 +404,42 @@
             this.txtAccountPassword.Size = new System.Drawing.Size(209, 21);
             this.txtAccountPassword.TabIndex = 1;
             this.txtAccountPassword.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            // 
+            // txtTenKhoa
+            // 
+            this.txtTenKhoa.Enabled = false;
+            this.txtTenKhoa.Location = new System.Drawing.Point(102, 101);
+            this.txtTenKhoa.Name = "txtTenKhoa";
+            this.txtTenKhoa.Size = new System.Drawing.Size(209, 21);
+            this.txtTenKhoa.TabIndex = 1;
+            this.txtTenKhoa.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(28, 104);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(68, 13);
+            this.label11.TabIndex = 0;
+            this.label11.Text = "Khoa phòng:";
+            // 
+            // txtHoTen
+            // 
+            this.txtHoTen.Enabled = false;
+            this.txtHoTen.Location = new System.Drawing.Point(102, 74);
+            this.txtHoTen.Name = "txtHoTen";
+            this.txtHoTen.Size = new System.Drawing.Size(209, 21);
+            this.txtHoTen.TabIndex = 1;
+            this.txtHoTen.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(53, 77);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(43, 13);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Họ tên:";
             // 
             // txtAccountUserName
             // 
@@ -360,9 +469,31 @@
             // 
             // tabTienIch
             // 
+            this.tabTienIch.Controls.Add(this.label1);
+            this.tabTienIch.Controls.Add(this.txtLinkHopThu);
             this.tabTienIch.Name = "tabTienIch";
-            this.tabTienIch.Size = new System.Drawing.Size(566, 235);
+            this.tabTienIch.Size = new System.Drawing.Size(548, 313);
             this.tabTienIch.Text = "Tiện ích";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(19, 15);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(70, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Link hộp thư:";
+            // 
+            // txtLinkHopThu
+            // 
+            this.txtLinkHopThu.Location = new System.Drawing.Point(95, 15);
+            this.txtLinkHopThu.Multiline = true;
+            this.txtLinkHopThu.Name = "txtLinkHopThu";
+            this.txtLinkHopThu.ReadOnly = true;
+            this.txtLinkHopThu.Size = new System.Drawing.Size(434, 36);
+            this.txtLinkHopThu.TabIndex = 0;
+            this.txtLinkHopThu.Text = "http://128.0.0.101:1234/ThuNoiBo/ClientLogin/?TenDangNhap=nghongthanhdt&MatKhau=s" +
+    "dhjgdjh3hdh3hfdhfhdj";
             // 
             // notifyIconMain
             // 
@@ -389,6 +520,7 @@
             this.menuHienThu.Name = "menuHienThu";
             this.menuHienThu.Size = new System.Drawing.Size(140, 22);
             this.menuHienThu.Text = "Hiển thị";
+            this.menuHienThu.Click += new System.EventHandler(this.menuHienThu_Click);
             // 
             // menuDenHopThu
             // 
@@ -402,30 +534,62 @@
             this.menuThoat.Name = "menuThoat";
             this.menuThoat.Size = new System.Drawing.Size(140, 22);
             this.menuThoat.Text = "Thoát";
+            this.menuThoat.Click += new System.EventHandler(this.menuThoat_Click);
             // 
             // btnDong
             // 
             this.btnDong.Image = ((System.Drawing.Image)(resources.GetObject("btnDong.Image")));
             this.btnDong.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleRight;
-            this.btnDong.Location = new System.Drawing.Point(483, 12);
+            this.btnDong.Location = new System.Drawing.Point(460, 12);
             this.btnDong.Name = "btnDong";
             this.btnDong.Size = new System.Drawing.Size(102, 24);
             this.btnDong.TabIndex = 1;
             this.btnDong.Text = "Đóng";
             this.btnDong.Click += new System.EventHandler(this.btnDong_Click);
             // 
+            // btnThoatChuongTrinh
+            // 
+            this.btnThoatChuongTrinh.Image = ((System.Drawing.Image)(resources.GetObject("btnThoatChuongTrinh.Image")));
+            this.btnThoatChuongTrinh.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.btnThoatChuongTrinh.Location = new System.Drawing.Point(310, 12);
+            this.btnThoatChuongTrinh.Name = "btnThoatChuongTrinh";
+            this.btnThoatChuongTrinh.Size = new System.Drawing.Size(144, 24);
+            this.btnThoatChuongTrinh.TabIndex = 1;
+            this.btnThoatChuongTrinh.Text = "Thoát chương trình";
+            this.btnThoatChuongTrinh.Click += new System.EventHandler(this.btnThoatChuongTrinh_Click);
+            // 
+            // statusStripClient
+            // 
+            this.statusStripClient.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusStripClient.Location = new System.Drawing.Point(0, 381);
+            this.statusStripClient.Name = "statusStripClient";
+            this.statusStripClient.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.statusStripClient.Size = new System.Drawing.Size(578, 22);
+            this.statusStripClient.TabIndex = 2;
+            this.statusStripClient.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(374, 17);
+            this.toolStripStatusLabel1.Text = "Hỗ trợ phần mềm: Nguyễn Hồng Thanh - 0973.952.747 - 0944.129.847";
+            // 
             // FormClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(595, 312);
+            this.ClientSize = new System.Drawing.Size(578, 403);
             this.ControlBox = false;
+            this.Controls.Add(this.statusStripClient);
             this.Controls.Add(this.xtraTabControl1);
+            this.Controls.Add(this.btnThoatChuongTrinh);
             this.Controls.Add(this.btnDong);
             this.Controls.Add(this.labelControl2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormClient";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BỆNH VIỆN PHỤC HỒI CHỨC NĂNG ĐỒNG THÁP";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormClient_FormClosed);
             this.Load += new System.EventHandler(this.FormClient_Load);
@@ -440,7 +604,11 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.tabTienIch.ResumeLayout(false);
+            this.tabTienIch.PerformLayout();
             this.contextMenuStripClient.ResumeLayout(false);
+            this.statusStripClient.ResumeLayout(false);
+            this.statusStripClient.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -451,16 +619,16 @@
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
         private DevExpress.XtraTab.XtraTabPage tabHopThu;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
-        private DevExpress.XtraEditors.LabelControl labelControl3;
-        private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.XtraEditors.SimpleButton btnDenHopThu;
+        private DevExpress.XtraEditors.LabelControl lblTenKhoa;
+        private DevExpress.XtraEditors.LabelControl lblHoTen;
         private DevExpress.XtraTab.XtraTabPage tabCauHinh;
         private System.Windows.Forms.Label label2;
         private DevExpress.XtraTab.XtraTabPage tabTienIch;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox txtConnectPassword;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtConnectUSerName;
+        private System.Windows.Forms.TextBox txtConnectUserName;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtConnectServer;
@@ -468,9 +636,9 @@
         private System.Windows.Forms.TextBox txtAccountPassword;
         private System.Windows.Forms.TextBox txtAccountUserName;
         private System.Windows.Forms.Label label3;
-        private DevExpress.XtraEditors.SimpleButton btnBoQua;
+        private DevExpress.XtraEditors.SimpleButton btnLuuCauHinh;
         private DevExpress.XtraEditors.SimpleButton btnCapNhatCauHinh;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblThongBao;
         private System.Windows.Forms.NotifyIcon notifyIconMain;
         private DevExpress.XtraEditors.SimpleButton btnDong;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripClient;
@@ -482,6 +650,20 @@
         private System.Windows.Forms.CheckBox checkboxAutoGetMail;
         private System.Windows.Forms.CheckBox checkboxShowOnStart;
         private System.Windows.Forms.CheckBox checkboxAutoStart;
+        private DevExpress.XtraEditors.SimpleButton btnBoQua;
+        private System.Windows.Forms.TextBox txtPort;
+        private System.Windows.Forms.TextBox txtWebServer;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtLinkHopThu;
+        private DevExpress.XtraEditors.SimpleButton btnThoatChuongTrinh;
+        private System.Windows.Forms.StatusStrip statusStripClient;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.TextBox txtTenKhoa;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox txtHoTen;
+        private System.Windows.Forms.Label label8;
     }
 }
 

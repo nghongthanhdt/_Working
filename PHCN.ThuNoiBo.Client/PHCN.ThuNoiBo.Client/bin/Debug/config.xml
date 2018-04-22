@@ -1,12 +1,16 @@
 <?xml version="1.0"?>
 <ClientConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <ConnectServer>128.0.0.102/SQLSERVER2008R2</ConnectServer>
+  <ConnectServer>ADMIN\SQLSERVER2008R2</ConnectServer>
   <ConnectUserName>nghongthanhdt</ConnectUserName>
   <ConnectPassword>123123</ConnectPassword>
-  <AccountUserName>admin</AccountUserName>
-  <AccountPassword>admin</AccountPassword>
+  <AccountUserName>ntnhiem</AccountUserName>
+  <AccountPassword>123</AccountPassword>
+  <WebServer>localhost</WebServer>
+  <Port>11225</Port>
   <AutoStart>true</AutoStart>
   <ShowOnStart>true</ShowOnStart>
   <AutoGetMail>true</AutoGetMail>
   <AutoGetMailTimer>30</AutoGetMailTimer>
+  <HoTen>Nguyễn Thị Nhiệm</HoTen>
+  <TenKhoa>Ban giám đốc</TenKhoa>
 </ClientConfig>

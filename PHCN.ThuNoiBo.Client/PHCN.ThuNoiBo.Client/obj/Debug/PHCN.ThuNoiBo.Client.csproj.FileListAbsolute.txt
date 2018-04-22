@@ -42,7 +42,6 @@ D:\_Working\_Working\PHCN.ThuNoiBo.Client\PHCN.ThuNoiBo.Client\obj\Debug\PHCN.Th
 D:\_Working\_Working\PHCN.ThuNoiBo.Client\PHCN.ThuNoiBo.Client\obj\Debug\PHCN.ThuNoiBo.Client.csproj.GenerateResource.Cache
 D:\_Working\_Working\PHCN.ThuNoiBo.Client\PHCN.ThuNoiBo.Client\obj\Debug\PHCN.ThuNoiBo.Client.exe
 D:\_Working\_Working\PHCN.ThuNoiBo.Client\PHCN.ThuNoiBo.Client\obj\Debug\PHCN.ThuNoiBo.Client.pdb
-D:\_Working\_Working\PHCN.ThuNoiBo.Client\PHCN.ThuNoiBo.Client\obj\Debug\PHCN.ThuNoiBo.Client.FormClient.resources
 D:\_Working\PHCN.ThuNoiBo.Client\PHCN.ThuNoiBo.Client\obj\Debug\PHCN.ThuNoiBo.Client.exe
 D:\_Working\PHCN.ThuNoiBo.Client\PHCN.ThuNoiBo.Client\obj\Debug\PHCN.ThuNoiBo.Client.pdb
 D:\_Working\PHCN.ThuNoiBo.Client\PHCN.ThuNoiBo.Client\bin\Debug\PHCN.ThuNoiBo.Client.exe
@@ -88,3 +87,4 @@ D:\_Working\PHCN.ThuNoiBo.Client\PHCN.ThuNoiBo.Client\obj\Debug\PHCN.ThuNoiBo.Cl
 D:\_Working\PHCN.ThuNoiBo.Client\PHCN.ThuNoiBo.Client\obj\Debug\PHCN.ThuNoiBo.Client.FormClient.resources
 D:\_Working\PHCN.ThuNoiBo.Client\PHCN.ThuNoiBo.Client\obj\Debug\PHCN.ThuNoiBo.Client.Properties.Resources.resources
 D:\_Working\PHCN.ThuNoiBo.Client\PHCN.ThuNoiBo.Client\obj\Debug\PHCN.ThuNoiBo.Client.csproj.GenerateResource.Cache
+D:\_Working\_Working\PHCN.ThuNoiBo.Client\PHCN.ThuNoiBo.Client\obj\Debug\PHCN.ThuNoiBo.Client.FormClient.resources

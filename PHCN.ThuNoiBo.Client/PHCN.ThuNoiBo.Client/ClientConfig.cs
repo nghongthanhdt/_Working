@@ -13,9 +13,14 @@ namespace PHCN.ThuNoiBo.Client
         public string ConnectPassword;
         public string AccountUserName;
         public string AccountPassword;
+        public string WebServer;
+        public string Port;
         public bool AutoStart;
         public bool ShowOnStart;
         public bool AutoGetMail;
         public int AutoGetMailTimer;
+
+        public string HoTen;
+        public string TenKhoa;
     }
 }
