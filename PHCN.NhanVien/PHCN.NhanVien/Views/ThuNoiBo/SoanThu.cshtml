@@ -1,0 +1,180 @@
+﻿
+@{
+    ViewBag.Title = "Soạn thư";
+    ViewBag.PanelTitle = "Soạn thư";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    PHCN.NhanVien.Models.PHCNEntities db = new PHCN.NhanVien.Models.PHCNEntities();
+    var idBaiViet = HttpContext.Current.Request.RequestContext.RouteData.Values["id"];
+
+    int maNhanVienDangNhap = (int)(ViewBag.MaNhanVienDangNhap);
+
+}
+<script>
+    var idBaiViet = @idBaiViet;
+    var maNhanVienDangNhap = @maNhanVienDangNhap;
+</script>
+<script src="~/Content/ckeditor/ckeditor.js"></script>
+<script src="~/scripts/jquery.form.min.js"></script>
+<script src="~/Content/treelist/js/checktree.js"></script>
+<div class="row">
+    <div class="col-xs-12">
+        <form role="form">
+            <div class="form-group">
+                <label for="txtTieuDe">Tiêu đề</label>
+                <input class="form-control" id="txtTieuDe" placeholder="" />
+            </div>
+        </form>
+    </div>
+</div>
+<textarea id="txtNoiDung"></textarea>
+<script>
+    CKEDITOR.replace( 'txtNoiDung');
+</script>
+<div id="divDanhSachFileDinhKem">
+    @*lấy ajax hiển thị ra đây*@
+</div>
+<script>
+    
+    function loadDanhSachFileDinhKem() {
+        var url = '@Url.Action("_pDanhSachFileDinhKem", "ThuNoiBo", new { id = idBaiViet, xem = false } )';
+        var danhSachFileDinhKem = $.get(url, function (data) {
+            $("#divDanhSachFileDinhKem").html(data);
+        });        
+    }    
+    $(document).ready(function () {        
+        loadDanhSachFileDinhKem();        
+    });
+</script>
+<button class="btn btn-success" style="width:230px;" id="btnGui">Gửi</button>
+<button class="btn btn-default btn-sm" id="btnThemFileDinhKem">Thêm file đính kèm...</button>
+<div class="form-group" style="display:none;">
+    <form id="formFileDinhKem" action="@Url.Action("UploadFile", "Upload")" method="post" enctype="multipart/form-data">
+        <label for="exampleInputFile">Thêm file</label>
+        <input id="fileuploadDinhKem" type="file" name="file">
+        <input type="hidden" value="@idBaiViet" name="id" />        
+    </form>
+</div>
+<script>
+    $("#btnThemFileDinhKem").click(function () {
+        $("input#fileuploadDinhKem").trigger('click'); 
+    });    
+    $("input#fileuploadDinhKem").on('change', function(){
+        //alert("gone");
+        $("form#formFileDinhKem").ajaxSubmit({
+            type: "post",
+            success: function() {
+                $("input#fileuploadDinhKem").val(null);
+                loadDanhSachFileDinhKem();
+            }
+        });
+    });
+</script>
+<div class="">
+    <h4 class="content-row-title">Nhận thư</h4>
+    <ul class="checktree">
+        <li>
+            <input id="administration" type="checkbox"><label for="administration" style="font-size:16px; margin-left:10px; color:#003407;">BỆNH VIỆN PHỤC HỒI CHỨC NĂNG ĐỒNG THÁP</label>
+            
+            
+            
+            <ul>
+
+                @{
+                    var listKhoaPhong = db.KhoaPhong.OrderBy(x => x.STT).ToList();
+
+                 }
+
+                @foreach (var khoa in listKhoaPhong)
+                {
+                    var listNhanVien = khoa.NhanVien.Where(x => x.NhanThu == true).ToList();
+                    if (listNhanVien.Any())
+                    {
+                        <li>
+                            <input id="checkboxKhoaPhong_@khoa.MaKhoa" type="checkbox" class="checkboxKhoaPhong" data-ma-khoa="@khoa.MaKhoa">
+                            <label for="checkboxKhoaPhong_@khoa.MaKhoa" style="font-size:14px; margin-left:10px; text-transform:uppercase;">@khoa.TenKhoa</label>
+                            <ul>
+                                @foreach (var nhanvien in listNhanVien)
+                                {
+                                    <li><input id="checkboxNhanVien_@nhanvien.MaNhanVien" class="checkboxNhanVien" data-ma-nhan-vien="@nhanvien.MaNhanVien" type="checkbox"><label for="checkboxNhanVien_@nhanvien.MaNhanVien" style="font-weight:normal;font-size:14px; margin-left:10px; ">@nhanvien.HoTen</label></li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                }
+
+            </ul>
+        </li>
+    </ul>
+</div>
+<script>
+	$(function(){
+		$("ul.checktree").checktree();
+	});
+</script>
+<script>
+
+    
+    $("#btnGui").click(function () {
+
+        // validate
+        var tieuDe = $("#txtTieuDe").val();
+        if (tieuDe == "") {
+            alert("Chưa nhập tiêu đề");
+            return;
+        };
+        var noiDung = CKEDITOR.instances.txtNoiDung.getData();
+        if (noiDung == "") {
+            alert("Chưa nhập nội dung");
+            return;
+        }
+
+        var listCheckedNhanVien = $('.checkboxNhanVien:checkbox:checked').map(function () {
+            return $(this).data("ma-nhan-vien");
+        }).get();
+
+
+        //alert("send ajax");
+        // send ajax
+        listNguoiNhan = listCheckedNhanVien.join(",");
+        if (listNguoiNhan == "") {
+            alert("Chưa chọn người nhận");
+            return;
+        }
+
+        // send ajax 
+        alert(listCheckedNhanVien.join(",") + "send ajax...");
+
+        var url = '@Url.Action("GuiThu", "ThuNoiBo")';
+        var param = {
+            maBaiViet: idBaiViet,
+            tieuDe: tieuDe,
+            noiDung: noiDung,
+            nguoiGui: maNhanVienDangNhap,
+            listNguoiNhan: listNguoiNhan
+        }
+        //$.post(url, param).done(function (result) {
+        //    alert(data);
+        //});
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: param,
+            success: function (result) {
+                if (result == "true") {
+                    //window.location = @Url.Action("");
+                }
+            },
+            dataType: "html"
+        });
+
+
+
+
+
+    });
+
+</script>
+
+
+
