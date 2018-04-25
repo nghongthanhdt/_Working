@@ -43,8 +43,8 @@
           <Property Name="QuanTrong" Type="bit" />
           <Property Name="DaXoa" Type="bit" />
           <Property Name="GhiChu" Type="nvarchar" MaxLength="1000" />
-          <Property Name="Xoa" Type="bit" Nullable="false" />
           <Property Name="STTGui" Type="int" Nullable="false" />
+          <Property Name="Xoa" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="KhoaPhong">
           <Key>
@@ -323,7 +323,7 @@
           <NavigationProperty Name="KhoaPhong" Relationship="PHCNModel.FK_NhanVien_KhoaPhong" FromRole="NhanVien" ToRole="KhoaPhong" />
           <NavigationProperty Name="GuiNhan" Relationship="PHCNModel.FK_GuiNhan_NhanVien_NguoiGui" FromRole="NhanVien" ToRole="GuiNhan" />
           <NavigationProperty Name="GuiNhan1" Relationship="PHCNModel.FK_GuiNhan_NhanVien_NguoiNhan" FromRole="NhanVien" ToRole="GuiNhan" />
-        </EntityType>
+          </EntityType>
         <Association Name="FK_NhanVien_KhoaPhong">
           <End Type="PHCNModel.KhoaPhong" Role="KhoaPhong" Multiplicity="1" />
           <End Type="PHCNModel.NhanVien" Role="NhanVien" Multiplicity="*" />
@@ -349,8 +349,8 @@
           <Property Name="QuanTrong" Type="Boolean" />
           <Property Name="DaXoa" Type="Boolean" />
           <Property Name="GhiChu" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="Xoa" Type="Boolean" Nullable="false" />
           <Property Name="STTGui" Type="Int32" Nullable="false" />
+          <Property Name="Xoa" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="BaiViet" Relationship="PHCNModel.FK_GuiNhan_BaiViet" FromRole="GuiNhan" ToRole="BaiViet" />
           <NavigationProperty Name="NhanVien" Relationship="PHCNModel.FK_GuiNhan_NhanVien_NguoiGui" FromRole="GuiNhan" ToRole="NhanVien" />
           <NavigationProperty Name="NhanVien1" Relationship="PHCNModel.FK_GuiNhan_NhanVien_NguoiNhan" FromRole="GuiNhan" ToRole="NhanVien" />
@@ -470,8 +470,8 @@
           <EntitySetMapping Name="GuiNhan">
             <EntityTypeMapping TypeName="PHCNModel.GuiNhan">
               <MappingFragment StoreEntitySet="GuiNhan">
-                <ScalarProperty Name="STTGui" ColumnName="STTGui" />
                 <ScalarProperty Name="Xoa" ColumnName="Xoa" />
+                <ScalarProperty Name="STTGui" ColumnName="STTGui" />
                 <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
                 <ScalarProperty Name="DaXoa" ColumnName="DaXoa" />
                 <ScalarProperty Name="QuanTrong" ColumnName="QuanTrong" />

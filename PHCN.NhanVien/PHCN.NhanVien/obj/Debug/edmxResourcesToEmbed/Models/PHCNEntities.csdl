@@ -155,8 +155,8 @@
     <Property Name="QuanTrong" Type="Boolean" />
     <Property Name="DaXoa" Type="Boolean" />
     <Property Name="GhiChu" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-    <Property Name="Xoa" Type="Boolean" Nullable="false" />
     <Property Name="STTGui" Type="Int32" Nullable="false" />
+    <Property Name="Xoa" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="BaiViet" Relationship="PHCNModel.FK_GuiNhan_BaiViet" FromRole="GuiNhan" ToRole="BaiViet" />
     <NavigationProperty Name="NhanVien" Relationship="PHCNModel.FK_GuiNhan_NhanVien_NguoiGui" FromRole="GuiNhan" ToRole="NhanVien" />
     <NavigationProperty Name="NhanVien1" Relationship="PHCNModel.FK_GuiNhan_NhanVien_NguoiNhan" FromRole="GuiNhan" ToRole="NhanVien" />

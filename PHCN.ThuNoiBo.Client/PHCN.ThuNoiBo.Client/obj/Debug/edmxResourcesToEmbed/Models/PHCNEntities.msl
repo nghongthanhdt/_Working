@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PHCNThuNoiBoClientModelsStoreContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="ThamSoHeThong">
+      <EntityTypeMapping TypeName="PHCN.ThuNoiBo.Client.Models.ThamSoHeThong">
+        <MappingFragment StoreEntitySet="ThamSoHeThong">
+          <ScalarProperty Name="MaThamSo" ColumnName="MaThamSo" />
+          <ScalarProperty Name="GiaTri" ColumnName="GiaTri" />
+          <ScalarProperty Name="TenThamSo" ColumnName="TenThamSo" />
+          <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

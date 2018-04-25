@@ -38,8 +38,8 @@
     <Property Name="QuanTrong" Type="bit" />
     <Property Name="DaXoa" Type="bit" />
     <Property Name="GhiChu" Type="nvarchar" MaxLength="1000" />
-    <Property Name="Xoa" Type="bit" Nullable="false" />
     <Property Name="STTGui" Type="int" Nullable="false" />
+    <Property Name="Xoa" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="KhoaPhong">
     <Key>

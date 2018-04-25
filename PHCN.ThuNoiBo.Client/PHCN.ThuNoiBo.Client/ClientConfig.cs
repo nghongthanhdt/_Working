@@ -20,6 +20,7 @@ namespace PHCN.ThuNoiBo.Client
         public bool AutoGetMail;
         public int AutoGetMailTimer;
 
+        public string MaNhanVien;
         public string HoTen;
         public string TenKhoa;
     }

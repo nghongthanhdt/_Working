@@ -74,8 +74,8 @@
     <EntitySetMapping Name="GuiNhan">
       <EntityTypeMapping TypeName="PHCNModel.GuiNhan">
         <MappingFragment StoreEntitySet="GuiNhan">
-          <ScalarProperty Name="STTGui" ColumnName="STTGui" />
           <ScalarProperty Name="Xoa" ColumnName="Xoa" />
+          <ScalarProperty Name="STTGui" ColumnName="STTGui" />
           <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
           <ScalarProperty Name="DaXoa" ColumnName="DaXoa" />
           <ScalarProperty Name="QuanTrong" ColumnName="QuanTrong" />
