@@ -22,6 +22,8 @@ public partial class NhanVien
     public NhanVien()
     {
 
+        this.BaiViet = new HashSet<BaiViet>();
+
         this.GuiNhan = new HashSet<GuiNhan>();
 
         this.GuiNhan1 = new HashSet<GuiNhan>();
@@ -45,9 +47,13 @@ public partial class NhanVien
 
     public bool NhanThu { get; set; }
 
+    public string MatKhauMD5 { get; set; }
 
 
-    public virtual KhoaPhong KhoaPhong { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<BaiViet> BaiViet { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
@@ -56,6 +62,8 @@ public partial class NhanVien
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<GuiNhan> GuiNhan1 { get; set; }
+
+    public virtual KhoaPhong KhoaPhong { get; set; }
 
 }
 

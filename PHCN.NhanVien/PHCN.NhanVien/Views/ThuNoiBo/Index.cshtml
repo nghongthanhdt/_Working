@@ -32,8 +32,7 @@
             break;
         default:
             ViewBag.PanelTitle = "Hộp thư đến";
-            break;
-
+            break; 
     }
 
 }
@@ -46,10 +45,18 @@
 <div style="width:100%; height:400px; overflow:scroll;" id="divDanhSachThu">
                             
 </div>
+<br/>
+<button class="btn btn-default" id="btnXoaThu">Xóa thư</button>
+<button class="btn btn-default" id="btnChonTatCa">Chọn tất cả</button>
+
 
 <script>
     $(document).ready(function () {
-        //var url = 'http://localhost:11225/ThuNoiBo/_pDanhSachThu'
+
+        loadDanhSachThu();
+
+    });
+    function loadDanhSachThu() {
         var url = '@Url.Action("_pDanhSachThu", "ThuNoiBo")';
 
         var param = {
@@ -57,7 +64,7 @@
             trangThai:_trangThai
         }
         $.ajax({
-    type: "POST",
+            type: "POST",
             url: url,
             data: param,
             success: function (data) {
@@ -66,15 +73,86 @@
                     $("#btnDanhDauQuanTrong").hide();
                     $("#btnDanhDauXoa").hide();
                 }
-        },
+            },
             dataType: "html"
         });
+    }
+    $("#btnChonTatCa").click(function () {
+        if ($(".checkboxThu").prop("checked") == false) {
+            $(".checkboxThu").prop("checked", true);
+        } else {
+            $(".checkboxThu").prop("checked", false);
+        }
 
+    });
+    $("#btnXoaThu").click(function () {
+        if (_trangThai == "DaGui") {
+            alert("Không thể xóa thư đã gửi");
+            return;
+        }
+        var listCheckedThu = $('.checkboxThu:checkbox:checked').map(function () {
+            return $(this).data("id-gui-nhan");
+        }).get();
+        listThuDaChon = listCheckedThu.join(",");
+        if (listThuDaChon == "") {
+            alert("Chưa chọn thư nào");
+            return;
+        }
 
         
 
+        if (_trangThai != "DaXoa") {
+            if (confirm("Bạn thật sự muốn xóa ?") == false) {
+                return;
+            }
+            // send ajax - đánh dấu xóa
+            var url = '@Url.Action("DanhDauXoaList", "ThuNoiBo")';
+            var param = {
+                listGuiNhanXoa: listThuDaChon
+            }
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: param,
+                success: function (result) {
+                    if (result == "true") {
+                        alert ("Đã xóa thư thành công");
+                        loadDanhSachThu();
+                    } else {
+                        alert(result);
+                    }
+                },
+                dataType: "html"
+            });
+        } else {
+            if (confirm("Bạn thật sự muốn xóa vĩnh viễn các thư này ?") == false) {
+                return;
+            }
+            // send ajax xóa vĩnh viễn        
+            var url = '@Url.Action("XoaVinhVienList", "ThuNoiBo")';
+            var param = {
+                listGuiNhanXoa: listThuDaChon
+            }
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: param,
+                success: function (result) {
+                    if (result == "true") {
+                        alert ("Đã xóa thư thành công");
+                        loadDanhSachThu();
+                    } else {
+                        alert(result);
+                    }
+                },
+                dataType: "html"
+            });
+        }
         
-                                   
+
+        
+
+
     });
 </script>
   

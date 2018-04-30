@@ -1,5 +1,9 @@
 ﻿@{ 
-    var nhanVienDangNhap = (PHCN.NhanVien.Models.NhanVien)Session["NhanVienDangNhap"];
+    //var nhanVienDangNhap = (PHCN.NhanVien.Models.NhanVien)Session["NhanVienDangNhap"];
+
+    var nhanVienDangNhap = new PHCN.NhanVien.Models.NhanVien();
+    nhanVienDangNhap.MaNhanVien = 8;
+    nhanVienDangNhap.HoTen = "Administrator";
 
     int _maNhanVienDangNhap = nhanVienDangNhap.MaNhanVien;
     string box = "";
@@ -73,24 +77,31 @@
             <div class="col-xs-6 col-sm-3 sidebar-offcanvas" role="navigation">
                 <ul class="list-group panel">
                     <li class="list-group-item">
+                        <a href="#" class="btn btn-success" style="width:100%">
+                            Admin Control Panel
+                        </a>
+                    </li>
+                </ul>
+                <div class="list-group">
+                    <a href="@Url.Action("NhanVien", "Admin")" class="list-group-item">Nhân viên</a>
+                    
+                    <a href="@Url.Action("KhoaPhong", "Admin")" class="list-group-item">Khoa phòng</a>
+                    
+                    <a href="@Url.Action("ThamSoHeThong", "Admin")" class="list-group-item">Tham số hệ thống</a>
+                </div>
+                <ul class="list-group panel">
+                    <li class="list-group-item">
                         <a href="@Url.Action("SoanThu","ThuNoiBo")" class="btn btn-success" style="width:100%">
                             Soạn thư
                         </a>
                     </li>
-
-
-
                 </ul>
                 <div class="list-group">
                     <a href="@Url.Action("Index", "ThuNoiBo", new { box = "ThuDen"})" class="list-group-item @((box=="ThuDen")?"active":"")">Hộp thư đến</a>
-                    <a href="@Url.Action("Index", "ThuNoiBo", new { box = "QuanTrong"})" class="list-group-item @((box=="QuanTrong")?"active":"")">Quan trọng</a>
+                    @*<a href="@Url.Action("Index", "ThuNoiBo", new { box = "QuanTrong"})" class="list-group-item @((box=="QuanTrong")?"active":"")">Quan trọng</a>*@
                     <a href="@Url.Action("Index", "ThuNoiBo", new { box = "DaGui"})" class="list-group-item @((box=="DaGui")?"active":"")">Thư đã gửi</a>
                     @*<a href="@Url.Action("Index", "ThuNoiBo", new { maNhanVienDangNhap = _maNhanVienDangNhap, trangThai = "ThuNhap"})" class="list-group-item">Thư nháp</a>*@
                     <a href="@Url.Action("Index", "ThuNoiBo", new { box = "DaXoa"})" class="list-group-item @((box=="DaXoa")?"active":"")">Thùng rác</a>
-
-
-
-
                 </div>
             </div>
             <div class="col-xs-12 col-sm-9 content">
@@ -109,7 +120,7 @@
         </div>
     </div>
     <!--footer-->
-    <div class="site-footer">
+    @*<div class="site-footer">
         <div class="container">
 
             <div class="copyright clearfix">
@@ -119,6 +130,6 @@
                 Session time out: @Session.Timeout
             </div>
         </div>
-    </div>
+    </div>*@
 </body>
 </html>

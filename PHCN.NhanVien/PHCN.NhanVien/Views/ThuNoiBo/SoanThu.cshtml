@@ -131,10 +131,6 @@
         var listCheckedNhanVien = $('.checkboxNhanVien:checkbox:checked').map(function () {
             return $(this).data("ma-nhan-vien");
         }).get();
-
-
-        //alert("send ajax");
-        // send ajax
         listNguoiNhan = listCheckedNhanVien.join(",");
         if (listNguoiNhan == "") {
             alert("Chưa chọn người nhận");
@@ -142,7 +138,7 @@
         }
 
         // send ajax 
-        alert(listCheckedNhanVien.join(",") + "send ajax...");
+        //alert(listCheckedNhanVien.join(",") + "send ajax...");
 
         var url = '@Url.Action("GuiThu", "ThuNoiBo")';
         var param = {
@@ -162,16 +158,14 @@
             data: param,
             success: function (result) {
                 if (result == "true") {
-                    //window.location = @Url.Action("");
+                    alert("Đã gửi thư thành công!");
+                    window.location = '@Url.Action("Index", "ThuNoiBo", new { box = "DaGui"})';
+                } else {
+                    alert (result);
                 }
             },
             dataType: "html"
-        });
-
-
-
-
-
+        });    
     });
 
 </script>

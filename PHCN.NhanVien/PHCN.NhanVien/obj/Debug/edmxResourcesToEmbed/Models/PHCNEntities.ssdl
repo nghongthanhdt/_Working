@@ -12,6 +12,7 @@
     <Property Name="NgayXoa" Type="datetime" />
     <Property Name="NguoiXoa" Type="nvarchar" MaxLength="50" />
     <Property Name="Ngay" Type="datetime" Nullable="false" />
+    <Property Name="MaNhanVien" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="FileDinhKem">
     <Key>
@@ -79,6 +80,16 @@
     <Property Name="STT" Type="int" Nullable="false" />
     <Property Name="Xoa" Type="bit" Nullable="false" />
     <Property Name="NhanThu" Type="bit" Nullable="false" />
+    <Property Name="MatKhauMD5" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ThamSoHeThong">
+    <Key>
+      <PropertyRef Name="MaThamSo" />
+    </Key>
+    <Property Name="MaThamSo" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="GiaTri" Type="nvarchar" MaxLength="2000" Nullable="false" />
+    <Property Name="TenThamSo" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="MoTa" Type="nvarchar" MaxLength="2000" />
   </EntityType>
   <Association Name="FK_BaiViet_LoaiBaiViet">
     <End Role="LoaiBaiViet" Type="Self.LoaiBaiViet" Multiplicity="1" />
@@ -89,6 +100,18 @@
       </Principal>
       <Dependent Role="BaiViet">
         <PropertyRef Name="LoaiBaiViet" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BaiViet_NhanVien">
+    <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="1" />
+    <End Role="BaiViet" Type="Self.BaiViet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NhanVien">
+        <PropertyRef Name="MaNhanVien" />
+      </Principal>
+      <Dependent Role="BaiViet">
+        <PropertyRef Name="MaNhanVien" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -160,8 +183,13 @@
     <EntitySet Name="LoaiBaiViet" EntityType="Self.LoaiBaiViet" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Loi" EntityType="Self.Loi" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NhanVien" EntityType="Self.NhanVien" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ThamSoHeThong" EntityType="Self.ThamSoHeThong" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_BaiViet_LoaiBaiViet" Association="Self.FK_BaiViet_LoaiBaiViet">
       <End Role="LoaiBaiViet" EntitySet="LoaiBaiViet" />
+      <End Role="BaiViet" EntitySet="BaiViet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BaiViet_NhanVien" Association="Self.FK_BaiViet_NhanVien">
+      <End Role="NhanVien" EntitySet="NhanVien" />
       <End Role="BaiViet" EntitySet="BaiViet" />
     </AssociationSet>
     <AssociationSet Name="FK_FileDinhKem_BaiViet" Association="Self.FK_FileDinhKem_BaiViet">

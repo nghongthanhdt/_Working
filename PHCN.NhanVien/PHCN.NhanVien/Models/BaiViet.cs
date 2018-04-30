@@ -45,9 +45,13 @@ public partial class BaiViet
 
     public System.DateTime Ngay { get; set; }
 
+    public int MaNhanVien { get; set; }
+
 
 
     public virtual LoaiBaiViet LoaiBaiViet1 { get; set; }
+
+    public virtual NhanVien NhanVien { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 

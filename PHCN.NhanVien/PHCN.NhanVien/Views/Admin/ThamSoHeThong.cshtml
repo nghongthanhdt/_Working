@@ -1,0 +1,39 @@
+﻿@model List<PHCN.NhanVien.Models.ThamSoHeThong>
+@{
+    ViewBag.Title = "ThamSoHeThong";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+    ViewBag.PanelTitle = "Tham số hệ thống";
+}
+
+Chú ý: Thay đổi dữ liệu này có thể làm ảnh hưởng đến hệ thống phần mềm, vui lòng cẩn thận trong thao tác.
+<br /><br />
+<table class="table">
+    <tr>
+        <th style="width:10%">Mã tham số</th>
+        <th style="width:20%">Tên tham số</th>
+        <th style="width:70%">Giá trị</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.MaThamSo</td>
+            <td>
+                <a href="@Url.Action("ThongTinThamSoHeThong", "Admin", new { @id = item.MaThamSo})">@item.TenThamSo</a>
+            </td>
+            <td>
+                @item.GiaTri
+            </td>
+        </tr>
+    }
+</table>
+
+
+
+
+    
+
+
+
+
+<br /><br /><br /><br /><br /><br /><br /><br />

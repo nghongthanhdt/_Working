@@ -10,7 +10,7 @@ namespace PHCN.NhanVien.Controllers
     public class ThuNoiBoController : Controller
     {
         PHCNEntities db = new PHCNEntities();
-        int _maNhanVienDangNhap = 0;
+        
         // GET: ThuNoiBo
 
         public ActionResult Index()
@@ -38,7 +38,7 @@ namespace PHCN.NhanVien.Controllers
                                                                 && x.DaXoa == false).OrderByDescending(x => x.BaiViet.MaBaiViet).ToList();                        
                         break;
                     case "DaGui":
-                        listBaiViet = db.GuiNhan.Where(x => x.NguoiGui == nhanVienDangNhap.MaNhanVien 
+                        listBaiViet = db.GuiNhan.Where(x => x.BaiViet.MaNhanVien == nhanVienDangNhap.MaNhanVien
                                                                 && x.Xoa == false 
                                                                 && x.DaNhan == true 
                                                                 && x.QuanTrong == false 
@@ -98,6 +98,7 @@ namespace PHCN.NhanVien.Controllers
             if (id == null || id == "")
             {
                 BaiViet bv = new BaiViet();
+                bv.MaNhanVien = nhanVienDangNhap.MaNhanVien;
                 bv.LoaiBaiViet = 0;
                 bv.TieuDe = "";                
                 bv.Xoa = true;
@@ -184,8 +185,7 @@ namespace PHCN.NhanVien.Controllers
             if (gn.QuanTrong == false) gn.QuanTrong = true; else gn.QuanTrong = false;
             db.SaveChanges();
             return Content("true");
-        }
-
+        }      
         public ActionResult DanhDauXoa(int id)
         {
             // id của GuiNhan
@@ -194,6 +194,42 @@ namespace PHCN.NhanVien.Controllers
             if (gn.DaXoa == true) gn.DaXoa = false; else gn.DaXoa = true;
             db.SaveChanges();
             return Content("true");
+        }
+
+        public ActionResult DanhDauXoaList(string listGuiNhanXoa)
+        {
+            try
+            {
+                var listIntGuiNhanXoa = listGuiNhanXoa.Split(',').Select(Int32.Parse).ToList();                
+                foreach (var item in listIntGuiNhanXoa)
+                {
+                    GuiNhan gn = db.GuiNhan.Find(item);
+                    gn.DaXoa = true;                    
+                }
+                db.SaveChanges();
+                return Content("true");
+            } catch (Exception ex)
+            {
+                return Content("Lỗi hệ thống: " + ex.Message);
+            }
+        }
+        public ActionResult XoaVinhVienList(string listGuiNhanXoa)
+        {
+            try
+            {
+                var listIntGuiNhanXoa = listGuiNhanXoa.Split(',').Select(Int32.Parse).ToList();
+                foreach (var item in listIntGuiNhanXoa)
+                {
+                    GuiNhan gn = db.GuiNhan.Find(item);
+                    db.GuiNhan.Remove(gn);
+                }
+                db.SaveChanges();
+                return Content("true");
+            }
+            catch (Exception ex)
+            {
+                return Content("Lỗi hệ thống: " + ex.Message);
+            }
         }
     }
 }

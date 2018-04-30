@@ -20,7 +20,9 @@
         {
 
             <tr>
-                <td>@(stt++)</td>
+                <td>
+                    <input type="checkbox" class="checkboxThu" data-id-gui-nhan="@item.ID"/>
+                </td>
                 <td>                    
                     <a href="@Url.Action("XemThu", "ThuNoiBo", new { id = item.MaBaiViet })">@item.BaiViet.TieuDe</a>
                 </td>

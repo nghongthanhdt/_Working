@@ -29,6 +29,7 @@ namespace PHCN.NhanVien.Controllers
             if (nhanVien.Any())
             {
                 this.Session["NhanVienDangNhap"] = nhanVien.First();
+                Session.Timeout = 86000;
                 return RedirectToAction("Index", "ThuNoiBo");
             }
             else

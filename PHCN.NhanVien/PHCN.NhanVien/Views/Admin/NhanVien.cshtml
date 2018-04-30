@@ -1,0 +1,60 @@
+﻿@model List<PHCN.NhanVien.Models.KhoaPhong>
+@{
+    ViewBag.Title = "NhanVien";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.PanelTitle = "Nhân viên";
+}
+
+
+<a href="#" class="btn btn-success">Thêm mới</a>
+<table class="table table-condensed">
+    <thead>
+        <tr>
+            <th style="width:3%; text-align:center;">#</th>
+            <th style="width:57%">Họ tên</th>
+            <th style="width:20%">Nhận thư</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (PHCN.NhanVien.Models.KhoaPhong khoaphong in Model)
+        {
+            var listNhanVien = khoaphong.NhanVien.Where(x => x.Xoa == false).OrderBy(x => x.STT).ToList();
+            if (listNhanVien.Any())
+            {
+                <tr>
+                    <td colspan="4" style="background-color:#dbdbdb">
+                        <strong>@khoaphong.MaKhoa - @khoaphong.TenKhoa</strong>
+                    </td>
+                </tr>  
+                foreach (PHCN.NhanVien.Models.NhanVien nhanvien in listNhanVien)
+                {
+                    <tr>
+                        <td style="text-align:center;">
+                            @nhanvien.STT                            
+                        </td>
+                        <td>
+                            <a href="@Url.Action("ThongTinNhanVien", "Admin", new { @id = nhanvien.MaNhanVien})">
+                                @nhanvien.HoTen
+                            </a>
+                            
+                        </td>
+                        <td>
+                            <input type="checkbox" class="checkboxNhanThu" disabled="disabled" @((nhanvien.NhanThu)?"checked='checked'":"") />
+                        </td>
+                        <td>
+                            <a href="@Url.Action("ThongTinNhanVien", "Admin", new { @id = nhanvien.MaNhanVien})" class="btn btn-primary btn-xs">Cập nhật</a>
+                            <a href="@Url.Action("ThongTinNhanVien", "Admin", new { @id = nhanvien.MaNhanVien})" class="btn btn-danger btn-xs">Xóa</a>
+                        </td>
+
+                    </tr>
+                }      
+            }          
+        }
+
+    </tbody>
+</table>
+
+
+

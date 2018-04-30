@@ -1,0 +1,61 @@
+﻿@model PHCN.NhanVien.Models.NhanVien
+@{
+    ViewBag.Title = "ThongTinNhanVien";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.PanelTitle = "Nhân viên";
+
+    List<PHCN.NhanVien.Models.KhoaPhong> listKhoaPhong = (List<PHCN.NhanVien.Models.KhoaPhong>)ViewBag.ListKhoaPhong;
+}
+
+<form novalidate="" id="formThongTinNhanVien" role="form" class="form-horizontal" method="post" action="">
+    <div class="form-group">
+        <label class="col-md-2 control-label">Số thứ tự:</label>
+        <div class="col-md-10">                                                      
+            @Html.TextBoxFor(x => x.STT, new { @id = "txtSTT", @class = "form-control"})
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Họ tên:</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(x => x.HoTen, new { @id = "txtHoTen", @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Khoa phòng:</label>
+        <div class="col-md-10">
+            <select class="form-control">
+                <option value=""> - chọn khoa phòng - </option>
+                @foreach (var item in listKhoaPhong)
+                {
+                    <option value="@item.MaKhoa" @((item.MaKhoa == Model.MaKhoa)?"selected='selected'":"")>@item.MaKhoa - @item.TenKhoa</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Tên đăng nhập:</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(x => x.TenDangNhap, new { @id = "txtTenDangNhap", @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Mật khẩu:</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(x => x.MatKhau, new { @id = "txtMatKhau", @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            @Html.CheckBoxFor(x => x.NhanThu)
+            @Html.LabelFor(x => x.NhanThu, "Cho phép nhận thư", new { @style="font-weight:normal; font-size:14px; margin-left:10px"})
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <a href="javascript:history.back();" class="btn btn-default" type="button">Trở lại</a>
+            <button class="btn btn-primary" type="submit" id="btnLuu">Lưu thông tin</button>
+            <button class="btn btn-danger" type="button" id="btnXoa" data-makhoa="GD">Xóa</button>
+        </div>
+    </div>
+</form>

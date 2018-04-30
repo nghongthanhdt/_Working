@@ -1,0 +1,50 @@
+﻿@model List<PHCN.NhanVien.Models.KhoaPhong>
+@{
+    ViewBag.Title = "KhoaPhong";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.PanelTitle = "Danh mục khoa phòng";
+
+}
+
+<a href="@Url.Action("ThongTinKhoaPhong", "Admin")" class="btn btn-success">Thêm mới</a>
+<br /><br />
+
+
+<table class="table">
+    <tr>
+        <th style="width:5%;">STT</th>
+        <th style="width:10%;">Mã khoa</th>
+        <th style="width:50%;">Tên khoa</th>
+        <th style="width:35%;"></th>
+    </tr>
+
+    @foreach (var khoaphong in Model)
+    {
+        <tr>
+            <td>@khoaphong.STT</td>
+            <td>
+                @khoaphong.MaKhoa
+            </td>
+            <td>
+                <a href="@Url.Action("ThongTinKhoaPhong", "Admin", new { id = khoaphong.MaKhoa})">@khoaphong.TenKhoa</a>
+            </td>
+            <td>
+                <a href="@Url.Action("ThongTinKhoaPhong", "Admin", new { id = khoaphong.MaKhoa})" class="btn btn-xs btn-primary btnSua">Sửa</a>
+                <a href="javascript:void(0);" class="btn btn-xs btn-danger btnXoa" data-makhoa="@khoaphong.MaKhoa">Xóa</a>
+            </td>
+        </tr>
+    }
+    
+</table>
+
+
+<script>
+    $(".btnXoa").click(function () {
+        if (!confirm("Bạn thật sự muốn xóa ?")) {
+            return;
+        }
+        var maKhoa = $(this).data("makhoa");
+        var url = '@Url.Action("XoaKhoaPhong", "Admin")' + '/' + maKhoa;
+        window.location = url;
+    });
+</script>

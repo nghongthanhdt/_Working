@@ -602,6 +602,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CodeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoiController.cs" />
@@ -646,6 +647,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PHCNEntities.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\ThamSoHeThong.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -689,6 +693,13 @@
     <Content Include="scripts\jquery-3.3.1.min.map" />
     <Content Include="Views\Home\DangNhap.cshtml" />
     <Content Include="Views\ThuNoiBo\XemThu.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\KhoaPhong.cshtml" />
+    <Content Include="Views\Admin\ThongTinKhoaPhong.cshtml" />
+    <Content Include="Views\Admin\ThamSoHeThong.cshtml" />
+    <Content Include="Views\Admin\ThongTinThamSoHeThong.cshtml" />
+    <Content Include="Views\Admin\NhanVien.cshtml" />
+    <Content Include="Views\Admin\ThongTinNhanVien.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
