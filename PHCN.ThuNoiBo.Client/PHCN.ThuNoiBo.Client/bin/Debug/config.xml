@@ -3,15 +3,15 @@
   <ConnectServer>admin\sqlserver2008r2</ConnectServer>
   <ConnectUserName>nghongthanhdt</ConnectUserName>
   <ConnectPassword>123123</ConnectPassword>
-  <AccountUserName>nghongthanhdt</AccountUserName>
-  <AccountPassword>1233</AccountPassword>
+  <AccountUserName>ntnhiem</AccountUserName>
+  <AccountPassword>123</AccountPassword>
   <WebServer>localhost</WebServer>
   <Port />
   <AutoStart>true</AutoStart>
   <ShowOnStart>true</ShowOnStart>
   <AutoGetMail>true</AutoGetMail>
   <AutoGetMailTimer>30</AutoGetMailTimer>
-  <MaNhanVien>8</MaNhanVien>
-  <HoTen>Nguyễn Hồng Thhanh</HoTen>
-  <TenKhoa>Phòng Kế hoạch Tổng hợp</TenKhoa>
+  <MaNhanVien>1</MaNhanVien>
+  <HoTen>Nguyễn Thị Nhiệm</HoTen>
+  <TenKhoa>Ban giám đốc</TenKhoa>
 </ClientConfig>
