@@ -6,7 +6,8 @@
 }
 
 
-<a href="#" class="btn btn-success">Thêm mới</a>
+<a href="@Url.Action("ThongTinNhanVien", "Admin")" class="btn btn-success">Thêm nhân viên mới</a>
+<a href="@Url.Action("PhanQuyen", "Admin")" class="btn btn-default">Phân quyền</a>
 <table class="table table-condensed">
     <thead>
         <tr>
@@ -45,7 +46,7 @@
                         </td>
                         <td>
                             <a href="@Url.Action("ThongTinNhanVien", "Admin", new { @id = nhanvien.MaNhanVien})" class="btn btn-primary btn-xs">Cập nhật</a>
-                            <a href="@Url.Action("ThongTinNhanVien", "Admin", new { @id = nhanvien.MaNhanVien})" class="btn btn-danger btn-xs">Xóa</a>
+                            <a href="@Url.Action("DanhDauXoaNhanVien", "Admin", new { @maNhanVien = nhanvien.MaNhanVien})" class="btn btn-danger btn-xs" onclick="return confirm('Bạn thật sự muốn xóa ?');">Xóa</a>
                         </td>
 
                     </tr>

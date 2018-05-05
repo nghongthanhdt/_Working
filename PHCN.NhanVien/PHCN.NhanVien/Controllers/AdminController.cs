@@ -33,8 +33,62 @@ namespace PHCN.NhanVien.Controllers
             else
             {
                 PHCN.NhanVien.Models.NhanVien nv = new NhanVien.Models.NhanVien();
+                nv.NhanThu = true;
                 return View(nv);
             }
+        }
+        public ActionResult LuuThongTinNhanVien(NhanVien.Models.NhanVien nv, string mode)
+        {
+            
+            if (mode == "edit")
+            {
+                db.Entry(nv).State = EntityState.Modified;
+                nv.MatKhauMD5 = CodeController.GetMD5(nv.MatKhau);
+                db.SaveChanges();
+            } else
+            {
+                bool tontaiTenDangNhap = db.NhanVien.Where(x => x.TenDangNhap == nv.TenDangNhap).ToList().Any();
+                if (tontaiTenDangNhap) return RedirectToAction("ThongBao", "Loi", new { @id = "tendangnhapdatontai" });
+                nv.MatKhauMD5 = CodeController.GetMD5(nv.MatKhau);
+                db.NhanVien.Add(nv);
+                db.SaveChanges();
+            }                                
+            return RedirectToAction("NhanVien");
+        }
+        public ActionResult DanhDauXoaNhanVien(int maNhanVien)
+        {
+            
+            var nv = db.NhanVien.Find(maNhanVien);                                           
+            if (nv.TenDangNhap == "admin")
+            {
+                return RedirectToAction("ThongBao", "Loi", new { @id = "khongthexoaadmin" });
+            }
+            nv.Xoa = true;
+            db.SaveChanges();
+            return RedirectToAction("NhanVien", "Admin");
+        }
+        public ActionResult PhanQuyen()
+        {
+            return View();
+        }
+        public ActionResult LuuPhanQuyenNhanVien(string MaQuyen, int MaNhanVien) 
+        {
+            var listKiemTra = db.PhanQuyen.Where(x => x.MaQuyen == MaQuyen && x.MaNhanVien == MaNhanVien);
+            if (listKiemTra.Any()) return RedirectToAction("PhanQuyen");
+
+            PhanQuyen phanQuyen = new PhanQuyen();
+            phanQuyen.MaQuyen = MaQuyen;
+            phanQuyen.MaNhanVien = MaNhanVien;
+            db.PhanQuyen.Add(phanQuyen);
+            db.SaveChanges();
+            return RedirectToAction("PhanQuyen");
+        }
+        public ActionResult XoaPhanQuyenNhanVien(int id)
+        {
+            var phanquyen = db.PhanQuyen.Find(id);
+            db.PhanQuyen.Remove(phanquyen);
+            db.SaveChanges();
+            return RedirectToAction("PhanQuyen");
         }
         public ActionResult KhoaPhong()
         {

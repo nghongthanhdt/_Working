@@ -1,11 +1,21 @@
 ﻿@{ 
-    //var nhanVienDangNhap = (PHCN.NhanVien.Models.NhanVien)Session["NhanVienDangNhap"];
 
-    var nhanVienDangNhap = new PHCN.NhanVien.Models.NhanVien();
-    nhanVienDangNhap.MaNhanVien = 8;
-    nhanVienDangNhap.HoTen = "Administrator";
+
+    //var nhanVienDangNhap = new PHCN.NhanVien.Models.NhanVien();
+    //nhanVienDangNhap.MaNhanVien = 8;
+    //nhanVienDangNhap.HoTen = "Administrator";
+
+    var nhanVienDangNhap = (PHCN.NhanVien.Models.NhanVien)Session["NhanVienDangNhap"];
+    if (nhanVienDangNhap == null)
+    {
+        Response.Redirect(Url.Action("DangNhap", "Home"));
+    }
+
+    var listPhanQuyen = nhanVienDangNhap.PhanQuyen.ToList();
+
 
     int _maNhanVienDangNhap = nhanVienDangNhap.MaNhanVien;
+
     string box = "";
     try
     {
@@ -75,20 +85,32 @@
         <!--documents-->
         <div class="row row-offcanvas row-offcanvas-left">
             <div class="col-xs-6 col-sm-3 sidebar-offcanvas" role="navigation">
-                <ul class="list-group panel">
-                    <li class="list-group-item">
-                        <a href="#" class="btn btn-success" style="width:100%">
-                            Admin Control Panel
-                        </a>
-                    </li>
-                </ul>
-                <div class="list-group">
-                    <a href="@Url.Action("NhanVien", "Admin")" class="list-group-item">Nhân viên</a>
-                    
-                    <a href="@Url.Action("KhoaPhong", "Admin")" class="list-group-item">Khoa phòng</a>
-                    
-                    <a href="@Url.Action("ThamSoHeThong", "Admin")" class="list-group-item">Tham số hệ thống</a>
-                </div>
+                @{ 
+                    bool isAdmin = listPhanQuyen.Where(x => x.MaQuyen == "admin").Any();
+                    if (nhanVienDangNhap.TenDangNhap == "admin")
+                    {
+                        isAdmin = true;
+                    }                  
+                }
+
+                @if (isAdmin)
+                {
+                    <ul class="list-group panel">
+                        <li class="list-group-item">
+                            <a href="#" class="btn btn-success" style="width:100%">
+                                Admin Control Panel
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="list-group">
+                        <a href="@Url.Action("NhanVien", "Admin")" class="list-group-item">Nhân viên</a>
+                        <a href="@Url.Action("PhanQuyen", "Admin")" class="list-group-item">Phân quyền</a>
+                        <a href="@Url.Action("KhoaPhong", "Admin")" class="list-group-item">Khoa phòng</a>
+
+                        <a href="@Url.Action("ThamSoHeThong", "Admin")" class="list-group-item">Tham số hệ thống</a>
+                    </div>
+
+                }  
                 <ul class="list-group panel">
                     <li class="list-group-item">
                         <a href="@Url.Action("SoanThu","ThuNoiBo")" class="btn btn-success" style="width:100%">

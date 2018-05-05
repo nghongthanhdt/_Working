@@ -28,6 +28,8 @@ public partial class NhanVien
 
         this.GuiNhan1 = new HashSet<GuiNhan>();
 
+        this.PhanQuyen = new HashSet<PhanQuyen>();
+
     }
 
 
@@ -64,6 +66,10 @@ public partial class NhanVien
     public virtual ICollection<GuiNhan> GuiNhan1 { get; set; }
 
     public virtual KhoaPhong KhoaPhong { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<PhanQuyen> PhanQuyen { get; set; }
 
 }
 

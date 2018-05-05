@@ -632,6 +632,9 @@
     <Compile Include="Models\NhanVien.cs">
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PhanQuyen.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\PHCNEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -646,6 +649,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PHCNEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Quyen.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ThamSoHeThong.cs">
       <DependentUpon>PHCNEntities.tt</DependentUpon>
@@ -700,6 +706,8 @@
     <Content Include="Views\Admin\ThongTinThamSoHeThong.cshtml" />
     <Content Include="Views\Admin\NhanVien.cshtml" />
     <Content Include="Views\Admin\ThongTinNhanVien.cshtml" />
+    <Content Include="Views\Loi\LoiHeThong.cshtml" />
+    <Content Include="Views\Admin\PhanQuyen.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

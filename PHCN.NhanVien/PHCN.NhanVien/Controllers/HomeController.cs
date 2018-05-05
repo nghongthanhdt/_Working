@@ -25,18 +25,59 @@ namespace PHCN.NhanVien.Controllers
         public ActionResult Login(string tenDangNhap, string matKhau, bool nhoTaiKhoan)
         {
             // nếu thành công, trả về mã nhân viên, nếu sai trả về false;
-            var nhanVien = db.NhanVien.Where(x => x.TenDangNhap == tenDangNhap && x.MatKhau == matKhau).ToList();
-            if (nhanVien.Any())
+            try
             {
-                this.Session["NhanVienDangNhap"] = nhanVien.First();
-                Session.Timeout = 86000;
-                return RedirectToAction("Index", "ThuNoiBo");
-            }
-            else
+                var nhanVien = db.NhanVien.Where(x => x.TenDangNhap == tenDangNhap && x.MatKhau == matKhau).ToList();
+                if (nhanVien.Any())
+                {
+                    this.Session["NhanVienDangNhap"] = nhanVien.First();
+                    Session.Timeout = 86000;
+                    return RedirectToAction("Index", "ThuNoiBo");
+                }
+                else
+                {
+                    ViewBag.Result = "false";
+                    return View("DangNhap");
+                }
+            } catch (Exception ex)
             {
-                ViewBag.Result = "false";
+                ViewBag.Result = "khongketnoi";
                 return View("DangNhap");
             }
+            
+        }
+        [HttpGet]
+        public ActionResult ClientLogin(string TenDangNhap, string MatKhau)
+        {
+            try
+            {
+                // kiểm tra tham số hệ thống cho phép đăng nhập client
+                if (db.ThamSoHeThong.Find("dangnhapclient").GiaTri != "1")
+                {
+                    //hethongkhongchophepdangnhapclient
+                    return RedirectToAction("LoiHeThong", "Loi", new { @id = "hethongkhongchophepdangnhapclient" });
+                }
+
+
+
+                // nếu thành công, trả về mã nhân viên, nếu sai trả về false;
+                var nhanVien = db.NhanVien.Where(x => x.TenDangNhap == TenDangNhap && x.MatKhauMD5 == MatKhau).ToList();
+                if (nhanVien.Any())
+                {
+                    this.Session["NhanVienDangNhap"] = nhanVien.First();
+                    Session.Timeout = 86000;
+                    return RedirectToAction("Index", "ThuNoiBo");
+                }
+                else
+                {
+                    return RedirectToAction("LoiHeThong", "Loi", new { @id = "taikhoanhoacmatkhaukhongdung" });
+                }
+            } catch
+            {
+                ViewBag.Result = "khongketnoi";
+                return View("DangNhap");
+            }
+            
         }
 
         public ActionResult Logout()

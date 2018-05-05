@@ -58,6 +58,16 @@
       <End Role="NhanVien" EntitySet="NhanVien" />
     </AssociationSet>
     <EntitySet Name="ThamSoHeThong" EntityType="PHCNModel.ThamSoHeThong" />
+    <EntitySet Name="PhanQuyen" EntityType="PHCNModel.PhanQuyen" />
+    <EntitySet Name="Quyen" EntityType="PHCNModel.Quyen" />
+    <AssociationSet Name="FK_PhanQuyen_NhanVien" Association="PHCNModel.FK_PhanQuyen_NhanVien">
+      <End Role="NhanVien" EntitySet="NhanVien" />
+      <End Role="PhanQuyen" EntitySet="PhanQuyen" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhanQuyen_Quyen" Association="PHCNModel.FK_PhanQuyen_Quyen">
+      <End Role="Quyen" EntitySet="Quyen" />
+      <End Role="PhanQuyen" EntitySet="PhanQuyen" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Loi">
     <Key>
@@ -133,6 +143,7 @@
     <NavigationProperty Name="GuiNhan1" Relationship="PHCNModel.FK_GuiNhan_NhanVien_NguoiNhan" FromRole="NhanVien" ToRole="GuiNhan" />
     <NavigationProperty Name="KhoaPhong" Relationship="PHCNModel.FK_NhanVien_KhoaPhong" FromRole="NhanVien" ToRole="KhoaPhong" />
     <Property Name="MatKhauMD5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="PhanQuyen" Relationship="PHCNModel.FK_PhanQuyen_NhanVien" FromRole="NhanVien" ToRole="PhanQuyen" />
   </EntityType>
   <Association Name="FK_BaiViet_LoaiBaiViet">
     <End Type="PHCNModel.LoaiBaiViet" Role="LoaiBaiViet" Multiplicity="1" />
@@ -227,4 +238,46 @@
     <Property Name="TenThamSo" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="MoTa" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
   </EntityType>
+  <EntityType Name="PhanQuyen">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MaNhanVien" Type="Int32" Nullable="false" />
+    <Property Name="MaQuyen" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="NhanVien" Relationship="PHCNModel.FK_PhanQuyen_NhanVien" FromRole="PhanQuyen" ToRole="NhanVien" />
+    <NavigationProperty Name="Quyen" Relationship="PHCNModel.FK_PhanQuyen_Quyen" FromRole="PhanQuyen" ToRole="Quyen" />
+  </EntityType>
+  <EntityType Name="Quyen">
+    <Key>
+      <PropertyRef Name="MaQuyen" />
+    </Key>
+    <Property Name="MaQuyen" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TenQuyen" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="PhanQuyen" Relationship="PHCNModel.FK_PhanQuyen_Quyen" FromRole="Quyen" ToRole="PhanQuyen" />
+  </EntityType>
+  <Association Name="FK_PhanQuyen_NhanVien">
+    <End Type="PHCNModel.NhanVien" Role="NhanVien" Multiplicity="1" />
+    <End Type="PHCNModel.PhanQuyen" Role="PhanQuyen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NhanVien">
+        <PropertyRef Name="MaNhanVien" />
+      </Principal>
+      <Dependent Role="PhanQuyen">
+        <PropertyRef Name="MaNhanVien" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhanQuyen_Quyen">
+    <End Type="PHCNModel.Quyen" Role="Quyen" Multiplicity="1" />
+    <End Type="PHCNModel.PhanQuyen" Role="PhanQuyen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Quyen">
+        <PropertyRef Name="MaQuyen" />
+      </Principal>
+      <Dependent Role="PhanQuyen">
+        <PropertyRef Name="MaQuyen" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

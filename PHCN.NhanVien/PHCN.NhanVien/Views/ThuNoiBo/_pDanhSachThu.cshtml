@@ -2,9 +2,11 @@
 @{ 
     List< PHCN.NhanVien.Models.GuiNhan> listBaiViet = ViewBag.ListBaiViet;
     int stt = 1;
+    PHCN.NhanVien.Models.PHCNEntities db = new PHCN.NhanVien.Models.PHCNEntities();
+    string fontSize = db.ThamSoHeThong.Find("kichthuocfontchu").GiaTri;
 }
 
-<table class="table table-condensed">
+<table class="table table-condensed" style="font-size:@(fontSize)px;">
     <thead>
         <tr>
             <th style="width:3%">#</th>
@@ -24,7 +26,15 @@
                     <input type="checkbox" class="checkboxThu" data-id-gui-nhan="@item.ID"/>
                 </td>
                 <td>                    
-                    <a href="@Url.Action("XemThu", "ThuNoiBo", new { id = item.MaBaiViet })">@item.BaiViet.TieuDe</a>
+                    @if (item.DaXem == true)
+                    {
+                        <a href="@Url.Action("XemThu", "ThuNoiBo", new { id = item.MaBaiViet })" style="color:#004007;">@item.BaiViet.TieuDe</a>
+                    }
+                    else
+                    {
+                        <strong><a href="@Url.Action("XemThu", "ThuNoiBo", new { id = item.MaBaiViet })" style="color:black;">@item.BaiViet.TieuDe</a></strong>
+                    }
+
                 </td>
                 <td>@item.NhanVien.HoTen</td> @*(người gửi)*@
                 <td>@item.BaiViet.Ngay</td>

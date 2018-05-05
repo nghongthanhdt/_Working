@@ -42,7 +42,7 @@
             </div>
             <div class="col-4-xs">
                 <form class="form-signin" role="form" action="@Url.Action("Login", "Home")" method="post">
-                    <h3 class="form-signin-heading">Bệnh viện PHCN</h3>
+                    <h3 class="form-signin-heading">Hệ thống nội bộ</h3>
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-addon">
@@ -61,17 +61,21 @@
                         </div>
                     </div>
 
-                    <label class="checkbox">
+                    @*<label class="checkbox">
                         <input type="checkbox" value="remember-me"> &nbsp Nhớ tài khoản
-                    </label>
+                    </label>*@
                     <input type="hidden" value="true" name="nhoTaiKhoan"/>
-                    <button class="btn btn-lg btn-primary btn-block" type="submit">Đăng nhập</button>
+                    <button class="btn btn-lg btn-success btn-block" type="submit">Đăng nhập</button>
                     <br />
                     @if (loginResult == "false")
                     {
                         <div style="color:#ff6a00;">Tài khoản hoặc mật khẩu không đúng</div>
                     }
-                    
+                    else if (loginResult == "khongketnoi")
+                    {
+                        <div style="color:#ff6a00;">Không thể kết nối đến máy chủ, vui lòng liên hệ quản trị</div>
+                    }
+
                 </form>
             </div>
             <div class="col-4-xs">
@@ -84,14 +88,14 @@
     <div class="clearfix"></div>
     <br><br>
     <!--footer-->
-    <div class="site-footer login-footer">
+    @*<div class="site-footer login-footer">
         <div class="container">
             <div class="copyright clearfix text-center">
                 <p><b>HỆ THỐNG NỘI BỘ</b></p>
                 <p>Bệnh viện Phục hồi chức năng Đồng Tháp</p>
             </div>
         </div>
-    </div>
+    </div>*@
 
 
     <script>

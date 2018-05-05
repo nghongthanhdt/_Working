@@ -17,5 +17,11 @@ namespace PHCN.NhanVien.Controllers
             ViewBag.TenLoi = loi.TenLoi;            
             return View();
         }
+        public ActionResult LoiHeThong(string id)
+        {
+            var loi = db.Loi.Find(id);
+            ViewBag.TenLoi = loi.TenLoi;
+            return View();
+        }
     }
 }

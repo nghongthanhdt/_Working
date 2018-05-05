@@ -33,7 +33,7 @@
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.tabHopThu = new DevExpress.XtraTab.XtraTabPage();
-            this.btnLayThuMoi = new DevExpress.XtraEditors.SimpleButton();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblThongBao = new System.Windows.Forms.Label();
             this.btnDenHopThu = new DevExpress.XtraEditors.SimpleButton();
             this.lblTenKhoa = new DevExpress.XtraEditors.LabelControl();
@@ -78,11 +78,12 @@
             this.btnDong = new DevExpress.XtraEditors.SimpleButton();
             this.btnThoatChuongTrinh = new DevExpress.XtraEditors.SimpleButton();
             this.statusStripClient = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusBanQuyen = new System.Windows.Forms.ToolStripStatusLabel();
             this.timerLayThu = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.tabHopThu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabCauHinh.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -115,7 +116,7 @@
             // 
             // tabHopThu
             // 
-            this.tabHopThu.Controls.Add(this.btnLayThuMoi);
+            this.tabHopThu.Controls.Add(this.pictureBox1);
             this.tabHopThu.Controls.Add(this.lblThongBao);
             this.tabHopThu.Controls.Add(this.btnDenHopThu);
             this.tabHopThu.Controls.Add(this.lblTenKhoa);
@@ -124,34 +125,34 @@
             this.tabHopThu.Size = new System.Drawing.Size(548, 313);
             this.tabHopThu.Text = "Hộp thư";
             // 
-            // btnLayThuMoi
+            // pictureBox1
             // 
-            this.btnLayThuMoi.Image = ((System.Drawing.Image)(resources.GetObject("btnLayThuMoi.Image")));
-            this.btnLayThuMoi.Location = new System.Drawing.Point(201, 227);
-            this.btnLayThuMoi.Name = "btnLayThuMoi";
-            this.btnLayThuMoi.Size = new System.Drawing.Size(118, 33);
-            this.btnLayThuMoi.TabIndex = 3;
-            this.btnLayThuMoi.Text = "Lấy thư mới";
-            this.btnLayThuMoi.Click += new System.EventHandler(this.btnLayThuMoi_Click);
+            this.pictureBox1.Image = global::PHCN.ThuNoiBo.Client.Properties.Resources.home;
+            this.pictureBox1.Location = new System.Drawing.Point(19, 18);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(150, 95);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
             // 
             // lblThongBao
             // 
             this.lblThongBao.AutoSize = true;
             this.lblThongBao.Font = new System.Drawing.Font("Tahoma", 10F);
             this.lblThongBao.ForeColor = System.Drawing.Color.Red;
-            this.lblThongBao.Location = new System.Drawing.Point(222, 113);
+            this.lblThongBao.Location = new System.Drawing.Point(172, 85);
             this.lblThongBao.Name = "lblThongBao";
-            this.lblThongBao.Size = new System.Drawing.Size(97, 17);
+            this.lblThongBao.Size = new System.Drawing.Size(130, 17);
             this.lblThongBao.TabIndex = 2;
-            this.lblThongBao.Text = "Có 3 thư mới !";
+            this.lblThongBao.Text = "Bạn có 3 thư mới !!!";
             // 
             // btnDenHopThu
             // 
             this.btnDenHopThu.Image = ((System.Drawing.Image)(resources.GetObject("btnDenHopThu.Image")));
             this.btnDenHopThu.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleRight;
-            this.btnDenHopThu.Location = new System.Drawing.Point(154, 174);
+            this.btnDenHopThu.Location = new System.Drawing.Point(155, 177);
             this.btnDenHopThu.Name = "btnDenHopThu";
-            this.btnDenHopThu.Size = new System.Drawing.Size(227, 47);
+            this.btnDenHopThu.Size = new System.Drawing.Size(260, 58);
             this.btnDenHopThu.TabIndex = 1;
             this.btnDenHopThu.Text = "ĐẾN HỘP THƯ";
             this.btnDenHopThu.Click += new System.EventHandler(this.btnDenHopThu_Click);
@@ -165,9 +166,9 @@
             this.lblTenKhoa.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblTenKhoa.LineLocation = DevExpress.XtraEditors.LineLocation.Center;
             this.lblTenKhoa.LineVisible = true;
-            this.lblTenKhoa.Location = new System.Drawing.Point(24, 23);
+            this.lblTenKhoa.Location = new System.Drawing.Point(175, 25);
             this.lblTenKhoa.Name = "lblTenKhoa";
-            this.lblTenKhoa.Size = new System.Drawing.Size(528, 19);
+            this.lblTenKhoa.Size = new System.Drawing.Size(350, 19);
             this.lblTenKhoa.TabIndex = 0;
             this.lblTenKhoa.Text = "PHÒNG CÔNG NGHỆ THÔNG TIN";
             // 
@@ -178,7 +179,7 @@
             this.lblHoTen.Appearance.Options.UseFont = true;
             this.lblHoTen.Appearance.Options.UseForeColor = true;
             this.lblHoTen.LineVisible = true;
-            this.lblHoTen.Location = new System.Drawing.Point(24, 48);
+            this.lblHoTen.Location = new System.Drawing.Point(175, 50);
             this.lblHoTen.Name = "lblHoTen";
             this.lblHoTen.Size = new System.Drawing.Size(164, 19);
             this.lblHoTen.TabIndex = 0;
@@ -205,7 +206,7 @@
             // checkboxTienIch
             // 
             this.checkboxTienIch.AutoSize = true;
-            this.checkboxTienIch.Location = new System.Drawing.Point(349, 96);
+            this.checkboxTienIch.Location = new System.Drawing.Point(349, 94);
             this.checkboxTienIch.Name = "checkboxTienIch";
             this.checkboxTienIch.Size = new System.Drawing.Size(62, 17);
             this.checkboxTienIch.TabIndex = 17;
@@ -224,7 +225,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(506, 74);
+            this.label9.Location = new System.Drawing.Point(506, 51);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(27, 13);
             this.label9.TabIndex = 6;
@@ -232,7 +233,7 @@
             // 
             // txtAutoGetMailTimer
             // 
-            this.txtAutoGetMailTimer.Location = new System.Drawing.Point(468, 71);
+            this.txtAutoGetMailTimer.Location = new System.Drawing.Point(468, 48);
             this.txtAutoGetMailTimer.Name = "txtAutoGetMailTimer";
             this.txtAutoGetMailTimer.Size = new System.Drawing.Size(30, 21);
             this.txtAutoGetMailTimer.TabIndex = 13;
@@ -244,7 +245,8 @@
             this.checkboxAutoGetMail.AutoSize = true;
             this.checkboxAutoGetMail.Checked = true;
             this.checkboxAutoGetMail.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkboxAutoGetMail.Location = new System.Drawing.Point(349, 73);
+            this.checkboxAutoGetMail.Enabled = false;
+            this.checkboxAutoGetMail.Location = new System.Drawing.Point(349, 50);
             this.checkboxAutoGetMail.Name = "checkboxAutoGetMail";
             this.checkboxAutoGetMail.Size = new System.Drawing.Size(115, 17);
             this.checkboxAutoGetMail.TabIndex = 12;
@@ -256,7 +258,7 @@
             this.checkboxShowOnStart.AutoSize = true;
             this.checkboxShowOnStart.Checked = true;
             this.checkboxShowOnStart.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkboxShowOnStart.Location = new System.Drawing.Point(349, 50);
+            this.checkboxShowOnStart.Location = new System.Drawing.Point(349, 73);
             this.checkboxShowOnStart.Name = "checkboxShowOnStart";
             this.checkboxShowOnStart.Size = new System.Drawing.Size(151, 17);
             this.checkboxShowOnStart.TabIndex = 11;
@@ -278,7 +280,7 @@
             // btnBoQua
             // 
             this.btnBoQua.Image = ((System.Drawing.Image)(resources.GetObject("btnBoQua.Image")));
-            this.btnBoQua.Location = new System.Drawing.Point(349, 206);
+            this.btnBoQua.Location = new System.Drawing.Point(349, 194);
             this.btnBoQua.Name = "btnBoQua";
             this.btnBoQua.Size = new System.Drawing.Size(184, 26);
             this.btnBoQua.TabIndex = 16;
@@ -288,7 +290,7 @@
             // btnLuuCauHinh
             // 
             this.btnLuuCauHinh.Image = ((System.Drawing.Image)(resources.GetObject("btnLuuCauHinh.Image")));
-            this.btnLuuCauHinh.Location = new System.Drawing.Point(349, 174);
+            this.btnLuuCauHinh.Location = new System.Drawing.Point(349, 162);
             this.btnLuuCauHinh.Name = "btnLuuCauHinh";
             this.btnLuuCauHinh.Size = new System.Drawing.Size(184, 26);
             this.btnLuuCauHinh.TabIndex = 15;
@@ -300,7 +302,7 @@
             this.btnCapNhatCauHinh.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             this.btnCapNhatCauHinh.Appearance.Options.UseFont = true;
             this.btnCapNhatCauHinh.Image = ((System.Drawing.Image)(resources.GetObject("btnCapNhatCauHinh.Image")));
-            this.btnCapNhatCauHinh.Location = new System.Drawing.Point(349, 129);
+            this.btnCapNhatCauHinh.Location = new System.Drawing.Point(349, 117);
             this.btnCapNhatCauHinh.Name = "btnCapNhatCauHinh";
             this.btnCapNhatCauHinh.Size = new System.Drawing.Size(184, 39);
             this.btnCapNhatCauHinh.TabIndex = 14;
@@ -533,6 +535,7 @@
             this.menuDenHopThu.Name = "menuDenHopThu";
             this.menuDenHopThu.Size = new System.Drawing.Size(140, 22);
             this.menuDenHopThu.Text = "Đến hộp thư";
+            this.menuDenHopThu.Click += new System.EventHandler(this.btnDenHopThu_Click);
             // 
             // menuThoat
             // 
@@ -566,18 +569,18 @@
             // statusStripClient
             // 
             this.statusStripClient.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
+            this.statusBanQuyen});
             this.statusStripClient.Location = new System.Drawing.Point(0, 381);
             this.statusStripClient.Name = "statusStripClient";
             this.statusStripClient.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.statusStripClient.Size = new System.Drawing.Size(578, 22);
             this.statusStripClient.TabIndex = 2;
             // 
-            // toolStripStatusLabel1
+            // statusBanQuyen
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(93, 17);
-            this.toolStripStatusLabel1.Text = "statusBanQuyen";
+            this.statusBanQuyen.Name = "statusBanQuyen";
+            this.statusBanQuyen.Size = new System.Drawing.Size(93, 17);
+            this.statusBanQuyen.Text = "statusBanQuyen";
             // 
             // timerLayThu
             // 
@@ -596,6 +599,7 @@
             this.Controls.Add(this.btnThoatChuongTrinh);
             this.Controls.Add(this.btnDong);
             this.Controls.Add(this.labelControl2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormClient";
@@ -607,6 +611,7 @@
             this.xtraTabControl1.ResumeLayout(false);
             this.tabHopThu.ResumeLayout(false);
             this.tabHopThu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabCauHinh.ResumeLayout(false);
             this.tabCauHinh.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -672,9 +677,9 @@
         private System.Windows.Forms.TextBox txtHoTen;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.CheckBox checkboxTienIch;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private DevExpress.XtraEditors.SimpleButton btnLayThuMoi;
+        private System.Windows.Forms.ToolStripStatusLabel statusBanQuyen;
         public System.Windows.Forms.Timer timerLayThu;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

@@ -48,6 +48,10 @@ public partial class PHCNEntities : DbContext
 
     public virtual DbSet<ThamSoHeThong> ThamSoHeThong { get; set; }
 
+    public virtual DbSet<PhanQuyen> PhanQuyen { get; set; }
+
+    public virtual DbSet<Quyen> Quyen { get; set; }
+
 }
 
 }

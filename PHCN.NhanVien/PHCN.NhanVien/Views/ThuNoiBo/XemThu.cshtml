@@ -13,6 +13,12 @@
 
     ViewBag.PanelTitle = "" + baiViet.TieuDe;
     var idBaiViet = baiViet.MaBaiViet;
+
+    PHCN.NhanVien.Models.PHCNEntities db = new PHCN.NhanVien.Models.PHCNEntities();
+    string fontSize = db.ThamSoHeThong.Find("kichthuocfontchu").GiaTri;
+
+    var listNguoiNhan = baiViet.GuiNhan.ToList();    
+    
 }
 
 <script>
@@ -22,11 +28,11 @@
 
 
 @*<label for="exampleInputEmail1">Nội dung</label>*@
-<div class="well">
+<div class="well" style="font-size:@(fontSize)px;">
     @Html.Raw(baiViet.NoiDung)
 </div>
 <div class="pull-right">
-    Người gửi: <strong>@guiNhan.NhanVien.HoTen</strong> - <a href="javascript:void(0);">Người nhận</a> - @baiViet.Ngay
+    Người gửi: <strong>@guiNhan.NhanVien.HoTen</strong> - <a href="javascript:void(0);" id="linkNguoiNhan">Người nhận</a> - @baiViet.Ngay
 </div>
 <!--<textarea id="txtNoiDung"></textarea>
 <script>
@@ -46,48 +52,47 @@
     $(document).ready(function () {
         loadDanhSachFileDinhKem();
     });
+
+    $("#linkNguoiNhan").click(function () {
+        $("#modalDanhSachNguoiNhan").modal("show");
+    });
 </script>
 
 <a href="javascript:history.back();" class="btn btn-primary">Trở lại</a>
 
 
-@if (guiNhan.NguoiGui != guiNhan.NguoiNhan && guiNhan.NguoiGui != _maNhanVienDangNhap)
-{
-
-    <a class="btn @((guiNhan.QuanTrong == true)?"btn-warning":"btn-default")" id="btnDanhDauQuanTrong">
-        @if (guiNhan.QuanTrong == true)
-        { <i class="glyphicon glyphicon-ok"></i> } Quan trọng
-    </a>
-        <button class="btn btn-default" id="btnDanhDauXoa">
-            @if (guiNhan.DaXoa != true)
-            {
-                <span>Xóa thư</span>
-            }
-            else
-            {
-                <span>Trả về thư đến</span>
-            }
-        </button>
-
-}
 
 
+<div class="modal" id="modalDanhSachNguoiNhan">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Người nhận</h4>
+            </div>
+            <div class="modal-body" style="height:300px; overflow:scroll;">
+                <table class="table">
+                    @foreach (var item in listNguoiNhan)
+                    {
+                        <tr>
+                            
+                            <td>
+                                <i class="glyphicon glyphicon-user"></i>
+                                @item.NhanVien1.HoTen
+                            </td>
+                        </tr>
+                    }
+                    
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
 
-<script>
-    $("#btnDanhDauQuanTrong").click(function () {
-        var url = '@Url.Action("DanhDauQuanTrong", "ThuNoiBo", new { id = guiNhan.ID})';
-        $.get(url, function (result) {
-            if (result == "true") window.location = window.location;
-        });
-
-    });
-    $("#btnDanhDauXoa").click(function () {
-        var url = '@Url.Action("DanhDauXoa", "ThuNoiBo", new { id = guiNhan.ID})';
-        $.get(url, function (result) {
-            if (result == "true") window.location = '@Url.Action("Index", "ThuNoiBo")';
-        });
-    });
-</script>

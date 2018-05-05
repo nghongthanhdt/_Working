@@ -171,8 +171,11 @@ namespace PHCN.NhanVien.Controllers
         public ActionResult XemThu(int id)
         {
 
-            
-            BaiViet baiViet = db.BaiViet.Find(id);
+            NhanVien.Models.NhanVien nhanVienDangNhap = (NhanVien.Models.NhanVien)Session["NhanVienDangNhap"];
+            GuiNhan guiNhan = db.GuiNhan.Where(x => x.MaBaiViet == id && (x.NguoiNhan == nhanVienDangNhap.MaNhanVien || x.NguoiGui == nhanVienDangNhap.MaNhanVien);
+            guiNhan.DaXem = true;            
+            db.SaveChanges();
+            BaiViet baiViet = db.BaiViet.Find(id);            
             ViewBag.BaiViet = baiViet;
             
             return View();
@@ -209,6 +212,24 @@ namespace PHCN.NhanVien.Controllers
                 db.SaveChanges();
                 return Content("true");
             } catch (Exception ex)
+            {
+                return Content("Lỗi hệ thống: " + ex.Message);
+            }
+        }
+        public ActionResult TraVeThuDenList(string listGuiNhanTraVeThuDen)
+        {
+            try
+            {
+                var listIntGuiNhanTraVe = listGuiNhanTraVeThuDen.Split(',').Select(Int32.Parse).ToList();
+                foreach (var item in listIntGuiNhanTraVe)
+                {
+                    GuiNhan gn = db.GuiNhan.Find(item);
+                    gn.DaXoa = false;
+                }
+                db.SaveChanges();
+                return Content("true");
+            }
+            catch (Exception ex)
             {
                 return Content("Lỗi hệ thống: " + ex.Message);
             }

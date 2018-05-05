@@ -18,8 +18,7 @@ namespace PHCN.ThuNoiBo.Client
         public bool AutoStart;
         public bool ShowOnStart;
         public bool AutoGetMail;
-        public int AutoGetMailTimer;
-
+        public int AutoGetMailTimer;    
         public string MaNhanVien;
         public string HoTen;
         public string TenKhoa;

@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,20 +24,18 @@ namespace PHCN.ThuNoiBo.Client
         DataTable dtThamSoHeThong = new DataTable();
         string _ConnnectionString = "";
         string _MaNhanVien = "0";
-        int _SoThuMoi = 0;
-        
+        int _SoThuMoi = 0;          
         public FormClient()
         {
             InitializeComponent();            
         }
         private void FormClient_Load(object sender, EventArgs e)
-        {                
+        {                         
             modeXemCauHinh();
             if (!kiemtraCauHinh())
             {
                 modeChuaCauHinhKetNoi();
-            }
-            toolStripStatusLabel1.Text = layThamSoHeThong("banquyen");
+            }                     
             if (_MaNhanVien == "0") {
                 timerLayThu.Enabled = false;
             } else
@@ -44,19 +43,20 @@ namespace PHCN.ThuNoiBo.Client
                 layThuMoi(_MaNhanVien);
                 timerLayThu.Enabled = true;
                 timerLayThu.Start();
-            }
-
+            }                     
         }
         private string layThamSoHeThong(string maThamSo)
         {
             foreach (DataRow row in dtThamSoHeThong.Rows)
             {
-                if (row["MaThamSo"].ToString() == maThamSo) return row["GiaTri"].ToString();
-                break;
+                if (row["MaThamSo"].ToString() == maThamSo)
+                {
+                    string giaTri = row["GiaTri"].ToString();
+                    return giaTri;                    
+                }                 
             }
             return "[Không tìm thấy tham số]";
-        }
-
+        }  
         private void loaddtThamSoHeThong(string connectionString)
         {
             try
@@ -81,18 +81,11 @@ namespace PHCN.ThuNoiBo.Client
         }
         private void FormClient_VisibleChanged(object sender, EventArgs e)
         {
-            string tenDonVi = "";
-            string tenHopThu = "";
-            foreach (DataRow row in dtThamSoHeThong.Rows)
-            {
-                if (row["MaThamSo"].ToString() == "tendonvi") tenDonVi = row["GiaTri"].ToString();
-                if (row["MaThamSo"].ToString() == "tenhopthu") tenHopThu = row["GiaTri"].ToString();
-            }
             if (this.Visible != true)
             {
                 notifyIconMain.Visible = true;
-                notifyIconMain.BalloonTipTitle = tenDonVi;
-                notifyIconMain.BalloonTipText = tenHopThu;
+                notifyIconMain.BalloonTipTitle = layThamSoHeThong("tendonvi");
+                notifyIconMain.BalloonTipText = layThamSoHeThong("tenhopthu");
                 notifyIconMain.ShowBalloonTip(500);
             }
         }
@@ -107,7 +100,8 @@ namespace PHCN.ThuNoiBo.Client
         private void btnLuu_Click(object sender, EventArgs e)
         {
             luuCauHinh();
-
+            loadCauHinh();
+            modeXemCauHinh();
         }
         private void menuThoat_Click(object sender, EventArgs e)
         {
@@ -124,6 +118,7 @@ namespace PHCN.ThuNoiBo.Client
         private void btnBoQua_Click(object sender, EventArgs e)
         {
             loadCauHinh();
+            modeXemCauHinh();
         }
         private void checkboxTienIch_CheckedChanged(object sender, EventArgs e)
         {
@@ -135,28 +130,24 @@ namespace PHCN.ThuNoiBo.Client
                 tabTienIch.PageVisible = false;
             }
         }
-
         private void loadCauHinh()
-        {
-
-
+        {     
             ClientConfig clientConfig = new ClientConfig();
             string path = "config.xml";
             XmlSerializer serializer = new XmlSerializer(typeof(ClientConfig));
             try
             {
                 StreamReader _reader = new StreamReader(path);
+                _reader.Close();                
             }
             catch
             {
                 XmlSerializer _serializer = new XmlSerializer(typeof(ClientConfig));
                 var file = File.Create("config.xml");
                 _serializer.Serialize(file, clientConfig);
-                file.Close();
-
+                file.Close();    
                 lblThongBao.Text = "Chưa cấu hình kết nối";
-                btnDenHopThu.Enabled = false;
-
+                btnDenHopThu.Enabled = false;  
             }
             StreamReader reader = new StreamReader(path);
             clientConfig = (ClientConfig)serializer.Deserialize(reader);
@@ -171,20 +162,36 @@ namespace PHCN.ThuNoiBo.Client
             checkboxAutoGetMail.Checked = clientConfig.AutoGetMail;
             txtAutoGetMailTimer.Text = clientConfig.AutoGetMailTimer.ToString();
             txtWebServer.Text = clientConfig.WebServer;
-            txtPort.Text = clientConfig.Port;
-
+            txtPort.Text = clientConfig.Port; 
             txtHoTen.Text = clientConfig.HoTen;
             txtTenKhoa.Text = clientConfig.TenKhoa;
             _MaNhanVien = clientConfig.MaNhanVien;
             string md5Password = getMd5(txtAccountPassword.Text).ToLower();
-            txtLinkHopThu.Text = "http://" + txtWebServer.Text + ((txtPort.Text != "") ? (":" + txtPort.Text) : "") + "/ClientLogin/?TenDangNhap=" + txtAccountUserName.Text.ToLower() + "&MatKhau=" + md5Password;
-
+            txtLinkHopThu.Text = "http://" + txtWebServer.Text + ((txtPort.Text != "") ? (":" + txtPort.Text) : "") + "/Home/ClientLogin/?TenDangNhap=" + txtAccountUserName.Text.ToLower() + "&MatKhau=" + md5Password;
             lblTenKhoa.Text = clientConfig.TenKhoa;
             lblHoTen.Text = clientConfig.HoTen;
             lblThongBao.Text = "Chưa có thư mới";
             lblThongBao.ForeColor = Color.Green;
-            btnDenHopThu.Enabled = true;
-
+            btnDenHopThu.Enabled = true;   
+            if (clientConfig.AutoStart)  {
+                setAutoStart();
+            }
+            else
+            {
+                unsetAutoStart();
+            }      
+            try
+            {
+                string thoigianlaythu = layThamSoHeThong("thoigianlaythu");
+                int thoiGianLayThu = int.Parse(thoigianlaythu);
+                timerLayThu.Interval = thoiGianLayThu * 1000;
+            } catch
+            {
+                int thoiGianLayThu = clientConfig.AutoGetMailTimer;
+                timerLayThu.Interval = thoiGianLayThu * 1000;
+            } 
+            statusBanQuyen.Text = layThamSoHeThong("banquyen");
+            txtAutoGetMailTimer.Text = layThamSoHeThong("thoigianlaythu");
         }
         private bool validateFormCauHinh()
         {
@@ -229,6 +236,7 @@ namespace PHCN.ThuNoiBo.Client
             try
             {
                 StreamReader _reader = new StreamReader(path);
+                _reader.Close();
             }
             catch
             {
@@ -240,15 +248,13 @@ namespace PHCN.ThuNoiBo.Client
             StreamReader reader = new StreamReader(path);
             clientConfig = (ClientConfig)serializer.Deserialize(reader);
             reader.Close();
-
             if (clientConfig.ConnectServer == "" || clientConfig.ConnectServer == null)
             {
                 modeChuaCauHinhKetNoi();
                 return false;
             }
-            string connectionString = "Data Source=" + clientConfig.ConnectServer + ";Initial Catalog=PHCN; User ID=" + clientConfig.ConnectUserName + "; Password=" + clientConfig.ConnectPassword + ";";
-            
-            SqlConnection connection = new SqlConnection(connectionString);
+            string connectionString = "Data Source=" + clientConfig.ConnectServer + ";Initial Catalog=PHCN; User ID=" + clientConfig.ConnectUserName + "; Password=" + clientConfig.ConnectPassword + "; Connection Timeout=5";            
+            SqlConnection connection = new SqlConnection(connectionString);            
             try
             {
                 connection.Open();
@@ -261,9 +267,7 @@ namespace PHCN.ThuNoiBo.Client
                 return false;
             } 
             try
-            {
-                
-                
+            {   
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = connection;
                 cmd.CommandText = @"select khoa.TenKhoa, nv.HoTen, nv.TenDangNhap, nv.MatKhau, nv.NhanThu, nv.MaNhanVien from NhanVien as nv
@@ -275,7 +279,7 @@ namespace PHCN.ThuNoiBo.Client
                 adapter.Fill(dt);
                 if (dt.Rows.Count == 0)
                 {
-                    MessageBox.Show("Tài khoản hoặc mật khẩu không đúng !");
+                    MessageBox.Show("Tài khoản hoặc mật khẩu người dùng không đúng !");
                     return false;
                 }
                 else
@@ -286,7 +290,6 @@ namespace PHCN.ThuNoiBo.Client
                         MessageBox.Show("Tài khoản \"" + row["HoTen"] + "\" không được phép nhận thư, vui lòng liên hệ quản trị.");
                         return false;
                     }
-
                 }
                 loadCauHinh();
             }
@@ -297,16 +300,15 @@ namespace PHCN.ThuNoiBo.Client
             }
             connection.Close();
             return true;
-        }
-
+        }   
         private void modeChuaCauHinhKetNoi()
         {
             lblTenKhoa.Text = "";
             lblHoTen.Text = "";
-            lblThongBao.Text = "Chưa cấu hình kết nối";
+            lblThongBao.Text = "";
             btnDenHopThu.Enabled = false;
-        }
-
+            statusBanQuyen.Text = "Chưa cấu hình kết nối";
+        }      
         private void luuCauHinh()
         {
             if (validateFormCauHinh() == false)
@@ -320,7 +322,7 @@ namespace PHCN.ThuNoiBo.Client
             clientConfig.ConnectPassword = txtConnectPassword.Text;
             clientConfig.AccountUserName = txtAccountUserName.Text;
             clientConfig.AccountPassword = txtAccountPassword.Text;
-            clientConfig.AutoStart = checkboxShowOnStart.Checked;
+            clientConfig.AutoStart = checkboxAutoStart.Checked;
             clientConfig.ShowOnStart = checkboxShowOnStart.Checked;
             clientConfig.AutoGetMail = checkboxAutoGetMail.Checked;
             clientConfig.AutoGetMailTimer = int.Parse(txtAutoGetMailTimer.Text);
@@ -341,7 +343,7 @@ namespace PHCN.ThuNoiBo.Client
             }
             try
             {
-                UserLogin userLogin = new UserLogin();
+                
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = connection;
                 cmd.CommandText = @"select khoa.TenKhoa, nv.HoTen, nv.TenDangNhap, nv.MatKhau, nv.MaNhanVien, nv.NhanThu from NhanVien as nv
@@ -376,11 +378,10 @@ namespace PHCN.ThuNoiBo.Client
                         serializer.Serialize(file, clientConfig);
                         file.Close();
                     }
-                    catch { };
-
-                    MessageBox.Show("Chào mừng " + clientConfig.HoTen + ", kết nối thành công!");
-                    loadCauHinh();
-                    modeXemCauHinh();
+                    catch (Exception ex){
+                        MessageBox.Show(ex.Message);
+                    };  
+                    MessageBox.Show("Chào mừng " + clientConfig.HoTen + ", kết nối thành công!");                    
                 }
             }
             catch (Exception ex)
@@ -466,41 +467,45 @@ namespace PHCN.ThuNoiBo.Client
             btnCapNhatCauHinh.Enabled = true;
             btnLuuCauHinh.Enabled = false;
             btnBoQua.Enabled = false;
-        }
-
-        private void btnLayThuMoi_Click(object sender, EventArgs e)
-        {
-            //layThuMoi(8);
-        }  
-
+        }      
         private int layThuMoi(string maNhanVien)
         {
-                        
-            SqlConnection conn = new SqlConnection(_ConnnectionString);
-            string query = "select * from GuiNhan where NguoiNhan = " + maNhanVien + " and DaXem = 0";
-            using (SqlCommand cmd = new SqlCommand(query, conn))
+              
+            try
             {
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                DataTable _dt = new DataTable();
-                adapter.Fill(_dt);
-                int count = _dt.Rows.Count;
-                if (count > 0)
+                SqlConnection conn = new SqlConnection(_ConnnectionString);
+                string query = "select * from GuiNhan where NguoiNhan = " + maNhanVien + " and DaXem = 0";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    lblThongBao.ForeColor = Color.Red;
-                    lblThongBao.Text = "Bạn có " + count + " thư mới";
-                    
-                    return count;
-                } else
-                {
-                    lblThongBao.ForeColor = Color.Green;
-                    lblThongBao.Text = "";
+                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                    DataTable _dt = new DataTable();
+                    adapter.Fill(_dt);
+                    int count = _dt.Rows.Count;
+                    if (count > 0)
+                    {
+                        lblThongBao.ForeColor = Color.Red;
+                        lblThongBao.Text = "Bạn có " + count + " thư mới";
+
+                        return count;
+                    }
+                    else
+                    {
+                        lblThongBao.ForeColor = Color.Green;
+                        lblThongBao.Text = "";
+                    }
+
                 }
-
+                
             }
-            return 0;
-            
-        }
+            catch 
+            {
+                showBalloonKhongTheKetNoiDenMayChu();
+                timerLayThu.Stop();
+            }
 
+            return 0;
+
+        }
         private void timerLayThu_Tick(object sender, EventArgs e)
         {
             timerLayThu.Enabled = false;
@@ -508,19 +513,49 @@ namespace PHCN.ThuNoiBo.Client
             if (count != _SoThuMoi && count > 0)
             {
                 notifyIconMain.Visible = true;
-                notifyIconMain.BalloonTipTitle = "Hệ thống nội bộ";
+                notifyIconMain.BalloonTipTitle = layThamSoHeThong("tenhopthu");
                 notifyIconMain.BalloonTipText = "Bạn có " + count + " thư mới !"; 
                 notifyIconMain.ShowBalloonTip(500);
             }
             _SoThuMoi = count;
             timerLayThu.Enabled = true;
+        }   
+        private void setAutoStart()
+        {                                                              
+            string StartupKey = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
+            string StartupValue = "PHCN.ThuNoiBo.Client";  
+            RegistryKey key = Registry.CurrentUser.OpenSubKey(StartupKey, true);
+            key.SetValue(StartupValue, Application.ExecutablePath.ToString());        
         }
+        private void unsetAutoStart()
+        {
+            string StartupKey = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
+            string StartupValue = "PHCN.ThuNoiBo.Client";
+            RegistryKey key = Registry.CurrentUser.OpenSubKey(StartupKey, true);
+            key.DeleteValue(StartupValue);
+        }                               
+        private void showBalloonKhongTheKetNoiDenMayChu()
+        {
+            notifyIconMain.Visible = true;
+            notifyIconMain.BalloonTipTitle = "Hệ thống nội bộ";
+            notifyIconMain.BalloonTipText = "Không thể kết nối đến máy chủ, vui lòng liên hệ quản trị";
+            notifyIconMain.ShowBalloonTip(500);
+        }
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            const string message = "Bạn muốn thoát chương trình ?";
+            const string caption = "Hệ thống nội bộ";
+            var result = MessageBox.Show(message, caption,
+                                         MessageBoxButtons.YesNo,
+                                         MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+                Environment.Exit(0);
+            
+
+            e.Cancel = (result == DialogResult.No);
+        }
+
     }
-    public class UserLogin
-    {
-        public string TenDangNhap;
-        public string MatKhau;
-        public string HoTen;
-        public string KhoaPhong;
-    }
+
 }
