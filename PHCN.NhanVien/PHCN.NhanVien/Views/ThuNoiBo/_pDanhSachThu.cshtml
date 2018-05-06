@@ -28,11 +28,11 @@
                 <td>                    
                     @if (item.DaXem == true)
                     {
-                        <a href="@Url.Action("XemThu", "ThuNoiBo", new { id = item.MaBaiViet })" style="color:#004007;">@item.BaiViet.TieuDe</a>
+                        <a href="@Url.Action("XemThu", "ThuNoiBo", new { id = item.ID })" style="color:#004007;">@item.BaiViet.TieuDe</a>
                     }
                     else
                     {
-                        <strong><a href="@Url.Action("XemThu", "ThuNoiBo", new { id = item.MaBaiViet })" style="color:black;">@item.BaiViet.TieuDe</a></strong>
+                        <strong><a href="@Url.Action("XemThu", "ThuNoiBo", new { id = item.ID })" style="color:black;">@item.BaiViet.TieuDe</a></strong>
                     }
 
                 </td>

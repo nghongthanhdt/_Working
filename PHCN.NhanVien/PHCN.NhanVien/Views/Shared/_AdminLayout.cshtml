@@ -49,30 +49,38 @@
 </head>
 <body>
     <!--nav-->
-    <nav role="navigation" class="navbar navbar-custom">
+    <nav role="navigation" class="navbar navbar-custom" style="background-color:#004f02;">
         <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
+            
+            <div class="navbar-default" >
                 <button data-target="#bs-content-row-navbar-collapse-5" data-toggle="collapse" class="navbar-toggle" type="button">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="#" class="navbar-brand">BVPHCNDT</a>
+
+                <a href="@Url.Action("Index", "ThuNoiBo")" class="navbar-brand" style="color:white;">
+                    <i class="glyphicon glyphicon-home"></i>
+                        Thư nội bộ
+                </a>
             </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div id="bs-content-row-navbar-collapse-5" class="collapse navbar-collapse">
+            
+            <div id="bs-content-row-navbar-collapse-5" class="collapse navbar-collapse" style="background-color:transparent;">
                 <ul class="nav navbar-nav navbar-right">
 
                     <!-- <li class="disabled"><a href="#">Link</a></li> -->
                     <li class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">@nhanVienDangNhap.HoTen<b class="caret"></b></a>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <i class="glyphicon glyphicon-user"></i>
+                            @nhanVienDangNhap.HoTen
+                            <b class="caret"></b>
+                        </a>
                         <ul role="menu" class="dropdown-menu">
                             <!--<li class="dropdown-header">Setting</li>-->
 
-                            <li class="disabled"><a href="@Url.Action("Logout", "Home")">Thoát</a></li>
+                            <li class="disabled"><a href="@Url.Action("Logout", "Home")"> <i class="glyphicon glyphicon-arrow-left"></i> Thoát</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -129,8 +137,12 @@
             <div class="col-xs-12 col-sm-9 content">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><a href="javascript:void(0);" class="toggle-sidebar"><span class="fa fa-angle-double-left" data-toggle="offcanvas" title="Maximize Panel"></span></a>
-                            @ViewBag.PanelTitle
+                        <h3 class="panel-title">
+                            <a href="javascript:void(0);" class="toggle-sidebar"><span class="fa fa-angle-double-left" data-toggle="offcanvas" title="Maximize Panel"></span></a>
+                            <span style="font-size:22px; font-weight:bold;">
+                                @ViewBag.PanelTitle
+                            </span>                            
+                            
                         </h3>
                     </div>
                     <div class="panel-body">

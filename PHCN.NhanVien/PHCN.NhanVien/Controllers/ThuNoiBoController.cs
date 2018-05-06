@@ -172,12 +172,11 @@ namespace PHCN.NhanVien.Controllers
         {
 
             NhanVien.Models.NhanVien nhanVienDangNhap = (NhanVien.Models.NhanVien)Session["NhanVienDangNhap"];
-            GuiNhan guiNhan = db.GuiNhan.Where(x => x.MaBaiViet == id && (x.NguoiNhan == nhanVienDangNhap.MaNhanVien || x.NguoiGui == nhanVienDangNhap.MaNhanVien);
+            GuiNhan guiNhan = db.GuiNhan.Find(id);
             guiNhan.DaXem = true;            
             db.SaveChanges();
-            BaiViet baiViet = db.BaiViet.Find(id);            
-            ViewBag.BaiViet = baiViet;
-            
+            BaiViet baiViet = db.BaiViet.Find(guiNhan.MaBaiViet);            
+            ViewBag.BaiViet = baiViet;            
             return View();
         }
 

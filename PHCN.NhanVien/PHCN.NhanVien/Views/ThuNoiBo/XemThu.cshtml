@@ -26,21 +26,24 @@
     var maNhanVienDangNhap = @_maNhanVienDangNhap;
 </script>
 
-
+<div class="pull-right">
+    Người gửi: <strong>@guiNhan.NhanVien.HoTen</strong> - <a href="javascript:void(0);" id="linkNguoiNhan">Người nhận</a> - @baiViet.Ngay
+</div>
+<div style="clear:both;"></div>
 @*<label for="exampleInputEmail1">Nội dung</label>*@
 <div class="well" style="font-size:@(fontSize)px;">
     @Html.Raw(baiViet.NoiDung)
 </div>
-<div class="pull-right">
-    Người gửi: <strong>@guiNhan.NhanVien.HoTen</strong> - <a href="javascript:void(0);" id="linkNguoiNhan">Người nhận</a> - @baiViet.Ngay
-</div>
+
 <!--<textarea id="txtNoiDung"></textarea>
 <script>
   CKEDITOR.replace( 'txtNoiDung');
 </script>-->
-<div id="divDanhSachFileDinhKem">
+<div id="divDanhSachFileDinhKem" style="font-size:@(fontSize)px;">
     @*lấy ajax hiển thị ra đây*@
 </div>
+
+
 <script>
 
     function loadDanhSachFileDinhKem() {
