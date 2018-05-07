@@ -151,6 +151,7 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Debug\config.xml" />
     <Content Include="mail.ico" />
     <None Include="Resources\home.jpg" />
   </ItemGroup>

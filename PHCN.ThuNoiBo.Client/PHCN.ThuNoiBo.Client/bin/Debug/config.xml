@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
 <ClientConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <ConnectServer>admin\sqlserver2008r2</ConnectServer>
-  <ConnectUserName>nghongthanhdt</ConnectUserName>
-  <ConnectPassword>123123</ConnectPassword>
-  <AccountUserName>nghongthanhdt</AccountUserName>
+  <ConnectServer>server\sqlserver2008r2</ConnectServer>
+  <ConnectUserName>HongThanh</ConnectUserName>
+  <ConnectPassword>phcn@123</ConnectPassword>
+  <AccountUserName>hongthanh</AccountUserName>
   <AccountPassword>123</AccountPassword>
-  <WebServer>localhost</WebServer>
-  <Port>11225</Port>
+  <WebServer>bvphcndt.com</WebServer>
+  <Port>1234</Port>
   <AutoStart>true</AutoStart>
   <ShowOnStart>true</ShowOnStart>
   <AutoGetMail>true</AutoGetMail>
-  <AutoGetMailTimer>10</AutoGetMailTimer>
-  <MaNhanVien>8</MaNhanVien>
+  <AutoGetMailTimer>30</AutoGetMailTimer>
+  <MaNhanVien>35</MaNhanVien>
   <HoTen>Nguyễn Hồng Thanh</HoTen>
   <TenKhoa>Phòng Kế hoạch Tổng hợp</TenKhoa>
 </ClientConfig>

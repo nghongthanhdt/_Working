@@ -7,14 +7,14 @@
     <framework targetVersion="4.5.2" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="PHCN.ThuNoiBo.Client.exe.manifest" size="53728">
+    <dependentAssembly dependencyType="install" codebase="PHCN.ThuNoiBo.Client.exe.manifest" size="54157">
       <assemblyIdentity name="PHCN.ThuNoiBo.Client.exe" version="1.0.0.1" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>/FRnDfYHcudIErTgbRBQ4IOrXlE+sZ4u05gGf+1ybns=</dsig:DigestValue>
+        <dsig:DigestValue>yXhgK9YQLck6+K3n5+Obxv3POaQ1IO/n+S59gr7SpBg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

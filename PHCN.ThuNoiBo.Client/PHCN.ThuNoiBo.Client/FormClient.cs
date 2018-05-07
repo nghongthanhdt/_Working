@@ -30,20 +30,23 @@ namespace PHCN.ThuNoiBo.Client
             InitializeComponent();            
         }
         private void FormClient_Load(object sender, EventArgs e)
-        {                         
+        {
             modeXemCauHinh();
             if (!kiemtraCauHinh())
             {
                 modeChuaCauHinhKetNoi();
-            }                     
-            if (_MaNhanVien == "0") {
+            }
+            if (_MaNhanVien == "0")
+            {
                 timerLayThu.Enabled = false;
-            } else
+            }
+            else
             {
                 layThuMoi(_MaNhanVien);
                 timerLayThu.Enabled = true;
                 timerLayThu.Start();
-            }                     
+                //loadCauHinh();
+            }
         }
         private string layThamSoHeThong(string maThamSo)
         {
@@ -141,7 +144,7 @@ namespace PHCN.ThuNoiBo.Client
         private void loadCauHinh()
         {     
             ClientConfig clientConfig = new ClientConfig();
-            string path = "config.xml";
+            string path = @"C:\configThuNoiBo.xml";
             XmlSerializer serializer = new XmlSerializer(typeof(ClientConfig));
             try
             {
@@ -151,7 +154,7 @@ namespace PHCN.ThuNoiBo.Client
             catch
             {
                 XmlSerializer _serializer = new XmlSerializer(typeof(ClientConfig));
-                var file = File.Create("config.xml");
+                var file = File.Create(path);
                 _serializer.Serialize(file, clientConfig);
                 file.Close();    
                 lblThongBao.Text = "Chưa cấu hình kết nối";
@@ -239,17 +242,20 @@ namespace PHCN.ThuNoiBo.Client
         private bool kiemtraCauHinh()
         {
             ClientConfig clientConfig = new ClientConfig();
-            string path = "config.xml";
+            string path = @"C:\configThuNoiBo.xml";
             XmlSerializer serializer = new XmlSerializer(typeof(ClientConfig));
             try
             {
                 StreamReader _reader = new StreamReader(path);
                 _reader.Close();
+                //MessageBox.Show("Tìm thấy file cấu hình");
+                
             }
-            catch
+            catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 XmlSerializer _serializer = new XmlSerializer(typeof(ClientConfig));
-                var file = File.Create("config.xml");
+                var file = File.Create(@"C:\configThuNoiBo.xml");
                 _serializer.Serialize(file, clientConfig);
                 file.Close();
             }
@@ -258,6 +264,7 @@ namespace PHCN.ThuNoiBo.Client
             reader.Close();
             if (clientConfig.ConnectServer == "" || clientConfig.ConnectServer == null)
             {
+                MessageBox.Show("Chưa cấu hình kết nối, clientConfig.ConnectServer=" + clientConfig.ConnectServer);
                 modeChuaCauHinhKetNoi();
                 return false;
             }
@@ -307,6 +314,7 @@ namespace PHCN.ThuNoiBo.Client
                 return false;
             }
             connection.Close();
+            reader.Close();
             return true;
         }   
         private void modeChuaCauHinhKetNoi()
@@ -382,7 +390,7 @@ namespace PHCN.ThuNoiBo.Client
                     XmlSerializer serializer = new XmlSerializer(typeof(ClientConfig));
                     try
                     {
-                        var file = File.Create("config.xml");
+                        var file = File.Create(@"C:\configThuNoiBo.xml");
                         serializer.Serialize(file, clientConfig);
                         file.Close();
                     }
@@ -537,10 +545,15 @@ namespace PHCN.ThuNoiBo.Client
         }
         private void unsetAutoStart()
         {
-            string StartupKey = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
-            string StartupValue = "PHCN.ThuNoiBo.Client";
-            RegistryKey key = Registry.CurrentUser.OpenSubKey(StartupKey, true);
-            key.DeleteValue(StartupValue);
+            try
+            {
+                string StartupKey = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
+                string StartupValue = "PHCN.ThuNoiBo.Client";
+                RegistryKey key = Registry.CurrentUser.OpenSubKey(StartupKey, true);
+                key.DeleteValue(StartupValue);
+            }
+            catch { }
+            
         }                               
         private void showBalloonKhongTheKetNoiDenMayChu()
         {

@@ -878,10 +878,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ef9ArplQh8CvMME8nJVBCwbdqw5bDKMqR58JIYRrKgY=</dsig:DigestValue>
+        <dsig:DigestValue>JysSveGfsUVq15IAqIEP9NvbjGPxnfxY7mi9EcSGLdM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
+  <file name="bin\Debug\config.xml" size="725" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>MQbrt2oaTILsb8nRrYHar4rXR22mdH3MhbRH2bBJB5I=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="mail.ico" size="370070">
     <hash>
       <dsig:Transforms>
