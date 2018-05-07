@@ -1,0 +1,197 @@
+﻿
+@{
+    ViewBag.Title = "Thư nội bộ";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+
+    var nhanVienDangNhap = (PHCN.NhanVien.Models.NhanVien)Session["NhanVienDangNhap"];
+    if (nhanVienDangNhap == null) { Response.Redirect(Url.Action("DangNhap", "Home")); }
+    int _maNhanVienDangNhap = nhanVienDangNhap.MaNhanVien;
+    string _trangThai = ViewBag.TrangThai.ToString();
+    string box = "";
+    try
+    {
+        box = Request.QueryString["box"].ToString();
+    }
+    catch { }
+
+    ViewBag.PanelTitle = "";
+    switch(box)
+    {
+        case "ThuDen":
+            ViewBag.PanelTitle = "Thư đến";
+            break;
+        case "QuanTrong":
+            ViewBag.PanelTitle = "Thư quan trọng";
+            break;
+        case "DaGui":
+            ViewBag.PanelTitle = "Thư đã gửi";
+            break;
+        case "DaXoa":
+            ViewBag.PanelTitle = "Thư đã xóa";
+            break;
+        default:
+            ViewBag.PanelTitle = "Hộp thư đến";
+            break; 
+    }
+
+}
+
+<script>
+    var _maNhanVienDangNhap = @_maNhanVienDangNhap;
+    var _trangThai = '@_trangThai';
+</script>
+ 
+<div style="width:100%; height:400px; overflow:scroll;" id="divDanhSachThu">
+                            
+</div>
+<br/>
+@if (_trangThai == "DaXoa")
+{
+    <button class="btn btn-default" id="btnTraVeThuDen">Trả về thư đến</button>
+}
+@if (_trangThai == "ThuDen" || _trangThai == "DaGui" || _trangThai == "DaXoa")
+{
+    <button class="btn btn-default" id="btnXoaThu">Xóa thư</button>
+}                                                                  
+<button class="btn btn-default" id="btnChonTatCa">Chọn tất cả</button>
+
+
+<script>
+    $(document).ready(function () {
+
+        loadDanhSachThu();
+
+    });
+    function loadDanhSachThu() {
+        var url = '@Url.Action("_pDanhSachThu", "ThuNoiBo")';
+
+        var param = {
+            maNhanVienDangNhap:_maNhanVienDangNhap,
+            trangThai:_trangThai
+        }
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: param,
+            success: function (data) {
+                $("#divDanhSachThu").html(data);
+                //if (_trangThai == "DaGui") {
+                //    //$("#btnDanhDauQuanTrong").hide();
+                //    //$("#btnDanhDauXoa").hide();
+                //}
+                //if (_trangThai == "DaXoa") {
+                //    $("#btnTraVeThuDen").show();
+                //} else {
+                //    $("#btnTraVeThuDen").hide();
+                //}
+            },
+            dataType: "html"
+        });
+    }
+    $("#btnChonTatCa").click(function () {
+        if ($(".checkboxThu").prop("checked") == false) {
+            $(".checkboxThu").prop("checked", true);
+        } else {
+            $(".checkboxThu").prop("checked", false);
+        }
+
+    });
+
+    $("#btnTraVeThuDen").click(function () {
+        
+        var listCheckedThu = $('.checkboxThu:checkbox:checked').map(function () {
+            return $(this).data("id-gui-nhan");
+        }).get();
+        listThuDaChon = listCheckedThu.join(",");
+        if (listThuDaChon == "") {
+            alert("Chưa chọn thư nào");
+            return;
+        }
+        if (!confirm("Bạn muốn trả thư này về hộp thư đến ?")) {
+            return;
+        }
+        // send ajax - đánh dấu trả về thư đến
+        var url = '@Url.Action("TraVeThuDenList", "ThuNoiBo")';
+        var param = {
+            listGuiNhanTraVeThuDen: listThuDaChon
+        }
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: param,
+            success: function (result) {
+                if (result == "true") {
+                    //alert ("Đã trả về hộp thư đến thành công");
+                    loadDanhSachThu();
+                } else {
+                    alert(result);
+                }
+            },
+            dataType: "html"
+        });
+    });
+    $("#btnXoaThu").click(function () {
+        if (_trangThai == "DaGui") {
+            alert("Không thể xóa thư đã gửi");
+            return;
+        }
+        var listCheckedThu = $('.checkboxThu:checkbox:checked').map(function () {
+            return $(this).data("id-gui-nhan");
+        }).get();
+        listThuDaChon = listCheckedThu.join(",");
+        if (listThuDaChon == "") {
+            alert("Chưa chọn thư nào");
+            return;
+        }
+        if (_trangThai != "DaXoa") {
+            if (confirm("Bạn thật sự muốn xóa ?") == false) {
+                return;
+            }
+            // send ajax - đánh dấu xóa
+            var url = '@Url.Action("DanhDauXoaList", "ThuNoiBo")';
+            var param = {
+                listGuiNhanXoa: listThuDaChon
+            }
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: param,
+                success: function (result) {
+                    if (result == "true") {
+                        //alert ("Đã xóa thư thành công");
+                        loadDanhSachThu();
+                    } else {
+                        alert(result);
+                    }
+                },
+                dataType: "html"
+            });
+        } else {
+            if (confirm("Bạn thật sự muốn xóa vĩnh viễn các thư này ?") == false) {
+                return;
+            }
+            // send ajax xóa vĩnh viễn        
+            var url = '@Url.Action("XoaVinhVienList", "ThuNoiBo")';
+            var param = {
+                listGuiNhanXoa: listThuDaChon
+            }
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: param,
+                success: function (result) {
+                    if (result == "true") {
+                        //alert ("Đã xóa thư thành công");
+                        loadDanhSachThu();
+                    } else {
+                        alert(result);
+                    }
+                },
+                dataType: "html"
+            });
+        }
+
+    });
+</script>
+  

@@ -1,0 +1,91 @@
+﻿@model PHCN.NhanVien.Models.KhoaPhong
+@{
+    ViewBag.Title = "KhoaPhong";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.PanelTitle = "Cập nhật khoa phòng";
+}
+
+
+<div class="panel panel-default">
+    
+    <div class="panel-body">
+        <form novalidate="" id="formThongTinKhoaPhong" role="form" class="form-horizontal" method="post" action="@Url.Action("LuuKhoaPhong", "Admin")">
+            <div class="form-group">
+                <label class="col-md-2 control-label">Số thứ tự:</label>
+                <div class="col-md-10">
+                    
+                    @Html.TextBoxFor(x => x.STT, new { @class = "form-control", @id = "txtSTT" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">Mã khoa:</label>
+                <div class="col-md-10">
+                    @if (Model.MaKhoa == null)
+                    {
+                        @Html.TextBoxFor(x => x.MaKhoa, new { @class = "form-control", @id = "txtMaKhoa" })
+                        @Html.Hidden("mode", "add")
+                    }
+                    else
+                    {
+                        @Html.TextBoxFor(x => x.MaKhoa, new { @class = "form-control", @readonly = "readonly", @id="txtMaKhoa" })
+                        @Html.Hidden("mode", "edit")
+                    }
+                    
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">Tên khoa:</label>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(x => x.TenKhoa, new { @class = "form-control", @id = "txtTenKhoa" })
+                </div>
+            </div>            
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <a href="javascript:history.back();" class="btn btn-default" type="button">Trở lại</a>
+                    <button class="btn btn-primary" type="submit" id="btnLuu">Lưu thông tin</button>
+                    <button class="btn btn-danger" type="button" id="btnXoa" data-makhoa="@Model.MaKhoa">Xóa</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script>
+    $("#formThongTinKhoaPhong").submit(function (e) {
+
+        if ($("#txtSTT").val() == "") {
+            alert("Nhập số thứ tự");
+            e.preventDefault(e);
+            return;
+        }
+        if ($("#txtMaKhoa").val() == "") {
+            alert("Nhập mã khoa");
+            e.preventDefault(e);
+            return;
+        }
+        if ($("#txtTenKhoa").val() == "") {
+            alert("Nhập tên khoa");
+            e.preventDefault(e);
+            return;
+        }
+
+    });
+
+
+    $("#txtSTT").keypress(function (e) {
+        //if the letter is not digit then display error and don't type anything
+        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+            return false;
+        }
+    });
+
+    $("#btnXoa").click(function () {
+        if (!confirm("Bạn thật sự muốn xóa ?")) {
+            return;
+        }
+        var maKhoa = $(this).data("makhoa");
+        var url = '@Url.Action("XoaKhoaPhong", "Admin")' + '/' + maKhoa;
+        window.location = url;
+    });
+</script>

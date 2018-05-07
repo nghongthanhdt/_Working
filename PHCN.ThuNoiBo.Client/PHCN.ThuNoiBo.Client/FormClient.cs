@@ -113,7 +113,15 @@ namespace PHCN.ThuNoiBo.Client
         }
         private void btnThoatChuongTrinh_Click(object sender, EventArgs e)
         {
-            this.Close();
+            const string message = "Bạn muốn thoát chương trình ?";
+            const string caption = "Hệ thống nội bộ";
+            var result = MessageBox.Show(message, caption,
+                                         MessageBoxButtons.YesNo,
+                                         MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+                Environment.Exit(0);
+            
         }
         private void btnBoQua_Click(object sender, EventArgs e)
         {
@@ -543,17 +551,10 @@ namespace PHCN.ThuNoiBo.Client
         }
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            const string message = "Bạn muốn thoát chương trình ?";
-            const string caption = "Hệ thống nội bộ";
-            var result = MessageBox.Show(message, caption,
-                                         MessageBoxButtons.YesNo,
-                                         MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
-                Environment.Exit(0);
+            
             
 
-            e.Cancel = (result == DialogResult.No);
+            
         }
 
     }

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="82d5b28938ed4f9da5a1f41af467c1e6" Name="Diagram1">
+        <EntityTypeShape EntityType="PHCNModel.KhoaPhong" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PHCNModel.LoaiBaiViet" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PHCNModel.Loi" Width="1.5" PointX="9" PointY="4.875" />
+        <EntityTypeShape EntityType="PHCNModel.FileDinhKem" Width="1.5" PointX="6.875" PointY="7.125" />
+        <EntityTypeShape EntityType="PHCNModel.GuiNhan" Width="1.5" PointX="5" PointY="2.25" />
+        <EntityTypeShape EntityType="PHCNModel.BaiViet" Width="1.5" PointX="9.125" PointY="0.625" />
+        <EntityTypeShape EntityType="PHCNModel.NhanVien" Width="1.5" PointX="3" PointY="1.125" />
+        <AssociationConnector Association="PHCNModel.FK_BaiViet_LoaiBaiViet" />
+        <AssociationConnector Association="PHCNModel.FK_BaiViet_NhanVien" />
+        <AssociationConnector Association="PHCNModel.FK_FileDinhKem_BaiViet" />
+        <AssociationConnector Association="PHCNModel.FK_GuiNhan_BaiViet" />
+        <AssociationConnector Association="PHCNModel.FK_GuiNhan_NhanVien_NguoiGui" />
+        <AssociationConnector Association="PHCNModel.FK_GuiNhan_NhanVien_NguoiNhan" />
+        <AssociationConnector Association="PHCNModel.FK_NhanVien_KhoaPhong" />
+        <EntityTypeShape EntityType="PHCNModel.ThamSoHeThong" Width="1.5" PointX="3.375" PointY="6.75" />
+        <EntityTypeShape EntityType="PHCNModel.PhanQuyen" Width="1.5" PointX="6.75" PointY="0.625" />
+        <EntityTypeShape EntityType="PHCNModel.Quyen" Width="1.5" PointX="4.5" PointY="11.5" />
+        <AssociationConnector Association="PHCNModel.FK_PhanQuyen_NhanVien" />
+        <AssociationConnector Association="PHCNModel.FK_PhanQuyen_Quyen" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

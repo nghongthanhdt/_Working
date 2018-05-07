@@ -1,0 +1,121 @@
+﻿@model PHCN.NhanVien.Models.NhanVien
+@{
+    ViewBag.Title = "ThongTinNhanVien";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.PanelTitle = "Nhân viên";
+
+    List<PHCN.NhanVien.Models.KhoaPhong> listKhoaPhong = (List<PHCN.NhanVien.Models.KhoaPhong>)ViewBag.ListKhoaPhong;
+}
+
+<form novalidate="" id="formThongTinNhanVien" role="form" class="form-horizontal" method="post" action="@Url.Action("LuuThongTinNhanVien", "Admin")">
+    <div class="form-group">
+        <label class="col-md-2 control-label">Số thứ tự:</label>
+        <div class="col-md-10">                                                      
+            @Html.TextBoxFor(x => x.STT, new { @id = "txtSTT", @class = "form-control"})
+            @Html.HiddenFor(x => x.MaNhanVien)
+            @if (Model.MaNhanVien == 0)
+            {
+                @Html.Hidden("mode", "add")
+            }
+            else
+            {
+                @Html.Hidden("mode", "edit")
+            }
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Họ tên:</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(x => x.HoTen, new { @id = "txtHoTen", @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Khoa phòng:</label>
+        <div class="col-md-10">
+            <select class="form-control" name="MaKhoa" id="selectMaKhoa">
+                <option value=""> - chọn khoa phòng - </option>
+                @foreach (var item in listKhoaPhong)
+                {
+                    <option value="@item.MaKhoa" @((item.MaKhoa == Model.MaKhoa)?"selected='selected'":"")>@item.MaKhoa - @item.TenKhoa</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Tên đăng nhập:</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(x => x.TenDangNhap, new { @id = "txtTenDangNhap", @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Mật khẩu:</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(x => x.MatKhau, new { @id = "txtMatKhau", @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            @Html.CheckBoxFor(x => x.NhanThu)
+            @Html.LabelFor(x => x.NhanThu, "Cho phép nhận thư", new { @style="font-weight:normal; font-size:14px; margin-left:10px"})
+        </div>
+    </div>
+    <div class="form-group">
+        
+        <div class="col-md-offset-2 col-md-10">            
+            <button class="btn btn-primary" type="submit" id="btnLuu">Lưu thông tin</button>
+            <button class="btn btn-danger" type="button" id="btnXoa">Xóa</button>
+            <a href="javascript:history.back();" class="btn btn-default" type="button">Trở lại danh sách</a>
+        </div>
+    </div>
+</form>
+<script>
+    $("#formThongTinNhanVien").submit(function (e) {
+
+        if ($("#txtSTT").val() == "") {
+            alert("Nhập số thứ tự");
+            e.preventDefault(e);
+            return;
+        }
+        if ($("#txtHoTen").val() == "") {
+            alert("Nhập họ tên");
+            e.preventDefault(e);
+            return;
+        }
+        if ($("#selectMaKhoa").val() == "") {
+            alert("Chọn khoa phòng");
+            e.preventDefault(e);
+            return;
+        }
+        if ($("#txtTenDangNhap").val() == "") {
+            alert("Nhập tên đăng nhập");
+            e.preventDefault(e);
+            return;
+        }
+        if ($("#txtMatKhau").val() == "") {
+            alert("Nhập mật khẩu");
+            e.preventDefault(e);
+            return;
+        }
+        
+        
+
+    });
+
+
+    $("#txtSTT").keypress(function (e) {
+        //if the letter is not digit then display error and don't type anything
+        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+            return false;
+        }
+    });
+
+
+    $("#btnXoa").click(function () {
+        if (confirm("Bạn thật sự muốn xóa nhân viên ?") == false) {
+            return;
+        }
+        var url = '@Url.Action("DanhDauXoaNhanVien", "Admin", new { maNhanVien = Model.MaNhanVien})';
+        window.location = url;
+    });
+</script>

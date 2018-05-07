@@ -1,0 +1,46 @@
+﻿@model PHCN.NhanVien.Models.ThamSoHeThong
+@{
+    ViewBag.Title = "ThongTinThamSoHeThong";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.PanelTitle = "Tham số hệ thống";
+}
+
+
+
+    <div class="panel-body">
+        <form novalidate="" role="form" class="form-horizontal" action="@Url.Action("LuuThamSoHeThong", "Admin")" method="post">
+            <div class="form-group">
+                <label class="col-md-2 control-label">Tên tham số</label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.TenThamSo, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+                <label class="col-md-2 control-label">Mã tham số</label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.MaThamSo, new { @class = "form-control", @readonly = "readonly"})
+                </div>
+                
+            </div>
+            
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="description">Mô tả</label>
+                <div class="col-md-10">
+                    @Html.TextAreaFor(x => x.MoTa, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">Giá trị</label>
+                <div class="col-md-10">
+                    @Html.TextAreaFor(x => x.GiaTri, new { @class = "form-control" })
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button class="btn btn-info" type="submit">Lưu tham số</button>
+                    <button class="btn btn-default" type="button" onclick="history.back();">Trở lại</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+

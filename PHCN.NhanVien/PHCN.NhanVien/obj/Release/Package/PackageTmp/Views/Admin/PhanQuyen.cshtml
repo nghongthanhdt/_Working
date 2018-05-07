@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewBag.Title = "PhanQuyen";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.PanelTitle = "Phân quyền nhân viên";
+
+    PHCN.NhanVien.Models.PHCNEntities db = new PHCN.NhanVien.Models.PHCNEntities();
+    List<PHCN.NhanVien.Models.Quyen> listQuyen = db.Quyen.ToList();
+    List<PHCN.NhanVien.Models.KhoaPhong> listKhoaPhong = db.KhoaPhong.OrderBy(x => x.STT).ToList();
+    int stt = 0;
+}
+
+
+<form class="form-horizontal" method="post" id="formLuuPhanQuyenNhanVien" action="@Url.Action("LuuPhanQuyenNhanVien", "Admin")">
+    
+    <div class="col-md-3">
+        <select class="form-control" name="MaQuyen">
+            @foreach(var quyen in listQuyen)
+            {
+                <option value="@quyen.MaQuyen">@quyen.TenQuyen</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-3">
+        <select class="form-control" name="MaNhanVien" id="selectMaNhanVien">
+            <option value=""> - chọn nhân viên - </option>
+            @foreach (var khoaphong in listKhoaPhong)
+            {
+                var listNhanVien = khoaphong.NhanVien.Where(x => x.Xoa == false).ToList();
+                if (listNhanVien.Any())
+                {
+                    <optgroup label="@khoaphong.TenKhoa">
+                        @foreach (var nv in listNhanVien)
+                        {
+                            <option value="@nv.MaNhanVien">@nv.HoTen</option>
+                        }
+                    </optgroup>
+                }                                                            
+            }
+        </select>
+    </div>
+    <div class="col-md-3">
+        <button class="btn btn-success" type="submit">Phân quyền</button>
+    </div>
+</form>
+<table class="table table-condensed">
+    <thead>
+        <tr>
+            <th style="width:3%; text-align:center;">#</th>
+            <th style="width:77%">Họ tên</th>
+            
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var quyen in listQuyen)
+        {
+            stt = 0;
+            <tr>
+                <td colspan="3" style="background-color:#dbdbdb">
+                    <strong>@quyen.TenQuyen</strong>
+                </td>
+            </tr>
+            foreach(var phanquyen in quyen.PhanQuyen)
+            {
+                stt++;
+                 <tr>
+                     <td>@stt</td>
+                     <td><a href="#">@phanquyen.NhanVien.HoTen</a></td>
+                     <td>
+                         <a href="@Url.Action("XoaPhanQuyenNhanVien", "Admin", new { @id = phanquyen.ID})" class="btn btn-xs btn-danger" onclick="return confirm('Bạn thật sự muốn xóa ?');">Xóa</a>
+                     </td>
+                 </tr>
+            }
+        }
+        
+        
+
+    </tbody>
+</table>
+
+
+<script>
+    $("#formLuuPhanQuyenNhanVien").submit(function (e) {
+
+        if ($("#selectMaNhanVien").val() == "") {
+            alert("Chưa chọn nhân viên");
+            e.preventDefault(e);
+            return;
+        }
+        
+
+    });
+</script>
+

@@ -141,4 +141,3 @@ D:\_Working\_Working\PHCN.ThuNoiBo.Client\PHCN.ThuNoiBo.Client\bin\Debug\PHCN.Th
 D:\_Working\_Working\PHCN.ThuNoiBo.Client\PHCN.ThuNoiBo.Client\bin\Debug\PHCN.ThuNoiBo.Client.application
 D:\_Working\_Working\PHCN.ThuNoiBo.Client\PHCN.ThuNoiBo.Client\obj\Debug\PHCN.ThuNoiBo.Client.exe.manifest
 D:\_Working\_Working\PHCN.ThuNoiBo.Client\PHCN.ThuNoiBo.Client\obj\Debug\PHCN.ThuNoiBo.Client.application
-D:\_Working\_Working\PHCN.ThuNoiBo.Client\PHCN.ThuNoiBo.Client\obj\Debug\PHCN.ThuNoiBo.Client.csprojResolveAssemblyReference.cache

@@ -585,6 +585,7 @@
     <Content Include="Models\PHCNEntities.edmx.diagram">
       <DependentUpon>PHCNEntities.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\PHCN.NhanVien.pubxml" />
     <None Include="scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="scripts\app_scripts\SoanThu.js" />
     <Content Include="scripts\jquery-3.3.1.js" />
