@@ -28,10 +28,11 @@ namespace PHCN.ThuNoiBo.Client
             var mutex = new System.Threading.Mutex(true, "UniqueAppId", out result);
             if (!result)
             {
-                MessageBox.Show("Chương trình đang chạy ở khay hệ thống!");
+                MessageBox.Show("Chương trình đang chạy ở khay hệ thống!");                
+                Process.GetCurrentProcess().Kill();
                 return;
             }
-            GC.KeepAlive(mutex);
+            //GC.KeepAlive(mutex);
             Application.Run(new FormClient());            
         }
         

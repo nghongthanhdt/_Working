@@ -871,14 +871,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PHCN.ThuNoiBo.Client.exe" size="1295872">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PHCN.ThuNoiBo.Client.exe" size="1296384">
       <assemblyIdentity name="PHCN.ThuNoiBo.Client" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>JysSveGfsUVq15IAqIEP9NvbjGPxnfxY7mi9EcSGLdM=</dsig:DigestValue>
+        <dsig:DigestValue>xzqpOl29xJAaUMrkUD6Eh7uUgUI1AfbvUAbAAAvN2ck=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

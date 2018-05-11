@@ -24,7 +24,10 @@ namespace PHCN.ThuNoiBo.Client
         DataTable dtThamSoHeThong = new DataTable();
         string _ConnnectionString = "";
         string _MaNhanVien = "0";
-        int _SoThuMoi = 0;          
+        int _SoThuMoi = 0;
+        string _PathConFig = @"C:\configThuNoiBo.xml";
+        string _loginMD5prefix = "hongthanh_";
+        int _macdinhThoiGianLayThu = 10000; // 10 giây
         public FormClient()
         {
             InitializeComponent();            
@@ -35,18 +38,15 @@ namespace PHCN.ThuNoiBo.Client
             if (!kiemtraCauHinh())
             {
                 modeChuaCauHinhKetNoi();
-            }
-            if (_MaNhanVien == "0")
-            {
+                timerLayThu.Stop();
                 timerLayThu.Enabled = false;
-            }
-            else
+            } else
             {
+                loadCauHinh();
                 layThuMoi(_MaNhanVien);
                 timerLayThu.Enabled = true;
                 timerLayThu.Start();
-                //loadCauHinh();
-            }
+            }            
         }
         private string layThamSoHeThong(string maThamSo)
         {
@@ -95,6 +95,7 @@ namespace PHCN.ThuNoiBo.Client
         private void btnCapNhatCauHinh_Click(object sender, EventArgs e)
         {
             modeCapNhatCauHinh();
+            txtConnectServer.Focus();
         }
         private void menuHienThu_Click(object sender, EventArgs e)
         {
@@ -108,7 +109,14 @@ namespace PHCN.ThuNoiBo.Client
         }
         private void menuThoat_Click(object sender, EventArgs e)
         {
-            this.Close();
+            const string message = "Bạn muốn thoát chương trình ?";
+            const string caption = "Hệ thống nội bộ";
+            var result = MessageBox.Show(message, caption,
+                                         MessageBoxButtons.YesNo,
+                                         MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+                Application.Exit();
         }
         private void btnDenHopThu_Click(object sender, EventArgs e)
         {
@@ -123,8 +131,8 @@ namespace PHCN.ThuNoiBo.Client
                                          MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
-                Environment.Exit(0);
-            
+                Application.Exit();
+
         }
         private void btnBoQua_Click(object sender, EventArgs e)
         {
@@ -143,26 +151,32 @@ namespace PHCN.ThuNoiBo.Client
         }
         private void loadCauHinh()
         {     
+            // đọc file cấu hình, lấy thông tin load lên các control
             ClientConfig clientConfig = new ClientConfig();
-            string path = @"C:\configThuNoiBo.xml";
+            
             XmlSerializer serializer = new XmlSerializer(typeof(ClientConfig));
             try
             {
-                StreamReader _reader = new StreamReader(path);
+                // kiểm tra xem có tồn tại file không 
+                StreamReader _reader = new StreamReader(_PathConFig);
                 _reader.Close();                
             }
             catch
             {
+                // nếu không có thì tạo file mới
                 XmlSerializer _serializer = new XmlSerializer(typeof(ClientConfig));
-                var file = File.Create(path);
+                var file = File.Create(_PathConFig);
                 _serializer.Serialize(file, clientConfig);
                 file.Close();    
                 lblThongBao.Text = "Chưa cấu hình kết nối";
+                statusBanQuyen.Text = "";
                 btnDenHopThu.Enabled = false;  
             }
-            StreamReader reader = new StreamReader(path);
+            // đọc và giải mã file cấu hình
+            StreamReader reader = new StreamReader(_PathConFig);
             clientConfig = (ClientConfig)serializer.Deserialize(reader);
             reader.Close();
+            // gắn clientConfig vào các control
             txtConnectServer.Text = clientConfig.ConnectServer;
             txtConnectUserName.Text = clientConfig.ConnectUserName;
             txtConnectPassword.Text = clientConfig.ConnectPassword;
@@ -173,24 +187,20 @@ namespace PHCN.ThuNoiBo.Client
             checkboxAutoGetMail.Checked = clientConfig.AutoGetMail;
             txtAutoGetMailTimer.Text = clientConfig.AutoGetMailTimer.ToString();
             txtWebServer.Text = clientConfig.WebServer;
-            txtPort.Text = clientConfig.Port; 
+            txtPort.Text = clientConfig.Port;
+            txtDatabase.Text = clientConfig.Database;
             txtHoTen.Text = clientConfig.HoTen;
             txtTenKhoa.Text = clientConfig.TenKhoa;
             _MaNhanVien = clientConfig.MaNhanVien;
-            string md5Password = getMd5(txtAccountPassword.Text).ToLower();
+            // ví dụ tên đăng nhập là nhthanh thì pass md5 là hongthanh_nhthanh ->> md5code
+            string md5Password = getMd5(_loginMD5prefix+txtAccountUserName.Text).ToLower();
             txtLinkHopThu.Text = "http://" + txtWebServer.Text + ((txtPort.Text != "") ? (":" + txtPort.Text) : "") + "/Home/ClientLogin/?TenDangNhap=" + txtAccountUserName.Text.ToLower() + "&MatKhau=" + md5Password;
             lblTenKhoa.Text = clientConfig.TenKhoa;
             lblHoTen.Text = clientConfig.HoTen;
-            lblThongBao.Text = "Chưa có thư mới";
+            lblThongBao.Text = "";
             lblThongBao.ForeColor = Color.Green;
-            btnDenHopThu.Enabled = true;   
-            if (clientConfig.AutoStart)  {
-                setAutoStart();
-            }
-            else
-            {
-                unsetAutoStart();
-            }      
+            btnDenHopThu.Enabled = true;
+            setAutoStart();      
             try
             {
                 string thoigianlaythu = layThamSoHeThong("thoigianlaythu");
@@ -198,14 +208,14 @@ namespace PHCN.ThuNoiBo.Client
                 timerLayThu.Interval = thoiGianLayThu * 1000;
             } catch
             {
-                int thoiGianLayThu = clientConfig.AutoGetMailTimer;
-                timerLayThu.Interval = thoiGianLayThu * 1000;
+                timerLayThu.Interval = _macdinhThoiGianLayThu;
             } 
             statusBanQuyen.Text = layThamSoHeThong("banquyen");
             txtAutoGetMailTimer.Text = layThamSoHeThong("thoigianlaythu");
         }
         private bool validateFormCauHinh()
         {
+            //kiểm tra hợp lệ khi lưu cấu hình
             if (txtConnectServer.Text == "")
             {
                 MessageBox.Show("Chưa nhập tên server kết nối");
@@ -219,6 +229,11 @@ namespace PHCN.ThuNoiBo.Client
             if (txtConnectPassword.Text == "")
             {
                 MessageBox.Show("Chưa nhập mật khẩu kết nối");
+                return false;
+            }
+            if (txtDatabase.Text == "")
+            {
+                MessageBox.Show("Chưa nhập tên database");
                 return false;
             }
             if (txtWebServer.Text == "")
@@ -241,34 +256,35 @@ namespace PHCN.ThuNoiBo.Client
         }
         private bool kiemtraCauHinh()
         {
-            ClientConfig clientConfig = new ClientConfig();
-            string path = @"C:\configThuNoiBo.xml";
+            ClientConfig clientConfig = new ClientConfig();            
             XmlSerializer serializer = new XmlSerializer(typeof(ClientConfig));
             try
             {
-                StreamReader _reader = new StreamReader(path);
+                // kiểm tra file cấu hình có tồn tại không
+                StreamReader _reader = new StreamReader(_PathConFig);
                 _reader.Close();
-                //MessageBox.Show("Tìm thấy file cấu hình");
-                
             }
             catch (Exception ex)
             {
+                // nếu chưa thấy file cấu hình thì tạo file xml mới có cấu trúc là client Config
                 MessageBox.Show(ex.Message);
                 XmlSerializer _serializer = new XmlSerializer(typeof(ClientConfig));
-                var file = File.Create(@"C:\configThuNoiBo.xml");
+                var file = File.Create(_PathConFig);
                 _serializer.Serialize(file, clientConfig);
                 file.Close();
             }
-            StreamReader reader = new StreamReader(path);
+            // bắt đầu đọc file config, gắn về clientConfig
+            StreamReader reader = new StreamReader(_PathConFig);
             clientConfig = (ClientConfig)serializer.Deserialize(reader);
             reader.Close();
+
             if (clientConfig.ConnectServer == "" || clientConfig.ConnectServer == null)
             {
-                MessageBox.Show("Chưa cấu hình kết nối, clientConfig.ConnectServer=" + clientConfig.ConnectServer);
+                MessageBox.Show("Chưa cấu hình kết nối !");
                 modeChuaCauHinhKetNoi();
                 return false;
             }
-            string connectionString = "Data Source=" + clientConfig.ConnectServer + ";Initial Catalog=PHCN; User ID=" + clientConfig.ConnectUserName + "; Password=" + clientConfig.ConnectPassword + "; Connection Timeout=5";            
+            string connectionString = "Data Source=" + clientConfig.ConnectServer + ";Initial Catalog="+clientConfig.Database+"; User ID=" + clientConfig.ConnectUserName + "; Password=" + clientConfig.ConnectPassword + "; Connection Timeout=5";            
             SqlConnection connection = new SqlConnection(connectionString);            
             try
             {
@@ -276,9 +292,9 @@ namespace PHCN.ThuNoiBo.Client
                 loaddtThamSoHeThong(connectionString);
                 _ConnnectionString = connectionString;
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show("Không thể kết nối đến máy chủ, vui lòng kiểm tra thông tin kết nối!");
+                MessageBox.Show("Không thể kết nối đến SQL, vui lòng kiểm tra thông tin kết nối!");
                 return false;
             } 
             try
@@ -306,7 +322,8 @@ namespace PHCN.ThuNoiBo.Client
                         return false;
                     }
                 }
-                loadCauHinh();
+                
+
             }
             catch (Exception ex)
             {
@@ -338,6 +355,7 @@ namespace PHCN.ThuNoiBo.Client
             clientConfig.ConnectPassword = txtConnectPassword.Text;
             clientConfig.AccountUserName = txtAccountUserName.Text;
             clientConfig.AccountPassword = txtAccountPassword.Text;
+            clientConfig.Database = txtDatabase.Text;
             clientConfig.AutoStart = checkboxAutoStart.Checked;
             clientConfig.ShowOnStart = checkboxShowOnStart.Checked;
             clientConfig.AutoGetMail = checkboxAutoGetMail.Checked;
@@ -455,6 +473,7 @@ namespace PHCN.ThuNoiBo.Client
             txtAutoGetMailTimer.Enabled = true;
             txtWebServer.Enabled = true;
             txtPort.Enabled = true;
+            txtDatabase.Enabled = true;
             checkboxAutoStart.Enabled = true;
             checkboxShowOnStart.Enabled = true;
             checkboxAutoGetMail.Enabled = true;
@@ -476,6 +495,7 @@ namespace PHCN.ThuNoiBo.Client
             txtAutoGetMailTimer.Enabled = false;
             txtWebServer.Enabled = false;
             txtPort.Enabled = false;
+            txtDatabase.Enabled = false;
             checkboxAutoStart.Enabled = false;
             checkboxShowOnStart.Enabled = false;
             checkboxAutoGetMail.Enabled = false;
@@ -545,6 +565,7 @@ namespace PHCN.ThuNoiBo.Client
         }
         private void unsetAutoStart()
         {
+            // chưa sử dụng
             try
             {
                 string StartupKey = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
@@ -562,14 +583,11 @@ namespace PHCN.ThuNoiBo.Client
             notifyIconMain.BalloonTipText = "Không thể kết nối đến máy chủ, vui lòng liên hệ quản trị";
             notifyIconMain.ShowBalloonTip(500);
         }
-        protected override void OnFormClosing(FormClosingEventArgs e)
+
+        private void FormClient_FormClosed(object sender, FormClosedEventArgs e)
         {
-            
-            
-
-            
+            Application.Exit();
         }
-
     }
 
 }
