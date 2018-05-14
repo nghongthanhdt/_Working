@@ -38,6 +38,16 @@
             this.btnDenHopThu = new DevExpress.XtraEditors.SimpleButton();
             this.lblTenKhoa = new DevExpress.XtraEditors.LabelControl();
             this.lblHoTen = new DevExpress.XtraEditors.LabelControl();
+            this.tabTaiKhoan = new DevExpress.XtraTab.XtraTabPage();
+            this.btnChonTaiKhoan = new DevExpress.XtraEditors.SimpleButton();
+            this.gcTaiKhoan = new DevExpress.XtraGrid.GridControl();
+            this.gvTaiKhoan = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colMaNhanVien = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colHoTen = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colTenDangNhap = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.selectKhoaPhong = new DevExpress.XtraEditors.LookUpEdit();
             this.tabCauHinh = new DevExpress.XtraTab.XtraTabPage();
             this.txtAccountPassword = new System.Windows.Forms.TextBox();
             this.txtWebServer = new System.Windows.Forms.TextBox();
@@ -84,6 +94,10 @@
             this.xtraTabControl1.SuspendLayout();
             this.tabHopThu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tabTaiKhoan.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gcTaiKhoan)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvTaiKhoan)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.selectKhoaPhong.Properties)).BeginInit();
             this.tabCauHinh.SuspendLayout();
             this.tabTienIch.SuspendLayout();
             this.contextMenuStripClient.SuspendLayout();
@@ -109,6 +123,7 @@
             this.xtraTabControl1.TabIndex = 1;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.tabHopThu,
+            this.tabTaiKhoan,
             this.tabCauHinh,
             this.tabTienIch});
             // 
@@ -182,6 +197,105 @@
             this.lblHoTen.Size = new System.Drawing.Size(164, 19);
             this.lblHoTen.TabIndex = 0;
             this.lblHoTen.Text = "Nguyễn Hồng Thanh";
+            // 
+            // tabTaiKhoan
+            // 
+            this.tabTaiKhoan.Controls.Add(this.btnChonTaiKhoan);
+            this.tabTaiKhoan.Controls.Add(this.gcTaiKhoan);
+            this.tabTaiKhoan.Controls.Add(this.label14);
+            this.tabTaiKhoan.Controls.Add(this.label12);
+            this.tabTaiKhoan.Controls.Add(this.selectKhoaPhong);
+            this.tabTaiKhoan.Name = "tabTaiKhoan";
+            this.tabTaiKhoan.Size = new System.Drawing.Size(476, 278);
+            this.tabTaiKhoan.Text = "Tài khoản";
+            // 
+            // btnChonTaiKhoan
+            // 
+            this.btnChonTaiKhoan.Image = ((System.Drawing.Image)(resources.GetObject("btnChonTaiKhoan.Image")));
+            this.btnChonTaiKhoan.Location = new System.Drawing.Point(117, 223);
+            this.btnChonTaiKhoan.Name = "btnChonTaiKhoan";
+            this.btnChonTaiKhoan.Size = new System.Drawing.Size(99, 34);
+            this.btnChonTaiKhoan.TabIndex = 4;
+            this.btnChonTaiKhoan.Text = "Chọn";
+            this.btnChonTaiKhoan.Click += new System.EventHandler(this.btnChonTaiKhoan_Click);
+            // 
+            // gcTaiKhoan
+            // 
+            this.gcTaiKhoan.Location = new System.Drawing.Point(117, 61);
+            this.gcTaiKhoan.MainView = this.gvTaiKhoan;
+            this.gcTaiKhoan.Name = "gcTaiKhoan";
+            this.gcTaiKhoan.Size = new System.Drawing.Size(274, 156);
+            this.gcTaiKhoan.TabIndex = 3;
+            this.gcTaiKhoan.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvTaiKhoan});
+            // 
+            // gvTaiKhoan
+            // 
+            this.gvTaiKhoan.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colMaNhanVien,
+            this.colHoTen,
+            this.colTenDangNhap});
+            this.gvTaiKhoan.GridControl = this.gcTaiKhoan;
+            this.gvTaiKhoan.Name = "gvTaiKhoan";
+            this.gvTaiKhoan.OptionsBehavior.Editable = false;
+            this.gvTaiKhoan.OptionsBehavior.ReadOnly = true;
+            this.gvTaiKhoan.OptionsView.ShowGroupPanel = false;
+            // 
+            // colMaNhanVien
+            // 
+            this.colMaNhanVien.Caption = "Mã NV";
+            this.colMaNhanVien.FieldName = "MaNhanVien";
+            this.colMaNhanVien.Name = "colMaNhanVien";
+            // 
+            // colHoTen
+            // 
+            this.colHoTen.Caption = "Họ tên";
+            this.colHoTen.FieldName = "HoTen";
+            this.colHoTen.Name = "colHoTen";
+            this.colHoTen.Visible = true;
+            this.colHoTen.VisibleIndex = 0;
+            // 
+            // colTenDangNhap
+            // 
+            this.colTenDangNhap.Caption = "Tên đăng nhập";
+            this.colTenDangNhap.FieldName = "TenDangNhap";
+            this.colTenDangNhap.Name = "colTenDangNhap";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(48, 61);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(57, 13);
+            this.label14.TabIndex = 1;
+            this.label14.Text = "Tài khoản:";
+            this.label14.Click += new System.EventHandler(this.label12_Click);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(37, 32);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(68, 13);
+            this.label12.TabIndex = 1;
+            this.label12.Text = "Khoa phòng:";
+            this.label12.Click += new System.EventHandler(this.label12_Click);
+            // 
+            // selectKhoaPhong
+            // 
+            this.selectKhoaPhong.Location = new System.Drawing.Point(117, 29);
+            this.selectKhoaPhong.Name = "selectKhoaPhong";
+            this.selectKhoaPhong.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.selectKhoaPhong.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("MaKhoa", "#"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TenKhoa", 80, "Tên Khoa")});
+            this.selectKhoaPhong.Properties.DisplayMember = "TenKhoa";
+            this.selectKhoaPhong.Properties.NullText = "Chọn khoa...";
+            this.selectKhoaPhong.Properties.ValueMember = "MaKhoa";
+            this.selectKhoaPhong.Size = new System.Drawing.Size(201, 20);
+            this.selectKhoaPhong.TabIndex = 0;
+            this.selectKhoaPhong.EditValueChanged += new System.EventHandler(this.selectKhoaPhong_EditValueChanged);
             // 
             // tabCauHinh
             // 
@@ -522,14 +636,14 @@
             this.menuDenHopThu,
             this.menuThoat});
             this.contextMenuStripClient.Name = "contextMenuStripClient";
-            this.contextMenuStripClient.Size = new System.Drawing.Size(153, 92);
+            this.contextMenuStripClient.Size = new System.Drawing.Size(141, 70);
             // 
             // menuHienThu
             // 
             this.menuHienThu.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.menuHienThu.Image = ((System.Drawing.Image)(resources.GetObject("menuHienThu.Image")));
             this.menuHienThu.Name = "menuHienThu";
-            this.menuHienThu.Size = new System.Drawing.Size(152, 22);
+            this.menuHienThu.Size = new System.Drawing.Size(140, 22);
             this.menuHienThu.Text = "Hiển thị";
             this.menuHienThu.Click += new System.EventHandler(this.menuHienThu_Click);
             // 
@@ -537,14 +651,14 @@
             // 
             this.menuDenHopThu.Image = ((System.Drawing.Image)(resources.GetObject("menuDenHopThu.Image")));
             this.menuDenHopThu.Name = "menuDenHopThu";
-            this.menuDenHopThu.Size = new System.Drawing.Size(152, 22);
+            this.menuDenHopThu.Size = new System.Drawing.Size(140, 22);
             this.menuDenHopThu.Text = "Đến hộp thư";
             this.menuDenHopThu.Click += new System.EventHandler(this.btnDenHopThu_Click);
             // 
             // menuThoat
             // 
             this.menuThoat.Name = "menuThoat";
-            this.menuThoat.Size = new System.Drawing.Size(152, 22);
+            this.menuThoat.Size = new System.Drawing.Size(140, 22);
             this.menuThoat.Text = "Thoát";
             this.menuThoat.Click += new System.EventHandler(this.menuThoat_Click);
             // 
@@ -617,6 +731,11 @@
             this.tabHopThu.ResumeLayout(false);
             this.tabHopThu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.tabTaiKhoan.ResumeLayout(false);
+            this.tabTaiKhoan.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gcTaiKhoan)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvTaiKhoan)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.selectKhoaPhong.Properties)).EndInit();
             this.tabCauHinh.ResumeLayout(false);
             this.tabCauHinh.PerformLayout();
             this.tabTienIch.ResumeLayout(false);
@@ -681,6 +800,16 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtDatabase;
+        private DevExpress.XtraTab.XtraTabPage tabTaiKhoan;
+        private System.Windows.Forms.Label label12;
+        private DevExpress.XtraEditors.LookUpEdit selectKhoaPhong;
+        private DevExpress.XtraEditors.SimpleButton btnChonTaiKhoan;
+        private DevExpress.XtraGrid.GridControl gcTaiKhoan;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvTaiKhoan;
+        private DevExpress.XtraGrid.Columns.GridColumn colMaNhanVien;
+        private DevExpress.XtraGrid.Columns.GridColumn colHoTen;
+        private DevExpress.XtraGrid.Columns.GridColumn colTenDangNhap;
+        private System.Windows.Forms.Label label14;
     }
 }
 

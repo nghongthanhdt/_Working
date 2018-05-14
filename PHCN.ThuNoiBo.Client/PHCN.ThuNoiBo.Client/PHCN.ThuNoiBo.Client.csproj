@@ -100,7 +100,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Forms\FormNhapMatKhau.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App_Forms\FormNhapMatKhau.Designer.cs">
+      <DependentUpon>FormNhapMatKhau.cs</DependentUpon>
+    </Compile>
     <Compile Include="ClientConfig.cs" />
+    <Compile Include="Controller\ClientController.cs" />
+    <Compile Include="Data\DBAccess.cs" />
     <Compile Include="FormClient.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,6 +117,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="App_Forms\FormNhapMatKhau.resx">
+      <DependentUpon>FormNhapMatKhau.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormClient.resx">
       <DependentUpon>FormClient.cs</DependentUpon>
     </EmbeddedResource>

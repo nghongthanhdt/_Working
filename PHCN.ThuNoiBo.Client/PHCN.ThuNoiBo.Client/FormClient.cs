@@ -1,5 +1,7 @@
 ﻿
 using Microsoft.Win32;
+using PHCN.ThuNoiBo.Client.App_Forms;
+using PHCN.ThuNoiBo.Client.Controller;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -212,6 +214,30 @@ namespace PHCN.ThuNoiBo.Client
             } 
             statusBanQuyen.Text = layThamSoHeThong("banquyen");
             txtAutoGetMailTimer.Text = layThamSoHeThong("thoigianlaythu");
+
+            // load danh sách khoa phòng vào select khoa phòng
+            if (_ConnnectionString != "")
+            {
+                try
+                {
+                    SqlConnection connection = new SqlConnection(_ConnnectionString);
+                    string query = "select * from KhoaPhong where Xoa = 0 order by STT";
+                    using (SqlCommand cmd = new SqlCommand(query, connection))
+                    {
+                        DataTable dt = new DataTable();
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        adapter.Fill(dt);
+                        selectKhoaPhong.Properties.DataSource = dt;                        
+                    }
+                } catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return;
+                }
+                
+                
+            }
+            
         }
         private bool validateFormCauHinh()
         {
@@ -588,6 +614,41 @@ namespace PHCN.ThuNoiBo.Client
         {
             Application.Exit();
         }
+
+        private void label12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnChonTaiKhoan_Click(object sender, EventArgs e)
+        {
+            FormNhapMatKhau f = new FormNhapMatKhau();
+            f.ShowDialog();
+            string matKhau = f.txtMatKhau.Text;
+                
+        }
+        private void setConfigChonTaiKhoan(int maNhanVien, string hoTen, string tenDangNhap, string tenKhoa)
+        {
+
+        }
+
+        private void selectKhoaPhong_EditValueChanged(object sender, EventArgs e)
+        {
+            
+
+            string maKhoa = "";
+            if (selectKhoaPhong.EditValue != null)
+            {
+                maKhoa = selectKhoaPhong.EditValue.ToString();
+                ClientController controller = new ClientController();
+                DataTable dt = controller.runQuery("select * from NhanVien where Xoa = 0 and MaKhoa = '"+maKhoa+"' order by HoTen");
+                gcTaiKhoan.DataSource = dt;
+            }
+             
+            
+        }
+
     }
 
 }
+
