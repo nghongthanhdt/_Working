@@ -1,13 +1,10 @@
-﻿
-@{
-    ViewBag.Title = "Soạn thư";
+﻿@{
     ViewBag.PanelTitle = "Soạn thư";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     PHCN.NhanVien.Models.PHCNEntities db = new PHCN.NhanVien.Models.PHCNEntities();
     var idBaiViet = HttpContext.Current.Request.RequestContext.RouteData.Values["id"];
-
     int maNhanVienDangNhap = (int)(ViewBag.MaNhanVienDangNhap);
-
+    string tenDonVi = PHCN.NhanVien.Controllers.CodeController.layThamSoHeThong("tendonvi").ToUpper();
 }
 <script>
     var idBaiViet = @idBaiViet;
@@ -28,39 +25,42 @@
 </div>
 <textarea id="txtNoiDung"></textarea>
 <script>
-    CKEDITOR.replace( 'txtNoiDung');
+    CKEDITOR.replace('txtNoiDung');
 </script>
 <div id="divDanhSachFileDinhKem">
     @*lấy ajax hiển thị ra đây*@
 </div>
 <script>
     
-    function loadDanhSachFileDinhKem() {
-        var url = '@Url.Action("_pDanhSachFileDinhKem", "ThuNoiBo", new { id = idBaiViet, xem = false } )';
-        var danhSachFileDinhKem = $.get(url, function (data) {
-            $("#divDanhSachFileDinhKem").html(data);
-        });        
-    }    
+   
     $(document).ready(function () {        
         loadDanhSachFileDinhKem();        
     });
 </script>
 <button class="btn btn-success" style="width:230px;" id="btnGui">Gửi</button>
 <button class="btn btn-default btn-sm" id="btnThemFileDinhKem">Thêm file đính kèm...</button>
+<button class="btn btn-default btn-sm" id="btnThemHinhAnh">Thêm hình ảnh...</button>
 <div class="form-group" style="display:none;">
     <form id="formFileDinhKem" action="@Url.Action("UploadFile", "Upload")" method="post" enctype="multipart/form-data">
-        <label for="exampleInputFile">Thêm file</label>
+        <label>Thêm file</label>
         <input id="fileuploadDinhKem" type="file" name="file" accept=".xls,.xlsx,.doc,.docx,.pdf,.zip,.rar,.jpg,.jpeg,.png,.gif">
         <input type="hidden" value="@idBaiViet" name="id" />        
+    </form>
+</div>
+<div class="form-group" style="display:none;">
+    <form id="formHinhAnh" action="@Url.Action("UploadFileHinhAnh", "Upload")" method="post" enctype="multipart/form-data">
+        <label>Thêm file</label>
+        <input id="fileuploadHinhAnh" type="file" name="file" accept=".jpg,.jpeg,.png,.gif,.bmp">        
     </form>
 </div>
 <script>
     $("#btnThemFileDinhKem").click(function () {
         $("input#fileuploadDinhKem").trigger('click'); 
     });    
+    $("#btnThemHinhAnh").click(function () {
+        $("input#fileuploadHinhAnh").trigger('click'); 
+    }); 
     $("input#fileuploadDinhKem").on('change', function(){
-        //alert("gone");
-        
         var allowedExtensions = /(\.xls|\.xlsx|\.doc|\.docx|\.pdf|\.zip|\.rar|\.jpg|\.jpeg|\.png|\.gif)$/i;
         if(!allowedExtensions.exec(this.value)){
             alert('Chỉ cho phép đính kèm các file xls,xlsx,doc,docx,pdf,zip,rar,jpg,jpeg,png,gif');
@@ -80,22 +80,52 @@
             }
         });
     });
+    $("input#fileuploadHinhAnh").on('change', function(){
+        var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif|\.bmp)$/i;
+        if(!allowedExtensions.exec(this.value)){
+            alert('Chỉ cho phép đính kèm các file jpg,jpeg,png,gif,bmp');
+            this.value = "";
+            return;
+        }
+        if(this.files[0].size > 52428800){
+            alert("Vui lòng không gửi file quá 50MB!");
+            this.value = "";
+            return;
+        };
+        $("form#formHinhAnh").ajaxSubmit({
+            type: "post",
+            success: function(result) {
+                // result là đường dẫn sau khi upload
+                loadHinhAnhVaoBaiViet(result);
+            }
+        });
+    });
+    function loadDanhSachFileDinhKem() {
+        var url = '@Url.Action("_pDanhSachFileDinhKem", "ThuNoiBo", new { id = idBaiViet, xem = false } )';
+        var danhSachFileDinhKem = $.get(url, function (data) {
+            $("#divDanhSachFileDinhKem").html(data);
+        });        
+    } 
+    function loadHinhAnhVaoBaiViet(result) {
+
+        if (result != "false") {
+            var imgHtml = CKEDITOR.dom.element.createFromHtml("<center><img src='"+result+"' alt='' style='width:80%; margin:auto; max-width:600px;' align='center'/></center>");
+            //CKEDITOR.instances['txtNoiDung'].insertHtml(imgHtml);
+            CKEDITOR.instances.txtNoiDung.insertElement(imgHtml);
+        } else {
+            alert("Lỗi hệ thống: " + result);
+        } 
+    } 
 </script>
 <div class="">
     <h4 class="content-row-title">Nhận thư</h4>
     <ul class="checktree">
         <li>
-            <input id="administration" type="checkbox"><label for="administration" style="font-size:16px; margin-left:10px; color:#003407;">BỆNH VIỆN PHỤC HỒI CHỨC NĂNG ĐỒNG THÁP</label>
-            
-            
-            
+            <input id="donvi" type="checkbox"><label for="donvi" style="font-size:16px; margin-left:10px; color:#003407;">@tenDonVi</label>
             <ul>
-
                 @{
                     var listKhoaPhong = db.KhoaPhong.OrderBy(x => x.STT).ToList();
-
-                 }
-
+                }
                 @foreach (var khoa in listKhoaPhong)
                 {
                     var listNhanVien = khoa.NhanVien.Where(x => x.NhanThu == true).ToList();
@@ -113,7 +143,6 @@
                         </li>
                     }
                 }
-
             </ul>
         </li>
     </ul>

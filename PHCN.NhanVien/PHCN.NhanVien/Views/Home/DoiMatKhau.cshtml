@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewBag.Title = "Đổi mật khẩu";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.PanelTitle = "Đổi mật khẩu";
+    PHCN.NhanVien.Models.NhanVien nhanviendangnhap = (PHCN.NhanVien.Models.NhanVien)Session["NhanVienDangNhap"];
+
+
+    string maloi = "";
+    try
+    {
+        maloi = Request.QueryString["thongbao"];
+    }
+    catch { }
+
+}
+
+
+
+<div class="panel panel-default">
+
+    <div class="panel-body">
+        <form novalidate="" role="form" class="form-horizontal" method="post" id="formDoiMatKhau" action="@Url.Action("ThucHienDoiMatKhau", "Home")" autocomplete="off">
+            <div class="form-group">
+                <label class="col-md-2 control-label">Mật khẩu:</label>
+                <div class="col-md-10">
+                    <input required="" id="txtMatKhau" class="form-control" name="MatKhau" type="password">
+                    <input type="hidden" name="MaNhanVien" value="@nhanviendangnhap.MaNhanVien" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">Mật khẩu mới:</label>
+                <div class="col-md-10">
+                    <input required="" id="txtMatKhauMoi" class="form-control" name="MatKhauMoi" type="password">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">Nhập lại mật khẩu mới:</label>
+                <div class="col-md-10">
+                    <input required="" id="txtNhapLaiMatKhauMoi" class="form-control" name="NhapLaiMatKhauMoi" type="password">
+                </div>
+            </div>
+            @if (maloi == "matkhaucukhongdung") 
+            {
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <span style="font-size:16px; color:red;">Mật khẩu cũ không đúng</span>
+                    </div>
+                </div>
+            }
+            else if (maloi == "nhaplaimatkhaumoikhongdung")
+            {
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <span style="font-size:16px; color:red;">Nhập lại mật khẩu mới không đúng</span>
+                    </div>
+                </div>
+            }
+            else if (maloi == "thanhcong")
+            {
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <span style="font-size:16px; color:green;">Đổi mật khẩu thành công</span>
+                    </div>
+                </div>
+            }
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button class="btn btn-success" type="submit">Đồng ý</button>
+                    <button class="btn btn-default" onclick="history.back();" type="submit">Trở lại</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    $("#formDoiMatKhau").submit(function (e) {
+        if ($("#txtMatKhau").val() == "") {
+            alert("Nhập mật khẩu");
+            e.preventDefault(e);
+            return;
+        }
+        if ($("#txtMatKhauMoi").val() == "") {
+            alert("Nhập mật khẩu mới");
+            e.preventDefault(e);
+            return;
+        }
+        if ($("#txtNhapLaiMatKhauMoi").val() == "") {
+            alert("Nhập lại mật khẩu mới");
+            e.preventDefault(e);
+            return;
+        }
+        if ($("#txtNhapLaiMatKhauMoi").val() != $("#txtMatKhauMoi").val()) {
+            alert("Nhập lại mật khẩu mới chưa trùng khớp");
+            e.preventDefault(e);
+            return;
+        }
+    });
+</script>

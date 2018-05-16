@@ -30,5 +30,18 @@ namespace PHCN.NhanVien.Controllers
             }
             return sBuilder.ToString().ToLower();
         }
+        public static string layThamSoHeThong(string maThamSo)
+        {
+            try
+            {
+                string result = db.ThamSoHeThong.Find(maThamSo).GiaTri;
+                return result;
+            } catch
+            {
+                string result = "[Không tìm thấy tham số]";
+                return result;
+            }
+            
+        }
     }
 }

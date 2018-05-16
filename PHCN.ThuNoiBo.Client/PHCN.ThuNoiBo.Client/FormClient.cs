@@ -329,14 +329,13 @@ namespace PHCN.ThuNoiBo.Client
                 cmd.Connection = connection;
                 cmd.CommandText = @"select khoa.TenKhoa, nv.HoTen, nv.TenDangNhap, nv.MatKhau, nv.NhanThu, nv.MaNhanVien from NhanVien as nv
                                             inner join KhoaPhong as khoa on nv.MaKhoa = khoa.MaKhoa
-                                            where TenDangNhap = @TenDangNhap and MatKhau = @MatKhau";
-                cmd.Parameters.AddWithValue("@TenDangNhap", clientConfig.AccountUserName);
-                cmd.Parameters.AddWithValue("@MatKhau", clientConfig.AccountPassword);
+                                            where TenDangNhap = @TenDangNhap";
+                cmd.Parameters.AddWithValue("@TenDangNhap", clientConfig.AccountUserName);                
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 adapter.Fill(dt);
                 if (dt.Rows.Count == 0)
                 {
-                    MessageBox.Show("Tài khoản hoặc mật khẩu người dùng không đúng !");
+                    MessageBox.Show("Tên tài khoản không đúng!");
                     return false;
                 }
                 else
@@ -347,6 +346,23 @@ namespace PHCN.ThuNoiBo.Client
                         MessageBox.Show("Tài khoản \"" + row["HoTen"] + "\" không được phép nhận thư, vui lòng liên hệ quản trị.");
                         return false;
                     }
+
+                    // set configThuNoiBo cho mật khẩu mới được đổi
+                    try
+                    {
+                        reader = new StreamReader(_PathConFig);
+                        clientConfig = (ClientConfig)serializer.Deserialize(reader);
+                        reader.Close();
+                        clientConfig.AccountPassword = row["MatKhau"].ToString();
+                        var file = File.Create(_PathConFig);
+                        serializer.Serialize(file, clientConfig);
+                        file.Close();
+                    } catch (Exception ex)
+                    {
+                        MessageBox.Show("Lỗi lưu mật khẩu mới: " + ex.Message);
+                    }
+                    
+
                 }
                 
 
@@ -434,7 +450,7 @@ namespace PHCN.ThuNoiBo.Client
                     XmlSerializer serializer = new XmlSerializer(typeof(ClientConfig));
                     try
                     {
-                        var file = File.Create(@"C:\configThuNoiBo.xml");
+                        var file = File.Create(_PathConFig);
                         serializer.Serialize(file, clientConfig);
                         file.Close();
                     }
@@ -622,16 +638,30 @@ namespace PHCN.ThuNoiBo.Client
 
         private void btnChonTaiKhoan_Click(object sender, EventArgs e)
         {
-            FormNhapMatKhau f = new FormNhapMatKhau();
-            f.ShowDialog();
-            string matKhau = f.txtMatKhau.Text;
-                
+            try
+            {
+                FormNhapMatKhau f = new FormNhapMatKhau();
+                int maNhanVien = int.Parse(gvTaiKhoan.GetFocusedRowCellValue("MaNhanVien").ToString());
+                string hoTen = gvTaiKhoan.GetFocusedRowCellValue("HoTen").ToString();
+                string tenDangNhap = gvTaiKhoan.GetFocusedRowCellValue("TenDangNhap").ToString();
+                f.maNhanVien = maNhanVien;
+                f.txtHoTen.Text = hoTen;
+                f.txtTenDangNhap.Text = tenDangNhap;
+                f.ShowDialog();
+                if (f.maNhanVien != 0)
+                {
+                    loadCauHinh();
+                }
+            } catch
+            {
+                MessageBox.Show("Chưa chọn tài khoản");
+                return;
+            }
+            
+            
         }
-        private void setConfigChonTaiKhoan(int maNhanVien, string hoTen, string tenDangNhap, string tenKhoa)
-        {
 
-        }
-
+        
         private void selectKhoaPhong_EditValueChanged(object sender, EventArgs e)
         {
             
@@ -641,7 +671,7 @@ namespace PHCN.ThuNoiBo.Client
             {
                 maKhoa = selectKhoaPhong.EditValue.ToString();
                 ClientController controller = new ClientController();
-                DataTable dt = controller.runQuery("select * from NhanVien where Xoa = 0 and MaKhoa = '"+maKhoa+"' order by HoTen");
+                DataTable dt = controller.runQuery("select * from NhanVien where Xoa = 0 and MaKhoa = '"+maKhoa+"' and NhanThu = '1' order by HoTen");
                 gcTaiKhoan.DataSource = dt;
             }
              

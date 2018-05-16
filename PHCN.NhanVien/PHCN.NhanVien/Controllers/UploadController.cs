@@ -46,6 +46,32 @@ namespace PHCN.NhanVien.Controllers
                 return Content("Lỗi hệ thống: " + ex.Message);
             }
         }
+        [HttpPost]
+        public ActionResult UploadFileHinhAnh(HttpPostedFileBase file)
+        {
+            // ajax
+            try
+            {
+                
+                if (file != null && file.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(file.FileName);
+                    var fileExtension = Path.GetExtension(file.FileName).ToLower();
+                    var serverDateTime = CodeController.GetServerDateTime();
+                    var fileFullName = fileName.Replace(fileExtension, "") + "-" + serverDateTime.ToString("yyyyMMddhhmmss") + fileExtension;
+                    var path = Path.Combine(Server.MapPath("~/Content/ImageManager"), fileFullName);
+                    file.SaveAs(path);
+                    string serverPath = Url.Content("~/Content/ImageManager/" + fileFullName);
+                    return Content(serverPath);
+                }
+                else return Content("false");
+
+            }
+            catch (Exception ex)
+            {
+                return Content("Lỗi hệ thống: " + ex.Message);
+            }
+        }
 
         [HttpPost] 
         public ActionResult XoaFileDinhKem(int id)

@@ -544,6 +544,7 @@
     <Content Include="Content\img\Jumbotron.jpg" />
     <Content Include="Content\img\logo-index.png" />
     <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\mail.ico" />
     <Content Include="Content\img\photo-1.jpg" />
     <Content Include="Content\img\photo-2.jpg" />
     <Content Include="Content\img\photo-3.jpg" />
@@ -709,6 +710,8 @@
     <Content Include="Views\Admin\ThongTinNhanVien.cshtml" />
     <Content Include="Views\Loi\LoiHeThong.cshtml" />
     <Content Include="Views\Admin\PhanQuyen.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\DoiMatKhau.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -719,6 +722,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\FileManager\" />
+    <Folder Include="Content\ImageManager\" />
     <Folder Include="Views\Code\" />
     <Folder Include="Views\Lib\" />
     <Folder Include="Views\test\" />

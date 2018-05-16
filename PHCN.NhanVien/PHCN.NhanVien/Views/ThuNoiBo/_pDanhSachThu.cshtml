@@ -1,9 +1,10 @@
 ﻿
 @{ 
     List< PHCN.NhanVien.Models.GuiNhan> listBaiViet = ViewBag.ListBaiViet;
-    int stt = 1;
+
     PHCN.NhanVien.Models.PHCNEntities db = new PHCN.NhanVien.Models.PHCNEntities();
     string fontSize = db.ThamSoHeThong.Find("kichthuocfontchu").GiaTri;
+    PHCN.NhanVien.Models.NhanVien nhanVienDangNhap = (PHCN.NhanVien.Models.NhanVien)Session["NhanVienDangNhap"];    
 }
 
 <table class="table table-condensed" style="font-size:@(fontSize)px;">
@@ -26,18 +27,18 @@
                     <input type="checkbox" class="checkboxThu" data-id-gui-nhan="@item.ID"/>
                 </td>
                 <td>                    
-                    @if (item.DaXem == true)
+                    @if (item.DaXem == false && item.NguoiGui != nhanVienDangNhap.MaNhanVien)
                     {
-                        <a href="@Url.Action("XemThu", "ThuNoiBo", new { id = item.ID })" style="color:#004007;">@item.BaiViet.TieuDe</a>
+                        <strong><a href="@Url.Action("XemThu", "ThuNoiBo", new { id = item.ID })" style="color:black;">@item.BaiViet.TieuDe</a></strong>
                     }
                     else
                     {
-                        <strong><a href="@Url.Action("XemThu", "ThuNoiBo", new { id = item.ID })" style="color:black;">@item.BaiViet.TieuDe</a></strong>
+                        <a href="@Url.Action("XemThu", "ThuNoiBo", new { id = item.ID })" style="color:#004007;">@item.BaiViet.TieuDe</a>
                     }
 
                 </td>
                 <td>@item.NhanVien.HoTen</td> @*(người gửi)*@
-                <td>@item.BaiViet.Ngay</td>
+                <td>@item.BaiViet.Ngay.ToString("dd/MM/yyyy HH:mm:ss")</td>
             </tr>
 
             

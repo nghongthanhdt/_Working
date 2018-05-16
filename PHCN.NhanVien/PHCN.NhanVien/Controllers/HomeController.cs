@@ -21,6 +21,32 @@ namespace PHCN.NhanVien.Controllers
 
             return View();
         }
+        public ActionResult DoiMatKhau()
+        {
+            return View();
+        }
+        public ActionResult ThucHienDoiMatKhau(string MaNhanVien, string MatKhau, string MatKhauMoi, string NhapLaiMatKhauMoi)
+        {
+            try
+            {
+                int maNV = int.Parse(MaNhanVien);
+                NhanVien.Models.NhanVien nv = db.NhanVien.Find(maNV);
+                if (nv.MatKhau != MatKhau)
+                {
+                    return RedirectToAction("DoiMatKhau", "Home", new { @thongbao = "matkhaucukhongdung" });
+                }
+                else
+                {
+                    nv.MatKhau = MatKhauMoi;
+                }
+                db.SaveChanges();
+                return RedirectToAction("DoiMatKhau", "Home", new { @thongbao = "thanhcong" });
+            } catch (Exception ex)
+            {
+                return Content("Lỗi hệ thống: " + ex.Message);
+            }
+            
+        }
 
         [HttpPost]
         public ActionResult Login(string tenDangNhap, string matKhau, bool nhoTaiKhoan)

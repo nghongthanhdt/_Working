@@ -81,6 +81,7 @@
             this.btnDongY.Size = new System.Drawing.Size(75, 23);
             this.btnDongY.TabIndex = 2;
             this.btnDongY.Text = "Đồng ý";
+            this.btnDongY.Click += new System.EventHandler(this.btnDongY_Click);
             // 
             // btnBoQua
             // 
@@ -123,6 +124,7 @@
             this.Controls.Add(this.txtHoTen);
             this.Controls.Add(this.txtTenDangNhap);
             this.Name = "FormNhapMatKhau";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mật khẩu";
             this.ResumeLayout(false);
             this.PerformLayout();
