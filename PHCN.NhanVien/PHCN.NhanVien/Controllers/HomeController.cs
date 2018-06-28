@@ -114,5 +114,22 @@ namespace PHCN.NhanVien.Controllers
             this.Session["NhanVienDangNhap"] = null;
             return RedirectToAction("DangNhap", "Home");
         }
+
+        public ActionResult DichVu()
+        {
+            return View();
+        }
+        public ActionResult TinTuc()
+        {
+            return View();
+        }
+        public ActionResult HinhAnh()
+        {
+            return View();
+        }
+        public ActionResult LienHe()
+        {
+            return View();
+        }
     }
 }

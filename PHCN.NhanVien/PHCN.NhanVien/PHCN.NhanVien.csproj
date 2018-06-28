@@ -528,6 +528,11 @@
     <Content Include="Content\fonts\angularicons.svg" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\home\blog.html" />
+    <Content Include="Content\home\contact.html" />
+    <Content Include="Content\home\index.html" />
+    <Content Include="Content\home\portfolio.html" />
+    <Content Include="Content\home\services.html" />
     <Content Include="Content\img\ascii-logo.gif" />
     <Content Include="Content\img\bootflat-ui-kit.jpg" />
     <Content Include="Content\img\check_flat\default.png" />
@@ -722,6 +727,10 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\FileManager\" />
+    <Folder Include="Content\home\css\" />
+    <Folder Include="Content\home\fonts\" />
+    <Folder Include="Content\home\img\" />
+    <Folder Include="Content\home\js\" />
     <Folder Include="Content\ImageManager\" />
     <Folder Include="Views\Code\" />
     <Folder Include="Views\Lib\" />

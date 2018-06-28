@@ -179,7 +179,6 @@ namespace PHCN.NhanVien.Controllers
             ViewBag.BaiViet = baiViet;            
             return View();
         }
-
         public ActionResult DanhDauQuanTrong(int id)
         {
             // id của GuiNhan
@@ -197,7 +196,6 @@ namespace PHCN.NhanVien.Controllers
             db.SaveChanges();
             return Content("true");
         }
-
         public ActionResult DanhDauXoaList(string listGuiNhanXoa)
         {
             try
