@@ -1,0 +1,135 @@
+﻿@*<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>*@
+
+
+
+@{
+    Layout = null;
+
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bệnh viện Phục hồi chức năng Đồng Tháp</title>
+
+    <!-- Bootstrap -->
+    <link href="~/Content/home/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/home/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/home/css/animate.css">
+    <link href="~/Content/home/css/prettyPhoto.css" rel="stylesheet">
+    <link href="~/Content/home/css/style.css" rel="stylesheet" />
+    <!-- =======================================================
+      Theme Name: Company
+      Theme URL: https://bootstrapmade.com/company-free-html-bootstrap-template/
+      Author: BootstrapMade
+      Author URL: https://bootstrapmade.com
+    ======================================================= -->
+</head>
+
+<body>
+    <div id="TrangChu"></div>
+    <header>
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse.collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <div class="navbar-brand">
+                            <a href="index.html"><h1><span>BV</span>PHCNĐT</h1></a>
+                        </div>
+                    </div>
+
+                    <div class="navbar-collapse collapse">
+                        <div class="menu">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation"><a href="#TrangChu" class="active">Trang chủ</a></li>
+                                <li role="presentation"><a href="#GioiThieu">Giới thiệu</a></li>
+                                <li role="presentation"><a href="#DichVu">Dịch vụ</a></li>
+                                @*<li role="presentation"><a href="#">Hình ảnh</a></li>*@
+                                @*<li role="presentation"><a href="#TinTuc">Tin tức</a></li>*@
+                                <li role="presentation"><a href="#LienHe">Liên hệ</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+@RenderBody()
+    <div id="LienHe"></div>
+    <section id="conatcat-info">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="media contact-info wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+                        <div class="pull-left">
+                            <i class="fa fa-phone"></i>
+                        </div>
+                        <div class="media-body">
+                            <h2>Liên hệ với chúng tôi</h2>
+                            <p>Phòng Tổ chức hành chính - Điện thoại: 02773.871.635</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.container-->
+    </section>
+
+    <!--/#partner-->
+    <footer>
+        <section id="partner">
+            <div class="container">
+                <div class="center wow fadeInDown">
+                    <h2>Bệnh viện Phục hồi chức năng</h2>
+                    <p>Chung tay góp sức cho ngày mai!</p>
+                </div>
+
+                @*<div class="partners">
+                        <ul>
+                            <li> <a href="#"><img class="img-responsive wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms" src="~/Content/home/images/partners/partner1.png"></a></li>
+                            <li> <a href="#"><img class="img-responsive wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms" src="~/Content/home/images/partners/partner2.png"></a></li>
+                            <li> <a href="#"><img class="img-responsive wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="900ms" src="~/Content/home/images/partners/partner3.png"></a></li>
+                            <li> <a href="#"><img class="img-responsive wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="1200ms" src="~/Content/home/images/partners/partner4.png"></a></li>
+                            <li> <a href="#"><img class="img-responsive wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="1500ms" src="~/Content/home/images/partners/partner5.png"></a></li>
+                        </ul>
+                    </div>*@
+            </div>
+            <!--/.container-->
+        </section>
+    </footer>
+
+    <!--/#conatcat-info-->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="~/Content/home/js/jquery-2.1.1.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="~/Content/home/js/bootstrap.min.js"></script>
+    <script src="~/Content/home/js/jquery.prettyPhoto.js"></script>
+    <script src="~/Content/home/js/jquery.isotope.min.js"></script>
+    <script src="~/Content/home/js/wow.min.js"></script>
+    <script src="~/Content/home/js/functions.js"></script>
+
+</body>
+
+</html>

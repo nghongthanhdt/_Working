@@ -528,10 +528,14 @@
     <Content Include="Content\fonts\angularicons.svg" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\home\about.html" />
     <Content Include="Content\home\blog.html" />
     <Content Include="Content\home\contact.html" />
+    <Content Include="Content\home\images\slider\bvphcndt-avatar.jpg" />
+    <Content Include="Content\home\images\slider\bvphcndt-banner.jpg" />
     <Content Include="Content\home\index.html" />
     <Content Include="Content\home\portfolio.html" />
+    <Content Include="Content\home\readme.txt" />
     <Content Include="Content\home\services.html" />
     <Content Include="Content\img\ascii-logo.gif" />
     <Content Include="Content\img\bootflat-ui-kit.jpg" />
@@ -613,7 +617,9 @@
     <Compile Include="Controllers\CodeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoiController.cs" />
+    <Compile Include="Controllers\QuanLyBaiVietController.cs" />
     <Compile Include="Controllers\ThuNoiBoController.cs" />
+    <Compile Include="Controllers\TinTucController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -717,6 +723,10 @@
     <Content Include="Views\Admin\PhanQuyen.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\DoiMatKhau.cshtml" />
+    <Content Include="Views\Shared\_HomeLayout.cshtml" />
+    <Content Include="Views\TinTuc\Index.cshtml" />
+    <Content Include="Views\QuanLyBaiViet\Index.cshtml" />
+    <Content Include="Views\QuanLyBaiViet\_pDanhSachBaiViet.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -727,9 +737,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\FileManager\" />
+    <Folder Include="Content\home\contactform\" />
     <Folder Include="Content\home\css\" />
     <Folder Include="Content\home\fonts\" />
-    <Folder Include="Content\home\img\" />
     <Folder Include="Content\home\js\" />
     <Folder Include="Content\ImageManager\" />
     <Folder Include="Views\Code\" />
