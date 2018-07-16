@@ -878,7 +878,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>votoB7jPd+g7HlSVMIa47arU5vmCQojt1n0SMSd+0yo=</dsig:DigestValue>
+        <dsig:DigestValue>TIex/ZYFRTtDrZpC3zrwVw+wjH4ducTB0xliiwdCiBc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
