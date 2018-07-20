@@ -60,21 +60,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="BaiViet">
-      <EntityTypeMapping TypeName="PHCNModel.BaiViet">
-        <MappingFragment StoreEntitySet="BaiViet">
-          <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
-          <ScalarProperty Name="Ngay" ColumnName="Ngay" />
-          <ScalarProperty Name="NguoiXoa" ColumnName="NguoiXoa" />
-          <ScalarProperty Name="NgayXoa" ColumnName="NgayXoa" />
-          <ScalarProperty Name="Xoa" ColumnName="Xoa" />
-          <ScalarProperty Name="LoaiBaiViet" ColumnName="LoaiBaiViet" />
-          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
-          <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
-          <ScalarProperty Name="MaBaiViet" ColumnName="MaBaiViet" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="NhanVien">
       <EntityTypeMapping TypeName="PHCNModel.NhanVien">
         <MappingFragment StoreEntitySet="NhanVien">
@@ -114,6 +99,21 @@
         <MappingFragment StoreEntitySet="Quyen">
           <ScalarProperty Name="TenQuyen" ColumnName="TenQuyen" />
           <ScalarProperty Name="MaQuyen" ColumnName="MaQuyen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BaiViet">
+      <EntityTypeMapping TypeName="PHCNModel.BaiViet">
+        <MappingFragment StoreEntitySet="BaiViet">
+          <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
+          <ScalarProperty Name="Ngay" ColumnName="Ngay" />
+          <ScalarProperty Name="NguoiXoa" ColumnName="NguoiXoa" />
+          <ScalarProperty Name="NgayXoa" ColumnName="NgayXoa" />
+          <ScalarProperty Name="Xoa" ColumnName="Xoa" />
+          <ScalarProperty Name="LoaiBaiViet" ColumnName="LoaiBaiViet" />
+          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+          <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
+          <ScalarProperty Name="MaBaiViet" ColumnName="MaBaiViet" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

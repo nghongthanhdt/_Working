@@ -6,13 +6,16 @@ using System.Web.Mvc;
 
 namespace PHCN.NhanVien.Controllers
 {
-    public class TinTucController : Controller
+    public class TraCuuController : Controller
     {
-        // GET: TinTuc
+        // GET: TraCuu
         public ActionResult Index()
         {
             return View();
         }
-
+        public ActionResult BangGiaDichVu()
+        {
+            return View();
+        }
     }
 }

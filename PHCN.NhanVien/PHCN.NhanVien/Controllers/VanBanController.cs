@@ -6,10 +6,14 @@ using System.Web.Mvc;
 
 namespace PHCN.NhanVien.Controllers
 {
-    public class TinTucController : Controller
+    public class VanBanController : Controller
     {
-        // GET: TinTuc
+        // GET: VanBan
         public ActionResult Index()
+        {
+            return View();
+        }
+        public ActionResult BangGiaDichVu()
         {
             return View();
         }

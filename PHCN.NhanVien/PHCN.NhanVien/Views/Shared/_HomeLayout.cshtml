@@ -61,12 +61,10 @@
                     <div class="navbar-collapse collapse">
                         <div class="menu">
                             <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation"><a href="#TrangChu" class="active">Trang chủ</a></li>
-                                <li role="presentation"><a href="#GioiThieu">Giới thiệu</a></li>
-                                <li role="presentation"><a href="#DichVu">Dịch vụ</a></li>
-                                @*<li role="presentation"><a href="#">Hình ảnh</a></li>*@
-                                @*<li role="presentation"><a href="#TinTuc">Tin tức</a></li>*@
-                                <li role="presentation"><a href="#LienHe">Liên hệ</a></li>
+                                <li role="presentation"><a href="@Url.Action("Index", "Home")#TrangChu" class="active">Trang chủ</a></li>
+                                <li role="presentation"><a href="@Url.Action("Index", "Home")#GioiThieu">Giới thiệu</a></li>
+                                <li role="presentation"><a href="@Url.Action("Index", "Home")#DichVu">Dịch vụ</a></li>
+                                <li role="presentation"><a href="@Url.Action("Index", "Home")#LienHe">Liên hệ</a></li>
                             </ul>
                         </div>
                     </div>
@@ -86,8 +84,12 @@
                             <i class="fa fa-phone"></i>
                         </div>
                         <div class="media-body">
-                            <h2>Liên hệ với chúng tôi</h2>
-                            <p>Phòng Tổ chức hành chính - Điện thoại: 02773.871.635</p>
+                            <h2>Liên hệ</h2>
+                            <p>BỆNH VIỆN PHỤC HỒI CHỨC NĂNG ĐỒNG THÁP<br />
+                            167 Tôn Đức Thắng, Phường 1, TP Cao Lãnh, Đồng Tháp<br />
+                            Mã số thuế: 1400524306<br />
+                            Điện thoại & Fax: <strong>02773.871.635</strong> - Phòng Tổ chức Hành chính</p>
+
 
                         </div>
                     </div>
@@ -99,11 +101,11 @@
 
     <!--/#partner-->
     <footer>
-        <section id="partner">
+        <section id="partner" style="background-position:bottom; background-size:100% auto; text-shadow:1px 1px 1px black;">
             <div class="container">
                 <div class="center wow fadeInDown">
-                    <h2>Bệnh viện Phục hồi chức năng</h2>
-                    <p>Chung tay góp sức cho ngày mai!</p>
+                    <h2>Bệnh viện Phục hồi Chức năng</h2>
+                    <p>Chung tay góp sức cho ngày mai</p>
                 </div>
 
                 @*<div class="partners">

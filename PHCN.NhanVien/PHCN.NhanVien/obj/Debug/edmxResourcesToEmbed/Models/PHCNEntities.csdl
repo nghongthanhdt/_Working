@@ -27,24 +27,7 @@
     <EntitySet Name="Loi" EntityType="PHCNModel.Loi" />
     <EntitySet Name="FileDinhKem" EntityType="PHCNModel.FileDinhKem" />
     <EntitySet Name="GuiNhan" EntityType="PHCNModel.GuiNhan" />
-    <EntitySet Name="BaiViet" EntityType="PHCNModel.BaiViet" />
     <EntitySet Name="NhanVien" EntityType="PHCNModel.NhanVien" />
-    <AssociationSet Name="FK_BaiViet_LoaiBaiViet" Association="PHCNModel.FK_BaiViet_LoaiBaiViet">
-      <End Role="LoaiBaiViet" EntitySet="LoaiBaiViet" />
-      <End Role="BaiViet" EntitySet="BaiViet" />
-    </AssociationSet>
-    <AssociationSet Name="FK_BaiViet_NhanVien" Association="PHCNModel.FK_BaiViet_NhanVien">
-      <End Role="NhanVien" EntitySet="NhanVien" />
-      <End Role="BaiViet" EntitySet="BaiViet" />
-    </AssociationSet>
-    <AssociationSet Name="FK_FileDinhKem_BaiViet" Association="PHCNModel.FK_FileDinhKem_BaiViet">
-      <End Role="BaiViet" EntitySet="BaiViet" />
-      <End Role="FileDinhKem" EntitySet="FileDinhKem" />
-    </AssociationSet>
-    <AssociationSet Name="FK_GuiNhan_BaiViet" Association="PHCNModel.FK_GuiNhan_BaiViet">
-      <End Role="BaiViet" EntitySet="BaiViet" />
-      <End Role="GuiNhan" EntitySet="GuiNhan" />
-    </AssociationSet>
     <AssociationSet Name="FK_GuiNhan_NhanVien_NguoiGui" Association="PHCNModel.FK_GuiNhan_NhanVien_NguoiGui">
       <End Role="NhanVien" EntitySet="NhanVien" />
       <End Role="GuiNhan" EntitySet="GuiNhan" />
@@ -67,6 +50,23 @@
     <AssociationSet Name="FK_PhanQuyen_Quyen" Association="PHCNModel.FK_PhanQuyen_Quyen">
       <End Role="Quyen" EntitySet="Quyen" />
       <End Role="PhanQuyen" EntitySet="PhanQuyen" />
+    </AssociationSet>
+    <EntitySet Name="BaiViet" EntityType="PHCNModel.BaiViet" />
+    <AssociationSet Name="FK_BaiViet_LoaiBaiViet" Association="PHCNModel.FK_BaiViet_LoaiBaiViet">
+      <End Role="LoaiBaiViet" EntitySet="LoaiBaiViet" />
+      <End Role="BaiViet" EntitySet="BaiViet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BaiViet_NhanVien" Association="PHCNModel.FK_BaiViet_NhanVien">
+      <End Role="NhanVien" EntitySet="NhanVien" />
+      <End Role="BaiViet" EntitySet="BaiViet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FileDinhKem_BaiViet" Association="PHCNModel.FK_FileDinhKem_BaiViet">
+      <End Role="BaiViet" EntitySet="BaiViet" />
+      <End Role="FileDinhKem" EntitySet="FileDinhKem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GuiNhan_BaiViet" Association="PHCNModel.FK_GuiNhan_BaiViet">
+      <End Role="BaiViet" EntitySet="BaiViet" />
+      <End Role="GuiNhan" EntitySet="GuiNhan" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Loi">
@@ -104,27 +104,9 @@
     <Property Name="GhiChu" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
     <Property Name="STTGui" Type="Int32" Nullable="false" />
     <Property Name="Xoa" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="BaiViet" Relationship="PHCNModel.FK_GuiNhan_BaiViet" FromRole="GuiNhan" ToRole="BaiViet" />
     <NavigationProperty Name="NhanVien" Relationship="PHCNModel.FK_GuiNhan_NhanVien_NguoiGui" FromRole="GuiNhan" ToRole="NhanVien" />
     <NavigationProperty Name="NhanVien1" Relationship="PHCNModel.FK_GuiNhan_NhanVien_NguoiNhan" FromRole="GuiNhan" ToRole="NhanVien" />
-  </EntityType>
-  <EntityType Name="BaiViet">
-    <Key>
-      <PropertyRef Name="MaBaiViet" />
-    </Key>
-    <Property Name="MaBaiViet" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TieuDe" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="LoaiBaiViet" Type="Int32" Nullable="false" />
-    <Property Name="Xoa" Type="Boolean" Nullable="false" />
-    <Property Name="NgayXoa" Type="DateTime" Precision="3" />
-    <Property Name="NguoiXoa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Ngay" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="MaNhanVien" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="LoaiBaiViet1" Relationship="PHCNModel.FK_BaiViet_LoaiBaiViet" FromRole="BaiViet" ToRole="LoaiBaiViet" />
-    <NavigationProperty Name="NhanVien" Relationship="PHCNModel.FK_BaiViet_NhanVien" FromRole="BaiViet" ToRole="NhanVien" />
-    <NavigationProperty Name="FileDinhKem" Relationship="PHCNModel.FK_FileDinhKem_BaiViet" FromRole="BaiViet" ToRole="FileDinhKem" />
-    <NavigationProperty Name="GuiNhan" Relationship="PHCNModel.FK_GuiNhan_BaiViet" FromRole="BaiViet" ToRole="GuiNhan" />
+    <NavigationProperty Name="BaiViet" Relationship="PHCNModel.FK_GuiNhan_BaiViet" FromRole="GuiNhan" ToRole="BaiViet" />
   </EntityType>
   <EntityType Name="NhanVien">
     <Key>
@@ -138,61 +120,13 @@
     <Property Name="STT" Type="Int32" Nullable="false" />
     <Property Name="Xoa" Type="Boolean" Nullable="false" />
     <Property Name="NhanThu" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="BaiViet" Relationship="PHCNModel.FK_BaiViet_NhanVien" FromRole="NhanVien" ToRole="BaiViet" />
     <NavigationProperty Name="GuiNhan" Relationship="PHCNModel.FK_GuiNhan_NhanVien_NguoiGui" FromRole="NhanVien" ToRole="GuiNhan" />
     <NavigationProperty Name="GuiNhan1" Relationship="PHCNModel.FK_GuiNhan_NhanVien_NguoiNhan" FromRole="NhanVien" ToRole="GuiNhan" />
     <NavigationProperty Name="KhoaPhong" Relationship="PHCNModel.FK_NhanVien_KhoaPhong" FromRole="NhanVien" ToRole="KhoaPhong" />
     <Property Name="MatKhauMD5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="PhanQuyen" Relationship="PHCNModel.FK_PhanQuyen_NhanVien" FromRole="NhanVien" ToRole="PhanQuyen" />
+    <NavigationProperty Name="BaiViet" Relationship="PHCNModel.FK_BaiViet_NhanVien" FromRole="NhanVien" ToRole="BaiViet" />
   </EntityType>
-  <Association Name="FK_BaiViet_LoaiBaiViet">
-    <End Type="PHCNModel.LoaiBaiViet" Role="LoaiBaiViet" Multiplicity="1" />
-    <End Type="PHCNModel.BaiViet" Role="BaiViet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="LoaiBaiViet">
-        <PropertyRef Name="MaLoai" />
-      </Principal>
-      <Dependent Role="BaiViet">
-        <PropertyRef Name="LoaiBaiViet" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_BaiViet_NhanVien">
-    <End Type="PHCNModel.NhanVien" Role="NhanVien" Multiplicity="1" />
-    <End Type="PHCNModel.BaiViet" Role="BaiViet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="NhanVien">
-        <PropertyRef Name="MaNhanVien" />
-      </Principal>
-      <Dependent Role="BaiViet">
-        <PropertyRef Name="MaNhanVien" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_FileDinhKem_BaiViet">
-    <End Type="PHCNModel.BaiViet" Role="BaiViet" Multiplicity="1" />
-    <End Type="PHCNModel.FileDinhKem" Role="FileDinhKem" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="BaiViet">
-        <PropertyRef Name="MaBaiViet" />
-      </Principal>
-      <Dependent Role="FileDinhKem">
-        <PropertyRef Name="MaBaiViet" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_GuiNhan_BaiViet">
-    <End Type="PHCNModel.BaiViet" Role="BaiViet" Multiplicity="1" />
-    <End Type="PHCNModel.GuiNhan" Role="GuiNhan" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="BaiViet">
-        <PropertyRef Name="MaBaiViet" />
-      </Principal>
-      <Dependent Role="GuiNhan">
-        <PropertyRef Name="MaBaiViet" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_GuiNhan_NhanVien_NguoiGui">
     <End Type="PHCNModel.NhanVien" Role="NhanVien" Multiplicity="1" />
     <End Type="PHCNModel.GuiNhan" Role="GuiNhan" Multiplicity="*" />
@@ -277,6 +211,72 @@
       </Principal>
       <Dependent Role="PhanQuyen">
         <PropertyRef Name="MaQuyen" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="BaiViet">
+    <Key>
+      <PropertyRef Name="MaBaiViet" />
+    </Key>
+    <Property Name="MaBaiViet" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TieuDe" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LoaiBaiViet" Type="Int32" Nullable="false" />
+    <Property Name="Xoa" Type="Boolean" Nullable="false" />
+    <Property Name="NgayXoa" Type="DateTime" Precision="3" />
+    <Property Name="NguoiXoa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Ngay" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="MaNhanVien" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="LoaiBaiViet1" Relationship="PHCNModel.FK_BaiViet_LoaiBaiViet" FromRole="BaiViet" ToRole="LoaiBaiViet" />
+    <NavigationProperty Name="NhanVien" Relationship="PHCNModel.FK_BaiViet_NhanVien" FromRole="BaiViet" ToRole="NhanVien" />
+    <NavigationProperty Name="FileDinhKem" Relationship="PHCNModel.FK_FileDinhKem_BaiViet" FromRole="BaiViet" ToRole="FileDinhKem" />
+    <NavigationProperty Name="GuiNhan" Relationship="PHCNModel.FK_GuiNhan_BaiViet" FromRole="BaiViet" ToRole="GuiNhan" />
+  </EntityType>
+  <Association Name="FK_BaiViet_LoaiBaiViet">
+    <End Type="PHCNModel.LoaiBaiViet" Role="LoaiBaiViet" Multiplicity="1" />
+    <End Type="PHCNModel.BaiViet" Role="BaiViet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LoaiBaiViet">
+        <PropertyRef Name="MaLoai" />
+      </Principal>
+      <Dependent Role="BaiViet">
+        <PropertyRef Name="LoaiBaiViet" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BaiViet_NhanVien">
+    <End Type="PHCNModel.NhanVien" Role="NhanVien" Multiplicity="1" />
+    <End Type="PHCNModel.BaiViet" Role="BaiViet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NhanVien">
+        <PropertyRef Name="MaNhanVien" />
+      </Principal>
+      <Dependent Role="BaiViet">
+        <PropertyRef Name="MaNhanVien" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FileDinhKem_BaiViet">
+    <End Type="PHCNModel.BaiViet" Role="BaiViet" Multiplicity="1" />
+    <End Type="PHCNModel.FileDinhKem" Role="FileDinhKem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BaiViet">
+        <PropertyRef Name="MaBaiViet" />
+      </Principal>
+      <Dependent Role="FileDinhKem">
+        <PropertyRef Name="MaBaiViet" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GuiNhan_BaiViet">
+    <End Type="PHCNModel.BaiViet" Role="BaiViet" Multiplicity="1" />
+    <End Type="PHCNModel.GuiNhan" Role="GuiNhan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BaiViet">
+        <PropertyRef Name="MaBaiViet" />
+      </Principal>
+      <Dependent Role="GuiNhan">
+        <PropertyRef Name="MaBaiViet" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

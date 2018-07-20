@@ -531,6 +531,8 @@
     <Content Include="Content\home\about.html" />
     <Content Include="Content\home\blog.html" />
     <Content Include="Content\home\contact.html" />
+    <Content Include="Content\home\images\partners\footer-bg.jpg" />
+    <Content Include="Content\home\images\partners\partner_bg.png" />
     <Content Include="Content\home\images\slider\bvphcndt-avatar.jpg" />
     <Content Include="Content\home\images\slider\bvphcndt-banner.jpg" />
     <Content Include="Content\home\index.html" />
@@ -575,6 +577,7 @@
     <Content Include="Content\treelist\css\styles.css" />
     <Content Include="Content\treelist\index.html" />
     <Content Include="Content\treelist\js\checktree.js" />
+    <Content Include="Content\VanBan\dmcls-15-07-2018.html" />
     <Content Include="Global.asax" />
     <Content Include="Models\PHCNEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -620,7 +623,9 @@
     <Compile Include="Controllers\QuanLyBaiVietController.cs" />
     <Compile Include="Controllers\ThuNoiBoController.cs" />
     <Compile Include="Controllers\TinTucController.cs" />
+    <Compile Include="Controllers\TraCuuController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
+    <Compile Include="Controllers\VanBanController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -727,6 +732,8 @@
     <Content Include="Views\TinTuc\Index.cshtml" />
     <Content Include="Views\QuanLyBaiViet\Index.cshtml" />
     <Content Include="Views\QuanLyBaiViet\_pDanhSachBaiViet.cshtml" />
+    <Content Include="Views\TraCuu\Index.cshtml" />
+    <Content Include="Views\TraCuu\BangGiaDichVu.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -744,7 +751,6 @@
     <Folder Include="Content\ImageManager\" />
     <Folder Include="Views\Code\" />
     <Folder Include="Views\Lib\" />
-    <Folder Include="Views\test\" />
     <Folder Include="Views\Upload\" />
   </ItemGroup>
   <ItemGroup>
