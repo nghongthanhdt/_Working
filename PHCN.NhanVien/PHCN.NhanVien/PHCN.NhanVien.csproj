@@ -733,7 +733,7 @@
     <Content Include="Views\QuanLyBaiViet\Index.cshtml" />
     <Content Include="Views\QuanLyBaiViet\_pDanhSachBaiViet.cshtml" />
     <Content Include="Views\TraCuu\Index.cshtml" />
-    <Content Include="Views\TraCuu\BangGiaDichVu.cshtml" />
+    <Content Include="Views\TraCuu\BangGiaVienPhi.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

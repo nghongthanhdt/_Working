@@ -13,7 +13,7 @@ namespace PHCN.NhanVien.Controllers
         {
             return View();
         }
-        public ActionResult BangGiaDichVu()
+        public ActionResult BangGiaVienPhi()
         {
             return View();
         }
