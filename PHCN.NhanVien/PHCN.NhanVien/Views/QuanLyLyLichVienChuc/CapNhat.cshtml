@@ -1,0 +1,805 @@
+﻿
+@{
+    ViewBag.PanelTitle = "SƠ YẾU LÝ LỊCH VIÊN CHỨC";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<link href="~/Content/css/jquery-ui.css" rel="stylesheet" />
+<script src="~/scripts/jquery.mask.js"></script>
+<script src="~/scripts/jquery-ui-1.12.1.min.js"></script>
+<div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-title">
+                <b>CƠ QUAN</b>
+            </div>
+            
+        </div>
+        <div class="panel-body">
+            
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label >Cơ quan thẩm quyền quản lý viên chức</label>
+                            <select class="form-control" id="selectCoQuanThamQuyenQuanLyVienChuc">
+                                <option value="">Sở Y Tế Đồng Tháp</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label >Số hiệu viên chức</label>
+                            <input class="form-control" type="text" id="txtSoHieuVienChuc">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label >Cơ quan sử dụng viên chức</label>
+                            <select class="form-control" id="txtCoQuanSuDungVienChuc">
+                                <option value="">Bệnh viện Phục Hồi Chức Năng Đồng Tháp</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                
+            
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-title">
+                <b>SƠ YẾU LÝ LỊCH VIÊN CHỨC</b>
+            </div>            
+        </div>
+        <div class="panel-body">
+            
+                <div class="row">
+                    <div class="col-md-3">
+                        <img src="~/Content/img/default-avatar.png" style="width:120px; height:120px;" />
+                    </div>
+                    <div class="col-md-9">
+                        <div class="form-group">
+                            <label >1. Họ tên khai sinh</label>
+                            <input class="form-control" type="text" id="txtHoTenKhaiSinh">
+                        </div>
+                        <div class="form-group">
+                            <label >2. Tên gọi khác</label>
+                            <input class="form-control" type="text" id="txtTenGoiKhac">
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label >3. Sinh ngày</label>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <input class="form-control text-right number" placeholder="ngày" type="text" id="txtNgaySinh_Ngay">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <input class="form-control text-right number" placeholder="tháng" type="text" id="txtNgaySinh_Thang">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input class="form-control text-right number" placeholder="năm" type="text" id="txtNgaySinh_Nam">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label >Giới tính</label>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label style="font-weight:normal; font-size:14px;">
+                                                <input type="checkbox" value="" id="checkboxGioiTinhNam" /> &nbsp;&nbsp; Nam
+                                            </label>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <label style="font-weight:normal; font-size:14px;">
+                                                <input type="checkbox" value="" id="checkboxGioiTinhNu" /> &nbsp;&nbsp; Nữ
+                                            </label>                                            
+                                        </div>                                        
+                                    </div>
+                                </div>
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label >4. Nơi sinh</label>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <input class="form-control" placeholder="Xã phường" type="text" id="txtNoiSinh_Xa">
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-control" placeholder="Huyện, Thành phố" type="text"  id="txtNoiSinh_Huyen">
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-control" placeholder="Tỉnh" type="text"  id="txtNoiSinh_Tinh">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label >5. Quê quán</label>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <input class="form-control" placeholder="Xã phường" type="text" id="txtQueQuan_Xa">
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-control" placeholder="Huyện, Thành phố" type="text" id="txtQueQuan_Huyen">
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-control" placeholder="Tỉnh" type="text" id="txtQueQuan_Tinh">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label >6. Dân tộc</label>
+                                    <select class="form-control" id="selectDanToc">
+                                        <option value="1">Kinh</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label >7. Tôn giáo</label>
+                                    <select class="form-control" id="selectTonGiao">
+                                        <option value="1">Không</option>
+                                    </select>
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label >8. Nơi đăng ký hộ khẩu thường trú</label>
+                            <input class="form-control" type="text" id="txtNoiDangKyHoKhauThuongTru">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label >9. Nơi ở hiện nay</label>
+                            <input class="form-control" type="text" id="txtNoiOHienNay">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label >10. Nghề nghiệp khi được tuyển dụng</label>
+                            <input class="form-control" type="text" id="txtNgheNghiepKhiDuocTuyenDung">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label >11. Ngày tuyển dụng</label>
+                            <input class="form-control date" type="text" id="txtNgayTuyenDung">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label >Cơ quan tuyển dụng</label>                            
+                            <select class="form-control" id="selectCoQuanTuyenDung">
+                                <option value="1">Sở Y Tế Đồng Tháp</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label >12. Chức vụ (chức danh hiện tại)</label>
+                            <input class="form-control" type="text" id="txtChucVuChucDanhHienTai">
+                        </div>
+                    </div>                    
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label >13. Công việc chính được giao</label>
+                            <textarea class="form-control" placeholder="" id="txtCongViecChinhDuocGiao"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label >14. Chức danh nghề nghiệp viên chức</label>
+                            <a class="btn btn-xs btn-default pull-right" id="btnCapNhatQuaTrinhLuong">Cập nhật quá trình lương</a>
+                            <a class="btn btn-xs btn-default pull-right" id="btnThemChucDanhNgheNghiep" style="margin-right:5px;">Thêm nhanh</a>
+                            
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label style="font-weight:normal">Tên chức danh</label>
+                                    <input type="text" class="form-control  disabled" readonly="readonly" id="txtTenChucDanh" />
+                                </div>
+                                <div class="col-md-4">
+                                    <label style="font-weight:normal">Mã số</label>
+                                    <input type="text" class="form-control  disabled" readonly="readonly" id="txtMaSoChucDanhNgheNghiep" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label style="font-weight:normal">Bậc lương</label>
+                                    <input type="text" class="form-control  disabled number" readonly="readonly" id="txtBacLuong" />
+                                </div>
+                                <div class="col-md-2">
+                                    <label style="font-weight:normal">Hệ số</label>
+                                    <input type="text" class="form-control  disabled" readonly="readonly" id="txtHeSo" />
+                                </div>
+                                <div class="col-md-2">
+                                    <label style="font-weight:normal">Vượt khung</label>
+                                    <input type="text" class="form-control  disabled" readonly="readonly" id="txtVuotKhung" />
+                                </div>
+                                <div class="col-md-2">
+                                    <label style="font-weight:normal">Ngày hưởng</label>
+                                    <input type="text" class="form-control  disabled" style="font-weight:bold;" readonly="readonly" id="txtNgayHuong" />
+                                </div>
+                                <div class="col-md-2">
+                                    <label style="font-weight:normal">Phụ cấp chức vụ</label>
+                                    <input type="text" class="form-control  disabled" readonly="readonly" id="txtPhuCapChucVu" />
+                                </div>
+                                <div class="col-md-2">
+                                    <label style="font-weight:normal">Phụ cấp khác</label>
+                                    <input type="text" class="form-control  disabled" readonly="readonly" id="txtPhuCapKhac" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label >15. Trình độ học vấn</label>                            
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label style="font-weight:normal">15.1 Trình độ giáo dục phổ thông</label>
+                                    <input type="text" class="form-control giaoducphothong" id="txtTrinhDoGiaoDucPhoThong" />
+                                </div>
+                                <div class="col-md-3">
+                                    <label style="font-weight:normal">15.2 Trình độ chuyên môn cao nhất</label>
+                                    <input type="text" class="form-control" id="txtTrinhDoChuyenMonCaoNhat" />
+                                </div>
+                                <div class="col-md-3">
+                                    <label style="font-weight:normal">15.3 Lý luận chính trị</label>
+                                    <input type="text" class="form-control" id="txtLyLuanChinhTri" />
+                                </div>
+                                <div class="col-md-3">
+                                    <label style="font-weight:normal">15.4 Quản lý nhà nước</label>
+                                    <input type="text" class="form-control" id="txtQuanLyNhaNuoc"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label style="font-weight:normal">15.5 Bồi dưỡng theo tiêu chuẩn chức danh nghề nghiệp</label>
+                                    <input type="text" class="form-control" id="txtBoiDuongTheoTieuChuanCDNN" />
+                                </div>
+                                <div class="col-md-3">
+                                    <label style="font-weight:normal">15.6 Ngoại ngữ</label>
+                                    <input type="text" class="form-control" id="txtNgoaiNgu" />
+                                </div>
+                                <div class="col-md-3">
+                                    <label style="font-weight:normal">15.7 Tin học</label>
+                                    <input type="text" class="form-control" id="txtTinhHoc"/>
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label >16. Ngày vào Đảng Cộng Sản Việt Nam</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label style="font-weight:normal">Ngày vào</label>
+                                    <input type="text" class="form-control date" id="txtNgayVaoDangCSVN" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label style="font-weight:normal">Ngày chính thức</label>
+                                    <input type="text" class="form-control date" id="txtNgayVaoDangCSVN_ChinhThuc" />
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label >17. Ngày tham gia tổ chức chính trị xã hội</label>
+                            <div class="row">                                
+                                <div class="col-md-12">
+                                    <label style="font-weight:normal">(Ngày tham gia tổ chức: Đoàn, Hội,... và làm việc gì trong tổ chức đó)</label>
+                                    <input type="text" class="form-control date" id="txtNgayThamGiaToChucChinhTriXaHoi" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label >18. Ngày nhập ngũ, xuất ngũ, quân hàm cao nhất</label>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label style="font-weight:normal">Ngày vào</label>
+                                    <input type="text" class="form-control date" id="txtNgayNhapNgu" />
+                                </div>
+                                <div class="col-md-3">
+                                    <label style="font-weight:normal">Ngày xuất ngũ</label>
+                                    <input type="text" class="form-control date" id="txtNgayXuatNgu" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label style="font-weight:normal">Quân hàm cao nhất</label>
+                                    <input type="text" class="form-control" id="txtQuanHamCaoNhat"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label >19. Danh hiệu được phong tặng cao nhất</label>
+                            <input class="form-control" type="text" id="txtDanhHieuDuocPhongTangCaoNhat">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label >20. Sở trường công tác</label>
+                            <input class="form-control" type="text" id="txtSoTruongCongTac">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label >21. Khen thưởng</label>
+                            <input class="form-control" type="text" id="txtKhenThuong">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label >22. Kỷ luật</label>
+                            <input class="form-control" type="text" id="txtKyLuat">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label >23. Tình trạng sức khỏe</label>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label style="font-weight:normal">Tình trạng</label>
+                                    <input type="text" class="form-control" id="txtTinhTrangSucKhoe" />
+                                </div>
+                                <div class="col-md-3">
+                                    <label style="font-weight:normal">Chiều cao (m)</label>
+                                    <input type="text" class="form-control decimal" id="txtChieuCao"/>
+                                </div>
+                                <div class="col-md-3">
+                                    <label style="font-weight:normal">Cân nặng (kg)</label>
+                                    <input type="text" class="form-control number" id="txtCanNang"/>
+                                </div>
+                                <div class="col-md-3">
+                                    <label style="font-weight:normal">Nhóm máu</label>
+                                    <input type="text" class="form-control" id="txtNhomMau"/>
+                                </div>
+                            </div>
+                            
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label >24. Là thương binh hạng</label>
+                            <input class="form-control" type="text" id="txtLaThuongBinhHang">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label >Là con gia đình chính sách</label>
+
+                            <input class="form-control" type="text" id="txtLaConGiaDinhChinhSach">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label >25. Số chứng minh nhân dân</label>
+                            <input class="form-control number" type="text" id="txtSoChungMinhNhanDan">
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label >Ngày cấp</label>
+                            <input class="form-control date" type="text" id="txtNgayCap">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label >27. ĐÀO TẠO, BỒI DƯỠNG VỀ CHUYÊN MÔN, NGHIỆP VỤ, LÝ LUẬN CHÍNH TRỊ, NGOẠI NGỮ, TIN HỌC</label>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Tên trường</th>
+                                        <th>Chuyên ngành đào tạo, bồi dưỡng</th>
+                                        <th>Từ tháng năm đến tháng năm</th>
+                                        <th>Hình thức đào tạo</th>
+                                        <th>Văn bằng, chứng chỉ, trình độ gì</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                    <tr>
+                                        <td>1</td>
+                                        <td>
+                                            Trường Đại Học Kỹ Thuật Công Nghệ TPHCM
+                                        </td>
+                                        <td>Công nghệ thông tin</td>
+                                        <td>11/2009 - 11/2014</td>
+                                        <td>Chính quy</td>
+                                        <td>Kỹ sư công nghệ thông tin</td>
+                                        <td>
+                                            <a href="#">Sửa</a><br /><a href="#">Xóa</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>
+                                            Trường Đại Học Kỹ Thuật Công Nghệ TPHCM
+                                        </td>
+                                        <td>Công nghệ thông tin</td>
+                                        <td>11/2009 - 11/2014</td>
+                                        <td>Chính quy</td>
+                                        <td>Kỹ sư công nghệ thông tin</td>
+                                        <td>
+                                            <a href="#">Sửa</a><br /><a href="#">Xóa</a>
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td colspan="7">
+                                            <button class="btn btn-default btn-sm pull-right" id="btnThemDaoTaoBoiDuongChuyenMon"><i class="glyphicon glyphicon-plus"></i> Thêm ...</button>
+                                        </td>                                        
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label >28. TÓM TẮT QUÁ TRÌNH CÔNG TÁC</label>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Từ tháng năm đến tháng năm</th>
+                                        <th>Chức danh, chức vụ, đơn vị công tác (Đảng, chính quyền, đoàn thể, tổ chức xã hội), kể cả thời gian được đào tạo, bồi dưỡng về chuyên môn, nghiệp vụ,...</th>
+                                        
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr>
+                                        <td>1</td>
+                                        <td>11/2009 - 11/2014</td>
+                                        <td>
+                                            Học Đại học tại
+                                            Trường Đại Học Kỹ Thuật Công Nghệ TPHCM
+                                        </td>
+                                        
+                                        <td>
+                                            <a href="#">Sửa</a><br/><a href="#">Xóa</a>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td colspan="7">
+                                            <button class="btn btn-default btn-sm pull-right" id="btnThemTomTatQuaTrinhCongTac"><i class="glyphicon glyphicon-plus"></i> Thêm ...</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label >29. DIỄN BIẾN QUÁ TRÌNH LƯƠNG CỦA VIÊN CHỨC</label>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Tháng/Năm</th>
+
+                                            <td>11/2018</td>
+                                            <td>11/2018</td>
+                                            <td>11/2018</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Mã CDNN/bậc</th>
+
+                                            <td>V01.A124.15</td>
+                                            <td>V01.A124.15</td>
+                                            <td>V01.A124.15</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+
+                                            <th>Hệ số lương</th>
+
+                                            <td>2.34</td>
+                                            <td>2.67</td>
+                                            <td>3.01</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+
+                                        </tr>
+                                    </thead>
+                                    
+                                </table>
+                            </div>
+                            <button class="btn btn-default btn-sm pull-right" id="btnThemQuaTrinhLuong"><i class="glyphicon glyphicon-plus"></i> Thêm ...</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label >30. NHẬN XÉT, ĐÁNH GIÁ CỦA CƠ QUAN, ĐƠN VỊ QUẢN LÝ HOẶC SỬ DỤNG VIÊN CHỨC</label>
+                            <textarea class="form-control" placeholder="" id="txtNhanXetDanhGiaCuaConQuan"></textarea>
+                        </div>
+                    </div>
+                </div>
+            
+        </div>
+    </div>
+
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-title">
+                <b>KÝ TÊN, ĐÓNG DẤU</b>
+            </div>            
+        </div>
+        <div class="panel-body">            
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label >Người khai</label>
+                            <input class="form-control" type="text" id="txtNguoiKhai">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label >Thủ trưởng cơ quan, đơn vị quản lý hoặc sử dụng viên chức</label>
+                            <input class="form-control" type="text" id="txtThuTruongCoQuan">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label >Nơi ký</label>
+                            <input class="form-control" type="text" id="txtNoiKy">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label >Ngày ký</label>
+                            <input class="form-control" type="text" id="txtNgayKy">
+                        </div>
+                    </div>
+                </div>
+                     
+        </div>        
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-title">
+                <b>GHI CHÚ</b>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <textarea class="form-control" placeholder="" id="txtGhiChu"></textarea>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <button class="btn btn-lg btn-success">Lưu dữ liệu</button>
+    <button class="btn btn-lg btn-default">Xóa hồ sơ</button>    
+</div>
+
+
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+
+<!-- modal -->
+<div class="modal" id="modalChucDanhNgheNghiepVienChuc"> 
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Chức danh nghề nghiệp</h4>
+            </div>
+            <div class="modal-body">
+                @*<p>Feel free to contact us for any issues you might have with our products.</p>*@
+                <div class="row">
+                    <div class="col-md-12">
+                        <select class="form-control">
+                            <option>V01.00012.03 - Kỹ sư hạng III</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <label>Bậc lương</label>
+                        <input class="form-control number"  type="text">
+                    </div>
+                    <div class="col-xs-4">
+                        <label>Hệ số</label>
+                        <input class="form-control decimal" type="text">
+                    </div>
+                    <div class="col-xs-4">
+                        <label>Vượt khung (%)</label>
+                        <input class="form-control number" type="text">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <label>Ngày hưởng</label>
+                        <input class="form-control date"  type="text">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <label>Phụ cấp chức vụ</label>
+                        <input class="form-control decimal"  type="text">
+                    </div>                    
+                    <div class="col-xs-6">
+                        <label>Phụ cấp khác</label>
+                        <input class="form-control decimal"  type="text">
+                    </div>
+                </div>                
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success">Lưu</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>                
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="modalDaoTaoBoiDuongNghiepVuChuyenMon">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Đào tạo bồi dưỡng nghiệp vụ chuyên môn</h4>
+            </div>
+            <div class="modal-body">
+                @*<p>Feel free to contact us for any issues you might have with our products.</p>*@
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Tên trường</label>
+                        <input class="form-control" type="text">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Chuyên ngành đào tạo, bồi dưỡng</label>
+                        <input class="form-control" type="text">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <label>Từ tháng năm</label>
+                        <input class="form-control thangnam" type="text">
+                    </div>
+                    <div class="col-xs-6">
+                        <label>Đến tháng năm</label>
+                        <input class="form-control thangnam" type="text">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Hình thức đào tạo</label>
+                        <input class="form-control" type="text">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Văn bằng, chứng chỉ, trình độ</label>
+                        <input class="form-control" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success">Lưu</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="modalTomTatQuaTrinhCongTac">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Tóm tắt quá trình công tác</h4>
+            </div>
+            <div class="modal-body">
+                @*<p>Feel free to contact us for any issues you might have with our products.</p>*@
+                <div class="row">
+                    <div class="col-xs-6">
+                        <label>Từ tháng năm</label>
+                        <input class="form-control thangnam" type="text">
+                    </div>
+                    <div class="col-xs-6">
+                        <label>Đến tháng năm</label>
+                        <input class="form-control thangnam" type="text">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Chức danh, chức vụ, đơn vị công tác</label>
+                        <textarea class="form-control" style="height:120px;"></textarea>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success">Lưu</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/scripts/app_scripts/CapNhatLyLichVienChuc.js?@("v="+DateTime.Now.ToString("yyMMddhhmmss"))"></script>

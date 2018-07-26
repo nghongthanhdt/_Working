@@ -17,5 +17,9 @@ namespace PHCN.NhanVien.Controllers
         {
             return View();
         }
+        public ActionResult DanhMucKyThuat()
+        {
+            return View();
+        }
     }
 }

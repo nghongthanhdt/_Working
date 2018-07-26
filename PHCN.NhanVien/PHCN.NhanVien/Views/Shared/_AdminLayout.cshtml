@@ -93,13 +93,26 @@
                     </div>
 
                 }*@  
+
                 <ul class="list-group panel">
+                    <li class="list-group-item">
+                        <a href="@Url.Action("Index", "QuanLyLyLichVienChuc")" class="btn btn-success" style="width:100%">
+                            Lý lịch Viên Chức
+                        </a>
+                    </li>
+                </ul>
+                <div class="list-group">
+                    <a href="@Url.Action("DanhSach", "QuanLyLyLichVienChuc")" class="list-group-item">Danh sách</a>
+                    
+                </div>
+
+                @*<ul class="list-group panel">
                     <li class="list-group-item">
                         <a href="@Url.Action("SoanThu","ThuNoiBo")" class="btn btn-success" style="width:100%">
                             Soạn thư
                         </a>
                     </li>
-                </ul>
+                </ul>*@
                 
                 <div class="list-group">
                     @*<a href="@Url.Action("Index", "ThuNoiBo", new { box = "ThuDen"})" class="list-group-item @((box=="ThuDen")?"active":"")">Hộp thư đến</a>

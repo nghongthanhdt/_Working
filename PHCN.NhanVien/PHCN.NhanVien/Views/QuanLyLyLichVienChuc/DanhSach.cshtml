@@ -1,0 +1,97 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    ViewBag.PanelTitle = "Danh sách Viên Chức";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="form-group">
+            <select class="form-control">
+                <option value="1">Bệnh viện Phục Hồi Chức Năng Đồng Tháp</option>
+            </select>
+        </div>
+
+    </div>
+    <div class="col-lg-6">
+        <div class="input-group form-search">
+            <input class="form-control search-query" type="text" placeholder="Họ tên...">
+            <span class="input-group-btn">
+                <button data-type="last" class="btn btn-primary" type="submit">Tìm kiếm</button>
+            </span>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="pull-right">
+    <button class="btn btn-default">Cập nhật STT</button>
+    <button class="btn btn-success">Thêm hồ sơ</button>
+    
+</div>
+
+<div class="pull-left">
+    <h6>Tổng cộng <strong>99</strong> hồ sơ</h6>
+</div>
+<table class="table table-condensed" style="font-size:14px;">
+    <thead>
+        <tr>
+            <th>STT</th>
+            <th>Họ tên</th>
+            <th>Giới tính</th>
+            <th>Ngày sinh</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <input type="text" value="1" class="form-control input-sm text-center" style="width:50px; height:25px" />
+            </td>
+            <td>
+                <a href="#">Nguyễn Hồng Thanh</a>
+            </td>
+            <td>Nam</td>
+            <td>17/04/1991</td>
+            <td>
+                <a href="#" class="btn btn-xs btn-primary">Cập nhật</a>
+                <a href="#" class="btn btn-xs btn-danger">Xóa</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" value="1" class="form-control input-sm text-center" style="width:50px; height:25px" />
+            </td>
+            <td>
+                <a href="#">Nguyễn Hồng Thanh</a>
+            </td>
+            <td>Nam</td>
+            <td>17/04/1991</td>
+            <td>
+                <a href="#" class="btn btn-xs btn-primary">Cập nhật</a>
+                <a href="#" class="btn btn-xs btn-danger">Xóa</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" value="1" class="form-control input-sm text-center" style="width:50px; height:25px" />
+            </td>
+            <td>
+                <a href="#">Nguyễn Hồng Thanh</a>
+            </td>
+            <td>Nam</td>
+            <td>17/04/1991</td>
+            <td>
+                <a href="#" class="btn btn-xs btn-primary">Cập nhật</a>
+                <a href="#" class="btn btn-xs btn-danger">Xóa</a>
+            </td>
+        </tr>
+
+        
+    </tbody>
+</table>
+
+
+
