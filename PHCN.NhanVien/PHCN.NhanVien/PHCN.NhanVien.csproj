@@ -664,6 +664,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AjaxManagerController.cs" />
     <Compile Include="Controllers\CodeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoiController.cs" />
@@ -680,10 +681,37 @@
     <Compile Include="Models\BaiViet.cs">
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ChucDanhNgheNghiep.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ChuyenMuc.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DanToc.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DienBienDaoTaoBoiDuong.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DienBienQuaTrinhLuong.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DonVi.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\FileDinhKem.cs">
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FileDinhKemWeb.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GuiNhan.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HinhAnh.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HuyenThi.cs">
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\KhoaPhong.cs">
@@ -692,7 +720,13 @@
     <Compile Include="Models\LoaiBaiViet.cs">
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LoaiHopDong.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Loi.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LyLichVienChuc.cs">
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\NhanVien.cs">
@@ -720,6 +754,21 @@
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ThamSoHeThong.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TinhThanh.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TomTatQuaTrinhCongTac.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TonGiao.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TrinhDoChuyenMon.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\XaPhuong.cs">
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -801,6 +850,7 @@
     <Folder Include="Content\home\fonts\" />
     <Folder Include="Content\home\js\" />
     <Folder Include="Content\ImageManager\" />
+    <Folder Include="Views\AjaxManager\" />
     <Folder Include="Views\Code\" />
     <Folder Include="Views\Lib\" />
     <Folder Include="Views\Upload\" />

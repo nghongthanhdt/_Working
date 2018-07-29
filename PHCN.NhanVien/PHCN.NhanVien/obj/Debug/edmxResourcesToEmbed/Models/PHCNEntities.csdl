@@ -68,6 +68,42 @@
       <End Role="BaiViet" EntitySet="BaiViet" />
       <End Role="GuiNhan" EntitySet="GuiNhan" />
     </AssociationSet>
+    <EntitySet Name="ChucDanhNgheNghiep" EntityType="PHCNModel.ChucDanhNgheNghiep" />
+    <EntitySet Name="ChuyenMuc" EntityType="PHCNModel.ChuyenMuc" />
+    <EntitySet Name="DanToc" EntityType="PHCNModel.DanToc" />
+    <EntitySet Name="DienBienDaoTaoBoiDuong" EntityType="PHCNModel.DienBienDaoTaoBoiDuong" />
+    <EntitySet Name="DonVi" EntityType="PHCNModel.DonVi" />
+    <EntitySet Name="HinhAnh" EntityType="PHCNModel.HinhAnh" />
+    <EntitySet Name="HuyenThi" EntityType="PHCNModel.HuyenThi" />
+    <EntitySet Name="LoaiHopDong" EntityType="PHCNModel.LoaiHopDong" />
+    <EntitySet Name="TinhThanh" EntityType="PHCNModel.TinhThanh" />
+    <EntitySet Name="TomTatQuaTrinhCongTac" EntityType="PHCNModel.TomTatQuaTrinhCongTac" />
+    <EntitySet Name="TonGiao" EntityType="PHCNModel.TonGiao" />
+    <EntitySet Name="TrinhDoChuyenMon" EntityType="PHCNModel.TrinhDoChuyenMon" />
+    <EntitySet Name="XaPhuong" EntityType="PHCNModel.XaPhuong" />
+    <EntitySet Name="FileDinhKemWeb" EntityType="PHCNModel.FileDinhKemWeb" />
+    <EntitySet Name="LyLichVienChuc" EntityType="PHCNModel.LyLichVienChuc" />
+    <AssociationSet Name="FK__DienBienD__MaLyL__05A3D694" Association="PHCNModel.FK__DienBienD__MaLyL__05A3D694">
+      <End Role="LyLichVienChuc" EntitySet="LyLichVienChuc" />
+      <End Role="DienBienDaoTaoBoiDuong" EntitySet="DienBienDaoTaoBoiDuong" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LyLichVie__MaDon__03BB8E22" Association="PHCNModel.FK__LyLichVie__MaDon__03BB8E22">
+      <End Role="DonVi" EntitySet="DonVi" />
+      <End Role="LyLichVienChuc" EntitySet="LyLichVienChuc" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LyLichVienChuc_LoaiHopDong" Association="PHCNModel.FK_LyLichVienChuc_LoaiHopDong">
+      <End Role="LoaiHopDong" EntitySet="LoaiHopDong" />
+      <End Role="LyLichVienChuc" EntitySet="LyLichVienChuc" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TomTatQua__MaLyL__0697FACD" Association="PHCNModel.FK__TomTatQua__MaLyL__0697FACD">
+      <End Role="LyLichVienChuc" EntitySet="LyLichVienChuc" />
+      <End Role="TomTatQuaTrinhCongTac" EntitySet="TomTatQuaTrinhCongTac" />
+    </AssociationSet>
+    <EntitySet Name="DienBienQuaTrinhLuong" EntityType="PHCNModel.DienBienQuaTrinhLuong" />
+    <AssociationSet Name="FK__DienBienQ__MaLyL__04AFB25B" Association="PHCNModel.FK__DienBienQ__MaLyL__04AFB25B">
+      <End Role="LyLichVienChuc" EntitySet="LyLichVienChuc" />
+      <End Role="DienBienQuaTrinhLuong" EntitySet="DienBienQuaTrinhLuong" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Loi">
     <Key>
@@ -168,7 +204,7 @@
       <PropertyRef Name="MaThamSo" />
     </Key>
     <Property Name="MaThamSo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="GiaTri" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Name="GiaTri" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="TenThamSo" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="MoTa" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
   </EntityType>
@@ -277,6 +313,326 @@
       </Principal>
       <Dependent Role="GuiNhan">
         <PropertyRef Name="MaBaiViet" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ChucDanhNgheNghiep">
+    <Key>
+      <PropertyRef Name="MaChucDanhNgheNghiep" />
+    </Key>
+    <Property Name="MaChucDanhNgheNghiep" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenChucDanhNgheNghiep" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="MaSo" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="STT" Type="Int32" Nullable="false" />
+    <Property Name="Xoa" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ChuyenMuc">
+    <Key>
+      <PropertyRef Name="MaChuyenMuc" />
+    </Key>
+    <Property Name="MaChuyenMuc" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenChuyenMuc" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="STT" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DanToc">
+    <Key>
+      <PropertyRef Name="MaDanToc" />
+    </Key>
+    <Property Name="MaDanToc" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenDanToc" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="STT" Type="Int32" Nullable="false" />
+    <Property Name="Xoa" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DienBienDaoTaoBoiDuong">
+    <Key>
+      <PropertyRef Name="MaDienBienDaoTaoBoiDuong" />
+    </Key>
+    <Property Name="MaDienBienDaoTaoBoiDuong" Type="Int32" Nullable="false" />
+    <Property Name="MaLyLichVienChuc" Type="Int32" Nullable="false" />
+    <Property Name="TenTruong" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="ChuyenNganhDaoTaoBoiDuong" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Tu_Thang" Type="Int32" />
+    <Property Name="Tu_Nam" Type="Int32" />
+    <Property Name="Den_Thang" Type="Int32" />
+    <Property Name="Den_Nam" Type="Int32" />
+    <Property Name="HinhThucDaoTao" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="VanBangChungChiTrinhDo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="LyLichVienChuc" Relationship="PHCNModel.FK__DienBienD__MaLyL__05A3D694" FromRole="DienBienDaoTaoBoiDuong" ToRole="LyLichVienChuc" />
+  </EntityType>
+  <EntityType Name="DonVi">
+    <Key>
+      <PropertyRef Name="MaDonVi" />
+    </Key>
+    <Property Name="MaDonVi" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenDonVi" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="STT" Type="Int32" Nullable="false" />
+    <Property Name="Xoa" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="LyLichVienChuc" Relationship="PHCNModel.FK__LyLichVie__MaDon__03BB8E22" FromRole="DonVi" ToRole="LyLichVienChuc" />
+  </EntityType>
+  <EntityType Name="HinhAnh">
+    <Key>
+      <PropertyRef Name="MaHinhAnh" />
+    </Key>
+    <Property Name="MaHinhAnh" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LoaiHinhAnh" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="TenFile" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="TenFileDayDu" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="DuongDan" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="PhanMoRong" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="ChieuRong" Type="Int32" Nullable="false" />
+    <Property Name="ChieuCao" Type="Int32" Nullable="false" />
+    <Property Name="Xoa" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HuyenThi">
+    <Key>
+      <PropertyRef Name="MaHuyenThi" />
+    </Key>
+    <Property Name="MaHuyenThi" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenHuyenThi" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="STT" Type="Int32" Nullable="false" />
+    <Property Name="Xoa" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LoaiHopDong">
+    <Key>
+      <PropertyRef Name="MaLoaiHopDong" />
+    </Key>
+    <Property Name="MaLoaiHopDong" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenLoaiHopDong" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="STT" Type="Int32" Nullable="false" />
+    <Property Name="Xoa" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="LyLichVienChuc" Relationship="PHCNModel.FK_LyLichVienChuc_LoaiHopDong" FromRole="LoaiHopDong" ToRole="LyLichVienChuc" />
+  </EntityType>
+  <EntityType Name="TinhThanh">
+    <Key>
+      <PropertyRef Name="MaTinhThanh" />
+    </Key>
+    <Property Name="MaTinhThanh" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenTinhThanh" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="STT" Type="Int32" Nullable="false" />
+    <Property Name="Xoa" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TomTatQuaTrinhCongTac">
+    <Key>
+      <PropertyRef Name="MaTomTatQuaTrinhCongTac" />
+    </Key>
+    <Property Name="MaTomTatQuaTrinhCongTac" Type="Int32" Nullable="false" />
+    <Property Name="MaLyLichVienChuc" Type="Int32" Nullable="false" />
+    <Property Name="Tu_Thang" Type="Int32" />
+    <Property Name="Tu_Nam" Type="Int32" />
+    <Property Name="Den_Thang" Type="Int32" />
+    <Property Name="Den_Nam" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="NoiDungCongTac" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="LyLichVienChuc" Relationship="PHCNModel.FK__TomTatQua__MaLyL__0697FACD" FromRole="TomTatQuaTrinhCongTac" ToRole="LyLichVienChuc" />
+  </EntityType>
+  <EntityType Name="TonGiao">
+    <Key>
+      <PropertyRef Name="MaTonGiao" />
+    </Key>
+    <Property Name="MaTonGiao" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenTonGiao" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="STT" Type="Int32" Nullable="false" />
+    <Property Name="Xoa" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TrinhDoChuyenMon">
+    <Key>
+      <PropertyRef Name="MaTrinhDoChuyenMon" />
+    </Key>
+    <Property Name="MaTrinhDoChuyenMon" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenTrinhDoChuyenMon" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="STT" Type="Int32" Nullable="false" />
+    <Property Name="Xoa" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="XaPhuong">
+    <Key>
+      <PropertyRef Name="MaXaPhuong" />
+    </Key>
+    <Property Name="MaXaPhuong" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenXaPhuong" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="STT" Type="Int32" Nullable="false" />
+    <Property Name="Xoa" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FileDinhKemWeb">
+    <Key>
+      <PropertyRef Name="MaFile" />
+      <PropertyRef Name="MaBaiViet" />
+      <PropertyRef Name="TenFile" />
+      <PropertyRef Name="TenFileFull" />
+      <PropertyRef Name="NgayTaiLen" />
+      <PropertyRef Name="Xoa" />
+    </Key>
+    <Property Name="MaFile" Type="Int32" Nullable="false" />
+    <Property Name="MaBaiViet" Type="Int32" Nullable="false" />
+    <Property Name="TenFile" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="TenFileFull" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="PhanMoRong" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="NgayTaiLen" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Xoa" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LyLichVienChuc">
+    <Key>
+      <PropertyRef Name="MaLyLichVienChuc" />
+    </Key>
+    <Property Name="MaNhanVien" Type="Int32" />
+    <Property Name="MaHinhAnh" Type="Int32" />
+    <Property Name="MaLyLichVienChuc" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MaDonVi" Type="Int32" />
+    <Property Name="MaDonViThamQuyenQuanLy" Type="Int32" />
+    <Property Name="MaLoaiHopDong" Type="Int32" />
+    <Property Name="SoHieuVienChuc" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="HoTenKhaiSinh" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="TenGoiKhac" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="NgaySinh" Type="Int32" />
+    <Property Name="ThangSinh" Type="Int32" />
+    <Property Name="NamSinh" Type="Int32" />
+    <Property Name="GioiTinh" Type="Int32" />
+    <Property Name="NoiSinh_Xa" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="NoiSinh_Huyen" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="NoiSinh_Tinh" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="QueQuan_Xa" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="QueQuan_Huyen" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="QueQuan_Tinh" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="DanToc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TonGiao" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="NoiDangKyHKTT_SoNha" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="NoiDangKyHKTT_Duong" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="NoiDangKyHKTT_Xa" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="NoiDangKyHKTT_Huyen" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="NoiDangKyHKTT_Tinh" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="NoiOHienNay_SoNha" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="NoiOHienNay_Duong" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="NoiOHienNay_Xa" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="NoiOHienNay_Huyen" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="NoiOHienNay_Tinh" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="NgheNghiepKhiDuocTuyenDung" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="NgayTuyenDung" Type="DateTime" Precision="3" />
+    <Property Name="MaCoQuanTuyenDung" Type="Int32" />
+    <Property Name="ChucVuChucDanhHienTai" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="CongViecChinhDuocGiao" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="TrinhDoGiaoDucPhoThong" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="TrinhDoChuyenMonCaoNhat" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="LyLuanChinhTri" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="QuanLyNhaNuoc" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="BoiDuongTheoTieuChuanCDNN" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="NgoaiNgu" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="TinHoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="NgayVaoDangCSVN" Type="DateTime" Precision="3" />
+    <Property Name="NgayVaoDangCSVNChinhThuc" Type="DateTime" Precision="3" />
+    <Property Name="ToChucChinhTriXH_NgayThamGia" Type="DateTime" Precision="3" />
+    <Property Name="ToChucChinhTriXH" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="NgayNhapNgu" Type="DateTime" Precision="3" />
+    <Property Name="NgayXuatNgu" Type="DateTime" Precision="3" />
+    <Property Name="QuanHamCaoNhat" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="DanhHieuDuocPhongTangCaoNhat" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="SoTruongCongTac" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="KhenThuong" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="KyLuat" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="TinhTrangSucKhoe" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ChieuCao" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="CanNang" Type="Int32" />
+    <Property Name="NhomMau" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="LaThuongBinhHang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LaConGiaDinhChinhSach" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SoChungMinhNhanDan" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="NgayCap" Type="DateTime" Precision="3" />
+    <Property Name="SoSoBHXH" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="NhanXetDanhGiaCuaCoQuanDonVi" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="NguoiKhai" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ThuTruongKyTen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ThuTruongKy_Ngay" Type="DateTime" Precision="3" />
+    <Property Name="ThuTruongKy_NoiKy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Nhap_MaNhanVien" Type="Int32" />
+    <Property Name="Nhap_Ngay" Type="DateTime" Precision="3" />
+    <Property Name="CapNhat_MaNhanVien" Type="Int32" />
+    <Property Name="CapNhat_Ngay" Type="DateTime" Precision="3" />
+    <Property Name="Xoa_MaNhanVien" Type="Int32" />
+    <Property Name="Xoa_Ngay" Type="DateTime" Precision="3" />
+    <Property Name="Xoa" Type="Boolean" />
+    <Property Name="GhiChu" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="DienBienDaoTaoBoiDuong" Relationship="PHCNModel.FK__DienBienD__MaLyL__05A3D694" FromRole="LyLichVienChuc" ToRole="DienBienDaoTaoBoiDuong" />
+    <NavigationProperty Name="DonVi" Relationship="PHCNModel.FK__LyLichVie__MaDon__03BB8E22" FromRole="LyLichVienChuc" ToRole="DonVi" />
+    <NavigationProperty Name="LoaiHopDong" Relationship="PHCNModel.FK_LyLichVienChuc_LoaiHopDong" FromRole="LyLichVienChuc" ToRole="LoaiHopDong" />
+    <NavigationProperty Name="TomTatQuaTrinhCongTac" Relationship="PHCNModel.FK__TomTatQua__MaLyL__0697FACD" FromRole="LyLichVienChuc" ToRole="TomTatQuaTrinhCongTac" />
+    <NavigationProperty Name="DienBienQuaTrinhLuong" Relationship="PHCNModel.FK__DienBienQ__MaLyL__04AFB25B" FromRole="LyLichVienChuc" ToRole="DienBienQuaTrinhLuong" />
+  </EntityType>
+  <Association Name="FK__DienBienD__MaLyL__05A3D694">
+    <End Type="PHCNModel.LyLichVienChuc" Role="LyLichVienChuc" Multiplicity="1" />
+    <End Type="PHCNModel.DienBienDaoTaoBoiDuong" Role="DienBienDaoTaoBoiDuong" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LyLichVienChuc">
+        <PropertyRef Name="MaLyLichVienChuc" />
+      </Principal>
+      <Dependent Role="DienBienDaoTaoBoiDuong">
+        <PropertyRef Name="MaLyLichVienChuc" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LyLichVie__MaDon__03BB8E22">
+    <End Type="PHCNModel.DonVi" Role="DonVi" Multiplicity="0..1" />
+    <End Type="PHCNModel.LyLichVienChuc" Role="LyLichVienChuc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DonVi">
+        <PropertyRef Name="MaDonVi" />
+      </Principal>
+      <Dependent Role="LyLichVienChuc">
+        <PropertyRef Name="MaDonVi" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LyLichVienChuc_LoaiHopDong">
+    <End Type="PHCNModel.LoaiHopDong" Role="LoaiHopDong" Multiplicity="0..1" />
+    <End Type="PHCNModel.LyLichVienChuc" Role="LyLichVienChuc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LoaiHopDong">
+        <PropertyRef Name="MaLoaiHopDong" />
+      </Principal>
+      <Dependent Role="LyLichVienChuc">
+        <PropertyRef Name="MaLoaiHopDong" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TomTatQua__MaLyL__0697FACD">
+    <End Type="PHCNModel.LyLichVienChuc" Role="LyLichVienChuc" Multiplicity="1" />
+    <End Type="PHCNModel.TomTatQuaTrinhCongTac" Role="TomTatQuaTrinhCongTac" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LyLichVienChuc">
+        <PropertyRef Name="MaLyLichVienChuc" />
+      </Principal>
+      <Dependent Role="TomTatQuaTrinhCongTac">
+        <PropertyRef Name="MaLyLichVienChuc" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="DienBienQuaTrinhLuong">
+    <Key>
+      <PropertyRef Name="MaDienBienQuaTrinhLuong" />
+    </Key>
+    <Property Name="MaDienBienQuaTrinhLuong" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MaLyLichVienChuc" Type="Int32" Nullable="false" />
+    <Property Name="MaChucDanhNgheNghiep" Type="Int32" Nullable="false" />
+    <Property Name="BacLuong" Type="Int32" />
+    <Property Name="HeSo" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="NgayHuong" Type="DateTime" Precision="3" />
+    <Property Name="PhuCapChucVu" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PhuCapKhac" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="VuotKhung" Type="Int32" />
+    <Property Name="Nhap_MaNhanVien" Type="Int32" />
+    <Property Name="Nhap_Ngay" Type="DateTime" Precision="3" />
+    <Property Name="CapNhat_MaNhanVien" Type="Int32" />
+    <Property Name="CapNhat_Ngay" Type="DateTime" Precision="3" />
+    <Property Name="Xoa" Type="Boolean" Nullable="false" />
+    <Property Name="Xoa_MaNhanVien" Type="Int32" />
+    <Property Name="Xoa_Ngay" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="LyLichVienChuc" Relationship="PHCNModel.FK__DienBienQ__MaLyL__04AFB25B" FromRole="DienBienQuaTrinhLuong" ToRole="LyLichVienChuc" />
+  </EntityType>
+  <Association Name="FK__DienBienQ__MaLyL__04AFB25B">
+    <End Type="PHCNModel.LyLichVienChuc" Role="LyLichVienChuc" Multiplicity="1" />
+    <End Type="PHCNModel.DienBienQuaTrinhLuong" Role="DienBienQuaTrinhLuong" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LyLichVienChuc">
+        <PropertyRef Name="MaLyLichVienChuc" />
+      </Principal>
+      <Dependent Role="DienBienQuaTrinhLuong">
+        <PropertyRef Name="MaLyLichVienChuc" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

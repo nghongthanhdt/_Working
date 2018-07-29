@@ -131,5 +131,7 @@ namespace PHCN.NhanVien.Controllers
         {
             return View();
         }
+
+
     }
 }
