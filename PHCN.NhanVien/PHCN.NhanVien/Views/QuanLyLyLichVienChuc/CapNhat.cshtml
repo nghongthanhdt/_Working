@@ -16,7 +16,7 @@
     var listDanToc = db.DanToc.Where(x => x.Xoa == false).OrderBy(x => x.STT).ToList();
     var listTonGiao = db.TonGiao.Where(x => x.Xoa == false).OrderBy(x => x.STT).ToList();
     var listChucDanhNgeNghiep = db.ChucDanhNgheNghiep.Where(x => x.Xoa == false).OrderBy(x => x.STT).ToList();
-
+    var listHinhThucDaoTao = db.HinhThucDaoTao.OrderBy(x => x.STT).Where(x => x.Xoa == false).ToList();
 
 }
 
@@ -278,7 +278,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label >12. Chức vụ (chức danh hiện tại)</label>
-                            <input class="form-control disabled" type="text" id="txtChucVuChucDanhHienTai" readonly="readonly">
+                            <input class="form-control" type="text" id="txtChucVuChucDanhHienTai">
                         </div>
                     </div>                    
                 </div>
@@ -294,8 +294,8 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label >14. Chức danh nghề nghiệp viên chức</label>
-                            <a class="btn btn-xs btn-default pull-right" id="btnCapNhatQuaTrinhLuong">Cập nhật quá trình lương</a>
-                            <a class="btn btn-xs btn-default pull-right" id="btnThemChucDanhNgheNghiep" style="margin-right:5px;">Thêm nhanh</a>
+                            <button class="btn btn-xs btn-default pull-right" id="btnThemNhanhQuaTrinhLuong">Thêm nhanh</button>                            
+                            <a class="btn btn-xs btn-default pull-right" id="btnCapNhatQuaTrinhLuong" href="#markDienBienQuaTrinhLuong"  style="margin-right:5px;">Cập nhật quá trình lương</a>                            
                             
                             <div class="row">
                                 <div class="col-md-8">
@@ -304,7 +304,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label style="font-weight:normal">Mã số</label>
-                                    <input type="text" class="form-control  disabled" readonly="readonly" id="txtMaSoChucDanhNgheNghiep" />
+                                    <input type="text" class="form-control  disabled" readonly="readonly" id="txtMaSoChucDanhNgheNghiep"  />
                                 </div>
                             </div>
                             <div class="row">
@@ -322,7 +322,7 @@
                                 </div>
                                 <div class="col-md-2">
                                     <label style="font-weight:normal">Ngày hưởng</label>
-                                    <input type="text" class="form-control  disabled" style="font-weight:bold;" readonly="readonly" id="txtNgayHuong" />
+                                    <input type="text" class="form-control  disabled" readonly="readonly" id="txtNgayHuong" />
                                 </div>
                                 <div class="col-md-2">
                                     <label style="font-weight:normal">Phụ cấp chức vụ</label>
@@ -365,11 +365,11 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label style="font-weight:normal">15.6 Ngoại ngữ</label>
-                                    <input type="text" class="form-control" id="txtNgoaiNgu" value="@Model.NgoaiNgu" />
+                                    <input type="text" class="form-control" id="txtNgoaiNgu" value="@Model.NgoaiNgu" style="text-transform:uppercase" />
                                 </div>
                                 <div class="col-md-3">
                                     <label style="font-weight:normal">15.7 Tin học</label>
-                                    <input type="text" class="form-control" id="txtTinHoc" value="@Model.TinHoc"/>
+                                    <input type="text" class="form-control" id="txtTinHoc" value="@Model.TinHoc" style="text-transform:uppercase"/>
                                 </div>                                
                             </div>
                         </div>
@@ -478,7 +478,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label style="font-weight:normal">Nhóm máu</label>
-                                    <input type="text" class="form-control" id="txtNhomMau" value="@Model.NhomMau"/>
+                                    <input type="text" class="form-control" id="txtNhomMau" value="@Model.NhomMau" style="text-transform:uppercase"/>
                                 </div>
                             </div>
                             
@@ -519,54 +519,12 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label >27. ĐÀO TẠO, BỒI DƯỠNG VỀ CHUYÊN MÔN, NGHIỆP VỤ, LÝ LUẬN CHÍNH TRỊ, NGOẠI NGỮ, TIN HỌC</label>
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Tên trường</th>
-                                        <th>Chuyên ngành đào tạo, bồi dưỡng</th>
-                                        <th>Từ tháng năm đến tháng năm</th>
-                                        <th>Hình thức đào tạo</th>
-                                        <th>Văn bằng, chứng chỉ, trình độ gì</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    
-                                    <tr>
-                                        <td>1</td>
-                                        <td>
-                                            Trường Đại Học Kỹ Thuật Công Nghệ TPHCM
-                                        </td>
-                                        <td>Công nghệ thông tin</td>
-                                        <td>11/2009 - 11/2014</td>
-                                        <td>Chính quy</td>
-                                        <td>Kỹ sư công nghệ thông tin</td>
-                                        <td>
-                                            <a href="#">Sửa</a><br /><a href="#">Xóa</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>
-                                            Trường Đại Học Kỹ Thuật Công Nghệ TPHCM
-                                        </td>
-                                        <td>Công nghệ thông tin</td>
-                                        <td>11/2009 - 11/2014</td>
-                                        <td>Chính quy</td>
-                                        <td>Kỹ sư công nghệ thông tin</td>
-                                        <td>
-                                            <a href="#">Sửa</a><br /><a href="#">Xóa</a>
-                                        </td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td colspan="7">
-                                            <button class="btn btn-default btn-sm pull-right" id="btnThemDaoTaoBoiDuongChuyenMon"><i class="glyphicon glyphicon-plus"></i> Thêm ...</button>
-                                        </td>                                        
-                                    </tr>
-                                </tbody>
-                            </table>
+
+                            <div id="divDienBienQuaTrinhDaoTaoBoiDuong" data-malylichvienchuc="@Model.MaLyLichVienChuc">
+
+                            </div>
+                            
+                            <button class="btn btn-default btn-sm pull-right" id="btnThemDaoTaoBoiDuongChuyenMon"><i class="glyphicon glyphicon-plus"></i> Thêm ...</button>
                         </div>
                     </div>
                 </div>
@@ -603,6 +561,7 @@
                                     <tr>
                                         <td colspan="7">
                                             <button class="btn btn-default btn-sm pull-right" id="btnThemTomTatQuaTrinhCongTac"><i class="glyphicon glyphicon-plus"></i> Thêm ...</button>
+                                            <div id="markDienBienQuaTrinhLuong"></div>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -610,56 +569,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
+            
+                <div class="row" >
+                    <div class="col-sm-12">
                         <div class="form-group">
-                            <label >29. DIỄN BIẾN QUÁ TRÌNH LƯƠNG CỦA VIÊN CHỨC</label>
-                            <div class="table-responsive">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Tháng/Năm</th>
-
-                                            <td>11/2018</td>
-                                            <td>11/2018</td>
-                                            <td>11/2018</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Mã CDNN/bậc</th>
-
-                                            <td>V01.A124.15</td>
-                                            <td>V01.A124.15</td>
-                                            <td>V01.A124.15</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-
-                                            <th>Hệ số lương</th>
-
-                                            <td>2.34</td>
-                                            <td>2.67</td>
-                                            <td>3.01</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-
-                                        </tr>
-                                    </thead>
-                                    
-                                </table>
-                            </div>
-                            <button class="btn btn-default btn-sm pull-right" id="btnThemQuaTrinhLuong" data-malylichvienchuc="@Model.MaLyLichVienChuc"><i class="glyphicon glyphicon-plus"></i> Thêm ...</button>
+                            <label>29. DIỄN BIẾN QUÁ TRÌNH LƯƠNG CỦA VIÊN CHỨC</label>
+                            
+                                <div id="divDienBienQuaTrinhLuong" data-malylichvienchuc="@Model.MaLyLichVienChuc">
+                                </div>
+                            <br/>                            
+                            <button class="btn btn-default btn-sm pull-right" id="btnThemQuaTrinhLuong" data-malylichvienchuc=""><i class="glyphicon glyphicon-plus"></i> Thêm ...</button>
                         </div>
                     </div>
                 </div>
@@ -755,7 +674,7 @@
                             <option value=""></option>
                             @foreach (var item in listChucDanhNgeNghiep)
                             {
-                                <option value="@item">@item.TenChucDanhNgheNghiep</option>
+                                <option value="@item.MaChucDanhNgheNghiep">@item.MaSo - @item.TenChucDanhNgheNghiep</option>
                             }
                         </select>
                     </div>
@@ -795,12 +714,13 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success" data-malylichvienchuc="@Model.MaLyLichVienChuc" data-mode="insert" id="modalQuaTrinhLuong_btnLuuDienBienQuaTrinhLuong">Thêm diễn biến</button>
+                <button type="button" class="btn btn-danger" data-malylichvienchuc="@Model.MaLyLichVienChuc" data-mode="insert" id="modalChucDanhNgheNghiepVienChuc_btnXoa">Xóa diễn biến</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>                
             </div>
         </div>
     </div>
 </div>
-<div class="modal" id="modalDaoTaoBoiDuongNghiepVuChuyenMon">
+<div class="modal" id="modalDaoTaoBoiDuongNghiepVuChuyenMon" data-malylichvienchuc="@Model.MaLyLichVienChuc" data-madienbiendaotaoboiduong="0">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -812,40 +732,48 @@
                 <div class="row">
                     <div class="col-md-12">
                         <label>Tên trường</label>
-                        <input class="form-control" type="text">
+                        <input class="form-control" type="text" id="modalDaoTaoBoiDuongNghiepVuChuyenMon_txtTenTruong">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <label>Chuyên ngành đào tạo, bồi dưỡng</label>
-                        <input class="form-control" type="text">
+                        <input class="form-control" type="text" id="modalDaoTaoBoiDuongNghiepVuChuyenMon_txtChuyenNganhDaoTao">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-6">
                         <label>Từ tháng năm</label>
-                        <input class="form-control thangnam" type="text">
+                        <input class="form-control thangnam" type="text" id="modalDaoTaoBoiDuongNghiepVuChuyenMon_txtTuThangNam">
                     </div>
                     <div class="col-xs-6">
                         <label>Đến tháng năm</label>
-                        <input class="form-control thangnam" type="text">
+                        <input class="form-control thangnam" type="text" id="modalDaoTaoBoiDuongNghiepVuChuyenMon_txtDenThangNam">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <label>Hình thức đào tạo</label>
-                        <input class="form-control" type="text">
+                        
+                        <select class="form-control" id="modalDaoTaoBoiDuongNghiepVuChuyenMon_selectHinhThucDaoTao"> 
+                            <option value=""></option>
+                            @foreach (var item in listHinhThucDaoTao)
+                            {
+                                <option value="@item.MaHinhThucDaoTao">@item.TenHinhThucDaoTao</option>
+                            }
+                        </select>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <label>Văn bằng, chứng chỉ, trình độ</label>
-                        <input class="form-control" type="text">
+                        <input class="form-control" type="text" id="modalDaoTaoBoiDuongNghiepVuChuyenMon_txtVanBangChungChiTrinhDo">
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success">Lưu</button>
+                <button type="button" class="btn btn-success" id="modalDaoTaoBoiDuongNghiepVuChuyenMon_btnLuu" data-malylichvienchuc="@Model.MaLyLichVienChuc">Lưu</button>
+                
                 <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
             </div>
         </div>
@@ -890,5 +818,6 @@
 
 <script>
     var _ajaxUrl = '@(HttpContext.Current.Request.Url.Scheme)://@(HttpContext.Current.Request.Url.Authority)/AjaxManager/';
+    var _ajaxThisUrl = '@(HttpContext.Current.Request.Url.Scheme)://@(HttpContext.Current.Request.Url.Authority)/QuanLyLyLichVienChuc/';
 </script>
 <script src="~/scripts/app_scripts/CapNhatLyLichVienChuc.js?@("v="+DateTime.Now.ToString("yyMMddhhmmss"))"></script>

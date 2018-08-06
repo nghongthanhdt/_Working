@@ -31,6 +31,7 @@ namespace PHCN.NhanVien.Models
         public Nullable<int> Xoa_MaNhanVien { get; set; }
         public Nullable<System.DateTime> Xoa_Ngay { get; set; }
     
+        public virtual ChucDanhNgheNghiep ChucDanhNgheNghiep { get; set; }
         public virtual LyLichVienChuc LyLichVienChuc { get; set; }
     }
 }

@@ -711,6 +711,9 @@
     <Compile Include="Models\HinhAnh.cs">
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\HinhThucDaoTao.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\HuyenThi.cs">
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
@@ -835,6 +838,9 @@
     <Content Include="Views\QuanLyLyLichVienChuc\Index.cshtml" />
     <Content Include="Views\QuanLyLyLichVienChuc\DanhSach.cshtml" />
     <Content Include="Views\QuanLyLyLichVienChuc\CapNhat.cshtml" />
+    <Content Include="Views\Home\KhongDuocPhepTruyCap.cshtml" />
+    <Content Include="Views\QuanLyLyLichVienChuc\_pDienBienQuaTrinhLuong.cshtml" />
+    <Content Include="Views\QuanLyLyLichVienChuc\_pDienBienQuaTrinhDaoTaoBoiDuong.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

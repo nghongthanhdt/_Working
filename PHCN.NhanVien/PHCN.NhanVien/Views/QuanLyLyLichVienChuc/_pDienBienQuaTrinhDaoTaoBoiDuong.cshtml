@@ -1,0 +1,65 @@
+﻿@model List<PHCN.NhanVien.Models.DienBienDaoTaoBoiDuong>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Tên trường</th>
+            <th>Chuyên ngành đào tạo, bồi dưỡng</th>
+            <th>Từ tháng năm đến tháng năm</th>
+            <th>Hình thức đào tạo</th>
+            <th>Văn bằng, chứng chỉ, trình độ gì</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ 
+            int count = 0;
+        }
+
+        @foreach (var item in Model)
+
+
+        {
+            count++;
+            <tr>
+                <td>@count</td>
+                <td>
+                    @item.TenTruong
+                </td>
+                <td>@item.ChuyenNganhDaoTaoBoiDuong</td>
+                <td>@(DateTime.Parse(item.TuThangNam.ToString()).ToString("MM/yyyy")) - @(DateTime.Parse(item.DenThangNam.ToString()).ToString("MM/yyyy"))</td>
+                <td>@item.HinhThucDaoTao.TenHinhThucDaoTao</td>
+                <td>@item.VanBangChungChiTrinhDo</td>
+                <td>
+                    <a href="javascript:void(0);" data-madienbiendaotaoboiduong="@item.MaDienBienDaoTaoBoiDuong" class="rowQuaTrinhDaoTaoBoiDuong btn btn-xs btn-default">
+                        <i class="glyphicon glyphicon-pencil"></i> 
+                        ...
+                    </a>
+                    <a href="javascript:void(0);" data-madienbiendaotaoboiduong="@item.MaDienBienDaoTaoBoiDuong" class="rowXoaQuaTrinhDaoTaoBoiDuong btn btn-xs btn-default">
+                        <i class="glyphicon glyphicon-remove"></i>
+                        
+                    </a>
+                    
+                </td>
+            </tr>
+        }
+
+
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                
+            </td>
+        </tr>
+
+        
+    </tbody>
+</table>

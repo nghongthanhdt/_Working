@@ -18,13 +18,12 @@ namespace PHCN.NhanVien.Models
         public int MaLyLichVienChuc { get; set; }
         public string TenTruong { get; set; }
         public string ChuyenNganhDaoTaoBoiDuong { get; set; }
-        public Nullable<int> Tu_Thang { get; set; }
-        public Nullable<int> Tu_Nam { get; set; }
-        public Nullable<int> Den_Thang { get; set; }
-        public Nullable<int> Den_Nam { get; set; }
-        public string HinhThucDaoTao { get; set; }
+        public Nullable<System.DateTime> TuThangNam { get; set; }
+        public Nullable<System.DateTime> DenThangNam { get; set; }
+        public Nullable<int> MaHinhThucDaoTao { get; set; }
         public string VanBangChungChiTrinhDo { get; set; }
     
         public virtual LyLichVienChuc LyLichVienChuc { get; set; }
+        public virtual HinhThucDaoTao HinhThucDaoTao { get; set; }
     }
 }

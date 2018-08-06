@@ -147,22 +147,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="DienBienDaoTaoBoiDuong">
-      <EntityTypeMapping TypeName="PHCNModel.DienBienDaoTaoBoiDuong">
-        <MappingFragment StoreEntitySet="DienBienDaoTaoBoiDuong">
-          <ScalarProperty Name="VanBangChungChiTrinhDo" ColumnName="VanBangChungChiTrinhDo" />
-          <ScalarProperty Name="HinhThucDaoTao" ColumnName="HinhThucDaoTao" />
-          <ScalarProperty Name="Den_Nam" ColumnName="Den_Nam" />
-          <ScalarProperty Name="Den_Thang" ColumnName="Den_Thang" />
-          <ScalarProperty Name="Tu_Nam" ColumnName="Tu_Nam" />
-          <ScalarProperty Name="Tu_Thang" ColumnName="Tu_Thang" />
-          <ScalarProperty Name="ChuyenNganhDaoTaoBoiDuong" ColumnName="ChuyenNganhDaoTaoBoiDuong" />
-          <ScalarProperty Name="TenTruong" ColumnName="TenTruong" />
-          <ScalarProperty Name="MaLyLichVienChuc" ColumnName="MaLyLichVienChuc" />
-          <ScalarProperty Name="MaDienBienDaoTaoBoiDuong" ColumnName="MaDienBienDaoTaoBoiDuong" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="DonVi">
       <EntityTypeMapping TypeName="PHCNModel.DonVi">
         <MappingFragment StoreEntitySet="DonVi">
@@ -375,6 +359,30 @@
           <ScalarProperty Name="MaChucDanhNgheNghiep" ColumnName="MaChucDanhNgheNghiep" />
           <ScalarProperty Name="MaLyLichVienChuc" ColumnName="MaLyLichVienChuc" />
           <ScalarProperty Name="MaDienBienQuaTrinhLuong" ColumnName="MaDienBienQuaTrinhLuong" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DienBienDaoTaoBoiDuong">
+      <EntityTypeMapping TypeName="PHCNModel.DienBienDaoTaoBoiDuong">
+        <MappingFragment StoreEntitySet="DienBienDaoTaoBoiDuong">
+          <ScalarProperty Name="VanBangChungChiTrinhDo" ColumnName="VanBangChungChiTrinhDo" />
+          <ScalarProperty Name="MaHinhThucDaoTao" ColumnName="MaHinhThucDaoTao" />
+          <ScalarProperty Name="DenThangNam" ColumnName="DenThangNam" />
+          <ScalarProperty Name="TuThangNam" ColumnName="TuThangNam" />
+          <ScalarProperty Name="ChuyenNganhDaoTaoBoiDuong" ColumnName="ChuyenNganhDaoTaoBoiDuong" />
+          <ScalarProperty Name="TenTruong" ColumnName="TenTruong" />
+          <ScalarProperty Name="MaLyLichVienChuc" ColumnName="MaLyLichVienChuc" />
+          <ScalarProperty Name="MaDienBienDaoTaoBoiDuong" ColumnName="MaDienBienDaoTaoBoiDuong" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HinhThucDaoTao">
+      <EntityTypeMapping TypeName="PHCNModel.HinhThucDaoTao">
+        <MappingFragment StoreEntitySet="HinhThucDaoTao">
+          <ScalarProperty Name="Xoa" ColumnName="Xoa" />
+          <ScalarProperty Name="STT" ColumnName="STT" />
+          <ScalarProperty Name="TenHinhThucDaoTao" ColumnName="TenHinhThucDaoTao" />
+          <ScalarProperty Name="MaHinhThucDaoTao" ColumnName="MaHinhThucDaoTao" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

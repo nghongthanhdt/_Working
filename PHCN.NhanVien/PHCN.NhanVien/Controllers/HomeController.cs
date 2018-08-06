@@ -132,6 +132,11 @@ namespace PHCN.NhanVien.Controllers
             return View();
         }
 
+        public ActionResult KhongDuocPhepTruyCap()
+        {
+            return View();
+        }
+
 
     }
 }

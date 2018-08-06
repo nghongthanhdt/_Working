@@ -1,0 +1,58 @@
+﻿@model List<PHCN.NhanVien.Models.DienBienQuaTrinhLuong>
+@{ 
+
+}
+
+<div style="width:100%; overflow-x:scroll;">
+    <table class="table table-bordered">
+        
+            <tr>
+                <th>Tháng/Năm</th>
+
+                @foreach (var item in Model)
+                {
+                    <td>
+                        <a data-madienbienquatrinhluong="@item.MaDienBienQuaTrinhLuong" class="colDienBienQuaTrinhLuong btn btn-xs @((item.VuotKhung > 0)?"btn-danger":"btn-primary")">
+                            @DateTime.Parse(item.NgayHuong.ToString()).ToString("MM/yyyy")
+                        </a>                        
+                    </td>
+                }
+
+                <td></td>
+                <td></td>
+                <td></td>
+
+            </tr>
+            <tr>
+                <th>Mã CDNN/bậc</th>
+
+                @foreach (var item in Model)
+            {
+                    <td>@item.BacLuong</td>
+                }
+                <td></td>
+                <td></td>
+                <td></td>
+
+            </tr>
+            <tr>
+
+                <th>Hệ số lương</th>
+
+                @foreach (var item in Model)
+                {
+                    <td>@item.HeSo @((item.VuotKhung > 0)?("+" + item.VuotKhung + "%"):"")</td>
+                }
+                <td></td>
+                <td></td>
+                <td></td>
+
+
+            </tr>
+        
+
+    </table>
+</div>
+
+
+

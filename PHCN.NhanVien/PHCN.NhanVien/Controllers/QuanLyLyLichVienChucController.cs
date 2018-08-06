@@ -44,5 +44,21 @@ namespace PHCN.NhanVien.Controllers
             lyLich = db.LyLichVienChuc.Find(maLyLichVienChuc);
             return View(lyLich);
         }
+
+        public ActionResult _pDienBienQuaTrinhLuong(int id)
+        {
+            //id: Mã lý lịch viên chức
+
+            List<DienBienQuaTrinhLuong> list =  db.DienBienQuaTrinhLuong.Where(x => x.MaLyLichVienChuc == id).OrderBy(x => x.NgayHuong).ToList();
+            return View(list);
+        }
+
+        public ActionResult _pDienBienQuaTrinhDaoTaoBoiDuong(int id)
+        {
+            // id: Mã lý lịch viên chức
+
+            List<DienBienDaoTaoBoiDuong> list = db.DienBienDaoTaoBoiDuong.Where(x => x.MaLyLichVienChuc == id).OrderBy(x => x.TuThangNam).ToList();
+            return View(list);
+        }
     }
 }

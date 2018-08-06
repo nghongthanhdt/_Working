@@ -12,21 +12,20 @@ namespace PHCN.NhanVien.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ChucDanhNgheNghiep
+    public partial class HinhThucDaoTao
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ChucDanhNgheNghiep()
+        public HinhThucDaoTao()
         {
-            this.DienBienQuaTrinhLuong = new HashSet<DienBienQuaTrinhLuong>();
+            this.DienBienDaoTaoBoiDuong = new HashSet<DienBienDaoTaoBoiDuong>();
         }
     
-        public int MaChucDanhNgheNghiep { get; set; }
-        public string TenChucDanhNgheNghiep { get; set; }
-        public string MaSo { get; set; }
+        public int MaHinhThucDaoTao { get; set; }
+        public string TenHinhThucDaoTao { get; set; }
         public int STT { get; set; }
         public bool Xoa { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DienBienQuaTrinhLuong> DienBienQuaTrinhLuong { get; set; }
+        public virtual ICollection<DienBienDaoTaoBoiDuong> DienBienDaoTaoBoiDuong { get; set; }
     }
 }
