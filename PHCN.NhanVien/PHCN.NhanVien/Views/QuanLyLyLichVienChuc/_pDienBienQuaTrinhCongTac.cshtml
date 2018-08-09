@@ -1,0 +1,46 @@
+﻿@model List<PHCN.NhanVien.Models.DienBienQuaTrinhCongTac>
+    
+@{ 
+    int count = 0;
+}
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Từ tháng năm đến tháng năm</th>
+            <th>Chức danh, chức vụ, đơn vị công tác (Đảng, chính quyền, đoàn thể, tổ chức xã hội), kể cả thời gian được đào tạo, bồi dưỡng về chuyên môn, nghiệp vụ,...</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            count++;
+            <tr>
+                <td>@count</td>
+                <td>@(DateTime.Parse(item.TuThangNam.ToString()).ToString("MM/yyyy")) - @(DateTime.Parse(item.DenThangNam.ToString()).ToString("MM/yyyy"))</td>
+                <td>
+                    @item.NoiDungCongTac
+                </td>
+                <td>
+                    <a href="javascript:void(0);" class="rowsuaDienBienQuaTrinhCongTac btn btn-xs btn-default" data-madienbienquatrinhcongtac="@item.MaDienBienQuaTrinhCongTac"><i class="glyphicon glyphicon-pencil"></i> ... </a>
+                    <a href="javascript:void(0);" data-madienbienquatrinhcongtac="@item.MaDienBienQuaTrinhCongTac" class="rowXoaDienBienQuaTrinhCongTac btn btn-xs btn-default">
+                        <i class="glyphicon glyphicon-remove"></i>
+
+                    </a>
+                </td>
+            </tr>
+        }
+        
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>&nbsp;</td>
+        </tr>
+
+
+        
+    </tbody>
+</table>

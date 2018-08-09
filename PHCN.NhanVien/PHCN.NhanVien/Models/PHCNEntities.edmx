@@ -59,6 +59,16 @@
           <Property Name="MaHinhThucDaoTao" Type="int" />
           <Property Name="VanBangChungChiTrinhDo" Type="nvarchar" MaxLength="200" />
         </EntityType>
+        <EntityType Name="DienBienQuaTrinhCongTac">
+          <Key>
+            <PropertyRef Name="MaDienBienQuaTrinhCongTac" />
+          </Key>
+          <Property Name="MaDienBienQuaTrinhCongTac" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaLyLichVienChuc" Type="int" Nullable="false" />
+          <Property Name="TuThangNam" Type="datetime2" Precision="7" />
+          <Property Name="DenThangNam" Type="datetime2" Precision="7" />
+          <Property Name="NoiDungCongTac" Type="ntext" />
+        </EntityType>
         <EntityType Name="DienBienQuaTrinhLuong">
           <Key>
             <PropertyRef Name="MaDienBienQuaTrinhLuong" />
@@ -141,14 +151,13 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
             <PropertyRef Name="MaHinhAnh" />
           </Key>
           <Property Name="MaHinhAnh" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="LoaiHinhAnh" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="MaLyLichVienChuc" Type="int" />
+          <Property Name="LoaiHinhAnh" Type="nvarchar" MaxLength="20" />
           <Property Name="TenFile" Type="nvarchar" MaxLength="300" Nullable="false" />
           <Property Name="TenFileDayDu" Type="nvarchar" MaxLength="300" Nullable="false" />
           <Property Name="DuongDan" Type="nvarchar" MaxLength="1000" Nullable="false" />
           <Property Name="PhanMoRong" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="ChieuRong" Type="int" Nullable="false" />
-          <Property Name="ChieuCao" Type="int" Nullable="false" />
-          <Property Name="Xoa" Type="bit" Nullable="false" />
+          <Property Name="NgayTaiLen" Type="datetime2" Precision="7" />
         </EntityType>
         <EntityType Name="HinhThucDaoTao">
           <Key>
@@ -331,18 +340,6 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
           <Property Name="STT" Type="int" Nullable="false" />
           <Property Name="Xoa" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="TomTatQuaTrinhCongTac">
-          <Key>
-            <PropertyRef Name="MaTomTatQuaTrinhCongTac" />
-          </Key>
-          <Property Name="MaTomTatQuaTrinhCongTac" Type="int" Nullable="false" />
-          <Property Name="MaLyLichVienChuc" Type="int" Nullable="false" />
-          <Property Name="Tu_Thang" Type="int" />
-          <Property Name="Tu_Nam" Type="int" />
-          <Property Name="Den_Thang" Type="int" />
-          <Property Name="Den_Nam" Type="image" />
-          <Property Name="NoiDungCongTac" Type="nvarchar" MaxLength="3000" />
-        </EntityType>
         <EntityType Name="TonGiao">
           <Key>
             <PropertyRef Name="MaTonGiao" />
@@ -408,12 +405,12 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
         </Association>
         <Association Name="FK__TomTatQua__MaLyL__0697FACD">
           <End Role="LyLichVienChuc" Type="Self.LyLichVienChuc" Multiplicity="1" />
-          <End Role="TomTatQuaTrinhCongTac" Type="Self.TomTatQuaTrinhCongTac" Multiplicity="*" />
+          <End Role="DienBienQuaTrinhCongTac" Type="Self.DienBienQuaTrinhCongTac" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LyLichVienChuc">
               <PropertyRef Name="MaLyLichVienChuc" />
             </Principal>
-            <Dependent Role="TomTatQuaTrinhCongTac">
+            <Dependent Role="DienBienQuaTrinhCongTac">
               <PropertyRef Name="MaLyLichVienChuc" />
             </Dependent>
           </ReferentialConstraint>
@@ -526,6 +523,18 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_LyLichVienChuc_NhanVien">
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="0..1" />
+          <End Role="LyLichVienChuc" Type="Self.LyLichVienChuc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="MaNhanVien" />
+            </Principal>
+            <Dependent Role="LyLichVienChuc">
+              <PropertyRef Name="MaNhanVien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_NhanVien_KhoaPhong">
           <End Role="KhoaPhong" Type="Self.KhoaPhong" Multiplicity="1" />
           <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />
@@ -568,6 +577,7 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
           <EntitySet Name="ChuyenMuc" EntityType="Self.ChuyenMuc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DanToc" EntityType="Self.DanToc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DienBienDaoTaoBoiDuong" EntityType="Self.DienBienDaoTaoBoiDuong" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DienBienQuaTrinhCongTac" EntityType="Self.DienBienQuaTrinhCongTac" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DienBienQuaTrinhLuong" EntityType="Self.DienBienQuaTrinhLuong" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DonVi" EntityType="Self.DonVi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FileDinhKem" EntityType="Self.FileDinhKem" Schema="dbo" store:Type="Tables" />
@@ -585,7 +595,6 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
           <EntitySet Name="Quyen" EntityType="Self.Quyen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ThamSoHeThong" EntityType="Self.ThamSoHeThong" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TinhThanh" EntityType="Self.TinhThanh" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TomTatQuaTrinhCongTac" EntityType="Self.TomTatQuaTrinhCongTac" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TonGiao" EntityType="Self.TonGiao" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TrinhDoChuyenMon" EntityType="Self.TrinhDoChuyenMon" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="XaPhuong" EntityType="Self.XaPhuong" Schema="dbo" store:Type="Tables" />
@@ -614,7 +623,7 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
           </AssociationSet>
           <AssociationSet Name="FK__TomTatQua__MaLyL__0697FACD" Association="Self.FK__TomTatQua__MaLyL__0697FACD">
             <End Role="LyLichVienChuc" EntitySet="LyLichVienChuc" />
-            <End Role="TomTatQuaTrinhCongTac" EntitySet="TomTatQuaTrinhCongTac" />
+            <End Role="DienBienQuaTrinhCongTac" EntitySet="DienBienQuaTrinhCongTac" />
           </AssociationSet>
           <AssociationSet Name="FK_BaiViet_LoaiBaiViet" Association="Self.FK_BaiViet_LoaiBaiViet">
             <End Role="LoaiBaiViet" EntitySet="LoaiBaiViet" />
@@ -650,6 +659,10 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
           </AssociationSet>
           <AssociationSet Name="FK_LyLichVienChuc_LoaiHopDong" Association="Self.FK_LyLichVienChuc_LoaiHopDong">
             <End Role="LoaiHopDong" EntitySet="LoaiHopDong" />
+            <End Role="LyLichVienChuc" EntitySet="LyLichVienChuc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LyLichVienChuc_NhanVien" Association="Self.FK_LyLichVienChuc_NhanVien">
+            <End Role="NhanVien" EntitySet="NhanVien" />
             <End Role="LyLichVienChuc" EntitySet="LyLichVienChuc" />
           </AssociationSet>
           <AssociationSet Name="FK_NhanVien_KhoaPhong" Association="Self.FK_NhanVien_KhoaPhong">
@@ -741,16 +754,39 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
           <EntitySet Name="ChuyenMuc" EntityType="PHCNModel.ChuyenMuc" />
           <EntitySet Name="DanToc" EntityType="PHCNModel.DanToc" />
           <EntitySet Name="DonVi" EntityType="PHCNModel.DonVi" />
-          <EntitySet Name="HinhAnh" EntityType="PHCNModel.HinhAnh" />
           <EntitySet Name="HuyenThi" EntityType="PHCNModel.HuyenThi" />
           <EntitySet Name="LoaiHopDong" EntityType="PHCNModel.LoaiHopDong" />
           <EntitySet Name="TinhThanh" EntityType="PHCNModel.TinhThanh" />
-          <EntitySet Name="TomTatQuaTrinhCongTac" EntityType="PHCNModel.TomTatQuaTrinhCongTac" />
           <EntitySet Name="TonGiao" EntityType="PHCNModel.TonGiao" />
           <EntitySet Name="TrinhDoChuyenMon" EntityType="PHCNModel.TrinhDoChuyenMon" />
           <EntitySet Name="XaPhuong" EntityType="PHCNModel.XaPhuong" />
           <EntitySet Name="FileDinhKemWeb" EntityType="PHCNModel.FileDinhKemWeb" />
+          <EntitySet Name="DienBienQuaTrinhLuong" EntityType="PHCNModel.DienBienQuaTrinhLuong" />
+          <AssociationSet Name="FK_DienBienQuaTrinhLuong_ChucDanhNgheNghiep" Association="PHCNModel.FK_DienBienQuaTrinhLuong_ChucDanhNgheNghiep">
+            <End Role="ChucDanhNgheNghiep" EntitySet="ChucDanhNgheNghiep" />
+            <End Role="DienBienQuaTrinhLuong" EntitySet="DienBienQuaTrinhLuong" />
+          </AssociationSet>
+          <EntitySet Name="DienBienDaoTaoBoiDuong" EntityType="PHCNModel.DienBienDaoTaoBoiDuong" />
+          <EntitySet Name="HinhThucDaoTao" EntityType="PHCNModel.HinhThucDaoTao" />
+          <AssociationSet Name="FK_DienBienDaoTaoBoiDuong_HinhThucDaoTao" Association="PHCNModel.FK_DienBienDaoTaoBoiDuong_HinhThucDaoTao">
+            <End Role="HinhThucDaoTao" EntitySet="HinhThucDaoTao" />
+            <End Role="DienBienDaoTaoBoiDuong" EntitySet="DienBienDaoTaoBoiDuong" />
+          </AssociationSet>
+          <EntitySet Name="DienBienQuaTrinhCongTac" EntityType="PHCNModel.DienBienQuaTrinhCongTac" />
+          <EntitySet Name="HinhAnh" EntityType="PHCNModel.HinhAnh" />
           <EntitySet Name="LyLichVienChuc" EntityType="PHCNModel.LyLichVienChuc" />
+          <AssociationSet Name="FK__DienBienD__MaLyL__05A3D694" Association="PHCNModel.FK__DienBienD__MaLyL__05A3D694">
+            <End Role="LyLichVienChuc" EntitySet="LyLichVienChuc" />
+            <End Role="DienBienDaoTaoBoiDuong" EntitySet="DienBienDaoTaoBoiDuong" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TomTatQua__MaLyL__0697FACD" Association="PHCNModel.FK__TomTatQua__MaLyL__0697FACD">
+            <End Role="LyLichVienChuc" EntitySet="LyLichVienChuc" />
+            <End Role="DienBienQuaTrinhCongTac" EntitySet="DienBienQuaTrinhCongTac" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DienBienQ__MaLyL__04AFB25B" Association="PHCNModel.FK__DienBienQ__MaLyL__04AFB25B">
+            <End Role="LyLichVienChuc" EntitySet="LyLichVienChuc" />
+            <End Role="DienBienQuaTrinhLuong" EntitySet="DienBienQuaTrinhLuong" />
+          </AssociationSet>
           <AssociationSet Name="FK__LyLichVie__MaDon__03BB8E22" Association="PHCNModel.FK__LyLichVie__MaDon__03BB8E22">
             <End Role="DonVi" EntitySet="DonVi" />
             <End Role="LyLichVienChuc" EntitySet="LyLichVienChuc" />
@@ -759,28 +795,9 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
             <End Role="LoaiHopDong" EntitySet="LoaiHopDong" />
             <End Role="LyLichVienChuc" EntitySet="LyLichVienChuc" />
           </AssociationSet>
-          <AssociationSet Name="FK__TomTatQua__MaLyL__0697FACD" Association="PHCNModel.FK__TomTatQua__MaLyL__0697FACD">
+          <AssociationSet Name="FK_LyLichVienChuc_NhanVien" Association="PHCNModel.FK_LyLichVienChuc_NhanVien">
+            <End Role="NhanVien" EntitySet="NhanVien" />
             <End Role="LyLichVienChuc" EntitySet="LyLichVienChuc" />
-            <End Role="TomTatQuaTrinhCongTac" EntitySet="TomTatQuaTrinhCongTac" />
-          </AssociationSet>
-          <EntitySet Name="DienBienQuaTrinhLuong" EntityType="PHCNModel.DienBienQuaTrinhLuong" />
-          <AssociationSet Name="FK_DienBienQuaTrinhLuong_ChucDanhNgheNghiep" Association="PHCNModel.FK_DienBienQuaTrinhLuong_ChucDanhNgheNghiep">
-            <End Role="ChucDanhNgheNghiep" EntitySet="ChucDanhNgheNghiep" />
-            <End Role="DienBienQuaTrinhLuong" EntitySet="DienBienQuaTrinhLuong" />
-          </AssociationSet>
-          <AssociationSet Name="FK__DienBienQ__MaLyL__04AFB25B" Association="PHCNModel.FK__DienBienQ__MaLyL__04AFB25B">
-            <End Role="LyLichVienChuc" EntitySet="LyLichVienChuc" />
-            <End Role="DienBienQuaTrinhLuong" EntitySet="DienBienQuaTrinhLuong" />
-          </AssociationSet>
-          <EntitySet Name="DienBienDaoTaoBoiDuong" EntityType="PHCNModel.DienBienDaoTaoBoiDuong" />
-          <EntitySet Name="HinhThucDaoTao" EntityType="PHCNModel.HinhThucDaoTao" />
-          <AssociationSet Name="FK__DienBienD__MaLyL__05A3D694" Association="PHCNModel.FK__DienBienD__MaLyL__05A3D694">
-            <End Role="LyLichVienChuc" EntitySet="LyLichVienChuc" />
-            <End Role="DienBienDaoTaoBoiDuong" EntitySet="DienBienDaoTaoBoiDuong" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DienBienDaoTaoBoiDuong_HinhThucDaoTao" Association="PHCNModel.FK_DienBienDaoTaoBoiDuong_HinhThucDaoTao">
-            <End Role="HinhThucDaoTao" EntitySet="HinhThucDaoTao" />
-            <End Role="DienBienDaoTaoBoiDuong" EntitySet="DienBienDaoTaoBoiDuong" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Loi">
@@ -840,6 +857,7 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
           <Property Name="MatKhauMD5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PhanQuyen" Relationship="PHCNModel.FK_PhanQuyen_NhanVien" FromRole="NhanVien" ToRole="PhanQuyen" />
           <NavigationProperty Name="BaiViet" Relationship="PHCNModel.FK_BaiViet_NhanVien" FromRole="NhanVien" ToRole="BaiViet" />
+          <NavigationProperty Name="LyLichVienChuc" Relationship="PHCNModel.FK_LyLichVienChuc_NhanVien" FromRole="NhanVien" ToRole="LyLichVienChuc" />
         </EntityType>
         <Association Name="FK_GuiNhan_NhanVien_NguoiGui">
           <End Type="PHCNModel.NhanVien" Role="NhanVien" Multiplicity="1" />
@@ -1032,20 +1050,6 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
           <Property Name="Xoa" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="LyLichVienChuc" Relationship="PHCNModel.FK__LyLichVie__MaDon__03BB8E22" FromRole="DonVi" ToRole="LyLichVienChuc" />
         </EntityType>
-        <EntityType Name="HinhAnh">
-          <Key>
-            <PropertyRef Name="MaHinhAnh" />
-          </Key>
-          <Property Name="MaHinhAnh" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="LoaiHinhAnh" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="TenFile" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="TenFileDayDu" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="DuongDan" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="PhanMoRong" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="ChieuRong" Type="Int32" Nullable="false" />
-          <Property Name="ChieuCao" Type="Int32" Nullable="false" />
-          <Property Name="Xoa" Type="Boolean" Nullable="false" />
-        </EntityType>
         <EntityType Name="HuyenThi">
           <Key>
             <PropertyRef Name="MaHuyenThi" />
@@ -1073,19 +1077,6 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
           <Property Name="TenTinhThanh" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="STT" Type="Int32" Nullable="false" />
           <Property Name="Xoa" Type="Boolean" Nullable="false" />
-        </EntityType>
-        <EntityType Name="TomTatQuaTrinhCongTac">
-          <Key>
-            <PropertyRef Name="MaTomTatQuaTrinhCongTac" />
-          </Key>
-          <Property Name="MaTomTatQuaTrinhCongTac" Type="Int32" Nullable="false" />
-          <Property Name="MaLyLichVienChuc" Type="Int32" Nullable="false" />
-          <Property Name="Tu_Thang" Type="Int32" />
-          <Property Name="Tu_Nam" Type="Int32" />
-          <Property Name="Den_Thang" Type="Int32" />
-          <Property Name="Den_Nam" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="NoiDungCongTac" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="LyLichVienChuc" Relationship="PHCNModel.FK__TomTatQua__MaLyL__0697FACD" FromRole="TomTatQuaTrinhCongTac" ToRole="LyLichVienChuc" />
         </EntityType>
         <EntityType Name="TonGiao">
           <Key>
@@ -1130,6 +1121,102 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
           <Property Name="PhanMoRong" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="NgayTaiLen" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Xoa" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DienBienQuaTrinhLuong">
+          <Key>
+            <PropertyRef Name="MaDienBienQuaTrinhLuong" />
+          </Key>
+          <Property Name="MaDienBienQuaTrinhLuong" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaLyLichVienChuc" Type="Int32" Nullable="false" />
+          <Property Name="MaChucDanhNgheNghiep" Type="Int32" Nullable="false" />
+          <Property Name="BacLuong" Type="Int32" />
+          <Property Name="HeSo" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="NgayHuong" Type="DateTime" Precision="7" />
+          <Property Name="PhuCapChucVu" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PhuCapKhac" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="VuotKhung" Type="Int32" />
+          <Property Name="Nhap_MaNhanVien" Type="Int32" />
+          <Property Name="Nhap_Ngay" Type="DateTime" Precision="7" />
+          <Property Name="CapNhat_MaNhanVien" Type="Int32" />
+          <Property Name="CapNhat_Ngay" Type="DateTime" Precision="7" />
+          <Property Name="Xoa" Type="Boolean" Nullable="false" />
+          <Property Name="Xoa_MaNhanVien" Type="Int32" />
+          <Property Name="Xoa_Ngay" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="ChucDanhNgheNghiep" Relationship="PHCNModel.FK_DienBienQuaTrinhLuong_ChucDanhNgheNghiep" FromRole="DienBienQuaTrinhLuong" ToRole="ChucDanhNgheNghiep" />
+          <NavigationProperty Name="LyLichVienChuc" Relationship="PHCNModel.FK__DienBienQ__MaLyL__04AFB25B" FromRole="DienBienQuaTrinhLuong" ToRole="LyLichVienChuc" />
+        </EntityType>
+        <Association Name="FK_DienBienQuaTrinhLuong_ChucDanhNgheNghiep">
+          <End Type="PHCNModel.ChucDanhNgheNghiep" Role="ChucDanhNgheNghiep" Multiplicity="1" />
+          <End Type="PHCNModel.DienBienQuaTrinhLuong" Role="DienBienQuaTrinhLuong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChucDanhNgheNghiep">
+              <PropertyRef Name="MaChucDanhNgheNghiep" />
+            </Principal>
+            <Dependent Role="DienBienQuaTrinhLuong">
+              <PropertyRef Name="MaChucDanhNgheNghiep" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DienBienDaoTaoBoiDuong">
+          <Key>
+            <PropertyRef Name="MaDienBienDaoTaoBoiDuong" />
+          </Key>
+          <Property Name="MaDienBienDaoTaoBoiDuong" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaLyLichVienChuc" Type="Int32" Nullable="false" />
+          <Property Name="TenTruong" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="ChuyenNganhDaoTaoBoiDuong" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TuThangNam" Type="DateTime" Precision="7" />
+          <Property Name="DenThangNam" Type="DateTime" Precision="7" />
+          <Property Name="MaHinhThucDaoTao" Type="Int32" />
+          <Property Name="VanBangChungChiTrinhDo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="HinhThucDaoTao" Relationship="PHCNModel.FK_DienBienDaoTaoBoiDuong_HinhThucDaoTao" FromRole="DienBienDaoTaoBoiDuong" ToRole="HinhThucDaoTao" />
+          <NavigationProperty Name="LyLichVienChuc" Relationship="PHCNModel.FK__DienBienD__MaLyL__05A3D694" FromRole="DienBienDaoTaoBoiDuong" ToRole="LyLichVienChuc" />
+        </EntityType>
+        <EntityType Name="HinhThucDaoTao">
+          <Key>
+            <PropertyRef Name="MaHinhThucDaoTao" />
+          </Key>
+          <Property Name="MaHinhThucDaoTao" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenHinhThucDaoTao" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="STT" Type="Int32" Nullable="false" />
+          <Property Name="Xoa" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="DienBienDaoTaoBoiDuong" Relationship="PHCNModel.FK_DienBienDaoTaoBoiDuong_HinhThucDaoTao" FromRole="HinhThucDaoTao" ToRole="DienBienDaoTaoBoiDuong" />
+        </EntityType>
+        <Association Name="FK_DienBienDaoTaoBoiDuong_HinhThucDaoTao">
+          <End Type="PHCNModel.HinhThucDaoTao" Role="HinhThucDaoTao" Multiplicity="0..1" />
+          <End Type="PHCNModel.DienBienDaoTaoBoiDuong" Role="DienBienDaoTaoBoiDuong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HinhThucDaoTao">
+              <PropertyRef Name="MaHinhThucDaoTao" />
+            </Principal>
+            <Dependent Role="DienBienDaoTaoBoiDuong">
+              <PropertyRef Name="MaHinhThucDaoTao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DienBienQuaTrinhCongTac">
+          <Key>
+            <PropertyRef Name="MaDienBienQuaTrinhCongTac" />
+          </Key>
+          <Property Name="MaDienBienQuaTrinhCongTac" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaLyLichVienChuc" Type="Int32" Nullable="false" />
+          <Property Name="TuThangNam" Type="DateTime" Precision="7" />
+          <Property Name="DenThangNam" Type="DateTime" Precision="7" />
+          <Property Name="NoiDungCongTac" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LyLichVienChuc" Relationship="PHCNModel.FK__TomTatQua__MaLyL__0697FACD" FromRole="DienBienQuaTrinhCongTac" ToRole="LyLichVienChuc" />
+        </EntityType>
+        <EntityType Name="HinhAnh">
+          <Key>
+            <PropertyRef Name="MaHinhAnh" />
+          </Key>
+          <Property Name="MaHinhAnh" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaLyLichVienChuc" Type="Int32" />
+          <Property Name="LoaiHinhAnh" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TenFile" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="TenFileDayDu" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="DuongDan" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="PhanMoRong" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="NgayTaiLen" Type="DateTime" Precision="7" />
         </EntityType>
         <EntityType Name="LyLichVienChuc">
           <Key>
@@ -1211,12 +1298,49 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
           <Property Name="Xoa_Ngay" Type="DateTime" Precision="3" />
           <Property Name="Xoa" Type="Boolean" />
           <Property Name="GhiChu" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DienBienDaoTaoBoiDuong" Relationship="PHCNModel.FK__DienBienD__MaLyL__05A3D694" FromRole="LyLichVienChuc" ToRole="DienBienDaoTaoBoiDuong" />
+          <NavigationProperty Name="DienBienQuaTrinhCongTac" Relationship="PHCNModel.FK__TomTatQua__MaLyL__0697FACD" FromRole="LyLichVienChuc" ToRole="DienBienQuaTrinhCongTac" />
+          <NavigationProperty Name="DienBienQuaTrinhLuong" Relationship="PHCNModel.FK__DienBienQ__MaLyL__04AFB25B" FromRole="LyLichVienChuc" ToRole="DienBienQuaTrinhLuong" />
           <NavigationProperty Name="DonVi" Relationship="PHCNModel.FK__LyLichVie__MaDon__03BB8E22" FromRole="LyLichVienChuc" ToRole="DonVi" />
           <NavigationProperty Name="LoaiHopDong" Relationship="PHCNModel.FK_LyLichVienChuc_LoaiHopDong" FromRole="LyLichVienChuc" ToRole="LoaiHopDong" />
-          <NavigationProperty Name="TomTatQuaTrinhCongTac" Relationship="PHCNModel.FK__TomTatQua__MaLyL__0697FACD" FromRole="LyLichVienChuc" ToRole="TomTatQuaTrinhCongTac" />
-          <NavigationProperty Name="DienBienQuaTrinhLuong" Relationship="PHCNModel.FK__DienBienQ__MaLyL__04AFB25B" FromRole="LyLichVienChuc" ToRole="DienBienQuaTrinhLuong" />
-          <NavigationProperty Name="DienBienDaoTaoBoiDuong" Relationship="PHCNModel.FK__DienBienD__MaLyL__05A3D694" FromRole="LyLichVienChuc" ToRole="DienBienDaoTaoBoiDuong" />
+          <NavigationProperty Name="NhanVien" Relationship="PHCNModel.FK_LyLichVienChuc_NhanVien" FromRole="LyLichVienChuc" ToRole="NhanVien" />
         </EntityType>
+        <Association Name="FK__DienBienD__MaLyL__05A3D694">
+          <End Type="PHCNModel.LyLichVienChuc" Role="LyLichVienChuc" Multiplicity="1" />
+          <End Type="PHCNModel.DienBienDaoTaoBoiDuong" Role="DienBienDaoTaoBoiDuong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LyLichVienChuc">
+              <PropertyRef Name="MaLyLichVienChuc" />
+            </Principal>
+            <Dependent Role="DienBienDaoTaoBoiDuong">
+              <PropertyRef Name="MaLyLichVienChuc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TomTatQua__MaLyL__0697FACD">
+          <End Type="PHCNModel.LyLichVienChuc" Role="LyLichVienChuc" Multiplicity="1" />
+          <End Type="PHCNModel.DienBienQuaTrinhCongTac" Role="DienBienQuaTrinhCongTac" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LyLichVienChuc">
+              <PropertyRef Name="MaLyLichVienChuc" />
+            </Principal>
+            <Dependent Role="DienBienQuaTrinhCongTac">
+              <PropertyRef Name="MaLyLichVienChuc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DienBienQ__MaLyL__04AFB25B">
+          <End Type="PHCNModel.LyLichVienChuc" Role="LyLichVienChuc" Multiplicity="1" />
+          <End Type="PHCNModel.DienBienQuaTrinhLuong" Role="DienBienQuaTrinhLuong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LyLichVienChuc">
+              <PropertyRef Name="MaLyLichVienChuc" />
+            </Principal>
+            <Dependent Role="DienBienQuaTrinhLuong">
+              <PropertyRef Name="MaLyLichVienChuc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__LyLichVie__MaDon__03BB8E22">
           <End Type="PHCNModel.DonVi" Role="DonVi" Multiplicity="0..1" />
           <End Type="PHCNModel.LyLichVienChuc" Role="LyLichVienChuc" Multiplicity="*" />
@@ -1241,111 +1365,15 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TomTatQua__MaLyL__0697FACD">
-          <End Type="PHCNModel.LyLichVienChuc" Role="LyLichVienChuc" Multiplicity="1" />
-          <End Type="PHCNModel.TomTatQuaTrinhCongTac" Role="TomTatQuaTrinhCongTac" Multiplicity="*" />
+        <Association Name="FK_LyLichVienChuc_NhanVien">
+          <End Type="PHCNModel.NhanVien" Role="NhanVien" Multiplicity="0..1" />
+          <End Type="PHCNModel.LyLichVienChuc" Role="LyLichVienChuc" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="LyLichVienChuc">
-              <PropertyRef Name="MaLyLichVienChuc" />
+            <Principal Role="NhanVien">
+              <PropertyRef Name="MaNhanVien" />
             </Principal>
-            <Dependent Role="TomTatQuaTrinhCongTac">
-              <PropertyRef Name="MaLyLichVienChuc" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="DienBienQuaTrinhLuong">
-          <Key>
-            <PropertyRef Name="MaDienBienQuaTrinhLuong" />
-          </Key>
-          <Property Name="MaDienBienQuaTrinhLuong" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MaLyLichVienChuc" Type="Int32" Nullable="false" />
-          <Property Name="MaChucDanhNgheNghiep" Type="Int32" Nullable="false" />
-          <Property Name="BacLuong" Type="Int32" />
-          <Property Name="HeSo" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="NgayHuong" Type="DateTime" Precision="7" />
-          <Property Name="PhuCapChucVu" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="PhuCapKhac" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="VuotKhung" Type="Int32" />
-          <Property Name="Nhap_MaNhanVien" Type="Int32" />
-          <Property Name="Nhap_Ngay" Type="DateTime" Precision="7" />
-          <Property Name="CapNhat_MaNhanVien" Type="Int32" />
-          <Property Name="CapNhat_Ngay" Type="DateTime" Precision="7" />
-          <Property Name="Xoa" Type="Boolean" Nullable="false" />
-          <Property Name="Xoa_MaNhanVien" Type="Int32" />
-          <Property Name="Xoa_Ngay" Type="DateTime" Precision="7" />
-          <NavigationProperty Name="ChucDanhNgheNghiep" Relationship="PHCNModel.FK_DienBienQuaTrinhLuong_ChucDanhNgheNghiep" FromRole="DienBienQuaTrinhLuong" ToRole="ChucDanhNgheNghiep" />
-          <NavigationProperty Name="LyLichVienChuc" Relationship="PHCNModel.FK__DienBienQ__MaLyL__04AFB25B" FromRole="DienBienQuaTrinhLuong" ToRole="LyLichVienChuc" />
-        </EntityType>
-        <Association Name="FK_DienBienQuaTrinhLuong_ChucDanhNgheNghiep">
-          <End Type="PHCNModel.ChucDanhNgheNghiep" Role="ChucDanhNgheNghiep" Multiplicity="1" />
-          <End Type="PHCNModel.DienBienQuaTrinhLuong" Role="DienBienQuaTrinhLuong" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ChucDanhNgheNghiep">
-              <PropertyRef Name="MaChucDanhNgheNghiep" />
-            </Principal>
-            <Dependent Role="DienBienQuaTrinhLuong">
-              <PropertyRef Name="MaChucDanhNgheNghiep" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__DienBienQ__MaLyL__04AFB25B">
-          <End Type="PHCNModel.LyLichVienChuc" Role="LyLichVienChuc" Multiplicity="1" />
-          <End Type="PHCNModel.DienBienQuaTrinhLuong" Role="DienBienQuaTrinhLuong" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LyLichVienChuc">
-              <PropertyRef Name="MaLyLichVienChuc" />
-            </Principal>
-            <Dependent Role="DienBienQuaTrinhLuong">
-              <PropertyRef Name="MaLyLichVienChuc" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="DienBienDaoTaoBoiDuong">
-          <Key>
-            <PropertyRef Name="MaDienBienDaoTaoBoiDuong" />
-          </Key>
-          <Property Name="MaDienBienDaoTaoBoiDuong" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MaLyLichVienChuc" Type="Int32" Nullable="false" />
-          <Property Name="TenTruong" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="ChuyenNganhDaoTaoBoiDuong" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="TuThangNam" Type="DateTime" Precision="7" />
-          <Property Name="DenThangNam" Type="DateTime" Precision="7" />
-          <Property Name="MaHinhThucDaoTao" Type="Int32" />
-          <Property Name="VanBangChungChiTrinhDo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="LyLichVienChuc" Relationship="PHCNModel.FK__DienBienD__MaLyL__05A3D694" FromRole="DienBienDaoTaoBoiDuong" ToRole="LyLichVienChuc" />
-          <NavigationProperty Name="HinhThucDaoTao" Relationship="PHCNModel.FK_DienBienDaoTaoBoiDuong_HinhThucDaoTao" FromRole="DienBienDaoTaoBoiDuong" ToRole="HinhThucDaoTao" />
-        </EntityType>
-        <EntityType Name="HinhThucDaoTao">
-          <Key>
-            <PropertyRef Name="MaHinhThucDaoTao" />
-          </Key>
-          <Property Name="MaHinhThucDaoTao" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TenHinhThucDaoTao" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="STT" Type="Int32" Nullable="false" />
-          <Property Name="Xoa" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="DienBienDaoTaoBoiDuong" Relationship="PHCNModel.FK_DienBienDaoTaoBoiDuong_HinhThucDaoTao" FromRole="HinhThucDaoTao" ToRole="DienBienDaoTaoBoiDuong" />
-        </EntityType>
-        <Association Name="FK__DienBienD__MaLyL__05A3D694">
-          <End Type="PHCNModel.LyLichVienChuc" Role="LyLichVienChuc" Multiplicity="1" />
-          <End Type="PHCNModel.DienBienDaoTaoBoiDuong" Role="DienBienDaoTaoBoiDuong" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LyLichVienChuc">
-              <PropertyRef Name="MaLyLichVienChuc" />
-            </Principal>
-            <Dependent Role="DienBienDaoTaoBoiDuong">
-              <PropertyRef Name="MaLyLichVienChuc" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DienBienDaoTaoBoiDuong_HinhThucDaoTao">
-          <End Type="PHCNModel.HinhThucDaoTao" Role="HinhThucDaoTao" Multiplicity="0..1" />
-          <End Type="PHCNModel.DienBienDaoTaoBoiDuong" Role="DienBienDaoTaoBoiDuong" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="HinhThucDaoTao">
-              <PropertyRef Name="MaHinhThucDaoTao" />
-            </Principal>
-            <Dependent Role="DienBienDaoTaoBoiDuong">
-              <PropertyRef Name="MaHinhThucDaoTao" />
+            <Dependent Role="LyLichVienChuc">
+              <PropertyRef Name="MaNhanVien" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1511,21 +1539,6 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="HinhAnh">
-            <EntityTypeMapping TypeName="PHCNModel.HinhAnh">
-              <MappingFragment StoreEntitySet="HinhAnh">
-                <ScalarProperty Name="Xoa" ColumnName="Xoa" />
-                <ScalarProperty Name="ChieuCao" ColumnName="ChieuCao" />
-                <ScalarProperty Name="ChieuRong" ColumnName="ChieuRong" />
-                <ScalarProperty Name="PhanMoRong" ColumnName="PhanMoRong" />
-                <ScalarProperty Name="DuongDan" ColumnName="DuongDan" />
-                <ScalarProperty Name="TenFileDayDu" ColumnName="TenFileDayDu" />
-                <ScalarProperty Name="TenFile" ColumnName="TenFile" />
-                <ScalarProperty Name="LoaiHinhAnh" ColumnName="LoaiHinhAnh" />
-                <ScalarProperty Name="MaHinhAnh" ColumnName="MaHinhAnh" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="HuyenThi">
             <EntityTypeMapping TypeName="PHCNModel.HuyenThi">
               <MappingFragment StoreEntitySet="HuyenThi">
@@ -1553,19 +1566,6 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
                 <ScalarProperty Name="STT" ColumnName="STT" />
                 <ScalarProperty Name="TenTinhThanh" ColumnName="TenTinhThanh" />
                 <ScalarProperty Name="MaTinhThanh" ColumnName="MaTinhThanh" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TomTatQuaTrinhCongTac">
-            <EntityTypeMapping TypeName="PHCNModel.TomTatQuaTrinhCongTac">
-              <MappingFragment StoreEntitySet="TomTatQuaTrinhCongTac">
-                <ScalarProperty Name="NoiDungCongTac" ColumnName="NoiDungCongTac" />
-                <ScalarProperty Name="Den_Nam" ColumnName="Den_Nam" />
-                <ScalarProperty Name="Den_Thang" ColumnName="Den_Thang" />
-                <ScalarProperty Name="Tu_Nam" ColumnName="Tu_Nam" />
-                <ScalarProperty Name="Tu_Thang" ColumnName="Tu_Thang" />
-                <ScalarProperty Name="MaLyLichVienChuc" ColumnName="MaLyLichVienChuc" />
-                <ScalarProperty Name="MaTomTatQuaTrinhCongTac" ColumnName="MaTomTatQuaTrinhCongTac" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1609,6 +1609,77 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
                 <ScalarProperty Name="TenFile" ColumnName="TenFile" />
                 <ScalarProperty Name="MaBaiViet" ColumnName="MaBaiViet" />
                 <ScalarProperty Name="MaFile" ColumnName="MaFile" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DienBienQuaTrinhLuong">
+            <EntityTypeMapping TypeName="PHCNModel.DienBienQuaTrinhLuong">
+              <MappingFragment StoreEntitySet="DienBienQuaTrinhLuong">
+                <ScalarProperty Name="Xoa_Ngay" ColumnName="Xoa_Ngay" />
+                <ScalarProperty Name="Xoa_MaNhanVien" ColumnName="Xoa_MaNhanVien" />
+                <ScalarProperty Name="Xoa" ColumnName="Xoa" />
+                <ScalarProperty Name="CapNhat_Ngay" ColumnName="CapNhat_Ngay" />
+                <ScalarProperty Name="CapNhat_MaNhanVien" ColumnName="CapNhat_MaNhanVien" />
+                <ScalarProperty Name="Nhap_Ngay" ColumnName="Nhap_Ngay" />
+                <ScalarProperty Name="Nhap_MaNhanVien" ColumnName="Nhap_MaNhanVien" />
+                <ScalarProperty Name="VuotKhung" ColumnName="VuotKhung" />
+                <ScalarProperty Name="PhuCapKhac" ColumnName="PhuCapKhac" />
+                <ScalarProperty Name="PhuCapChucVu" ColumnName="PhuCapChucVu" />
+                <ScalarProperty Name="NgayHuong" ColumnName="NgayHuong" />
+                <ScalarProperty Name="HeSo" ColumnName="HeSo" />
+                <ScalarProperty Name="BacLuong" ColumnName="BacLuong" />
+                <ScalarProperty Name="MaChucDanhNgheNghiep" ColumnName="MaChucDanhNgheNghiep" />
+                <ScalarProperty Name="MaLyLichVienChuc" ColumnName="MaLyLichVienChuc" />
+                <ScalarProperty Name="MaDienBienQuaTrinhLuong" ColumnName="MaDienBienQuaTrinhLuong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DienBienDaoTaoBoiDuong">
+            <EntityTypeMapping TypeName="PHCNModel.DienBienDaoTaoBoiDuong">
+              <MappingFragment StoreEntitySet="DienBienDaoTaoBoiDuong">
+                <ScalarProperty Name="VanBangChungChiTrinhDo" ColumnName="VanBangChungChiTrinhDo" />
+                <ScalarProperty Name="MaHinhThucDaoTao" ColumnName="MaHinhThucDaoTao" />
+                <ScalarProperty Name="DenThangNam" ColumnName="DenThangNam" />
+                <ScalarProperty Name="TuThangNam" ColumnName="TuThangNam" />
+                <ScalarProperty Name="ChuyenNganhDaoTaoBoiDuong" ColumnName="ChuyenNganhDaoTaoBoiDuong" />
+                <ScalarProperty Name="TenTruong" ColumnName="TenTruong" />
+                <ScalarProperty Name="MaLyLichVienChuc" ColumnName="MaLyLichVienChuc" />
+                <ScalarProperty Name="MaDienBienDaoTaoBoiDuong" ColumnName="MaDienBienDaoTaoBoiDuong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HinhThucDaoTao">
+            <EntityTypeMapping TypeName="PHCNModel.HinhThucDaoTao">
+              <MappingFragment StoreEntitySet="HinhThucDaoTao">
+                <ScalarProperty Name="Xoa" ColumnName="Xoa" />
+                <ScalarProperty Name="STT" ColumnName="STT" />
+                <ScalarProperty Name="TenHinhThucDaoTao" ColumnName="TenHinhThucDaoTao" />
+                <ScalarProperty Name="MaHinhThucDaoTao" ColumnName="MaHinhThucDaoTao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DienBienQuaTrinhCongTac">
+            <EntityTypeMapping TypeName="PHCNModel.DienBienQuaTrinhCongTac">
+              <MappingFragment StoreEntitySet="DienBienQuaTrinhCongTac">
+                <ScalarProperty Name="NoiDungCongTac" ColumnName="NoiDungCongTac" />
+                <ScalarProperty Name="DenThangNam" ColumnName="DenThangNam" />
+                <ScalarProperty Name="TuThangNam" ColumnName="TuThangNam" />
+                <ScalarProperty Name="MaLyLichVienChuc" ColumnName="MaLyLichVienChuc" />
+                <ScalarProperty Name="MaDienBienQuaTrinhCongTac" ColumnName="MaDienBienQuaTrinhCongTac" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HinhAnh">
+            <EntityTypeMapping TypeName="PHCNModel.HinhAnh">
+              <MappingFragment StoreEntitySet="HinhAnh">
+                <ScalarProperty Name="NgayTaiLen" ColumnName="NgayTaiLen" />
+                <ScalarProperty Name="PhanMoRong" ColumnName="PhanMoRong" />
+                <ScalarProperty Name="DuongDan" ColumnName="DuongDan" />
+                <ScalarProperty Name="TenFileDayDu" ColumnName="TenFileDayDu" />
+                <ScalarProperty Name="TenFile" ColumnName="TenFile" />
+                <ScalarProperty Name="LoaiHinhAnh" ColumnName="LoaiHinhAnh" />
+                <ScalarProperty Name="MaLyLichVienChuc" ColumnName="MaLyLichVienChuc" />
+                <ScalarProperty Name="MaHinhAnh" ColumnName="MaHinhAnh" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1691,52 +1762,6 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
                 <ScalarProperty Name="MaLyLichVienChuc" ColumnName="MaLyLichVienChuc" />
                 <ScalarProperty Name="MaHinhAnh" ColumnName="MaHinhAnh" />
                 <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DienBienQuaTrinhLuong">
-            <EntityTypeMapping TypeName="PHCNModel.DienBienQuaTrinhLuong">
-              <MappingFragment StoreEntitySet="DienBienQuaTrinhLuong">
-                <ScalarProperty Name="Xoa_Ngay" ColumnName="Xoa_Ngay" />
-                <ScalarProperty Name="Xoa_MaNhanVien" ColumnName="Xoa_MaNhanVien" />
-                <ScalarProperty Name="Xoa" ColumnName="Xoa" />
-                <ScalarProperty Name="CapNhat_Ngay" ColumnName="CapNhat_Ngay" />
-                <ScalarProperty Name="CapNhat_MaNhanVien" ColumnName="CapNhat_MaNhanVien" />
-                <ScalarProperty Name="Nhap_Ngay" ColumnName="Nhap_Ngay" />
-                <ScalarProperty Name="Nhap_MaNhanVien" ColumnName="Nhap_MaNhanVien" />
-                <ScalarProperty Name="VuotKhung" ColumnName="VuotKhung" />
-                <ScalarProperty Name="PhuCapKhac" ColumnName="PhuCapKhac" />
-                <ScalarProperty Name="PhuCapChucVu" ColumnName="PhuCapChucVu" />
-                <ScalarProperty Name="NgayHuong" ColumnName="NgayHuong" />
-                <ScalarProperty Name="HeSo" ColumnName="HeSo" />
-                <ScalarProperty Name="BacLuong" ColumnName="BacLuong" />
-                <ScalarProperty Name="MaChucDanhNgheNghiep" ColumnName="MaChucDanhNgheNghiep" />
-                <ScalarProperty Name="MaLyLichVienChuc" ColumnName="MaLyLichVienChuc" />
-                <ScalarProperty Name="MaDienBienQuaTrinhLuong" ColumnName="MaDienBienQuaTrinhLuong" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DienBienDaoTaoBoiDuong">
-            <EntityTypeMapping TypeName="PHCNModel.DienBienDaoTaoBoiDuong">
-              <MappingFragment StoreEntitySet="DienBienDaoTaoBoiDuong">
-                <ScalarProperty Name="VanBangChungChiTrinhDo" ColumnName="VanBangChungChiTrinhDo" />
-                <ScalarProperty Name="MaHinhThucDaoTao" ColumnName="MaHinhThucDaoTao" />
-                <ScalarProperty Name="DenThangNam" ColumnName="DenThangNam" />
-                <ScalarProperty Name="TuThangNam" ColumnName="TuThangNam" />
-                <ScalarProperty Name="ChuyenNganhDaoTaoBoiDuong" ColumnName="ChuyenNganhDaoTaoBoiDuong" />
-                <ScalarProperty Name="TenTruong" ColumnName="TenTruong" />
-                <ScalarProperty Name="MaLyLichVienChuc" ColumnName="MaLyLichVienChuc" />
-                <ScalarProperty Name="MaDienBienDaoTaoBoiDuong" ColumnName="MaDienBienDaoTaoBoiDuong" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="HinhThucDaoTao">
-            <EntityTypeMapping TypeName="PHCNModel.HinhThucDaoTao">
-              <MappingFragment StoreEntitySet="HinhThucDaoTao">
-                <ScalarProperty Name="Xoa" ColumnName="Xoa" />
-                <ScalarProperty Name="STT" ColumnName="STT" />
-                <ScalarProperty Name="TenHinhThucDaoTao" ColumnName="TenHinhThucDaoTao" />
-                <ScalarProperty Name="MaHinhThucDaoTao" ColumnName="MaHinhThucDaoTao" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

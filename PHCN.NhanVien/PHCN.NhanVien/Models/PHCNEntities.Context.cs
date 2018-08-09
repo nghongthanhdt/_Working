@@ -39,18 +39,18 @@ namespace PHCN.NhanVien.Models
         public virtual DbSet<ChuyenMuc> ChuyenMuc { get; set; }
         public virtual DbSet<DanToc> DanToc { get; set; }
         public virtual DbSet<DonVi> DonVi { get; set; }
-        public virtual DbSet<HinhAnh> HinhAnh { get; set; }
         public virtual DbSet<HuyenThi> HuyenThi { get; set; }
         public virtual DbSet<LoaiHopDong> LoaiHopDong { get; set; }
         public virtual DbSet<TinhThanh> TinhThanh { get; set; }
-        public virtual DbSet<TomTatQuaTrinhCongTac> TomTatQuaTrinhCongTac { get; set; }
         public virtual DbSet<TonGiao> TonGiao { get; set; }
         public virtual DbSet<TrinhDoChuyenMon> TrinhDoChuyenMon { get; set; }
         public virtual DbSet<XaPhuong> XaPhuong { get; set; }
         public virtual DbSet<FileDinhKemWeb> FileDinhKemWeb { get; set; }
-        public virtual DbSet<LyLichVienChuc> LyLichVienChuc { get; set; }
         public virtual DbSet<DienBienQuaTrinhLuong> DienBienQuaTrinhLuong { get; set; }
         public virtual DbSet<DienBienDaoTaoBoiDuong> DienBienDaoTaoBoiDuong { get; set; }
         public virtual DbSet<HinhThucDaoTao> HinhThucDaoTao { get; set; }
+        public virtual DbSet<DienBienQuaTrinhCongTac> DienBienQuaTrinhCongTac { get; set; }
+        public virtual DbSet<HinhAnh> HinhAnh { get; set; }
+        public virtual DbSet<LyLichVienChuc> LyLichVienChuc { get; set; }
     }
 }

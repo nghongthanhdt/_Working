@@ -16,6 +16,46 @@ namespace PHCN.NhanVien.Controllers
         {
             return View();
         }
+
+        // load avatar 
+        public JsonResult GetLastAvatar(int id)
+        {
+            // id: mã lý lịch viên chức
+            var list = db.HinhAnh.Where(x => x.MaLyLichVienChuc == id).OrderByDescending(x => x.MaHinhAnh).ToList();
+            if (list.Any())
+            {
+                HinhAnh hinhAnh = list.First();
+                var result = new
+                {
+                    MaLyLichVienChuc = id,
+                    MaHinhAnh = hinhAnh.MaHinhAnh,
+                    UrlAvatar = hinhAnh.DuongDan + hinhAnh.TenFileDayDu
+                };
+                return Json(result, JsonRequestBehavior.DenyGet); 
+            } else
+            {
+                var result = new
+                {
+                    MaLyLichVienChuc = 0,
+                    MaHinhAnh = 0,
+                    UrlAvatar = ""
+                };
+                return Json(result, JsonRequestBehavior.DenyGet);
+            }
+        }
+        public string XoaAvatar(int id)
+        {
+            //update cho đường dẫn của ảnh đại diện về mặc định
+            // id: mã hình ảnh
+            var hinhAnh = db.HinhAnh.Find(id);
+            hinhAnh.TenFileDayDu = "default-avatar.png";
+            db.Entry(hinhAnh).State = EntityState.Modified;
+            db.SaveChanges();
+            return "ok";
+        }
+
+
+        // các autocomplete
         public JsonResult GetListTinhThanh(string keyword)
         {
             
@@ -54,6 +94,9 @@ namespace PHCN.NhanVien.Controllers
             var list = db.ChucDanhNgheNghiep.Where(x => x.TenChucDanhNgheNghiep.Contains(keyword)).OrderBy(x => x.STT).Select(x => x.TenChucDanhNgheNghiep).Take(10).ToList();
             return Json(list, JsonRequestBehavior.AllowGet);
         }
+
+
+        // quá trình lương
         public string LuuQuaTrinhLuong(DienBienQuaTrinhLuong qtLuong)
         {
             if (qtLuong.MaDienBienQuaTrinhLuong == 0)
@@ -121,6 +164,7 @@ namespace PHCN.NhanVien.Controllers
             
         }
 
+        // đào tạo bồi dưỡng
         public JsonResult GetDienBienDaoTaoBoiDuong(int id)
         {
             DienBienDaoTaoBoiDuong dienbien = new DienBienDaoTaoBoiDuong();
@@ -156,6 +200,44 @@ namespace PHCN.NhanVien.Controllers
             //id: mã diễn biến
             DienBienDaoTaoBoiDuong dienbien = db.DienBienDaoTaoBoiDuong.Find(id);
             db.DienBienDaoTaoBoiDuong.Remove(dienbien);
+            db.SaveChanges();
+            return "ok";
+        }
+
+        // quá trình công tác
+        public JsonResult GetDienBienQuaTrinhCongTac(int id)
+        {
+            DienBienQuaTrinhCongTac dienbien = new DienBienQuaTrinhCongTac();
+            dienbien = db.DienBienQuaTrinhCongTac.Find(id);
+
+            object _dienbien = new
+            {
+                
+                TuThangNam = DateTime.Parse(dienbien.TuThangNam.ToString()).ToString("MM/yyyy"),
+                DenThangNam = DateTime.Parse(dienbien.DenThangNam.ToString()).ToString("MM/yyyy"),                
+                NoiDungCongTac = dienbien.NoiDungCongTac
+            };
+            return Json(_dienbien, JsonRequestBehavior.AllowGet);
+        }
+        public string LuuDienBienQuaTrinhCongTac(DienBienQuaTrinhCongTac dienbien)
+        {
+            if (dienbien.MaDienBienQuaTrinhCongTac == 0)
+            {
+                db.DienBienQuaTrinhCongTac.Add(dienbien);
+                db.SaveChanges();
+            }
+            else
+            {
+                db.Entry(dienbien).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            return "ok";
+        }
+        public string XoaDienBienQuaTrinhCongTac(int id)
+        {
+            //id: mã diễn biến
+            DienBienQuaTrinhCongTac dienbien = db.DienBienQuaTrinhCongTac.Find(id);
+            db.DienBienQuaTrinhCongTac.Remove(dienbien);
             db.SaveChanges();
             return "ok";
         }

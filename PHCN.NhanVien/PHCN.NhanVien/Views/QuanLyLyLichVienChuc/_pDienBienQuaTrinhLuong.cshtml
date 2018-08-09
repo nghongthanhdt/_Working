@@ -12,7 +12,7 @@
                 @foreach (var item in Model)
                 {
                     <td>
-                        <a data-madienbienquatrinhluong="@item.MaDienBienQuaTrinhLuong" class="colDienBienQuaTrinhLuong btn btn-xs @((item.VuotKhung > 0)?"btn-danger":"btn-primary")">
+                        <a data-madienbienquatrinhluong="@item.MaDienBienQuaTrinhLuong" class="colDienBienQuaTrinhLuong btn btn-xs @((item.VuotKhung > 0)?"btn-default":"btn-normal")">
                             @DateTime.Parse(item.NgayHuong.ToString()).ToString("MM/yyyy")
                         </a>                        
                     </td>

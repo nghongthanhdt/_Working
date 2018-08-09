@@ -525,6 +525,7 @@
     <Content Include="Content\ckeditor\skins\moono-lisa\images\spinner.gif" />
     <Content Include="Content\ckeditor\styles.js" />
     <Content Include="Content\css\site.min.css" />
+    <Content Include="Content\ImageAvatar\default-avatar.png" />
     <Content Include="Content\img\default-avatar.png" />
     <Content Include="Content\fonts\angularicons.svg" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
@@ -644,7 +645,9 @@
     <None Include="Properties\PublishProfiles\PHCN.NhanVien.pubxml" />
     <None Include="scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="scripts\app_scripts\CapNhatLyLichVienChuc.js" />
+    <Content Include="scripts\app_scripts\QuanLyNhanVien.js" />
     <Content Include="scripts\app_scripts\SoanThu.js" />
+    <Content Include="scripts\core-scripts\th.core.js" />
     <Content Include="scripts\jquery-3.3.1.js" />
     <Content Include="scripts\jquery-3.3.1.min.js" />
     <Content Include="scripts\jquery-3.3.1.slim.js" />
@@ -670,6 +673,7 @@
     <Compile Include="Controllers\LoiController.cs" />
     <Compile Include="Controllers\QuanLyBaiVietController.cs" />
     <Compile Include="Controllers\QuanLyLyLichVienChucController.cs" />
+    <Compile Include="Controllers\QuanLyNhanVienController.cs" />
     <Compile Include="Controllers\ThuNoiBoController.cs" />
     <Compile Include="Controllers\TinTucController.cs" />
     <Compile Include="Controllers\TraCuuController.cs" />
@@ -691,6 +695,9 @@
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DienBienDaoTaoBoiDuong.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DienBienQuaTrinhCongTac.cs">
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DienBienQuaTrinhLuong.cs">
@@ -760,9 +767,6 @@
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TinhThanh.cs">
-      <DependentUpon>PHCNEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TomTatQuaTrinhCongTac.cs">
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TonGiao.cs">
@@ -841,6 +845,8 @@
     <Content Include="Views\Home\KhongDuocPhepTruyCap.cshtml" />
     <Content Include="Views\QuanLyLyLichVienChuc\_pDienBienQuaTrinhLuong.cshtml" />
     <Content Include="Views\QuanLyLyLichVienChuc\_pDienBienQuaTrinhDaoTaoBoiDuong.cshtml" />
+    <Content Include="Views\QuanLyLyLichVienChuc\_pDienBienQuaTrinhCongTac.cshtml" />
+    <Content Include="Views\QuanLyNhanVien\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

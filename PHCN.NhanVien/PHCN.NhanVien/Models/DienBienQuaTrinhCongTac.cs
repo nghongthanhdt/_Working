@@ -12,14 +12,12 @@ namespace PHCN.NhanVien.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TomTatQuaTrinhCongTac
+    public partial class DienBienQuaTrinhCongTac
     {
-        public int MaTomTatQuaTrinhCongTac { get; set; }
+        public int MaDienBienQuaTrinhCongTac { get; set; }
         public int MaLyLichVienChuc { get; set; }
-        public Nullable<int> Tu_Thang { get; set; }
-        public Nullable<int> Tu_Nam { get; set; }
-        public Nullable<int> Den_Thang { get; set; }
-        public byte[] Den_Nam { get; set; }
+        public Nullable<System.DateTime> TuThangNam { get; set; }
+        public Nullable<System.DateTime> DenThangNam { get; set; }
         public string NoiDungCongTac { get; set; }
     
         public virtual LyLichVienChuc LyLichVienChuc { get; set; }

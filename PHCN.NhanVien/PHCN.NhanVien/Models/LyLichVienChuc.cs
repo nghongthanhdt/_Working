@@ -17,9 +17,9 @@ namespace PHCN.NhanVien.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public LyLichVienChuc()
         {
-            this.TomTatQuaTrinhCongTac = new HashSet<TomTatQuaTrinhCongTac>();
-            this.DienBienQuaTrinhLuong = new HashSet<DienBienQuaTrinhLuong>();
             this.DienBienDaoTaoBoiDuong = new HashSet<DienBienDaoTaoBoiDuong>();
+            this.DienBienQuaTrinhCongTac = new HashSet<DienBienQuaTrinhCongTac>();
+            this.DienBienQuaTrinhLuong = new HashSet<DienBienQuaTrinhLuong>();
         }
     
         public Nullable<int> MaNhanVien { get; set; }
@@ -99,13 +99,14 @@ namespace PHCN.NhanVien.Models
         public Nullable<bool> Xoa { get; set; }
         public string GhiChu { get; set; }
     
-        public virtual DonVi DonVi { get; set; }
-        public virtual LoaiHopDong LoaiHopDong { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TomTatQuaTrinhCongTac> TomTatQuaTrinhCongTac { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DienBienQuaTrinhLuong> DienBienQuaTrinhLuong { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DienBienDaoTaoBoiDuong> DienBienDaoTaoBoiDuong { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DienBienQuaTrinhCongTac> DienBienQuaTrinhCongTac { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DienBienQuaTrinhLuong> DienBienQuaTrinhLuong { get; set; }
+        public virtual DonVi DonVi { get; set; }
+        public virtual LoaiHopDong LoaiHopDong { get; set; }
+        public virtual NhanVien NhanVien { get; set; }
     }
 }

@@ -17,12 +17,16 @@
     var listTonGiao = db.TonGiao.Where(x => x.Xoa == false).OrderBy(x => x.STT).ToList();
     var listChucDanhNgeNghiep = db.ChucDanhNgheNghiep.Where(x => x.Xoa == false).OrderBy(x => x.STT).ToList();
     var listHinhThucDaoTao = db.HinhThucDaoTao.OrderBy(x => x.STT).Where(x => x.Xoa == false).ToList();
+    var listKhoaPhong = db.KhoaPhong.OrderBy(x => x.STT).Where(x => x.Xoa == false).ToList();
+    var listNhanVien = db.NhanVien.OrderBy(x => x.STT).Where(x => x.Xoa == false).ToList();
 
 }
 
 <link href="~/Content/css/jquery-ui.css" rel="stylesheet" />
 <script src="~/scripts/jquery.mask.js"></script>
 <script src="~/scripts/jquery-ui-1.12.1.min.js"></script>
+<script src="~/scripts/jquery.form.min.js"></script>
+
 <div>
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -66,8 +70,8 @@
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label>Nhân viên</label>
-                            <select class="form-control" id="txtCoQuanSuDungVienChuc">
+                            <label>Hợp đồng</label>
+                            <select class="form-control" id="selectCoQuanSuDungVienChuc">
                                 <option value=""></option>
                                 @foreach (var item in listLoaiHopDong)
                                 {
@@ -75,6 +79,34 @@
                                 }
                             </select>
                         </div>
+                    </div>
+                    <div class="col-md-12">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Tài khoản</label>
+                                    <select class="form-control" id="selectTaiKhoanNhanVien">
+                                        <option value=""></option>
+                                        
+                                                @foreach(var nhanvien in listNhanVien)
+                                                {
+                                                    <option value="@nhanvien.MaNhanVien" @((nhanvien.MaNhanVien == Model.MaNhanVien)?"selected='selected'":"") >@nhanvien.HoTen</option>
+                                                }
+                                        
+                                        
+                                                                                
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Khoa phòng</label>
+                                    <input type="text" class="form-control" id="txtKhoaPhong"  readonly="readonly" value="@Model.NhanVien.KhoaPhong.TenKhoa"/>
+                                </div>
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
                 
@@ -92,8 +124,16 @@
         <div class="panel-body">
             
                 <div class="row">
-                    <div class="col-md-3">
-                        <img src="~/Content/img/default-avatar.png" style="width:120px; height:120px;" />
+                    <div class="col-md-3" style="text-align:center;">
+                        <a href="javascript:void(0);" id="btnselectHinhAnh" data-malylichvienchuc="@Model.MaLyLichVienChuc">
+                            <img id="imgAvatar" src="~/Content/img/default-avatar.png" data-mahinhanh="0" style="max-width:140px; padding:3px; border:1px solid #cccccc; margin-bottom:5px;" />
+                            
+                        </a>
+                        <form id="formAvatar" action="@Url.Action("UploadFileAvatar", "Upload")" method="post" enctype="multipart/form-data">
+                            <input id="fileuploadAvatar" style="display:none;" type="file" name="file" accept=".jpg,.jpeg,.png,.gif,.bmp" />
+                            <input type="hidden" value="@Model.MaLyLichVienChuc" name="id" />   
+                        </form>
+                        
                     </div>
                     <div class="col-md-9">
                         <div class="form-group">
@@ -532,40 +572,13 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label >28. TÓM TẮT QUÁ TRÌNH CÔNG TÁC</label>
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Từ tháng năm đến tháng năm</th>
-                                        <th>Chức danh, chức vụ, đơn vị công tác (Đảng, chính quyền, đoàn thể, tổ chức xã hội), kể cả thời gian được đào tạo, bồi dưỡng về chuyên môn, nghiệp vụ,...</th>
-                                        
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    <tr>
-                                        <td>1</td>
-                                        <td>11/2009 - 11/2014</td>
-                                        <td>
-                                            Học Đại học tại
-                                            Trường Đại Học Kỹ Thuật Công Nghệ TPHCM
-                                        </td>
-                                        
-                                        <td>
-                                            <a href="#">Sửa</a><br/><a href="#">Xóa</a>
-                                        </td>
-                                    </tr>
 
 
-                                    <tr>
-                                        <td colspan="7">
-                                            <button class="btn btn-default btn-sm pull-right" id="btnThemTomTatQuaTrinhCongTac"><i class="glyphicon glyphicon-plus"></i> Thêm ...</button>
-                                            <div id="markDienBienQuaTrinhLuong"></div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div id="divDienBienQuaTrinhCongTac" data-malylichvienchuc="@Model.MaLyLichVienChuc">
+                                
+                            </div>
+                            <button class="btn btn-default btn-sm pull-right" id="btnThemDienBienQuaTrinhCongTac"><i class="glyphicon glyphicon-plus"></i> Thêm ...</button>
+                            <div id="markDienBienQuaTrinhLuong"></div>
                         </div>
                     </div>
                 </div>
@@ -779,7 +792,7 @@
         </div>
     </div>
 </div>
-<div class="modal" id="modalTomTatQuaTrinhCongTac">
+<div class="modal" id="modalDienBienQuaTrinhCongTac">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -791,33 +804,77 @@
                 <div class="row">
                     <div class="col-xs-6">
                         <label>Từ tháng năm</label>
-                        <input class="form-control thangnam" type="text">
+                        <input class="form-control thangnam" type="text" id="modalDienBienQuaTrinhCongTac_txtTuThangNam">
                     </div>
                     <div class="col-xs-6">
                         <label>Đến tháng năm</label>
-                        <input class="form-control thangnam" type="text">
+                        <input class="form-control thangnam" type="text" id="modalDienBienQuaTrinhCongTac_txtDenThangNam">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <label>Chức danh, chức vụ, đơn vị công tác</label>
-                        <textarea class="form-control" style="height:120px;"></textarea>
+                        <textarea class="form-control" style="height:120px;" id="modalDienBienQuaTrinhCongTac_txtNoiDungCongTac"></textarea>
                     </div>
                 </div>
                 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success">Lưu</button>
+                <button type="button" class="btn btn-success" id="modalDienBienQuaTrinhCongTac_btnLuu" data-malylichvienchuc="@Model.MaLyLichVienChuc">Lưu</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
             </div>
         </div>
     </div>
 </div>
+<div class="modal" id="modalTuyChonAvatar">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Hình ảnh</h4>
+            </div>
+            <div class="modal-body">
+                @*<p>Feel free to contact us for any issues you might have with our products.</p>*@
 
+                <div class="row">
+                    <div class="col-md-12">
+                        @*<button class="btn btn-lg btn-default btn-block btn-success">Xem ảnh</button>*@
+                        <img src="~/Content/img/default-avatar.png" style="width:100%;" id="modalTuyChonAnh_imgXemAnh" />
+                    </div>
+                    <div class="col-md-12">
+                        
+                        <button class="btn btn-lg btn-default btn-block btn-primary" id="modalTuyChonAnh_btnChonAnhKhac">Chọn ảnh khác</button>
+                        
+                        
+                    </div>
+                    <div class="col-md-12">
+                        
+                        
+                        <button class="btn btn-lg btn-default btn-block btn-danger" id="modalTuyChonAnh_btnXoaAnh" data-mahinhanh="0">Xóa ảnh</button>
+                        
+                        
+                    </div>
+                    <div class="col-md-12">
+                        
+                        <button class="btn btn-lg btn-default btn-block" data-dismiss="modal" >Bỏ qua</button>
+                        <br />    
+                    </div>
+                    
+                </div>
+
+            </div>
+            
+        </div>
+    </div>
+</div>
 
 
 <script>
     var _ajaxUrl = '@(HttpContext.Current.Request.Url.Scheme)://@(HttpContext.Current.Request.Url.Authority)/AjaxManager/';
     var _ajaxThisUrl = '@(HttpContext.Current.Request.Url.Scheme)://@(HttpContext.Current.Request.Url.Authority)/QuanLyLyLichVienChuc/';
+
 </script>
+
+
+<script src="~/scripts/core-scripts/th.core.js?@("v="+DateTime.Now.ToString("yyMMddhhmmss"))"></script>
 <script src="~/scripts/app_scripts/CapNhatLyLichVienChuc.js?@("v="+DateTime.Now.ToString("yyMMddhhmmss"))"></script>
