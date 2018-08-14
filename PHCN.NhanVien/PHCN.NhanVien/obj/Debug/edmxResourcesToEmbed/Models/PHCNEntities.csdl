@@ -572,7 +572,7 @@
     <Property Name="NoiOHienNay_Huyen" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="NoiOHienNay_Tinh" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="NgheNghiepKhiDuocTuyenDung" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="NgayTuyenDung" Type="DateTime" Precision="3" />
+    <Property Name="NgayTuyenDung" Type="DateTime" Precision="7" />
     <Property Name="MaCoQuanTuyenDung" Type="Int32" />
     <Property Name="ChucVuChucDanhHienTai" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
     <Property Name="CongViecChinhDuocGiao" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
@@ -583,12 +583,12 @@
     <Property Name="BoiDuongTheoTieuChuanCDNN" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
     <Property Name="NgoaiNgu" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="TinHoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="NgayVaoDangCSVN" Type="DateTime" Precision="3" />
-    <Property Name="NgayVaoDangCSVNChinhThuc" Type="DateTime" Precision="3" />
-    <Property Name="ToChucChinhTriXH_NgayThamGia" Type="DateTime" Precision="3" />
+    <Property Name="NgayVaoDangCSVN" Type="DateTime" Precision="7" />
+    <Property Name="NgayVaoDangCSVNChinhThuc" Type="DateTime" Precision="7" />
+    <Property Name="ToChucChinhTriXH_NgayThamGia" Type="DateTime" Precision="7" />
     <Property Name="ToChucChinhTriXH" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-    <Property Name="NgayNhapNgu" Type="DateTime" Precision="3" />
-    <Property Name="NgayXuatNgu" Type="DateTime" Precision="3" />
+    <Property Name="NgayNhapNgu" Type="DateTime" Precision="7" />
+    <Property Name="NgayXuatNgu" Type="DateTime" Precision="7" />
     <Property Name="QuanHamCaoNhat" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="DanhHieuDuocPhongTangCaoNhat" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="SoTruongCongTac" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
@@ -601,19 +601,19 @@
     <Property Name="LaThuongBinhHang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="LaConGiaDinhChinhSach" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="SoChungMinhNhanDan" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="NgayCap" Type="DateTime" Precision="3" />
+    <Property Name="NgayCap" Type="DateTime" Precision="7" />
     <Property Name="SoSoBHXH" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
     <Property Name="NhanXetDanhGiaCuaCoQuanDonVi" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
     <Property Name="NguoiKhai" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="ThuTruongKyTen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="ThuTruongKy_Ngay" Type="DateTime" Precision="3" />
+    <Property Name="ThuTruongKy_Ngay" Type="DateTime" Precision="7" />
     <Property Name="ThuTruongKy_NoiKy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="Nhap_MaNhanVien" Type="Int32" />
-    <Property Name="Nhap_Ngay" Type="DateTime" Precision="3" />
+    <Property Name="Nhap_Ngay" Type="DateTime" Precision="7" />
     <Property Name="CapNhat_MaNhanVien" Type="Int32" />
-    <Property Name="CapNhat_Ngay" Type="DateTime" Precision="3" />
+    <Property Name="CapNhat_Ngay" Type="DateTime" Precision="7" />
     <Property Name="Xoa_MaNhanVien" Type="Int32" />
-    <Property Name="Xoa_Ngay" Type="DateTime" Precision="3" />
+    <Property Name="Xoa_Ngay" Type="DateTime" Precision="7" />
     <Property Name="Xoa" Type="Boolean" />
     <Property Name="GhiChu" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="DienBienDaoTaoBoiDuong" Relationship="PHCNModel.FK__DienBienD__MaLyL__05A3D694" FromRole="LyLichVienChuc" ToRole="DienBienDaoTaoBoiDuong" />

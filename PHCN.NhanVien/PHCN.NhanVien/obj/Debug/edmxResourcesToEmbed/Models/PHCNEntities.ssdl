@@ -148,11 +148,11 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
     <Property Name="MaHinhAnh" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="MaLyLichVienChuc" Type="int" />
     <Property Name="LoaiHinhAnh" Type="nvarchar" MaxLength="20" />
-    <Property Name="TenFile" Type="nvarchar" MaxLength="300" Nullable="false" />
     <Property Name="TenFileDayDu" Type="nvarchar" MaxLength="300" Nullable="false" />
     <Property Name="DuongDan" Type="nvarchar" MaxLength="1000" Nullable="false" />
     <Property Name="PhanMoRong" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="NgayTaiLen" Type="datetime2" Precision="7" />
+    <Property Name="TenFile" Type="nvarchar" MaxLength="300" Nullable="false" />
   </EntityType>
   <EntityType Name="HinhThucDaoTao">
     <Key>
@@ -243,7 +243,7 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
     <Property Name="NoiOHienNay_Huyen" Type="nvarchar" MaxLength="200" />
     <Property Name="NoiOHienNay_Tinh" Type="nvarchar" MaxLength="200" />
     <Property Name="NgheNghiepKhiDuocTuyenDung" Type="nvarchar" MaxLength="500" />
-    <Property Name="NgayTuyenDung" Type="datetime" />
+    <Property Name="NgayTuyenDung" Type="datetime2" Precision="7" />
     <Property Name="MaCoQuanTuyenDung" Type="int" />
     <Property Name="ChucVuChucDanhHienTai" Type="nvarchar" MaxLength="300" />
     <Property Name="CongViecChinhDuocGiao" Type="nvarchar" MaxLength="1000" />
@@ -254,12 +254,12 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
     <Property Name="BoiDuongTheoTieuChuanCDNN" Type="nvarchar" MaxLength="300" />
     <Property Name="NgoaiNgu" Type="nvarchar" MaxLength="20" />
     <Property Name="TinHoc" Type="nvarchar" MaxLength="20" />
-    <Property Name="NgayVaoDangCSVN" Type="datetime" />
-    <Property Name="NgayVaoDangCSVNChinhThuc" Type="datetime" />
-    <Property Name="ToChucChinhTriXH_NgayThamGia" Type="datetime" />
+    <Property Name="NgayVaoDangCSVN" Type="datetime2" Precision="7" />
+    <Property Name="NgayVaoDangCSVNChinhThuc" Type="datetime2" Precision="7" />
+    <Property Name="ToChucChinhTriXH_NgayThamGia" Type="datetime2" Precision="7" />
     <Property Name="ToChucChinhTriXH" Type="nvarchar" MaxLength="300" />
-    <Property Name="NgayNhapNgu" Type="datetime" />
-    <Property Name="NgayXuatNgu" Type="datetime" />
+    <Property Name="NgayNhapNgu" Type="datetime2" Precision="7" />
+    <Property Name="NgayXuatNgu" Type="datetime2" Precision="7" />
     <Property Name="QuanHamCaoNhat" Type="nvarchar" MaxLength="200" />
     <Property Name="DanhHieuDuocPhongTangCaoNhat" Type="nvarchar" MaxLength="200" />
     <Property Name="SoTruongCongTac" Type="nvarchar" MaxLength="500" />
@@ -272,19 +272,19 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
     <Property Name="LaThuongBinhHang" Type="nvarchar" MaxLength="50" />
     <Property Name="LaConGiaDinhChinhSach" Type="nvarchar" MaxLength="50" />
     <Property Name="SoChungMinhNhanDan" Type="nvarchar" MaxLength="30" />
-    <Property Name="NgayCap" Type="datetime" />
+    <Property Name="NgayCap" Type="datetime2" Precision="7" />
     <Property Name="SoSoBHXH" Type="nvarchar" MaxLength="30" />
     <Property Name="NhanXetDanhGiaCuaCoQuanDonVi" Type="nvarchar" MaxLength="1000" />
     <Property Name="NguoiKhai" Type="nvarchar" MaxLength="100" />
     <Property Name="ThuTruongKyTen" Type="nvarchar" MaxLength="100" />
-    <Property Name="ThuTruongKy_Ngay" Type="datetime" />
+    <Property Name="ThuTruongKy_Ngay" Type="datetime2" Precision="7" />
     <Property Name="ThuTruongKy_NoiKy" Type="nvarchar" MaxLength="100" />
     <Property Name="Nhap_MaNhanVien" Type="int" />
-    <Property Name="Nhap_Ngay" Type="datetime" />
+    <Property Name="Nhap_Ngay" Type="datetime2" Precision="7" />
     <Property Name="CapNhat_MaNhanVien" Type="int" />
-    <Property Name="CapNhat_Ngay" Type="datetime" />
+    <Property Name="CapNhat_Ngay" Type="datetime2" Precision="7" />
     <Property Name="Xoa_MaNhanVien" Type="int" />
-    <Property Name="Xoa_Ngay" Type="datetime" />
+    <Property Name="Xoa_Ngay" Type="datetime2" Precision="7" />
     <Property Name="Xoa" Type="bit" />
     <Property Name="GhiChu" Type="nvarchar" MaxLength="2000" />
   </EntityType>

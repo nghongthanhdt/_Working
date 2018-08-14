@@ -129,7 +129,7 @@ $(document).ready(function () {
 
     loadHinhAnhVaoKhung();
 
-    
+    bindbtnLuu();
 
     // end document ready
 
@@ -785,3 +785,203 @@ function loadHinhAnhVaoKhung() {
 
 
 
+function bindbtnLuu() {
+    $("#btnLuu").unbind("click").click(function () {
+
+        var pMaLyLichVienChuc = $(this).data("malylichvienchuc");
+        var pMaNhanVien = $("#selectTaiKhoanNhanVien").val();
+
+        var pMaDonVi= $("#selectCoQuanSuDungVienChuc").val();
+        var pMaDonViThamQuyenQuanLy = $("#selectCoQuanThamQuyenQuanLyVienChuc").val();
+        var pMaLoaiHopDong = $("#selectLoaiHopDong").val();
+        var pSoHieuVienChuc = $("#txtSoHieuVienChuc").val();
+        var pHoTenKhaiSinh= $("#txtHoTenKhaiSinh").val();
+        var pTenGoiKhac= $("#txtTenGoiKhac").val();
+        var pNgaySinh=$("#txtNgaySinh_Ngay").val();
+        var pThangSinh=$("#txtNgaySinh_Thang").val();
+        var pNamSinh=$("#txtNgaySinh_Nam").val();
+
+        //var pGioiTinh=$("#selectCoQuanSuDungVienChuc").val();
+        // xử lý lấy giới tính
+
+        var pGioiTinh = 0;
+        if ($("#checkboxGioiTinhNam").is(":checked")) {
+            pGioiTinh = 1;
+        } else if ($("#checkboxGioiTinhNu").is(":checked")) {
+            pGioiTinh = 2;
+        }
+
+        var pNoiSinh_Xa=$("#txtNoiSinh_Xa").val();
+        var pNoiSinh_Huyen=$("#txtNoiSinh_Huyen").val();
+        var pNoiSinh_Tinh=$("#txtNoiSinh_Tinh").val();
+        var pQueQuan_Xa=$("#txtQueQuan_Xa").val();
+        var pQueQuan_Huyen=$("#txtQueQuan_Huyen").val();
+        var pQueQuan_Tinh=$("#txtQueQuan_Tinh").val();
+        var pDanToc=$("#txtDanToc").val();
+        var pTonGiao=$("#txtTonGiao").val();
+        var pNoiDangKyHKTT_SoNha=$("#txtNoiDangKyHKTT_SoNha").val();
+        var pNoiDangKyHKTT_Duong= $("#txtNoiDangKyHKTT_Duong").val();
+        var pNoiDangKyHKTT_Xa= $("#txtNoiDangKyHKTT_Xa").val();
+        var pNoiDangKyHKTT_Huyen= $("#txtNoiDangKyHKTT_Huyen").val();
+        var pNoiDangKyHKTT_Tinh= $("#txtNoiDangKyHKTT_Tinh").val();
+        var pNoiOHienNay_SoNha= $("#txtNoiOHienNay_SoNha").val();
+        var pNoiOHienNay_Duong= $("#txtNoiOHienNay_Duong").val();
+        var pNoiOHienNay_Xa= $("#txtNoiOHienNay_Xa").val();
+        var pNoiOHienNay_Huyen= $("#txtNoiOHienNay_Huyen").val();
+        var pNoiOHienNay_Tinh= $("#txtNoiOHienNay_Tinh").val();
+        var pNgheNghiepKhiDuocTuyenDung= $("#txtNgheNghiepKhiDuocTuyenDung").val();
+        var pNgayTuyenDung= $("#txtNgayTuyenDung").val();
+        var pMaCoQuanTuyenDung= $("#selectCoQuanTuyenDung").val();
+        var pChucVuChucDanhHienTai = $("#txtChucVuChucDanhHienTai").val();
+        var pCongViecChinhDuocGiao= $("#txtCongViecChinhDuocGiao").val();
+        var pTrinhDoGiaoDucPhoThong=$("#txtTrinhDoGiaoDucPhoThong").val();
+        var pTrinhDoChuyenMonCaoNhat=$("#txtTrinhDoChuyenMonCaoNhat").val(); 
+        var pLyLuanChinhTri= $("#txtLyLuanChinhTri").val();  
+        var pQuanLyNhaNuoc= $("#txtQuanLyNhaNuoc").val();  
+        var pBoiDuongTheoTieuChuanCDNN= $("#txtBoiDuongTheoTieuChuanCDNN").val();  
+        var pNgoaiNgu= $("#txtNgoaiNgu").val();  
+        var pTinHoc= $("#txtTinHoc").val();  
+        var pNgayVaoDangCSVN= $("#txtNgayVaoDangCSVN").val();  
+        var pNgayVaoDangCSVNChinhThuc= $("#txtNgayVaoDangCSVN_ChinhThuc").val();  
+        var pToChucChinhTriXH_NgayThamGia= $("#txtNgayThamGiaToChucChinhTriXaHoi").val();  
+        var pToChucChinhTriXH= $("#txtToChucChinhTriXaHoi").val();  
+        var pNgayNhapNgu= $("#txtNgayNhapNgu").val();  
+        var pNgayXuatNgu= $("#txtNgayXuatNgu").val();  
+        var pQuanHamCaoNhat= $("#txtQuanHamCaoNhat").val();  
+        var pDanhHieuDuocPhongTangCaoNhat= $("#txtDanhHieuDuocPhongTangCaoNhat").val();  
+        var pSoTruongCongTac= $("#txtSoTruongCongTac").val();  
+        var pKhenThuong= $("#txtKhenThuong").val();  
+        var pKyLuat= $("#txtKyLuat").val();  
+        var pTinhTrangSucKhoe= $("#txtTinhTrangSucKhoe").val();  
+        var pChieuCao= $("#txtChieuCao").val();  
+        var pCanNang= $("#txtCanNang").val();  
+        var pNhomMau= $("#txtNhomMau").val();  
+        var pLaThuongBinhHang= $("#txtLaThuongBinhHang").val();  
+        var pLaConGiaDinhChinhSach= $("#txtLaConGiaDinhChinhSach").val();  
+        var pSoChungMinhNhanDan= $("#txtSoChungMinhNhanDan").val();  
+        var pNgayCap= $("#txtNgayCap").val();  
+        var pSoSoBHXH= $("#txtSoSoBHXH").val();  
+        var pNhanXetDanhGiaCuaCoQuanDonVi= $("#txtNhanXetDanhGiaCuaCoQuanDonVi").val();  
+        var pNguoiKhai= $("#txtNguoiKhai").val();  
+        var pThuTruongKyTen= $("#txtThuTruongCoQuan").val();  
+        var pThuTruongKy_Ngay= $("#txtNgayKy").val();  
+        var pThuTruongKy_NoiKy = $("#txtNoiKy").val();
+        var pGhiChu = $("#txtGhiChu").val();
+        
+        if (!kiemTraNgaySinh()) {
+            return;
+        }
+
+        var param = {
+            MaLyLichVienChuc:pMaLyLichVienChuc,
+            MaDonVi: pMaDonVi,
+            MaDonViThamQuyenQuanLy: pMaDonViThamQuyenQuanLy,
+            MaLoaiHopDong: pMaLoaiHopDong,
+            SoHieuVienChuc: pSoHieuVienChuc,
+            HoTenKhaiSinh: pHoTenKhaiSinh,
+            MaNhanVien: pMaNhanVien,
+            TenGoiKhac: pTenGoiKhac,
+            NgaySinh: pNgaySinh,
+            ThangSinh: pThangSinh,
+            NamSinh: pNamSinh,
+            GioiTinh: pGioiTinh,
+            NoiSinh_Xa: pNoiSinh_Xa,
+            NoiSinh_Huyen: pNoiSinh_Huyen,
+            NoiSinh_Tinh: pNoiSinh_Tinh,
+            QueQuan_Xa: pQueQuan_Xa,
+            QueQuan_Huyen: pQueQuan_Huyen,
+            QueQuan_Tinh: pQueQuan_Tinh,
+            DanToc: pDanToc,
+            TonGiao: pTonGiao,
+            NoiDangKyHKTT_SoNha: pNoiDangKyHKTT_SoNha,
+            NoiDangKyHKTT_Duong: pNoiDangKyHKTT_Duong,
+            NoiDangKyHKTT_Xa: pNoiDangKyHKTT_Xa,
+            NoiDangKyHKTT_Huyen: pNoiDangKyHKTT_Huyen,
+            NoiDangKyHKTT_Tinh: pNoiDangKyHKTT_Tinh,
+            NoiOHienNay_SoNha: pNoiOHienNay_SoNha,
+            NoiOHienNay_Duong: pNoiOHienNay_Duong,
+            NoiOHienNay_Xa: pNoiOHienNay_Xa,
+            NoiOHienNay_Huyen: pNoiOHienNay_Huyen,
+            NoiOHienNay_Tinh: pNoiOHienNay_Tinh,
+            NgheNghiepKhiDuocTuyenDung: pNgheNghiepKhiDuocTuyenDung,
+            NgayTuyenDung: pNgayTuyenDung,
+            MaCoQuanTuyenDung: pMaCoQuanTuyenDung,
+            ChucVuChucDanhHienTai: pChucVuChucDanhHienTai,
+            CongViecChinhDuocGiao: pCongViecChinhDuocGiao,
+            TrinhDoGiaoDucPhoThong: pTrinhDoGiaoDucPhoThong,
+            TrinhDoChuyenMonCaoNhat: pTrinhDoChuyenMonCaoNhat,
+            LyLuanChinhTri: pLyLuanChinhTri,
+            QuanLyNhaNuoc: pQuanLyNhaNuoc,
+            BoiDuongTheoTieuChuanCDNN: pBoiDuongTheoTieuChuanCDNN,
+            NgoaiNgu: pNgoaiNgu,
+            TinHoc: pTinHoc,
+            NgayVaoDangCSVN: pNgayVaoDangCSVN,
+            NgayVaoDangCSVNChinhThuc: pNgayVaoDangCSVNChinhThuc,
+            ToChucChinhTriXH_NgayThamGia: pToChucChinhTriXH_NgayThamGia,
+            ToChucChinhTriXH: pToChucChinhTriXH,
+            NgayNhapNgu: pNgayNhapNgu,
+            NgayXuatNgu: pNgayXuatNgu,
+            QuanHamCaoNhat: pQuanHamCaoNhat,
+            DanhHieuDuocPhongTangCaoNhat: pDanhHieuDuocPhongTangCaoNhat,
+            SoTruongCongTac: pSoTruongCongTac,
+            KhenThuong: pKhenThuong,
+            KyLuat: pKyLuat,
+            TinhTrangSucKhoe: pTinhTrangSucKhoe,
+            ChieuCao: pChieuCao,
+            CanNang: pCanNang,
+            NhomMau: pNhomMau,
+            LaThuongBinhHang: pLaThuongBinhHang,
+            LaConGiaDinhChinhSach: pLaConGiaDinhChinhSach,
+            SoChungMinhNhanDan: pSoChungMinhNhanDan,
+            NgayCap: pNgayCap,
+            SoSoBHXH: pSoSoBHXH,
+            NhanXetDanhGiaCuaCoQuanDonVi: pNhanXetDanhGiaCuaCoQuanDonVi,
+            NguoiKhai: pNguoiKhai,
+            ThuTruongKyTen: pThuTruongKyTen,
+            ThuTruongKy_Ngay: pThuTruongKy_Ngay,
+            ThuTruongKy_NoiKy: pThuTruongKy_NoiKy,
+            GhiChu: pGhiChu
+        };
+        var ajaxActionName = "LuuLyLichVienChuc";
+        $.ajax({
+            method: "POST",
+            url: _ajaxUrl + ajaxActionName,
+            dataType: "html",
+            data: param,
+            success: function (result) {
+                if (result == "ok") {
+                    thAlert("Đã lưu dữ liệu");
+                }
+            }
+        });
+
+
+    });
+}
+
+function kiemTraNgaySinh() {
+    var ngaySinh = $("#txtNgaySinh_Ngay").val();
+    var thangSinh = $("#txtNgaySinh_Thang").val();
+    var namSinh = $("#txtNgaySinh_Nam").val();
+
+    if (parseInt(namSinh) < 1800) {
+        thAlertShowError("Năm sinh phải từ 1800 trở lên, vui lòng kiểm tra lại");
+        return false;
+    };
+    if (parseInt(thangSinh) > 13) {
+        thAlertShowError("Tháng sinh phải từ 1 đến 12, vui lòng kiểm tra lại");
+        return false;
+    }
+    if (parseInt(ngaySinh) > 31) {
+        thAlertShowError("Ngày sinh phải từ 1 đến 31, vui lòng kiểm tra lại");
+        return false;
+    }
+    if (ngaySinh != "" && thangSinh != "" && namSinh != "") {
+        if (!isValidDate(parseInt(ngaySinh), parseInt(thangSinh), parseInt(namSinh))) {
+            thAlertShowError("Ngày sinh " +ngaySinh+ "/"+thangSinh+"/"+namSinh+" không có thật, vui lòng kiểm tra lại");
+            return false;
+        }
+    }
+    
+    return true;
+}

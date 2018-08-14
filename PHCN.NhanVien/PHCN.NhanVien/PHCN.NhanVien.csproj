@@ -647,6 +647,7 @@
     <Content Include="scripts\app_scripts\CapNhatLyLichVienChuc.js" />
     <Content Include="scripts\app_scripts\QuanLyNhanVien.js" />
     <Content Include="scripts\app_scripts\SoanThu.js" />
+    <Content Include="scripts\core-scripts\sweetalert2.all.min.js" />
     <Content Include="scripts\core-scripts\th.core.js" />
     <Content Include="scripts\jquery-3.3.1.js" />
     <Content Include="scripts\jquery-3.3.1.min.js" />
@@ -846,7 +847,7 @@
     <Content Include="Views\QuanLyLyLichVienChuc\_pDienBienQuaTrinhLuong.cshtml" />
     <Content Include="Views\QuanLyLyLichVienChuc\_pDienBienQuaTrinhDaoTaoBoiDuong.cshtml" />
     <Content Include="Views\QuanLyLyLichVienChuc\_pDienBienQuaTrinhCongTac.cshtml" />
-    <Content Include="Views\QuanLyNhanVien\Index.cshtml" />
+    <Content Include="Views\QuanLyNhanVien\Xem.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

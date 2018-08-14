@@ -66,5 +66,7 @@ namespace PHCN.NhanVien.Controllers
             List<DienBienQuaTrinhCongTac> list = db.DienBienQuaTrinhCongTac.Where(x => x.MaLyLichVienChuc == id).OrderBy(x => x.TuThangNam).ToList();
             return View(list);
         }
+
+
     }
 }

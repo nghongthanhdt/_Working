@@ -241,5 +241,21 @@ namespace PHCN.NhanVien.Controllers
             db.SaveChanges();
             return "ok";
         }
+
+
+        // lưu lý lịch viên chức
+        [HttpPost]
+        public string LuuLyLichVienChuc(LyLichVienChuc lylich)
+        {
+
+            if (lylich.MaLyLichVienChuc > 0)
+            {
+                //update lý lịch
+                db.Entry(lylich).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+            return "ok";
+        }
+        //public string XoaLyLichVienChuc()
     }
 }

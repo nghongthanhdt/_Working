@@ -59,7 +59,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label >Cơ quan sử dụng viên chức</label>
-                            <select class="form-control" id="txtCoQuanSuDungVienChuc">
+                            <select class="form-control" id="selectCoQuanSuDungVienChuc">
                                 <option value=""></option>
                                 @foreach (var item in listDonVi)
                                 {
@@ -71,7 +71,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Hợp đồng</label>
-                            <select class="form-control" id="selectCoQuanSuDungVienChuc">
+                            <select class="form-control" id="selectLoaiHopDong">
                                 <option value=""></option>
                                 @foreach (var item in listLoaiHopDong)
                                 {
@@ -86,7 +86,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Tài khoản</label>
-                                    <select class="form-control" id="selectTaiKhoanNhanVien">
+                                    <select class="form-control disabled" id="selectTaiKhoanNhanVien" disabled="disabled">
                                         <option value=""></option>
                                         
                                                 @foreach(var nhanvien in listNhanVien)
@@ -318,7 +318,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label >12. Chức vụ (chức danh hiện tại)</label>
-                            <input class="form-control" type="text" id="txtChucVuChucDanhHienTai">
+                            <input class="form-control" type="text" id="txtChucVuChucDanhHienTai" value="@Model.ChucVuChucDanhHienTai">
                         </div>
                     </div>                    
                 </div>
@@ -548,10 +548,16 @@
                             <input class="form-control number" type="text" id="txtSoChungMinhNhanDan" value="@Model.SoChungMinhNhanDan">
                         </div>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label >Ngày cấp</label>
                             <input class="form-control date" type="text" id="txtNgayCap" value="@Model.NgayCap">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>26. Số sổ BHXH</label>
+                            <input class="form-control number" type="text" id="txtSoSoBHXH" value="@Model.SoSoBHXH">
                         </div>
                     </div>
                 </div>
@@ -599,7 +605,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label >30. NHẬN XÉT, ĐÁNH GIÁ CỦA CƠ QUAN, ĐƠN VỊ QUẢN LÝ HOẶC SỬ DỤNG VIÊN CHỨC</label>
-                            <textarea class="form-control" placeholder="" id="txtNhanXetDanhGiaCuaConQuan">@Model.NhanXetDanhGiaCuaCoQuanDonVi</textarea>
+                            <textarea class="form-control" placeholder="" id="txtNhanXetDanhGiaCuaCoQuanDonVi">@Model.NhanXetDanhGiaCuaCoQuanDonVi</textarea>
                         </div>
                     </div>
                 </div>
@@ -661,7 +667,11 @@
 
         </div>
     </div>
-    <button class="btn btn-lg btn-success">Lưu dữ liệu</button>
+    <div  style="position:fixed; bottom:10px; right:10px;">
+        <a class="btn btn-lg btn-default" id="btnTroVeDanhSach" href="@Url.Action("Xem", "QuanLyNhanVien", new { @id = Model.MaNhanVien})">Trở về danh sách</a>
+        <button class="btn btn-lg btn-success" id="btnLuu" data-malylichvienchuc="@Model.MaLyLichVienChuc">Lưu dữ liệu</button>
+    </div>
+    
     <button class="btn btn-lg btn-default">Xóa hồ sơ</button>    
 </div>
 
@@ -875,6 +885,6 @@
 
 </script>
 
-
+<script src="~/scripts/core-scripts/sweetalert2.all.min.js"></script>
 <script src="~/scripts/core-scripts/th.core.js?@("v="+DateTime.Now.ToString("yyMMddhhmmss"))"></script>
 <script src="~/scripts/app_scripts/CapNhatLyLichVienChuc.js?@("v="+DateTime.Now.ToString("yyMMddhhmmss"))"></script>

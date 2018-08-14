@@ -16,3 +16,19 @@ function revertDMY(date) {
     var newdate = date.split('/').reverse().join('/');
     return newdate;
 }
+
+
+function thAlert(message) {
+    swal(
+      message,
+      'Thành công',
+      'success'
+    )
+}
+function thAlertShowError(message) {
+    swal({
+        type: 'error',
+        title: 'Lỗi',
+        text: message
+    })
+}

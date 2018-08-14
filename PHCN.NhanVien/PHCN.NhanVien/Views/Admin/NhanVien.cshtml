@@ -38,8 +38,7 @@
                         <td>
                             <a href="@Url.Action("ThongTinNhanVien", "Admin", new { @id = nhanvien.MaNhanVien})">
                                 @nhanvien.HoTen
-                            </a>
-                            
+                            </a>                            
                         </td>
                         <td>
                             <input type="checkbox" class="checkboxNhanThu" disabled="disabled" @((nhanvien.NhanThu)?"checked='checked'":"") />
