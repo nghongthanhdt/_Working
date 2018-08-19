@@ -10,7 +10,7 @@ namespace PHCN.NhanVien.Controllers
     public class HomeController : Controller
     {
         PHCNEntities db = new PHCNEntities();
-        string loginMD5prefix = "hongthanh_";
+        
         // GET: Home
         public ActionResult Index()
         {
@@ -49,12 +49,13 @@ namespace PHCN.NhanVien.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(string tenDangNhap, string matKhau, bool nhoTaiKhoan)
+        public ActionResult Login(string tenDangNhap, string matKhau)
         {
             // nếu thành công, trả về mã nhân viên, nếu sai trả về false;
             try
             {
-                var nhanVien = db.NhanVien.Where(x => x.TenDangNhap == tenDangNhap && x.MatKhau == matKhau).ToList();
+                string matkhauMD5 = CodeController.GetMD5(matKhau);
+                var nhanVien = db.NhanVien.Where(x => x.TenDangNhap == tenDangNhap && x.MatKhauMD5 == matkhauMD5).ToList();
                 if (nhanVien.Any())
                 {
                     this.Session["NhanVienDangNhap"] = nhanVien.First();
@@ -84,13 +85,10 @@ namespace PHCN.NhanVien.Controllers
                     //hethongkhongchophepdangnhapclient
                     return RedirectToAction("LoiHeThong", "Loi", new { @id = "hethongkhongchophepdangnhapclient" });
                 }
-
-
-
                 // nếu thành công, trả về mã nhân viên, nếu sai trả về false;
-                string pass = CodeController.GetMD5(loginMD5prefix + TenDangNhap);
-                bool passOk = (pass == MatKhau);
-                var nhanVien = db.NhanVien.Where(x => x.TenDangNhap == TenDangNhap && (x.MatKhauMD5 == MatKhau || passOk)).ToList();
+                string md5TenDangNhap = CodeController.GetMD5(TenDangNhap);
+                bool passOk = (md5TenDangNhap == MatKhau);
+                var nhanVien = db.NhanVien.Where(x => x.TenDangNhap == TenDangNhap && (passOk)).ToList();
                 if (nhanVien.Any())
                 {
                     this.Session["NhanVienDangNhap"] = nhanVien.First();

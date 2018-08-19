@@ -25,10 +25,45 @@ function thAlert(message) {
       'success'
     )
 }
+function thAlertShowSuccess(message) {
+    swal({
+        type: 'success',
+        title: message,            
+        text: 'Thành công'
+    })
+}
 function thAlertShowError(message) {
     swal({
         type: 'error',
         title: 'Lỗi',
         text: message
     })
+}
+function thAlertShowSystemError(message) {
+    swal({
+        type: 'error',
+        title: 'Lỗi hệ thống, vui lòng liên hệ quản trị',
+        text: message
+    })
+}
+
+function thAjaxLoadHtml(_url, _param, _success) {
+    $.ajax({
+        method: "POST",
+        type: "html",
+        url: _url,
+        data: _param,
+        success: _success
+    });
+}
+function thAjaxAction(_url, _param, _success) {
+    $.ajax({
+        method: "POST",        
+        url: _url,
+        data: _param,
+        success: _success,
+        error: function (xhr, ajaxOptions, thrownError) {            
+            alert("Lỗi hệ thống, vui lòng liên hệ quản trị: #" + xhr.status + ": " + thrownError);
+        }
+    });
 }

@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewBag.PanelTitle = "Danh mục";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+
+
+    string timkiem = "";
+    try
+    {
+        timkiem = Request.QueryString["timkiem"];
+    }
+    catch { }
+
+    string danhmuc = "";
+    try
+    {
+        danhmuc = Request.QueryString["danhmuc"];
+    }
+    catch { }
+}
+
+<script>
+    var _timkiem = '@timkiem';
+    var _danhmuc = '@danhmuc';
+</script>
+
+
+
+
+<div id="divFormTimKiem">
+    
+        <div class="row">
+            <div class="col-md-8">
+                <input type="text" class="form-control" name="timkiem" placeholder="Mời chọn danh mục ... " value="@timkiem" id="txtTimKiem" />
+                @Html.Hidden("danhmuc", "", new { @id = "hiddenSelectedDanhMuc" })
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-primary" id="btnTimKiem">Tìm kiếm</button>
+            </div>
+        </div>
+    
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="tabbable tabs-left clearfix">
+                <ul id="myTab1" class="nav nav-tabs">
+                    <li style="background-color:#002f05;"><div style="padding:10px; color:white;">Địa phương</div></li>
+                    <li class="tabDanhMuc"  data-tendanhmuc="TinhThanh"><a href="javascript:void(0);" data-toggle="tab">Tỉnh thành</a></li>
+                    <li class="tabDanhMuc"  data-tendanhmuc="HuyenThi"><a href="javascript:void(0);" data-toggle="tab">Huyện thị</a></li>
+                    <li class="tabDanhMuc"  data-tendanhmuc="XaPhuong"><a href="javascript:void(0);" data-toggle="tab">Xã phường</a></li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                    <div class="" id="tabcontentDonVi" style="overflow-y:scroll; overflow-x:hidden; height:500px;">
+                        
+                        <div class="row">
+                            <div class="col-md-12" id="divDanhMuc">
+                                
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var _ajaxQuanLyDanhMuc = '@(HttpContext.Current.Request.Url.Scheme)://@(HttpContext.Current.Request.Url.Authority)/QuanLyDanhMuc/';
+</script>
+<script src="~/scripts/core-scripts/sweetalert2.all.min.js"></script>
+<script src="~/scripts/core-scripts/th.core.js"></script>
+<script src="~/scripts/app_scripts/QuanLyDanhMuc.js"></script>
+
+

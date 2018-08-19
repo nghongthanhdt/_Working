@@ -1,0 +1,35 @@
+﻿@model List<PHCN.NhanVien.Models.TinhThanh>
+
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            
+            <th style="width:60px; text-align:center;">STT</th>
+            <th>Tên tỉnh thành</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                
+                <td>
+                    <input value="@item.STT" style="width:50px; text-align:center;" id="txtSTT_@item.MaTinhThanh" />
+                </td>
+                <td>
+                    <input value="@item.TenTinhThanh" style="width:100%;" id="txtTenDanhMuc_@item.MaTinhThanh" />
+                </td>
+                
+                <td>
+                    <a href="javascript:void(0);" class="btn btn-xs btn-success btnLuu" data-madanhmuc="@item.MaTinhThanh">Lưu</a>
+                    <button class="btn btn-xs btn-danger">Xóa</button>
+                </td>
+            </tr>
+        }
+
+
+    </tbody>
+</table>
+

@@ -34,6 +34,8 @@ namespace PHCN.NhanVien.Controllers
             {
                 PHCN.NhanVien.Models.NhanVien nv = new NhanVien.Models.NhanVien();
                 nv.NhanThu = true;
+                nv.MatKhau = "123";
+                nv.MatKhauMD5 = CodeController.GetMD5("123");
                 return View(nv);
             }
         }

@@ -1,0 +1,32 @@
+﻿@model PHCN.NhanVien.Models.NhanVien
+
+
+<table class="table">
+    <tr>
+        <th style="width:40%;">Email </th>
+        <td>@Model.Email</td>
+    </tr>
+    <tr>
+        <th>Điện thoại </th>
+        <td>@Model.SoDienThoai</td>
+    </tr>
+    <tr>
+        <th>Điện thoại nội bộ </th>
+        <td>@Model.SoDienThoaiNoiBo</td>
+    </tr>
+    <tr>
+        <th>Tài khoản</th>
+        <td>@Model.TenDangNhap</td>
+    </tr>
+    <tr>
+        <th>Mật khẩu</th>
+        <td>******</td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <a href="javascript:void(0);" id="btnCapNhatThongTinLienHe"> <i class="glyphicon glyphicon-pencil"></i> Cập nhật </a>
+            - <a href="javascript:void(0);" id="btnDoiMatKhauNhanVien">Đổi mật khẩu</a>
+        </td>
+    </tr>
+</table>
+

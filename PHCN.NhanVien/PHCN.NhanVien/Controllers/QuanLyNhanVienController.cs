@@ -40,5 +40,12 @@ namespace PHCN.NhanVien.Controllers
             return RedirectToAction("CapNhat", "QuanLyLyLichVienChuc", new { @id = lylich.MaLyLichVienChuc });
 
         }
+        public ActionResult _pThongTinLienHe(int id)
+        {
+            //id: mã nhân viên
+            NhanVien.Models.NhanVien nv = db.NhanVien.Find(id);
+
+            return View(nv);
+        }
     }
 }

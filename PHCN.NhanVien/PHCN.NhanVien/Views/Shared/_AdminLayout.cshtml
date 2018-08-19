@@ -1,7 +1,15 @@
 ﻿@{ 
-    var nhanVienDangNhap = new PHCN.NhanVien.Models.NhanVien();
-    nhanVienDangNhap.MaNhanVien = 8;
-    nhanVienDangNhap.HoTen = "Administrator";
+
+    // chạy dev
+
+    PHCN.NhanVien.Models.PHCNEntities db = new PHCN.NhanVien.Models.PHCNEntities();
+    var nhanVienDangNhap = db.NhanVien.Find(1);
+    Session["NhanVienDangNhap"] = nhanVienDangNhap;
+    var listPhanQuyen = nhanVienDangNhap.PhanQuyen.ToList();
+    string box = "";
+
+    // chạy thật
+
     //var nhanVienDangNhap = (PHCN.NhanVien.Models.NhanVien)Session["NhanVienDangNhap"];
     //if (nhanVienDangNhap == null)
     //{
@@ -67,12 +75,13 @@
         <!--documents-->
         <div class="row row-offcanvas row-offcanvas-left">
             <div class="col-xs-6 col-sm-3 sidebar-offcanvas" role="navigation">
-                @*@{ 
+                @{ 
                     bool isAdmin = listPhanQuyen.Where(x => x.MaQuyen == "admin").Any();
+                    bool isQuanLyLyLichVienChuc = listPhanQuyen.Where(x => x.MaQuyen == "quanlylylichvienchuc").Any();
                     if (nhanVienDangNhap.TenDangNhap == "admin")
                     {
                         isAdmin = true;
-                    }                  
+                    } 
                 }
 
                 @if (isAdmin)
@@ -92,34 +101,34 @@
                         <a href="@Url.Action("ThamSoHeThong", "Admin")" class="list-group-item">Tham số hệ thống</a>
                     </div>
 
-                }*@  
+                }  
+                @if (isQuanLyLyLichVienChuc || isAdmin)
+                {
+                    <ul class="list-group panel">
+                        <li class="list-group-item">
+                            <a href="@Url.Action("Xem", "QuanLyNhanVien")" class="btn btn-success" style="width:100%">
+                                Quản lý nhân viên
+                            </a>
+                        </li>
+                    </ul>
+                    @*<div class="list-group">
+                        <a href="@Url.Action("DanhSach", "QuanLyLyLichVienChuc")" class="list-group-item">Danh sách</a>
+                    </div>*@
+                }
+                
 
                 <ul class="list-group panel">
-                    <li class="list-group-item">
-                        <a href="@Url.Action("Index", "QuanLyLyLichVienChuc")" class="btn btn-success" style="width:100%">
-                            Lý lịch Viên Chức
-                        </a>
-                    </li>
-                </ul>
-                <div class="list-group">
-                    <a href="@Url.Action("DanhSach", "QuanLyLyLichVienChuc")" class="list-group-item">Danh sách</a>
-                    
-                </div>
-
-                @*<ul class="list-group panel">
                     <li class="list-group-item">
                         <a href="@Url.Action("SoanThu","ThuNoiBo")" class="btn btn-success" style="width:100%">
                             Soạn thư
                         </a>
                     </li>
-                </ul>*@
+                </ul>
                 
                 <div class="list-group">
-                    @*<a href="@Url.Action("Index", "ThuNoiBo", new { box = "ThuDen"})" class="list-group-item @((box=="ThuDen")?"active":"")">Hộp thư đến</a>
-                    
-                    <a href="@Url.Action("Index", "ThuNoiBo", new { box = "DaGui"})" class="list-group-item @((box=="DaGui")?"active":"")">Thư đã gửi</a>
-                    
-                    <a href="@Url.Action("Index", "ThuNoiBo", new { box = "DaXoa"})" class="list-group-item @((box=="DaXoa")?"active":"")">Thùng rác</a>*@
+                    <a href="@Url.Action("Index", "ThuNoiBo", new { box = "ThuDen"})" class="list-group-item @((box=="ThuDen")?"active":"")">Hộp thư đến</a>                    
+                    <a href="@Url.Action("Index", "ThuNoiBo", new { box = "DaGui"})" class="list-group-item @((box=="DaGui")?"active":"")">Thư đã gửi</a>                    
+                    <a href="@Url.Action("Index", "ThuNoiBo", new { box = "DaXoa"})" class="list-group-item @((box=="DaXoa")?"active":"")">Thùng rác</a>
                 </div>
                     
             </div>

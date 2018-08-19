@@ -180,7 +180,7 @@ else
                                                 <td>@lyLichVienChuc.LoaiHopDong.TenLoaiHopDong</td>
                                             </tr>
                                         </table>
-                                        <a class="btn btn-default" id="btnXemChiTiet" style="margin-bottom:10px;">Xem chi tiết</a>                                        
+                                        <a class="btn btn-default" id="btnXemChiTiet" style="margin-bottom:10px; display:none;">Xem chi tiết</a>                                        
                                         <a href="@Url.Action("CapNhat", "QuanLyLyLichVienChuc", new { @id = lyLichVienChuc.MaLyLichVienChuc})" class="btn btn-primary" style="margin-bottom:10px;">Cập nhật</a>
                                         
                                     </div>
@@ -216,29 +216,8 @@ else
                 <div class="panel-heading">
                     <h3 class="panel-title"> <i class="glyphicon glyphicon-phone-alt"></i> Thông tin liên hệ</h3>
                 </div>
-                <div class="panel-body">
-                    <table class="table">
-                        <tr>
-                            <th>Email </th><td>ng.hong.thanh@gmail.com</td>
-                        </tr>
-                        <tr>
-                            <th>Điện thoại </th>
-                            <td>0973.952.747 - 0944.129.847</td>
-                        </tr>
-                        <tr>
-                            <th>Điện thoại nội bộ </th>
-                            <td>121</td>
-                        </tr>
-                        <tr>
-                            <th>Tài khoản</th>
-                            <td>hongthanh</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <a href="javascript:void(0);"> <i class="glyphicon glyphicon-pencil"></i> Cập nhật </a> - <a href="javascript:void(0);">Đổi mật khẩu</a>
-                            </td>
-                        </tr>
-                    </table>
+                <div class="panel-body" id="divThongTinLienHe">
+                    
                     
                 </div>
             </div>
@@ -627,6 +606,107 @@ else
 
         </div>
     </div>
+<div class="modal" id="modalThongTinLienHe">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Thông tin liên hệ</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <strong>Email</strong>
+                        <input type="text" class="form-control" id="modalLienHe_txtEmail" value="@nv.Email" />
+                    </div>
+                </div>
+                <div class="row">
+
+
+                    <div class="col-md-12">
+                        <strong>Điện thoại</strong>
+                        <input type="text" class="form-control" id="modalLienHe_txtDienThoai" value="@nv.SoDienThoai" />
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <strong>Điện thoại nội bộ</strong>
+                        <input type="text" class="form-control" id="modalLienHe_txtDienThoaiNoiBo" value="@nv.SoDienThoaiNoiBo" />
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-manhanvien="@nv.MaNhanVien" id="modalThongTinLienHe_btnLuu">Lưu thông tin</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>                
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="modal" id="modalDoiMatKhau">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Đổi mật khẩu</h4>
+            </div>
+            <div class="modal-body">
+                
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <strong>Tên đăng nhập</strong>
+                        <input type="text" class="form-control disabled" id="modalDoiMatKhau_txtTenDangNhap" value="@nv.TenDangNhap" disabled="disabled" />
+                    </div>
+                </div>
+                @*<div class="row">
+
+                    <div class="col-md-12">
+                        <strong>Mật khẩu cũ</strong>
+                        <input type="password" class="form-control" id="modalDoiMatKhau_txtMatKhauCu" />
+                    </div>
+                </div>*@
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <strong>Mật khẩu mới</strong>
+                        <input type="password" class="form-control" id="modalDoiMatKhau_txtMatKhauMoi" />
+                    </div>
+                </div>
+                
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <strong>Nhập lại mật khẩu mới</strong>
+                        <input type="password" class="form-control" id="modalDoiMatKhau_txtNhapLaiMatKhauMoi" />
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <span style="color:red; margin-right:10px;" id="modalDoiMatKhau_spanThongBao"></span>
+                <button type="button" class="btn btn-success" data-manhanvien="@nv.MaNhanVien" id="modalDoiMatKhau_btnLuu">Lưu thông tin</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+
+    </div>
 </div>
 
+
+
+
+<script>
+    var _ajaxManager = '@(HttpContext.Current.Request.Url.Scheme)://@(HttpContext.Current.Request.Url.Authority)/AjaxManager/';
+    var _ajaxThisUrl = '@(HttpContext.Current.Request.Url.Scheme)://@(HttpContext.Current.Request.Url.Authority)/QuanLyNhanVien/';
+    var _maNhanVien = '@nv.MaNhanVien';
+</script>
+
+
+<script src="~/scripts/core-scripts/sweetalert2.all.min.js"></script>
+<script src="~/scripts/core-scripts/th.core.js?@("v="+DateTime.Now.ToString("yyMMddhhmmss"))"></script>
 <script src="~/scripts/app_scripts/QuanLyNhanVien.js?@("v="+DateTime.Now.ToString("yyMMddhhmmss"))"></script>

@@ -382,33 +382,51 @@
                             <label >15. Trình độ học vấn</label>                            
                             <div class="row">
                                 <div class="col-md-3">
-                                    <label style="font-weight:normal">15.1 Trình độ giáo dục phổ thông</label>
+                                    <label style="font-weight:normal"><strong>15.1</strong> Trình độ giáo dục phổ thông</label>
                                     <input type="text" class="form-control giaoducphothong" id="txtTrinhDoGiaoDucPhoThong" value="@Model.TrinhDoGiaoDucPhoThong" />
                                 </div>
-                                <div class="col-md-3">
-                                    <label style="font-weight:normal">15.2 Trình độ chuyên môn cao nhất</label>
-                                    <input type="text" class="form-control" id="txtTrinhDoChuyenMonCaoNhat"  value="@Model.TrinhDoChuyenMonCaoNhat" />
+                                
+                                
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label style="font-weight:normal"><strong>15.2</strong> Trình độ chuyên môn cao nhất</label>
                                 </div>
-                                <div class="col-md-3">
-                                    <label style="font-weight:normal">15.3 Lý luận chính trị</label>
-                                    <input type="text" class="form-control" id="txtLyLuanChinhTri"  value="@Model.LyLuanChinhTri" />
+                                <div class="col-md-4">
+                                    <label style="font-weight:normal">Học hàm</label>
+                                    <input type="text" class="form-control" id="txtTrinhDoChuyenMonCaoNhat" value="@Model.TrinhDoChuyenMonCaoNhat" />
                                 </div>
-                                <div class="col-md-3">
-                                    <label style="font-weight:normal">15.4 Quản lý nhà nước</label>
-                                    <input type="text" class="form-control" id="txtQuanLyNhaNuoc"  value="@Model.QuanLyNhaNuoc" />
+                                <div class="col-md-4">
+                                    <label style="font-weight:normal">Học vị</label>
+                                    <input type="text" class="form-control" id="txtTrinhDoChuyenMonCaoNhat" value="@Model.TrinhDoChuyenMonCaoNhat" />
+                                </div>
+                                <div class="col-md-4">
+                                    <label style="font-weight:normal">Chuyên môn</label>
+                                    <input type="text" class="form-control" id="txtTrinhDoChuyenMonCaoNhat" value="@Model.TrinhDoChuyenMonCaoNhat" />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label style="font-weight:normal">15.5 Bồi dưỡng theo tiêu chuẩn chức danh nghề nghiệp</label>
+                                    <label style="font-weight:normal"><strong>15.3</strong> Lý luận chính trị</label>
+                                    <input type="text" class="form-control" id="txtLyLuanChinhTri" value="@Model.LyLuanChinhTri" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label style="font-weight:normal"><strong>15.4</strong> Quản lý nhà nước</label>
+                                    <input type="text" class="form-control" id="txtQuanLyNhaNuoc" value="@Model.QuanLyNhaNuoc" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label style="font-weight:normal"><strong>15.5</strong> Bồi dưỡng theo tiêu chuẩn chức danh nghề nghiệp</label>
                                     <input type="text" class="form-control" id="txtBoiDuongTheoTieuChuanCDNN" value="@Model.BoiDuongTheoTieuChuanCDNN"/>
                                 </div>
                                 <div class="col-md-3">
-                                    <label style="font-weight:normal">15.6 Ngoại ngữ</label>
+                                    <label style="font-weight:normal"><strong>15.6</strong> Ngoại ngữ</label>
                                     <input type="text" class="form-control" id="txtNgoaiNgu" value="@Model.NgoaiNgu" style="text-transform:uppercase" />
                                 </div>
                                 <div class="col-md-3">
-                                    <label style="font-weight:normal">15.7 Tin học</label>
+                                    <label style="font-weight:normal"><strong>15.7</strong> Tin học</label>
                                     <input type="text" class="form-control" id="txtTinHoc" value="@Model.TinHoc" style="text-transform:uppercase"/>
                                 </div>                                
                             </div>
@@ -672,7 +690,7 @@
         <button class="btn btn-lg btn-success" id="btnLuu" data-malylichvienchuc="@Model.MaLyLichVienChuc">Lưu dữ liệu</button>
     </div>
     
-    <button class="btn btn-lg btn-default">Xóa hồ sơ</button>    
+    @*<button class="btn btn-lg btn-default">Xóa hồ sơ</button>*@    
 </div>
 
 

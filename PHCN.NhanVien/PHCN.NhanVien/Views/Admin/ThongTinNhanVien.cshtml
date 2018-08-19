@@ -50,7 +50,20 @@
     <div class="form-group">
         <label class="col-md-2 control-label">Mật khẩu:</label>
         <div class="col-md-10">
-            @Html.TextBoxFor(x => x.MatKhau, new { @id = "txtMatKhau", @class = "form-control" })
+            
+            @if (Model.MaNhanVien > 0)
+            {
+                <div>@Html.HiddenFor(x => x.MatKhau, new { @id = "txtMatKhau", @class = "form-control" })</div>
+                <a href="javascript:void(0);" id="btnDoiMatKhau">Đổi mật khẩu</a>
+            }
+            else
+            {
+                <div>
+                    <span>(mặc định: 123)</span>
+                    @Html.HiddenFor(x => x.MatKhau, new { @id = "txtMatKhau", @class = "form-control" })
+                </div>
+            }
+
         </div>
     </div>
     <div class="form-group">
@@ -64,11 +77,51 @@
         
         <div class="col-md-offset-2 col-md-10">            
             <button class="btn btn-primary" type="submit" id="btnLuu">Lưu thông tin</button>
-            <button class="btn btn-danger" type="button" id="btnXoa">Xóa</button>
-            <a href="javascript:history.back();" class="btn btn-default" type="button">Trở lại danh sách</a>
+            @if (Model.MaNhanVien > 0)
+            {
+                <button class="btn btn-danger" type="button" id="btnXoa">Xóa</button>
+            }            
+            <a href="@Url.Action("NhanVien", "Admin")" class="btn btn-default" type="button" >Trở lại danh sách</a>
         </div>
     </div>
 </form>
+
+<div class="modal" id="modalDoiMatKhau">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Đổi mật khẩu</h4>
+            </div>
+            <div class="modal-body">                
+                <div class="row">
+                    <div class="col-xs-12">
+                        <label>Mật khẩu mới</label>
+                        <input class="form-control" type="password" id="modalDoiMatKhau_txtMatKhauMoi">
+                    </div>
+                    <div class="col-xs-12">
+                        <label>Nhập lại mật khẩu mới</label>
+                        <input class="form-control" type="password" id="modalDoiMatKhau_txtNhapLaiMatKhauMoi">
+                    </div>                    
+                </div>                
+            </div>
+            <div class="modal-footer">
+                <span style="color:red; margin-right:10px;" id="modalDoiMatKhau_spanThongBao"></span>
+                <button type="button" class="btn btn-success" id="modalDoiMatKhau_btnLuu">Lưu thông tin</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>                
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var _ajaxManager = '@(HttpContext.Current.Request.Url.Scheme)://@(HttpContext.Current.Request.Url.Authority)/AjaxManager/';    
+    var _maNhanVien = '@Model.MaNhanVien';
+</script>
+
+
+<script src="~/scripts/core-scripts/sweetalert2.all.min.js"></script>
+<script src="~/scripts/core-scripts/th.core.js?@("v="+DateTime.Now.ToString("yyMMddhhmmss"))"></script>
 <script>
     $("#formThongTinNhanVien").submit(function (e) {
 
@@ -118,4 +171,54 @@
         var url = '@Url.Action("DanhDauXoaNhanVien", "Admin", new { maNhanVien = Model.MaNhanVien})';
         window.location = url;
     });
+
+    $("#btnDoiMatKhau").unbind("click").click(function () {
+        $("#modalDoiMatKhau").modal("show");
+        bindbtn_modalDoiMatKhau_btnLuu();
+
+    });
+
+    function bindbtn_modalDoiMatKhau_btnLuu() {
+        $("#modalDoiMatKhau_btnLuu").unbind("click").click(function () {
+            
+            var matKhauMoi = $("#modalDoiMatKhau_txtMatKhauMoi").val();
+            var nhapLaiMatKhauMoi = $("#modalDoiMatKhau_txtNhapLaiMatKhauMoi").val();
+
+            
+            if (matKhauMoi == "") {
+                $("#modalDoiMatKhau_spanThongBao").html("Nhập mật khẩu mới");
+                return;
+            }
+            if (nhapLaiMatKhauMoi == "") {
+                $("#modalDoiMatKhau_spanThongBao").html("Nhập lại mật khẩu mới");
+                return;
+            }
+            if (matKhauMoi != nhapLaiMatKhauMoi) {
+                $("#modalDoiMatKhau_spanThongBao").html("Nhập lại mật khẩu mới chưa trùng khớp");
+                return;
+            }
+            var _url = _ajaxManager + "DoiMatKhauNhanVien";
+            var _param = { id: _maNhanVien, MatKhauMoi: matKhauMoi }
+            thAjaxAction(_url, _param, successDoiMatKhau);
+        });
+    }
+    function successDoiMatKhau(result) {
+        if (result == "ok") {
+            //$("#modalDoiMatKhau_txtMatKhauCu").val("");
+            $("#modalDoiMatKhau_txtMatKhauMoi").val("");
+            $("#modalDoiMatKhau_txtNhapLaiMatKhauMoi").val("");
+            $("#modalDoiMatKhau_spanThongBao").html("");
+            $("#modalDoiMatKhau").modal("hide");
+            thAlertShowSuccess("Đã đổi mật khẩu");
+            return;
+        } else {
+            //$("#modalDoiMatKhau_txtMatKhauCu").val("");
+            $("#modalDoiMatKhau_txtMatKhauMoi").val("");
+            $("#modalDoiMatKhau_txtNhapLaiMatKhauMoi").val("");
+            $("#modalDoiMatKhau_spanThongBao").html("");
+            $("#modalDoiMatKhau").modal("hide");
+            alert("Lỗi hệ thống, vui lòng liên hệ quản trị: " + result);
+            return;
+        }
+    }
 </script>

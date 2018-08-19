@@ -645,6 +645,7 @@
     <None Include="Properties\PublishProfiles\PHCN.NhanVien.pubxml" />
     <None Include="scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="scripts\app_scripts\CapNhatLyLichVienChuc.js" />
+    <Content Include="scripts\app_scripts\QuanLyDanhMuc.js" />
     <Content Include="scripts\app_scripts\QuanLyNhanVien.js" />
     <Content Include="scripts\app_scripts\SoanThu.js" />
     <Content Include="scripts\core-scripts\sweetalert2.all.min.js" />
@@ -673,6 +674,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoiController.cs" />
     <Compile Include="Controllers\QuanLyBaiVietController.cs" />
+    <Compile Include="Controllers\QuanLyDanhMucController.cs" />
     <Compile Include="Controllers\QuanLyLyLichVienChucController.cs" />
     <Compile Include="Controllers\QuanLyNhanVienController.cs" />
     <Compile Include="Controllers\ThuNoiBoController.cs" />
@@ -848,6 +850,11 @@
     <Content Include="Views\QuanLyLyLichVienChuc\_pDienBienQuaTrinhDaoTaoBoiDuong.cshtml" />
     <Content Include="Views\QuanLyLyLichVienChuc\_pDienBienQuaTrinhCongTac.cshtml" />
     <Content Include="Views\QuanLyNhanVien\Xem.cshtml" />
+    <Content Include="Views\QuanLyNhanVien\_pThongTinLienHe.cshtml" />
+    <Content Include="Views\QuanLyDanhMuc\Index.cshtml" />
+    <Content Include="Views\QuanLyDanhMuc\_pTinhThanh.cshtml" />
+    <Content Include="Views\QuanLyDanhMuc\_pHuyenThi.cshtml" />
+    <Content Include="Views\QuanLyDanhMuc\_pXaPhuong.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

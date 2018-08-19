@@ -18,7 +18,7 @@ namespace PHCN.NhanVien.Models
         public int MaNhanVien { get; set; }
         public string MaQuyen { get; set; }
     
-        public virtual NhanVien NhanVien { get; set; }
         public virtual Quyen Quyen { get; set; }
+        public virtual NhanVien NhanVien { get; set; }
     }
 }
