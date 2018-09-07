@@ -55,7 +55,6 @@
     <EntitySet Name="LoaiHopDong" EntityType="PHCNModel.LoaiHopDong" />
     <EntitySet Name="TinhThanh" EntityType="PHCNModel.TinhThanh" />
     <EntitySet Name="TonGiao" EntityType="PHCNModel.TonGiao" />
-    <EntitySet Name="TrinhDoChuyenMon" EntityType="PHCNModel.TrinhDoChuyenMon" />
     <EntitySet Name="XaPhuong" EntityType="PHCNModel.XaPhuong" />
     <EntitySet Name="FileDinhKemWeb" EntityType="PHCNModel.FileDinhKemWeb" />
     <EntitySet Name="DienBienQuaTrinhLuong" EntityType="PHCNModel.DienBienQuaTrinhLuong" />
@@ -116,6 +115,21 @@
     <AssociationSet Name="FK_PhanQuyen_NhanVien" Association="PHCNModel.FK_PhanQuyen_NhanVien">
       <End Role="NhanVien" EntitySet="NhanVien" />
       <End Role="PhanQuyen" EntitySet="PhanQuyen" />
+    </AssociationSet>
+    <EntitySet Name="ChuyenMon" EntityType="PHCNModel.ChuyenMon" />
+    <EntitySet Name="HocHam" EntityType="PHCNModel.HocHam" />
+    <EntitySet Name="HocVi" EntityType="PHCNModel.HocVi" />
+    <AssociationSet Name="FK_LyLichVienChuc_ChuyenMon" Association="PHCNModel.FK_LyLichVienChuc_ChuyenMon">
+      <End Role="ChuyenMon" EntitySet="ChuyenMon" />
+      <End Role="LyLichVienChuc" EntitySet="LyLichVienChuc" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LyLichVienChuc_HocHam" Association="PHCNModel.FK_LyLichVienChuc_HocHam">
+      <End Role="HocHam" EntitySet="HocHam" />
+      <End Role="LyLichVienChuc" EntitySet="LyLichVienChuc" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LyLichVienChuc_HocVi" Association="PHCNModel.FK_LyLichVienChuc_HocVi">
+      <End Role="HocVi" EntitySet="HocVi" />
+      <End Role="LyLichVienChuc" EntitySet="LyLichVienChuc" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Loi">
@@ -322,15 +336,6 @@
     </Key>
     <Property Name="MaTonGiao" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="TenTonGiao" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="STT" Type="Int32" Nullable="false" />
-    <Property Name="Xoa" Type="Boolean" Nullable="false" />
-  </EntityType>
-  <EntityType Name="TrinhDoChuyenMon">
-    <Key>
-      <PropertyRef Name="MaTrinhDoChuyenMon" />
-    </Key>
-    <Property Name="MaTrinhDoChuyenMon" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TenTrinhDoChuyenMon" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="STT" Type="Int32" Nullable="false" />
     <Property Name="Xoa" Type="Boolean" Nullable="false" />
   </EntityType>
@@ -542,6 +547,12 @@
     <NavigationProperty Name="DonVi" Relationship="PHCNModel.FK__LyLichVie__MaDon__03BB8E22" FromRole="LyLichVienChuc" ToRole="DonVi" />
     <NavigationProperty Name="LoaiHopDong" Relationship="PHCNModel.FK_LyLichVienChuc_LoaiHopDong" FromRole="LyLichVienChuc" ToRole="LoaiHopDong" />
     <NavigationProperty Name="NhanVien" Relationship="PHCNModel.FK_LyLichVienChuc_NhanVien" FromRole="LyLichVienChuc" ToRole="NhanVien" />
+    <Property Name="MaHocHam" Type="Int32" />
+    <Property Name="MaHocVi" Type="Int32" />
+    <Property Name="MaChuyenMon" Type="Int32" />
+    <NavigationProperty Name="ChuyenMon" Relationship="PHCNModel.FK_LyLichVienChuc_ChuyenMon" FromRole="LyLichVienChuc" ToRole="ChuyenMon" />
+    <NavigationProperty Name="HocHam" Relationship="PHCNModel.FK_LyLichVienChuc_HocHam" FromRole="LyLichVienChuc" ToRole="HocHam" />
+    <NavigationProperty Name="HocVi" Relationship="PHCNModel.FK_LyLichVienChuc_HocVi" FromRole="LyLichVienChuc" ToRole="HocVi" />
   </EntityType>
   <Association Name="FK__DienBienD__MaLyL__05A3D694">
     <End Type="PHCNModel.LyLichVienChuc" Role="LyLichVienChuc" Multiplicity="1" />
@@ -695,6 +706,72 @@
       </Principal>
       <Dependent Role="PhanQuyen">
         <PropertyRef Name="MaNhanVien" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ChuyenMon">
+    <Key>
+      <PropertyRef Name="MaChuyenMon" />
+    </Key>
+    <Property Name="MaChuyenMon" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenChuyenMon" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="STT" Type="Int32" Nullable="false" />
+    <Property Name="Xoa" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="LyLichVienChuc" Relationship="PHCNModel.FK_LyLichVienChuc_ChuyenMon" FromRole="ChuyenMon" ToRole="LyLichVienChuc" />
+  </EntityType>
+  <EntityType Name="HocHam">
+    <Key>
+      <PropertyRef Name="MaHocHam" />
+    </Key>
+    <Property Name="MaHocHam" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenHocHam" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="STT" Type="Int32" Nullable="false" />
+    <Property Name="Xoa" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="LyLichVienChuc" Relationship="PHCNModel.FK_LyLichVienChuc_HocHam" FromRole="HocHam" ToRole="LyLichVienChuc" />
+  </EntityType>
+  <EntityType Name="HocVi">
+    <Key>
+      <PropertyRef Name="MaHocVi" />
+    </Key>
+    <Property Name="MaHocVi" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenHocVi" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="STT" Type="Int32" Nullable="false" />
+    <Property Name="Xoa" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="LyLichVienChuc" Relationship="PHCNModel.FK_LyLichVienChuc_HocVi" FromRole="HocVi" ToRole="LyLichVienChuc" />
+  </EntityType>
+  <Association Name="FK_LyLichVienChuc_ChuyenMon">
+    <End Type="PHCNModel.ChuyenMon" Role="ChuyenMon" Multiplicity="0..1" />
+    <End Type="PHCNModel.LyLichVienChuc" Role="LyLichVienChuc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChuyenMon">
+        <PropertyRef Name="MaChuyenMon" />
+      </Principal>
+      <Dependent Role="LyLichVienChuc">
+        <PropertyRef Name="MaChuyenMon" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LyLichVienChuc_HocHam">
+    <End Type="PHCNModel.HocHam" Role="HocHam" Multiplicity="0..1" />
+    <End Type="PHCNModel.LyLichVienChuc" Role="LyLichVienChuc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HocHam">
+        <PropertyRef Name="MaHocHam" />
+      </Principal>
+      <Dependent Role="LyLichVienChuc">
+        <PropertyRef Name="MaHocHam" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LyLichVienChuc_HocVi">
+    <End Type="PHCNModel.HocVi" Role="HocVi" Multiplicity="0..1" />
+    <End Type="PHCNModel.LyLichVienChuc" Role="LyLichVienChuc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HocVi">
+        <PropertyRef Name="MaHocVi" />
+      </Principal>
+      <Dependent Role="LyLichVienChuc">
+        <PropertyRef Name="MaHocVi" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

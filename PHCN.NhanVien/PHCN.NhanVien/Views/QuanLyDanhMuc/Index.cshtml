@@ -33,10 +33,12 @@
         <div class="row">
             <div class="col-md-8">
                 <input type="text" class="form-control" name="timkiem" placeholder="Mời chọn danh mục ... " value="@timkiem" id="txtTimKiem" />
+                
                 @Html.Hidden("danhmuc", "", new { @id = "hiddenSelectedDanhMuc" })
             </div>
-            <div class="col-md-2">
+            <div class="col-md-4">
                 <button class="btn btn-primary" id="btnTimKiem">Tìm kiếm</button>
+                <a href="javascript:void(0);" id="btnThemDanhMuc" class="btn btn-success">Thêm mới</a>
             </div>
         </div>
     
@@ -47,6 +49,15 @@
         <div class="panel">
             <div class="tabbable tabs-left clearfix">
                 <ul id="myTab1" class="nav nav-tabs">
+                    <li style="background-color:#002f05;"><div style="padding:10px; color:white;">Lý lịch viên chức</div></li>
+                    <li class="tabDanhMuc" data-tendanhmuc="LoaiHopDong"><a href="javascript:void(0);" data-toggle="tab">Loại hợp đồng</a></li>                    
+                    <li class="tabDanhMuc" data-tendanhmuc="DonVi"><a href="javascript:void(0);" data-toggle="tab">Cơ quan đơn vị</a></li>                    
+                    <li class="tabDanhMuc" data-tendanhmuc="HocHam"><a href="javascript:void(0);" data-toggle="tab">Học hàm</a></li>                    
+                    <li class="tabDanhMuc" data-tendanhmuc="HocVi"><a href="javascript:void(0);" data-toggle="tab">Học vị</a></li>                    
+                    <li class="tabDanhMuc" data-tendanhmuc="ChuyenMon"><a href="javascript:void(0);" data-toggle="tab">Chuyên môn</a></li>                    
+                    <li class="tabDanhMuc" data-tendanhmuc="HinhThucDaoTao"><a href="javascript:void(0);" data-toggle="tab">Hình thức đào tạo</a></li>                    
+                    <li class="tabDanhMuc" data-tendanhmuc="DanToc"><a href="javascript:void(0);" data-toggle="tab">Dân tộc</a></li>                    
+                    <li class="tabDanhMuc" data-tendanhmuc="TonGiao"><a href="javascript:void(0);" data-toggle="tab">Tôn giáo</a></li>                    
                     <li style="background-color:#002f05;"><div style="padding:10px; color:white;">Địa phương</div></li>
                     <li class="tabDanhMuc"  data-tendanhmuc="TinhThanh"><a href="javascript:void(0);" data-toggle="tab">Tỉnh thành</a></li>
                     <li class="tabDanhMuc"  data-tendanhmuc="HuyenThi"><a href="javascript:void(0);" data-toggle="tab">Huyện thị</a></li>
@@ -73,6 +84,7 @@
 <script>
     var _ajaxQuanLyDanhMuc = '@(HttpContext.Current.Request.Url.Scheme)://@(HttpContext.Current.Request.Url.Authority)/QuanLyDanhMuc/';
 </script>
+<script src="~/scripts/jquery.mask.js"></script>
 <script src="~/scripts/core-scripts/sweetalert2.all.min.js"></script>
 <script src="~/scripts/core-scripts/th.core.js"></script>
 <script src="~/scripts/app_scripts/QuanLyDanhMuc.js"></script>

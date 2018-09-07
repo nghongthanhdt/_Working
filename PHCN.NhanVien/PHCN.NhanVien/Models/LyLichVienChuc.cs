@@ -98,6 +98,12 @@ namespace PHCN.NhanVien.Models
         public Nullable<System.DateTime> Xoa_Ngay { get; set; }
         public Nullable<bool> Xoa { get; set; }
         public string GhiChu { get; set; }
+        public Nullable<int> MaHocHam { get; set; }
+        public Nullable<int> MaHocVi { get; set; }
+        public Nullable<int> MaChuyenMon { get; set; }
+        public string SoCCHN { get; set; }
+        public Nullable<System.DateTime> NgayCapCCHN { get; set; }
+        public string PhamViHoatDongChuyenMon { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DienBienDaoTaoBoiDuong> DienBienDaoTaoBoiDuong { get; set; }
@@ -108,5 +114,8 @@ namespace PHCN.NhanVien.Models
         public virtual DonVi DonVi { get; set; }
         public virtual LoaiHopDong LoaiHopDong { get; set; }
         public virtual NhanVien NhanVien { get; set; }
+        public virtual ChuyenMon ChuyenMon { get; set; }
+        public virtual HocHam HocHam { get; set; }
+        public virtual HocVi HocVi { get; set; }
     }
 }

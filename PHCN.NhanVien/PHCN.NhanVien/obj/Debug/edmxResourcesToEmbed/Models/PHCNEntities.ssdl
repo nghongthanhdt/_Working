@@ -24,6 +24,15 @@
     <Property Name="STT" Type="int" Nullable="false" />
     <Property Name="Xoa" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="ChuyenMon">
+    <Key>
+      <PropertyRef Name="MaChuyenMon" />
+    </Key>
+    <Property Name="MaChuyenMon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenChuyenMon" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="STT" Type="int" Nullable="false" />
+    <Property Name="Xoa" Type="bit" Nullable="false" />
+  </EntityType>
   <EntityType Name="ChuyenMuc">
     <Key>
       <PropertyRef Name="MaChuyenMuc" />
@@ -163,6 +172,24 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
     <Property Name="STT" Type="int" Nullable="false" />
     <Property Name="Xoa" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="HocHam">
+    <Key>
+      <PropertyRef Name="MaHocHam" />
+    </Key>
+    <Property Name="MaHocHam" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenHocHam" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="STT" Type="int" Nullable="false" />
+    <Property Name="Xoa" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HocVi">
+    <Key>
+      <PropertyRef Name="MaHocVi" />
+    </Key>
+    <Property Name="MaHocVi" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenHocVi" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="STT" Type="int" Nullable="false" />
+    <Property Name="Xoa" Type="bit" Nullable="false" />
+  </EntityType>
   <EntityType Name="HuyenThi">
     <Key>
       <PropertyRef Name="MaHuyenThi" />
@@ -249,6 +276,9 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
     <Property Name="CongViecChinhDuocGiao" Type="nvarchar" MaxLength="1000" />
     <Property Name="TrinhDoGiaoDucPhoThong" Type="nvarchar" MaxLength="20" />
     <Property Name="TrinhDoChuyenMonCaoNhat" Type="nvarchar" MaxLength="200" />
+    <Property Name="MaHocHam" Type="int" />
+    <Property Name="MaHocVi" Type="int" />
+    <Property Name="MaChuyenMon" Type="int" />
     <Property Name="LyLuanChinhTri" Type="nvarchar" MaxLength="200" />
     <Property Name="QuanLyNhaNuoc" Type="nvarchar" MaxLength="200" />
     <Property Name="BoiDuongTheoTieuChuanCDNN" Type="nvarchar" MaxLength="300" />
@@ -344,15 +374,6 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
     </Key>
     <Property Name="MaTonGiao" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TenTonGiao" Type="nvarchar" MaxLength="100" Nullable="false" />
-    <Property Name="STT" Type="int" Nullable="false" />
-    <Property Name="Xoa" Type="bit" Nullable="false" />
-  </EntityType>
-  <EntityType Name="TrinhDoChuyenMon">
-    <Key>
-      <PropertyRef Name="MaTrinhDoChuyenMon" />
-    </Key>
-    <Property Name="MaTrinhDoChuyenMon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="TenTrinhDoChuyenMon" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="STT" Type="int" Nullable="false" />
     <Property Name="Xoa" Type="bit" Nullable="false" />
   </EntityType>
@@ -509,6 +530,42 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_LyLichVienChuc_ChuyenMon">
+    <End Role="ChuyenMon" Type="Self.ChuyenMon" Multiplicity="0..1" />
+    <End Role="LyLichVienChuc" Type="Self.LyLichVienChuc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChuyenMon">
+        <PropertyRef Name="MaChuyenMon" />
+      </Principal>
+      <Dependent Role="LyLichVienChuc">
+        <PropertyRef Name="MaChuyenMon" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LyLichVienChuc_HocHam">
+    <End Role="HocHam" Type="Self.HocHam" Multiplicity="0..1" />
+    <End Role="LyLichVienChuc" Type="Self.LyLichVienChuc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HocHam">
+        <PropertyRef Name="MaHocHam" />
+      </Principal>
+      <Dependent Role="LyLichVienChuc">
+        <PropertyRef Name="MaHocHam" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LyLichVienChuc_HocVi">
+    <End Role="HocVi" Type="Self.HocVi" Multiplicity="0..1" />
+    <End Role="LyLichVienChuc" Type="Self.LyLichVienChuc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HocVi">
+        <PropertyRef Name="MaHocVi" />
+      </Principal>
+      <Dependent Role="LyLichVienChuc">
+        <PropertyRef Name="MaHocVi" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_LyLichVienChuc_LoaiHopDong">
     <End Role="LoaiHopDong" Type="Self.LoaiHopDong" Multiplicity="0..1" />
     <End Role="LyLichVienChuc" Type="Self.LyLichVienChuc" Multiplicity="*" />
@@ -572,6 +629,7 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
   <EntityContainer Name="PHCNModelStoreContainer">
     <EntitySet Name="BaiViet" EntityType="Self.BaiViet" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ChucDanhNgheNghiep" EntityType="Self.ChucDanhNgheNghiep" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ChuyenMon" EntityType="Self.ChuyenMon" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ChuyenMuc" EntityType="Self.ChuyenMuc" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DanToc" EntityType="Self.DanToc" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DienBienDaoTaoBoiDuong" EntityType="Self.DienBienDaoTaoBoiDuong" Schema="dbo" store:Type="Tables" />
@@ -582,6 +640,8 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
     <EntitySet Name="GuiNhan" EntityType="Self.GuiNhan" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HinhAnh" EntityType="Self.HinhAnh" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HinhThucDaoTao" EntityType="Self.HinhThucDaoTao" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HocHam" EntityType="Self.HocHam" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HocVi" EntityType="Self.HocVi" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HuyenThi" EntityType="Self.HuyenThi" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="KhoaPhong" EntityType="Self.KhoaPhong" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LoaiBaiViet" EntityType="Self.LoaiBaiViet" Schema="dbo" store:Type="Tables" />
@@ -594,7 +654,6 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
     <EntitySet Name="ThamSoHeThong" EntityType="Self.ThamSoHeThong" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TinhThanh" EntityType="Self.TinhThanh" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TonGiao" EntityType="Self.TonGiao" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="TrinhDoChuyenMon" EntityType="Self.TrinhDoChuyenMon" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="XaPhuong" EntityType="Self.XaPhuong" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FileDinhKemWeb" EntityType="Self.FileDinhKemWeb" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
@@ -654,6 +713,18 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
     <AssociationSet Name="FK_GuiNhan_NhanVien_NguoiNhan" Association="Self.FK_GuiNhan_NhanVien_NguoiNhan">
       <End Role="NhanVien" EntitySet="NhanVien" />
       <End Role="GuiNhan" EntitySet="GuiNhan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LyLichVienChuc_ChuyenMon" Association="Self.FK_LyLichVienChuc_ChuyenMon">
+      <End Role="ChuyenMon" EntitySet="ChuyenMon" />
+      <End Role="LyLichVienChuc" EntitySet="LyLichVienChuc" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LyLichVienChuc_HocHam" Association="Self.FK_LyLichVienChuc_HocHam">
+      <End Role="HocHam" EntitySet="HocHam" />
+      <End Role="LyLichVienChuc" EntitySet="LyLichVienChuc" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LyLichVienChuc_HocVi" Association="Self.FK_LyLichVienChuc_HocVi">
+      <End Role="HocVi" EntitySet="HocVi" />
+      <End Role="LyLichVienChuc" EntitySet="LyLichVienChuc" />
     </AssociationSet>
     <AssociationSet Name="FK_LyLichVienChuc_LoaiHopDong" Association="Self.FK_LyLichVienChuc_LoaiHopDong">
       <End Role="LoaiHopDong" EntitySet="LoaiHopDong" />

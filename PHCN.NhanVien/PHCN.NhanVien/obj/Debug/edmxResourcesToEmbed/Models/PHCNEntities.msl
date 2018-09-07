@@ -182,16 +182,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TrinhDoChuyenMon">
-      <EntityTypeMapping TypeName="PHCNModel.TrinhDoChuyenMon">
-        <MappingFragment StoreEntitySet="TrinhDoChuyenMon">
-          <ScalarProperty Name="Xoa" ColumnName="Xoa" />
-          <ScalarProperty Name="STT" ColumnName="STT" />
-          <ScalarProperty Name="TenTrinhDoChuyenMon" ColumnName="TenTrinhDoChuyenMon" />
-          <ScalarProperty Name="MaTrinhDoChuyenMon" ColumnName="MaTrinhDoChuyenMon" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="XaPhuong">
       <EntityTypeMapping TypeName="PHCNModel.XaPhuong">
         <MappingFragment StoreEntitySet="XaPhuong">
@@ -289,6 +279,9 @@
     <EntitySetMapping Name="LyLichVienChuc">
       <EntityTypeMapping TypeName="PHCNModel.LyLichVienChuc">
         <MappingFragment StoreEntitySet="LyLichVienChuc">
+          <ScalarProperty Name="MaChuyenMon" ColumnName="MaChuyenMon" />
+          <ScalarProperty Name="MaHocVi" ColumnName="MaHocVi" />
+          <ScalarProperty Name="MaHocHam" ColumnName="MaHocHam" />
           <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
           <ScalarProperty Name="Xoa" ColumnName="Xoa" />
           <ScalarProperty Name="Xoa_Ngay" ColumnName="Xoa_Ngay" />
@@ -383,6 +376,36 @@
           <ScalarProperty Name="HoTen" ColumnName="HoTen" />
           <ScalarProperty Name="MaKhoa" ColumnName="MaKhoa" />
           <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ChuyenMon">
+      <EntityTypeMapping TypeName="PHCNModel.ChuyenMon">
+        <MappingFragment StoreEntitySet="ChuyenMon">
+          <ScalarProperty Name="Xoa" ColumnName="Xoa" />
+          <ScalarProperty Name="STT" ColumnName="STT" />
+          <ScalarProperty Name="TenChuyenMon" ColumnName="TenChuyenMon" />
+          <ScalarProperty Name="MaChuyenMon" ColumnName="MaChuyenMon" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HocHam">
+      <EntityTypeMapping TypeName="PHCNModel.HocHam">
+        <MappingFragment StoreEntitySet="HocHam">
+          <ScalarProperty Name="Xoa" ColumnName="Xoa" />
+          <ScalarProperty Name="STT" ColumnName="STT" />
+          <ScalarProperty Name="TenHocHam" ColumnName="TenHocHam" />
+          <ScalarProperty Name="MaHocHam" ColumnName="MaHocHam" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HocVi">
+      <EntityTypeMapping TypeName="PHCNModel.HocVi">
+        <MappingFragment StoreEntitySet="HocVi">
+          <ScalarProperty Name="Xoa" ColumnName="Xoa" />
+          <ScalarProperty Name="STT" ColumnName="STT" />
+          <ScalarProperty Name="TenHocVi" ColumnName="TenHocVi" />
+          <ScalarProperty Name="MaHocVi" ColumnName="MaHocVi" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

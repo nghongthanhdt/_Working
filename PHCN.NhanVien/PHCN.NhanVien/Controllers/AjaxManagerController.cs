@@ -84,9 +84,9 @@ namespace PHCN.NhanVien.Controllers
             var list = db.TonGiao.Where(x => x.TenTonGiao.Contains(keyword)).OrderBy(x => x.STT).Select(x => x.TenTonGiao).Take(10).ToList();
             return Json(list, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult GetListTrinhDoChuyenMon(string keyword)
+        public JsonResult GetListChuyenMon(string keyword)
         {
-            var list = db.TrinhDoChuyenMon.Where(x => x.TenTrinhDoChuyenMon.Contains(keyword)).OrderBy(x => x.STT).Select(x => x.TenTrinhDoChuyenMon).Take(10).ToList();
+            var list = db.ChuyenMon.Where(x => x.TenChuyenMon.Contains(keyword)).OrderBy(x => x.STT).Select(x => x.TenChuyenMon).Take(10).ToList();
             return Json(list, JsonRequestBehavior.AllowGet);
         }
         public JsonResult GetListChucDanhNgheNghiep(string keyword)
@@ -296,5 +296,8 @@ namespace PHCN.NhanVien.Controllers
                 return ex.Message;
             }
         }
+
+
+        
     }
 }

@@ -1,4 +1,4 @@
-﻿@model List<PHCN.NhanVien.Models.XaPhuong>
+﻿@model List<PHCN.NhanVien.Models.DonVi>
 
 
 <table class="table table-hover">
@@ -6,7 +6,7 @@
         <tr>
 
             <th style="width:60px; text-align:center;">STT</th>
-            <th>Tên xã phường</th>
+            <th>Tên đơn vị</th>
             <th></th>
         </tr>
     </thead>
@@ -16,15 +16,15 @@
             <tr>
 
                 <td>
-                    <input value="@item.STT" style="width:50px; text-align:center;" id="txtSTT_@item.MaXaPhuong" />
+                    <input value="@item.STT" style="width:50px; text-align:center;" id="txtSTT_@item.MaDonVi" />
                 </td>
                 <td>
-                    <input value="@item.TenXaPhuong" style="width:100%;" id="txtTenDanhMuc_@item.MaXaPhuong" />
+                    <input value="@item.TenDonVi" style="width:100%;" id="txtTenDanhMuc_@item.MaDonVi" />
                 </td>
 
                 <td>
-                    <a href="javascript:void(0);" class="btn btn-xs btn-success btnLuu" data-madanhmuc="@item.MaXaPhuong">Lưu</a>
-                    <a href="javascript:void(0);" class="btn btn-xs btn-danger btnXoa" data-madanhmuc="@item.MaXaPhuong">Xóa</a>
+                    <a href="javascript:void(0);" class="btn btn-xs btn-success btnLuu" data-madanhmuc="@item.MaDonVi">Lưu</a>
+                    <a href="javascript:void(0);" class="btn btn-xs btn-danger btnXoa" data-madanhmuc="@item.MaDonVi">Xóa</a>
                 </td>
             </tr>
         }
@@ -38,14 +38,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title">xã phường</h4>
+                <h4 class="modal-title">đơn vị</h4>
             </div>
             <div class="modal-body">
 
                 <div class="row">
                     <div class="col-xs-12">
-                        <label>Tên xã phường</label>
-                        <input class="form-control" placeholder="" type="text" id="modalDanhMuc_txtTenXaPhuong">
+                        <label>Tên đơn vị</label>
+                        <input class="form-control" placeholder="" type="text" id="modalDanhMuc_txtTenDonVi">
                     </div>
                 </div>
                 <div class="row">
@@ -76,10 +76,10 @@
 
     function bindmodalDanhMuc_btnLuu() {
         $("#modalDanhMuc_btnLuu").unbind("click").click(function () {
-            var _TenXaPhuong = $("#modalDanhMuc_txtTenXaPhuong").val();
+            var _TenDonVi = $("#modalDanhMuc_txtTenDonVi").val();
             var _STT = $("#modalDanhMuc_txtSTT").val();
 
-            if (_TenXaPhuong == "") {
+            if (_TenDonVi == "") {
                 thAlertShowError("Tên danh mục không được để trống");
                 return;
             }
@@ -88,16 +88,16 @@
                 return;
             }
 
-            var _url = _ajaxQuanLyDanhMuc + "LuuXaPhuong";
+            var _url = _ajaxQuanLyDanhMuc + "LuuDonVi";
             var _param = {
                 MaDanhMuc: 0,
-                TenDanhMuc: _TenXaPhuong,
+                TenDanhMuc: _TenDonVi,
                 STT: _STT
             }
 
             thAjaxAction(_url, _param, function (result) {
                 if (result == "ok") {
-                    $("#modalDanhMuc_txtTenXaPhuong").val("");
+                    $("#modalDanhMuc_txtTenDonVi").val("");
                     $("#modalDanhMuc_txtSTT").val("");
                     $("#modalDanhMuc").modal("hide");
 
@@ -114,7 +114,7 @@
         $(".btnXoa").unbind("click").click(function () {
             if (confirm("Bạn thật sự muốn xóa ?")) {
                 var maDanhMuc = $(this).data("madanhmuc");
-                var loaiDanhMuc = "XaPhuong";
+                var loaiDanhMuc = "DonVi";
                 var _url = _ajaxQuanLyDanhMuc + "Xoa" + loaiDanhMuc;
                 var _param = {
                     MaDanhMuc: maDanhMuc
@@ -145,7 +145,7 @@
             }
 
 
-            var loaiDanhMuc = "XaPhuong";
+            var loaiDanhMuc = "DonVi";
             var _url = _ajaxQuanLyDanhMuc + "Luu" + loaiDanhMuc;
             var _param = {
                 MaDanhMuc: maDanhMuc,

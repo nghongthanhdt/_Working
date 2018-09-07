@@ -26,10 +26,9 @@
         <EntityTypeShape EntityType="PHCNModel.LoaiHopDong" Width="1.5" PointX="11.75" PointY="4.75" />
         <EntityTypeShape EntityType="PHCNModel.TinhThanh" Width="1.5" PointX="13.75" PointY="0.75" />
         <EntityTypeShape EntityType="PHCNModel.TonGiao" Width="1.5" PointX="9.75" PointY="18" />
-        <EntityTypeShape EntityType="PHCNModel.TrinhDoChuyenMon" Width="1.5" PointX="13.75" PointY="3.75" />
         <EntityTypeShape EntityType="PHCNModel.XaPhuong" Width="1.5" PointX="0.75" PointY="14.75" />
         <EntityTypeShape EntityType="PHCNModel.FileDinhKemWeb" Width="1.5" PointX="2.75" PointY="14.75" />
-        <EntityTypeShape EntityType="PHCNModel.DienBienQuaTrinhLuong" Width="1.5" PointX="21.5" PointY="6.75" />
+        <EntityTypeShape EntityType="PHCNModel.DienBienQuaTrinhLuong" Width="1.5" PointX="21.5" PointY="3.75" />
         <AssociationConnector Association="PHCNModel.FK_DienBienQuaTrinhLuong_ChucDanhNgheNghiep" />
         <EntityTypeShape EntityType="PHCNModel.DienBienDaoTaoBoiDuong" Width="1.5" PointX="19.25" PointY="7.625" />
         <EntityTypeShape EntityType="PHCNModel.HinhThucDaoTao" Width="1.5" PointX="17" PointY="19" />
@@ -49,6 +48,17 @@
         <AssociationConnector Association="PHCNModel.FK_NhanVien_KhoaPhong" />
         <AssociationConnector Association="PHCNModel.FK_LyLichVienChuc_NhanVien" />
         <AssociationConnector Association="PHCNModel.FK_PhanQuyen_NhanVien" />
+        <EntityTypeShape EntityType="PHCNModel.ChuyenMon" Width="1.5" PointX="13.75" PointY="8.375" />
+        <EntityTypeShape EntityType="PHCNModel.HocHam" Width="1.5" PointX="13.75" PointY="15.125" />
+        <EntityTypeShape EntityType="PHCNModel.HocVi" Width="1.5" PointX="12.375" PointY="11.875" />
+        <AssociationConnector Association="PHCNModel.FK_LyLichVienChuc_ChuyenMon" />
+        <AssociationConnector Association="PHCNModel.FK_LyLichVienChuc_HocHam" />
+        <AssociationConnector Association="PHCNModel.FK_LyLichVienChuc_HocVi" />
+        <EntityTypeShape EntityType="PHCNModel.ChinhQuyen" Width="1.5" PointX="5.375" PointY="14.75" />
+        <EntityTypeShape EntityType="PHCNModel.Dang" Width="1.5" PointX="5.375" PointY="17.75" />
+        <EntityTypeShape EntityType="PHCNModel.DoanThe" Width="1.5" PointX="18.375" PointY="0.75" />
+        <EntityTypeShape EntityType="PHCNModel.MaCCHN" Width="1.5" PointX="18.375" PointY="3.75" />
+        <EntityTypeShape EntityType="PHCNModel.PhamViHoatDongChuyenMon" Width="1.5" PointX="12.375" PointY="18.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

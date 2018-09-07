@@ -2,6 +2,8 @@
     bindtabDanhMuc();
     bindbtnTimKiem();
     bindtxtTimKiem();
+    bindbtnThemDanhMuc();
+    bindbtnXoaDanhMuc();
 });
 
 function bindtxtTimKiem() {
@@ -42,41 +44,30 @@ function loadDanhSachDanhMuc(tenDanhMuc, timKiem) {
     thAjaxLoadHtml(_url, _param, function (result) {
         $("#divDanhMuc").html(result);
 
-        bindbtnLuuDanhMuc();
-
-    });
+        
+        bindbtnThemDanhMuc();
+        
+    });         
 }
-function bindbtnLuuDanhMuc() {
-    $(".btnLuu").unbind("click").click(function () {
-        var maDanhMuc = $(this).data("madanhmuc");
-        var tenDanhMuc = $("#txtTenDanhMuc_" + maDanhMuc).val();
-        var stt = $("#txtSTT_" + maDanhMuc).val();
 
-        if (tenDanhMuc == "") {
-            thAlertShowError("Tên danh mục không thể để trống");
-            return;
-        }
-        if (stt == "") {
-            thAlertShowError("Số thứ tự không thể để trống");
-            return;
-        }
-
-
-        var loaiDanhMuc = "TinhThanh";
-        var _url = _ajaxQuanLyDanhMuc + "Luu" + loaiDanhMuc;
-        var _param = {
-            MaDanhMuc: maDanhMuc,
-            TenDanhMuc: tenDanhMuc,
-            STT: stt
+function bindbtnThemDanhMuc() {
+    $("#btnThemDanhMuc").unbind("click").click(function () {
+        var tenDanhMuc = "_p" + $("#hiddenSelectedDanhMuc").val();
+        //var timKiem = $("#txtTimKiem").val();
+        if (tenDanhMuc == "_p") {
+            thAlertShowError("Chưa chọn danh mục");
+        } else {
+            $("#modalDanhMuc").modal("show");
+            bindmask_modalDanhMuc();
         }
         
         
-
-        thAjaxAction(_url, _param, function (result) {
-            if (result == "ok") {
-                thAlertShowSuccess("Đã cập nhật danh mục");
-                loadDanhSachDanhMuc("_p" + loaiDanhMuc, "");
-            }
-        });
+        
     });
 }
+
+
+function bindmask_modalDanhMuc() {
+    $('.number').mask('00000000000');
+}
+

@@ -12,11 +12,20 @@ namespace PHCN.NhanVien.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TrinhDoChuyenMon
+    public partial class HocHam
     {
-        public int MaTrinhDoChuyenMon { get; set; }
-        public string TenTrinhDoChuyenMon { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public HocHam()
+        {
+            this.LyLichVienChuc = new HashSet<LyLichVienChuc>();
+        }
+    
+        public int MaHocHam { get; set; }
+        public string TenHocHam { get; set; }
         public int STT { get; set; }
         public bool Xoa { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LyLichVienChuc> LyLichVienChuc { get; set; }
     }
 }

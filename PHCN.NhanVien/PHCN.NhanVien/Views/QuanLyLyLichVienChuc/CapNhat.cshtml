@@ -19,7 +19,9 @@
     var listHinhThucDaoTao = db.HinhThucDaoTao.OrderBy(x => x.STT).Where(x => x.Xoa == false).ToList();
     var listKhoaPhong = db.KhoaPhong.OrderBy(x => x.STT).Where(x => x.Xoa == false).ToList();
     var listNhanVien = db.NhanVien.OrderBy(x => x.STT).Where(x => x.Xoa == false).ToList();
-
+    var listHocHam = db.HocHam.OrderBy(x => x.STT).Where(x => x.Xoa == false).ToList();
+    var listHocVi = db.HocVi.OrderBy(x => x.STT).Where(x => x.Xoa == false).ToList();
+    var listChuyenMon = db.ChuyenMon.OrderBy(x => x.STT).Where(x => x.Xoa == false).ToList();
 }
 
 <link href="~/Content/css/jquery-ui.css" rel="stylesheet" />
@@ -395,15 +397,37 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label style="font-weight:normal">Học hàm</label>
-                                    <input type="text" class="form-control" id="txtTrinhDoChuyenMonCaoNhat" value="@Model.TrinhDoChuyenMonCaoNhat" />
+                                    
+                                    <select class="form-control">
+                                        <option value=""></option>
+                                        @foreach (var item in listHocHam)
+                                        {
+                                            <option @((Model.MaHocHam == item.MaHocHam) ? "selected" : "") value="@item.MaHocHam">@item.TenHocHam</option>
+                                        }
+
+                                    </select>
                                 </div>
                                 <div class="col-md-4">
                                     <label style="font-weight:normal">Học vị</label>
-                                    <input type="text" class="form-control" id="txtTrinhDoChuyenMonCaoNhat" value="@Model.TrinhDoChuyenMonCaoNhat" />
+                                    <select class="form-control">
+                                        <option value=""></option>
+                                        @foreach (var item in listHocVi)
+                                        {
+                                            <option @((Model.MaHocVi == item.MaHocVi) ? "selected" : "") value="@item.MaHocVi">@item.TenHocVi</option>
+                                        }
+
+                                    </select>
                                 </div>
                                 <div class="col-md-4">
                                     <label style="font-weight:normal">Chuyên môn</label>
-                                    <input type="text" class="form-control" id="txtTrinhDoChuyenMonCaoNhat" value="@Model.TrinhDoChuyenMonCaoNhat" />
+                                    <select class="form-control">
+                                        <option value=""></option>
+                                        @foreach (var item in listChuyenMon)
+                                        {
+                                            <option @((Model.MaChuyenMon == item.MaChuyenMon) ? "selected" : "") value="@item.MaChuyenMon">@item.TenChuyenMon</option>
+                                        }
+
+                                    </select>
                                 </div>
                             </div>
                             <div class="row">

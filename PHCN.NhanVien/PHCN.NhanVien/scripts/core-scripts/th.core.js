@@ -67,3 +67,19 @@ function thAjaxAction(_url, _param, _success) {
         }
     });
 }
+function thAlertConfirm(message) {
+    swal({
+        title: 'Xác nhận',
+        text: message,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Đồng ý',
+        cancelButtonText: 'Hủy bỏ'
+    }).then((result) => {
+        if (result.value) {
+            return true;
+        } else return false;
+    })
+}

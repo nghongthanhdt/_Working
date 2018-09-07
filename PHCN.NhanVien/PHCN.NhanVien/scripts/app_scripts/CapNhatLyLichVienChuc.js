@@ -77,8 +77,7 @@ $(document).ready(function () {
     bindAutoComplete("#txtNoiOHienNay_Xa", "GetListXaPhuong");
     bindAutoComplete("#txtNoiOHienNay_Huyen", "GetListHuyenThi");
     bindAutoComplete("#txtNoiOHienNay_Tinh", "GetListTinhThanh");
-    bindAutoComplete("#txtNgheNghiepKhiDuocTuyenDung", "GetListTrinhDoChuyenMon");
-    bindAutoComplete("#txtChucVuChucDanhHienTai", "GetListTrinhDoChuyenMon");
+    bindAutoComplete("#txtNgheNghiepKhiDuocTuyenDung", "GetListChuyenMon");    
     bindAutoComplete("#txtDanToc", "GetListDanToc");
     bindAutoComplete("#txtTonGiao", "GetListTonGiao");
 

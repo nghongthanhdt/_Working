@@ -688,10 +688,19 @@
     <Compile Include="Models\BaiViet.cs">
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ChinhQuyen.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ChucDanhNgheNghiep.cs">
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ChuyenMon.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ChuyenMuc.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Dang.cs">
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DanToc.cs">
@@ -704,6 +713,9 @@
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DienBienQuaTrinhLuong.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DoanThe.cs">
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DonVi.cs">
@@ -724,6 +736,12 @@
     <Compile Include="Models\HinhThucDaoTao.cs">
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\HocHam.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HocVi.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\HuyenThi.cs">
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
@@ -742,7 +760,13 @@
     <Compile Include="Models\LyLichVienChuc.cs">
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MaCCHN.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\NhanVien.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PhamViHoatDongChuyenMon.cs">
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PhanQuyen.cs">
@@ -773,9 +797,6 @@
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TonGiao.cs">
-      <DependentUpon>PHCNEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TrinhDoChuyenMon.cs">
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\XaPhuong.cs">
@@ -855,6 +876,14 @@
     <Content Include="Views\QuanLyDanhMuc\_pTinhThanh.cshtml" />
     <Content Include="Views\QuanLyDanhMuc\_pHuyenThi.cshtml" />
     <Content Include="Views\QuanLyDanhMuc\_pXaPhuong.cshtml" />
+    <Content Include="Views\QuanLyDanhMuc\_pDonVi.cshtml" />
+    <Content Include="Views\QuanLyDanhMuc\_pHocHam.cshtml" />
+    <Content Include="Views\QuanLyDanhMuc\_pHocVi.cshtml" />
+    <Content Include="Views\QuanLyDanhMuc\_pChuyenMon.cshtml" />
+    <Content Include="Views\QuanLyDanhMuc\_pHinhThucDaoTao.cshtml" />
+    <Content Include="Views\QuanLyDanhMuc\_pLoaiHopDong.cshtml" />
+    <Content Include="Views\QuanLyDanhMuc\_pDanToc.cshtml" />
+    <Content Include="Views\QuanLyDanhMuc\_pTonGiao.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
