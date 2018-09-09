@@ -15,21 +15,7 @@ $(document).ready(function () {
 
 
 
-    var listTrinhDoChuyenMonCaoNhat = [
-        "Bác sĩ",
-        "Bác sĩ Chuyên khoa I",
-        "Bác sĩ Chuyên khoa II",
-        "Cao đẳng",
-        "Cử nhân",
-        "Đại học",
-        "Kỹ sư",
-        "Kỹ thuật viên trung cấp",
-        "Trung cấp",
-        "Y sĩ"
-    ];
-    $("#txtTrinhDoChuyenMonCaoNhat").autocomplete({
-        source: listTrinhDoChuyenMonCaoNhat
-    });
+
 
 
     var listTinhTrangSucKhoe = [
@@ -49,21 +35,7 @@ $(document).ready(function () {
     });
     
 
-    //var json_result_listTinhThanh;
-    //$("#txtNoiSinh_Tinh").change(function () {
-        
-    //    var keyword = "Đồng";
-    //    $.ajax({
-    //        url: _ajaxUrl + "GetListTinh",
-    //        dataType: "jsonp",
-    //        data: {
-    //            id: keyword
-    //        },
-    //        success: function (data) {
-    //            json_result_listTinhThanh = data;
-    //        }
-    //    });
-    //});
+
 
     bindAutoComplete("#txtNoiSinh_Xa", "GetListXaPhuong");
     bindAutoComplete("#txtNoiSinh_Huyen", "GetListHuyenThi");
@@ -77,9 +49,12 @@ $(document).ready(function () {
     bindAutoComplete("#txtNoiOHienNay_Xa", "GetListXaPhuong");
     bindAutoComplete("#txtNoiOHienNay_Huyen", "GetListHuyenThi");
     bindAutoComplete("#txtNoiOHienNay_Tinh", "GetListTinhThanh");
-    bindAutoComplete("#txtNgheNghiepKhiDuocTuyenDung", "GetListChuyenMon");    
+    bindAutoComplete("#txtNgheNghiepKhiDuocTuyenDung", "GetListNgheNghiep");
     bindAutoComplete("#txtDanToc", "GetListDanToc");
     bindAutoComplete("#txtTonGiao", "GetListTonGiao");
+    bindAutoComplete("#txtTonGiao", "GetListTonGiao");
+    bindAutoComplete("#txtPhamViHoatDongChuyenMon", "GetListPhamViHoatDongChuyenMon");
+
 
     //$("#txtNoiSinh_Tinh").autocomplete({
     //    source:listTrinhDoChuyenMonCaoNhat
@@ -831,15 +806,26 @@ function bindbtnLuu() {
         var pNgheNghiepKhiDuocTuyenDung= $("#txtNgheNghiepKhiDuocTuyenDung").val();
         var pNgayTuyenDung= $("#txtNgayTuyenDung").val();
         var pMaCoQuanTuyenDung= $("#selectCoQuanTuyenDung").val();
-        var pChucVuChucDanhHienTai = $("#txtChucVuChucDanhHienTai").val();
+        
+        var pMaChinhQuyen = $("#selectChinhQuyen").val();
+        var pMaDang = $("#selectDang").val();
+        var pMaDoanThe = $("#selectDoanThe").val();
+        var pNgayBoNhiemBoNhiemLai = $("#txtNgayBoNhiemBoNhiemLai").val();
+
         var pCongViecChinhDuocGiao= $("#txtCongViecChinhDuocGiao").val();
         var pTrinhDoGiaoDucPhoThong=$("#txtTrinhDoGiaoDucPhoThong").val();
-        var pTrinhDoChuyenMonCaoNhat=$("#txtTrinhDoChuyenMonCaoNhat").val(); 
+        var pMaHocHam = $("#selectHocHam").val();
+        var pMaHocVi = $("#selectHocVi").val();
+        var pMaChuyenMon = $("#selectChuyenMon").val();
         var pLyLuanChinhTri= $("#txtLyLuanChinhTri").val();  
         var pQuanLyNhaNuoc= $("#txtQuanLyNhaNuoc").val();  
         var pBoiDuongTheoTieuChuanCDNN= $("#txtBoiDuongTheoTieuChuanCDNN").val();  
         var pNgoaiNgu= $("#txtNgoaiNgu").val();  
-        var pTinHoc= $("#txtTinHoc").val();  
+        var pTinHoc = $("#txtTinHoc").val();
+        var pSoCCHN = $("#txtSoCCHN").val();
+        var pMaCCHN = $("#selectMaCCHN").val();
+        var pNgayCapCCHN = $("#txtNgayCapCCHN").val();
+        var pPhamViHoatDongChuyenMon = $("#txtPhamViHoatDongChuyenMon").val();
         var pNgayVaoDangCSVN= $("#txtNgayVaoDangCSVN").val();  
         var pNgayVaoDangCSVNChinhThuc= $("#txtNgayVaoDangCSVN_ChinhThuc").val();  
         var pToChucChinhTriXH_NgayThamGia= $("#txtNgayThamGiaToChucChinhTriXaHoi").val();  
@@ -904,16 +890,27 @@ function bindbtnLuu() {
             NoiOHienNay_Tinh: pNoiOHienNay_Tinh,
             NgheNghiepKhiDuocTuyenDung: pNgheNghiepKhiDuocTuyenDung,
             NgayTuyenDung: pNgayTuyenDung,
-            MaCoQuanTuyenDung: pMaCoQuanTuyenDung,
-            ChucVuChucDanhHienTai: pChucVuChucDanhHienTai,
+            MaCoQuanTuyenDung: pMaCoQuanTuyenDung,            
+            MaChinhQuyen: pMaChinhQuyen,
+            MaDang: pMaDang,
+            MaDoanThe: pMaDoanThe,
+            NgayBoNhiemBoNhiemLai: pNgayBoNhiemBoNhiemLai,
             CongViecChinhDuocGiao: pCongViecChinhDuocGiao,
             TrinhDoGiaoDucPhoThong: pTrinhDoGiaoDucPhoThong,
-            TrinhDoChuyenMonCaoNhat: pTrinhDoChuyenMonCaoNhat,
+            MaHocHam: pMaHocHam,
+            MaHocVi: pMaHocVi,
+            MaChuyenMon: pMaChuyenMon,
             LyLuanChinhTri: pLyLuanChinhTri,
             QuanLyNhaNuoc: pQuanLyNhaNuoc,
             BoiDuongTheoTieuChuanCDNN: pBoiDuongTheoTieuChuanCDNN,
             NgoaiNgu: pNgoaiNgu,
             TinHoc: pTinHoc,
+
+            SoCCHN: pSoCCHN,
+            TenMaCCHN: pMaCCHN,
+            NgayCapCCHN: pNgayCapCCHN,
+            PhamViHoatDongChuyenMon: pPhamViHoatDongChuyenMon,
+
             NgayVaoDangCSVN: pNgayVaoDangCSVN,
             NgayVaoDangCSVNChinhThuc: pNgayVaoDangCSVNChinhThuc,
             ToChucChinhTriXH_NgayThamGia: pToChucChinhTriXH_NgayThamGia,

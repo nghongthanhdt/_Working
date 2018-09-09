@@ -113,6 +113,42 @@ namespace PHCN.NhanVien.Controllers
                 return Content("Lỗi hệ thống: " + ex.Message);
             }
         }
+        [HttpPost]
+        public ActionResult UploadFileHinhAnhWeb(int id, HttpPostedFileBase file)
+        {
+            // ajax
+            // id: Mã bài viết
+
+            try
+            {
+
+                if (file != null && file.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(file.FileName);
+                    var fileExtension = Path.GetExtension(file.FileName).ToLower();
+                    var serverDateTime = CodeController.GetServerDateTime();
+                    var fileFullName = CodeController.GetMD5(fileName.Replace(fileExtension, "") + "-" + serverDateTime.ToString()) + fileExtension;
+                    var path = Path.Combine(Server.MapPath("~/Content/ImageManager"), fileFullName);
+                    file.SaveAs(path);
+                    HinhAnh hinhAnh = new HinhAnh();
+                    hinhAnh.MaBaiViet = id;
+                    hinhAnh.LoaiHinhAnh = "baivietweb";
+                    hinhAnh.TenFile = "";
+                    hinhAnh.TenFileDayDu = fileFullName;
+                    hinhAnh.PhanMoRong = fileExtension;
+                    hinhAnh.DuongDan = "/Content/ImageManager/";
+                    hinhAnh.NgayTaiLen = CodeController.GetServerDateTime();
+                    db.HinhAnh.Add(hinhAnh);
+                    db.SaveChanges();
+                    return Content("true");
+                }
+                else return Content("false");
+            }
+            catch (Exception ex)
+            {
+                return Content("Lỗi hệ thống: " + ex.Message);
+            }
+        }
 
         [HttpPost] 
         public ActionResult XoaFileDinhKem(int id)

@@ -1,17 +1,4 @@
-﻿@*<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
-</head>
-<body>
-    <div>
-        @RenderBody()
-    </div>
-</body>
-</html>*@
-
-
+﻿
 
 @{
     Layout = null;
@@ -54,7 +41,7 @@
                             <span class="icon-bar"></span>
                         </button>
                         <div class="navbar-brand">
-                            <a href="index.html"><h1><span>BV</span>PHCNĐT</h1></a>
+                            <a href="javascript:void(0);"><h1><span>BV</span>PHCNĐT</h1></a>
                         </div>
                     </div>
 
@@ -65,6 +52,7 @@
                                 <li role="presentation"><a href="@Url.Action("Index", "Home")#GioiThieu">Giới thiệu</a></li>
                                 <li role="presentation"><a href="@Url.Action("Index", "Home")#DichVu">Dịch vụ</a></li>
                                 <li role="presentation"><a href="@Url.Action("Index", "Home")#LienHe">Liên hệ</a></li>
+                                <li role="presentation"><a href="@Url.Action("Index", "NoiBo")">Nội bộ</a></li>
                             </ul>
                         </div>
                     </div>

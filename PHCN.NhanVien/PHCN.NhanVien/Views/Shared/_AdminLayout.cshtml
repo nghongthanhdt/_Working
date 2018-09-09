@@ -8,7 +8,7 @@
     var listPhanQuyen = nhanVienDangNhap.PhanQuyen.ToList();
     string box = "";
 
-    // chạy thật
+    //chạy thật
 
     //var nhanVienDangNhap = (PHCN.NhanVien.Models.NhanVien)Session["NhanVienDangNhap"];
     //if (nhanVienDangNhap == null)
@@ -88,8 +88,8 @@
                 {
                     <ul class="list-group panel">
                         <li class="list-group-item">
-                            <a href="#" class="btn btn-success" style="width:100%">
-                                Admin Control Panel
+                            <a href="javascript:void(0);" class="btn btn-success" style="width:100%">
+                                Hệ Thống
                             </a>
                         </li>
                     </ul>
@@ -99,6 +99,7 @@
                         <a href="@Url.Action("KhoaPhong", "Admin")" class="list-group-item">Khoa phòng</a>
 
                         <a href="@Url.Action("ThamSoHeThong", "Admin")" class="list-group-item">Tham số hệ thống</a>
+                        <a href="@Url.Action("Index", "QuanLyDanhMuc")" class="list-group-item">Danh mục</a>
                     </div>
 
                 }  

@@ -526,6 +526,7 @@
     <Content Include="Content\ckeditor\styles.js" />
     <Content Include="Content\css\site.min.css" />
     <Content Include="Content\ImageAvatar\default-avatar.png" />
+    <Content Include="Content\ImageManager\3.jpg" />
     <Content Include="Content\img\default-avatar.png" />
     <Content Include="Content\fonts\angularicons.svg" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
@@ -644,6 +645,7 @@
     </Content>
     <None Include="Properties\PublishProfiles\PHCN.NhanVien.pubxml" />
     <None Include="scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="scripts\app_scripts\CapNhatBaiVietWeb.js" />
     <Content Include="scripts\app_scripts\CapNhatLyLichVienChuc.js" />
     <Content Include="scripts\app_scripts\QuanLyDanhMuc.js" />
     <Content Include="scripts\app_scripts\QuanLyNhanVien.js" />
@@ -673,6 +675,7 @@
     <Compile Include="Controllers\CodeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoiController.cs" />
+    <Compile Include="Controllers\NoiBoController.cs" />
     <Compile Include="Controllers\QuanLyBaiVietController.cs" />
     <Compile Include="Controllers\QuanLyDanhMucController.cs" />
     <Compile Include="Controllers\QuanLyLyLichVienChucController.cs" />
@@ -686,6 +689,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BaiViet.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BaiVietWeb.cs">
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ChinhQuyen.cs">
@@ -724,9 +730,6 @@
     <Compile Include="Models\FileDinhKem.cs">
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\FileDinhKemWeb.cs">
-      <DependentUpon>PHCNEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\GuiNhan.cs">
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
@@ -761,6 +764,9 @@
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MaCCHN.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NgheNghiep.cs">
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\NhanVien.cs">
@@ -884,6 +890,14 @@
     <Content Include="Views\QuanLyDanhMuc\_pLoaiHopDong.cshtml" />
     <Content Include="Views\QuanLyDanhMuc\_pDanToc.cshtml" />
     <Content Include="Views\QuanLyDanhMuc\_pTonGiao.cshtml" />
+    <Content Include="Views\QuanLyDanhMuc\_pChinhQuyen.cshtml" />
+    <Content Include="Views\QuanLyDanhMuc\_pDoanThe.cshtml" />
+    <Content Include="Views\QuanLyDanhMuc\_pDang.cshtml" />
+    <Content Include="Views\QuanLyDanhMuc\_pMaCCHN.cshtml" />
+    <Content Include="Views\QuanLyDanhMuc\_pPhamViHoatDongChuyenMon.cshtml" />
+    <Content Include="Views\QuanLyDanhMuc\_pNgheNghiep.cshtml" />
+    <Content Include="Views\QuanLyDanhMuc\_pChuyenMuc.cshtml" />
+    <Content Include="Views\QuanLyBaiViet\CapNhat.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -898,10 +912,10 @@
     <Folder Include="Content\home\css\" />
     <Folder Include="Content\home\fonts\" />
     <Folder Include="Content\home\js\" />
-    <Folder Include="Content\ImageManager\" />
     <Folder Include="Views\AjaxManager\" />
     <Folder Include="Views\Code\" />
     <Folder Include="Views\Lib\" />
+    <Folder Include="Views\NoiBo\" />
     <Folder Include="Views\Upload\" />
   </ItemGroup>
   <ItemGroup>

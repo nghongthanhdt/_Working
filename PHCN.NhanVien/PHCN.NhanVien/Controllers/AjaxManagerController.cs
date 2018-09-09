@@ -94,6 +94,16 @@ namespace PHCN.NhanVien.Controllers
             var list = db.ChucDanhNgheNghiep.Where(x => x.TenChucDanhNgheNghiep.Contains(keyword)).OrderBy(x => x.STT).Select(x => x.TenChucDanhNgheNghiep).Take(10).ToList();
             return Json(list, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult GetListPhamViHoatDongChuyenMon(string keyword)
+        {
+            var list = db.PhamViHoatDongChuyenMon.Where(x => x.TenPhamViHoatDongChuyenMon.Contains(keyword)).OrderBy(x => x.STT).Select(x => x.TenPhamViHoatDongChuyenMon).Take(10).ToList();
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetListNgheNghiep(string keyword)
+        {
+            var list = db.NgheNghiep.Where(x => x.TenNgheNghiep.Contains(keyword)).OrderBy(x => x.STT).Select(x => x.TenNgheNghiep).Take(10).ToList();
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
 
 
         // quá trình lương

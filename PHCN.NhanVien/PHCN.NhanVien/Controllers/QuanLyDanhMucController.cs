@@ -674,5 +674,419 @@ namespace PHCN.NhanVien.Controllers
                 return ex.Message;
             }
         }
+        [HttpPost]
+
+        public ActionResult _pChinhQuyen(string timkiem)
+        {
+            var listChinhQuyen = new List<ChinhQuyen>();
+            if (timkiem != "")
+            {
+                listChinhQuyen = db.ChinhQuyen.Where(x => x.Xoa == false && x.TenChinhQuyen.Contains(timkiem)).OrderBy(x => x.STT).ThenBy(x => x.MaChinhQuyen).ToList();
+            }
+            else
+            {
+                listChinhQuyen = db.ChinhQuyen.Where(x => x.Xoa == false).OrderBy(x => x.STT).ThenBy(x => x.MaChinhQuyen).ToList();
+            }
+
+            return View(listChinhQuyen);
+        }
+        [HttpPost]
+        public string LuuChinhQuyen(int MaDanhMuc, string TenDanhMuc, int STT)
+        {
+
+            try
+            {
+                if (MaDanhMuc > 0)
+                {
+                    var dm = db.ChinhQuyen.Find(MaDanhMuc);
+                    dm.TenChinhQuyen = TenDanhMuc;
+                    dm.STT = STT;
+                    db.SaveChanges();
+                    return "ok";
+                }
+                else
+                {
+                    ChinhQuyen dm = new ChinhQuyen();
+                    dm.TenChinhQuyen = TenDanhMuc;
+                    dm.STT = STT;
+                    db.ChinhQuyen.Add(dm);
+                    db.SaveChanges();
+                    return "ok";
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+        [HttpPost]
+        public string XoaChinhQuyen(int MaDanhMuc)
+        {
+            try
+            {
+                var dm = db.ChinhQuyen.Find(MaDanhMuc);
+                dm.Xoa = true;
+                db.SaveChanges();
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
+        public ActionResult _pDoanThe(string timkiem)
+        {
+            var listDoanThe = new List<DoanThe>();
+            if (timkiem != "")
+            {
+                listDoanThe = db.DoanThe.Where(x => x.Xoa == false && x.TenDoanThe.Contains(timkiem)).OrderBy(x => x.STT).ThenBy(x => x.MaDoanThe).ToList();
+            }
+            else
+            {
+                listDoanThe = db.DoanThe.Where(x => x.Xoa == false).OrderBy(x => x.STT).ThenBy(x => x.MaDoanThe).ToList();
+            }
+
+            return View(listDoanThe);
+        }
+        [HttpPost]
+        public string LuuDoanThe(int MaDanhMuc, string TenDanhMuc, int STT)
+        {
+
+            try
+            {
+                if (MaDanhMuc > 0)
+                {
+                    var dm = db.DoanThe.Find(MaDanhMuc);
+                    dm.TenDoanThe = TenDanhMuc;
+                    dm.STT = STT;
+                    db.SaveChanges();
+                    return "ok";
+                }
+                else
+                {
+                    DoanThe dm = new DoanThe();
+                    dm.TenDoanThe = TenDanhMuc;
+                    dm.STT = STT;
+                    db.DoanThe.Add(dm);
+                    db.SaveChanges();
+                    return "ok";
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+        [HttpPost]
+        public string XoaDoanThe(int MaDanhMuc)
+        {
+            try
+            {
+                var dm = db.DoanThe.Find(MaDanhMuc);
+                dm.Xoa = true;
+                db.SaveChanges();
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
+        public ActionResult _pDang(string timkiem)
+        {
+            var listDang = new List<Dang>();
+            if (timkiem != "")
+            {
+                listDang = db.Dang.Where(x => x.Xoa == false && x.TenDang.Contains(timkiem)).OrderBy(x => x.STT).ThenBy(x => x.MaDang).ToList();
+            }
+            else
+            {
+                listDang = db.Dang.Where(x => x.Xoa == false).OrderBy(x => x.STT).ThenBy(x => x.MaDang).ToList();
+            }
+
+            return View(listDang);
+        }
+        [HttpPost]
+        public string LuuDang(int MaDanhMuc, string TenDanhMuc, int STT)
+        {
+
+            try
+            {
+                if (MaDanhMuc > 0)
+                {
+                    var dm = db.Dang.Find(MaDanhMuc);
+                    dm.TenDang = TenDanhMuc;
+                    dm.STT = STT;
+                    db.SaveChanges();
+                    return "ok";
+                }
+                else
+                {
+                    Dang dm = new Dang();
+                    dm.TenDang = TenDanhMuc;
+                    dm.STT = STT;
+                    db.Dang.Add(dm);
+                    db.SaveChanges();
+                    return "ok";
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+        [HttpPost]
+        public string XoaDang(int MaDanhMuc)
+        {
+            try
+            {
+                var dm = db.Dang.Find(MaDanhMuc);
+                dm.Xoa = true;
+                db.SaveChanges();
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
+        public ActionResult _pMaCCHN(string timkiem)
+        {
+            var listMaCCHN = new List<MaCCHN>();
+            if (timkiem != "")
+            {
+                listMaCCHN = db.MaCCHN.Where(x => x.Xoa == false && x.TenMaCCHN.Contains(timkiem)).OrderBy(x => x.STT).ThenBy(x => x.MaMaCCHN).ToList();
+            }
+            else
+            {
+                listMaCCHN = db.MaCCHN.Where(x => x.Xoa == false).OrderBy(x => x.STT).ThenBy(x => x.MaMaCCHN).ToList();
+            }
+
+            return View(listMaCCHN);
+        }
+        [HttpPost]
+        public string LuuMaCCHN(int MaDanhMuc, string TenDanhMuc, int STT)
+        {
+
+            try
+            {
+                if (MaDanhMuc > 0)
+                {
+                    var dm = db.MaCCHN.Find(MaDanhMuc);
+                    dm.TenMaCCHN = TenDanhMuc;
+                    dm.STT = STT;
+                    db.SaveChanges();
+                    return "ok";
+                }
+                else
+                {
+                    MaCCHN dm = new MaCCHN();
+                    dm.TenMaCCHN = TenDanhMuc;
+                    dm.STT = STT;
+                    db.MaCCHN.Add(dm);
+                    db.SaveChanges();
+                    return "ok";
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+        [HttpPost]
+        public string XoaMaCCHN(int MaDanhMuc)
+        {
+            try
+            {
+                var dm = db.MaCCHN.Find(MaDanhMuc);
+                dm.Xoa = true;
+                db.SaveChanges();
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
+        public ActionResult _pPhamViHoatDongChuyenMon(string timkiem)
+        {
+            var listPhamViHoatDongChuyenMon = new List<PhamViHoatDongChuyenMon>();
+            if (timkiem != "")
+            {
+                listPhamViHoatDongChuyenMon = db.PhamViHoatDongChuyenMon.Where(x => x.Xoa == false && x.TenPhamViHoatDongChuyenMon.Contains(timkiem)).OrderBy(x => x.STT).ThenBy(x => x.MaPhamViHoatDongChuyenMon).ToList();
+            }
+            else
+            {
+                listPhamViHoatDongChuyenMon = db.PhamViHoatDongChuyenMon.Where(x => x.Xoa == false).OrderBy(x => x.STT).ThenBy(x => x.MaPhamViHoatDongChuyenMon).ToList();
+            }
+
+            return View(listPhamViHoatDongChuyenMon);
+        }
+        [HttpPost]
+        public string LuuPhamViHoatDongChuyenMon(int MaDanhMuc, string TenDanhMuc, int STT)
+        {
+
+            try
+            {
+                if (MaDanhMuc > 0)
+                {
+                    var dm = db.PhamViHoatDongChuyenMon.Find(MaDanhMuc);
+                    dm.TenPhamViHoatDongChuyenMon = TenDanhMuc;
+                    dm.STT = STT;
+                    db.SaveChanges();
+                    return "ok";
+                }
+                else
+                {
+                    PhamViHoatDongChuyenMon dm = new PhamViHoatDongChuyenMon();
+                    dm.TenPhamViHoatDongChuyenMon = TenDanhMuc;
+                    dm.STT = STT;
+                    db.PhamViHoatDongChuyenMon.Add(dm);
+                    db.SaveChanges();
+                    return "ok";
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+        [HttpPost]
+        public string XoaPhamViHoatDongChuyenMon(int MaDanhMuc)
+        {
+            try
+            {
+                var dm = db.PhamViHoatDongChuyenMon.Find(MaDanhMuc);
+                dm.Xoa = true;
+                db.SaveChanges();
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
+        public ActionResult _pNgheNghiep(string timkiem)
+        {
+            var listNgheNghiep = new List<NgheNghiep>();
+            if (timkiem != "")
+            {
+                listNgheNghiep = db.NgheNghiep.Where(x => x.Xoa == false && x.TenNgheNghiep.Contains(timkiem)).OrderBy(x => x.STT).ThenBy(x => x.MaNgheNghiep).ToList();
+            }
+            else
+            {
+                listNgheNghiep = db.NgheNghiep.Where(x => x.Xoa == false).OrderBy(x => x.STT).ThenBy(x => x.MaNgheNghiep).ToList();
+            }
+
+            return View(listNgheNghiep);
+        }
+        [HttpPost]
+        public string LuuNgheNghiep(int MaDanhMuc, string TenDanhMuc, int STT)
+        {
+
+            try
+            {
+                if (MaDanhMuc > 0)
+                {
+                    var dm = db.NgheNghiep.Find(MaDanhMuc);
+                    dm.TenNgheNghiep = TenDanhMuc;
+                    dm.STT = STT;
+                    db.SaveChanges();
+                    return "ok";
+                }
+                else
+                {
+                    NgheNghiep dm = new NgheNghiep();
+                    dm.TenNgheNghiep = TenDanhMuc;
+                    dm.STT = STT;
+                    db.NgheNghiep.Add(dm);
+                    db.SaveChanges();
+                    return "ok";
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+        [HttpPost]
+        public string XoaNgheNghiep(int MaDanhMuc)
+        {
+            try
+            {
+                var dm = db.NgheNghiep.Find(MaDanhMuc);
+                dm.Xoa = true;
+                db.SaveChanges();
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
+        public ActionResult _pChuyenMuc(string timkiem)
+        {
+            var listChuyenMuc = new List<ChuyenMuc>();
+            if (timkiem != "")
+            {
+                listChuyenMuc = db.ChuyenMuc.Where(x => x.Xoa == false && x.TenChuyenMuc.Contains(timkiem)).OrderBy(x => x.STT).ThenBy(x => x.MaChuyenMuc).ToList();
+            }
+            else
+            {
+                listChuyenMuc = db.ChuyenMuc.Where(x => x.Xoa == false).OrderBy(x => x.STT).ThenBy(x => x.MaChuyenMuc).ToList();
+            }
+
+            return View(listChuyenMuc);
+        }
+        [HttpPost]
+        public string LuuChuyenMuc(int MaDanhMuc, string TenDanhMuc, int STT)
+        {
+
+            try
+            {
+                if (MaDanhMuc > 0)
+                {
+                    var dm = db.ChuyenMuc.Find(MaDanhMuc);
+                    dm.TenChuyenMuc = TenDanhMuc;
+                    dm.STT = STT;
+                    db.SaveChanges();
+                    return "ok";
+                }
+                else
+                {
+                    ChuyenMuc dm = new ChuyenMuc();
+                    dm.TenChuyenMuc = TenDanhMuc;
+                    dm.STT = STT;
+                    db.ChuyenMuc.Add(dm);
+                    db.SaveChanges();
+                    return "ok";
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+        [HttpPost]
+        public string XoaChuyenMuc(int MaDanhMuc)
+        {
+            try
+            {
+                var dm = db.ChuyenMuc.Find(MaDanhMuc);
+                dm.Xoa = true;
+                db.SaveChanges();
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
     }
 }

@@ -22,6 +22,13 @@
     var listHocHam = db.HocHam.OrderBy(x => x.STT).Where(x => x.Xoa == false).ToList();
     var listHocVi = db.HocVi.OrderBy(x => x.STT).Where(x => x.Xoa == false).ToList();
     var listChuyenMon = db.ChuyenMon.OrderBy(x => x.STT).Where(x => x.Xoa == false).ToList();
+    var listMaCCHN = db.MaCCHN.OrderBy(x => x.STT).Where(x => x.Xoa == false).ToList();
+
+    var listChinhQuyen = db.ChinhQuyen.OrderBy(x => x.STT).Where(x => x.Xoa == false).ToList();
+    var listDang = db.Dang.OrderBy(x => x.STT).Where(x => x.Xoa == false).ToList();
+    var listDoanThe = db.DoanThe.OrderBy(x => x.STT).Where(x => x.Xoa == false).ToList();
+
+
 }
 
 <link href="~/Content/css/jquery-ui.css" rel="stylesheet" />
@@ -316,14 +323,53 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label >12. Chức vụ (chức danh hiện tại)</label>
-                            <input class="form-control" type="text" id="txtChucVuChucDanhHienTai" value="@Model.ChucVuChucDanhHienTai">
-                        </div>
-                    </div>                    
+            <div class="row">
+                <div class="col-md-3">
+                    <label>12. Chức vụ chức danh hiện tại</label>
+                    <br/>
+                    <label style="font-weight:normal">Chính quyền</label>
+                    <select class="form-control" id="selectChinhQuyen">
+                        <option value=""></option>
+                        @foreach (var item in listChinhQuyen)
+                        {
+                            <option @((Model.MaChinhQuyen == item.MaChinhQuyen) ? "selected" : "") value="@item.MaChinhQuyen">@item.TenChinhQuyen</option>
+                        }
+                    </select>
                 </div>
+                <div class="col-md-3">
+                    <label>&nbsp;</label>
+                    <br />
+                    <label style="font-weight:normal">Đảng</label>
+                    <select class="form-control" id="selectDang">
+                        <option value=""></option>
+                        @foreach (var item in listDang)
+                        {
+                            <option @((Model.MaDang == item.MaDang) ? "selected" : "") value="@item.MaDang">@item.TenDang</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label>&nbsp;</label>
+                    <br />
+                    <label style="font-weight:normal">Đoàn thể</label>
+                    <select class="form-control" id="selectDoanThe">
+                        <option value=""></option>
+                        @foreach (var item in listDoanThe)
+                        {
+                            <option @((Model.MaDoanThe == item.MaDoanThe) ? "selected" : "") value="@item.MaDoanThe">@item.TenDoanThe</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>&nbsp;</label>
+                        <br />
+                        <label style="font-weight:normal">Ngày bổ nhiệm, bổ nhiệm lại</label>
+                        <input class="form-control date" type="text" id="txtNgayBoNhiemBoNhiemLai" value="@Model.NgayBoNhiemBoNhiemLai">
+                    </div>
+                </div>
+            </div>
+
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
@@ -398,7 +444,7 @@
                                 <div class="col-md-4">
                                     <label style="font-weight:normal">Học hàm</label>
                                     
-                                    <select class="form-control">
+                                    <select class="form-control" id="selectHocHam">
                                         <option value=""></option>
                                         @foreach (var item in listHocHam)
                                         {
@@ -409,7 +455,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label style="font-weight:normal">Học vị</label>
-                                    <select class="form-control">
+                                    <select class="form-control" id="selectHocVi">
                                         <option value=""></option>
                                         @foreach (var item in listHocVi)
                                         {
@@ -420,7 +466,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label style="font-weight:normal">Chuyên môn</label>
-                                    <select class="form-control">
+                                    <select class="form-control" id="selectChuyenMon">
                                         <option value=""></option>
                                         @foreach (var item in listChuyenMon)
                                         {
@@ -453,6 +499,36 @@
                                     <label style="font-weight:normal"><strong>15.7</strong> Tin học</label>
                                     <input type="text" class="form-control" id="txtTinHoc" value="@Model.TinHoc" style="text-transform:uppercase"/>
                                 </div>                                
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label style="font-weight:normal"><strong>15.8</strong> Số chứng chỉ hành nghề</label>
+                                    <input type="text" class="form-control" id="txtSoCCHN" value="@Model.BoiDuongTheoTieuChuanCDNN" />
+                                </div>
+                                <div class="col-md-3">
+                                    <label style="font-weight:normal"><strong>&nbsp;</strong></label>
+                                    <select class="form-control" id="selectMaCCHN">
+                                        <option value=""></option>
+                                        @foreach (var item in listMaCCHN)
+                                        {
+                                            <option @((Model.TenMaCCHN == item.TenMaCCHN) ? "selected" : "") value="@item.TenMaCCHN">@item.TenMaCCHN</option>
+                                        }
+                                    </select>
+
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label style="font-weight:normal">Ngày cấp</label>
+                                        <input class="form-control date" type="text" id="txtNgayCapCCHN" value="@Model.NgayCapCCHN">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label style="font-weight:normal"> Phạm vi hoạt động chuyên môn</label>
+                                    <textarea type="text" class="form-control" id="txtPhamViHoatDongChuyenMon" >@Model.PhamViHoatDongChuyenMon</textarea>
+                                </div>
+                                
                             </div>
                         </div>
                     </div>

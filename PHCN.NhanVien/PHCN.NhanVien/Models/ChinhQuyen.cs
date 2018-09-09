@@ -14,9 +14,18 @@ namespace PHCN.NhanVien.Models
     
     public partial class ChinhQuyen
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ChinhQuyen()
+        {
+            this.LyLichVienChuc = new HashSet<LyLichVienChuc>();
+        }
+    
         public int MaChinhQuyen { get; set; }
         public string TenChinhQuyen { get; set; }
         public int STT { get; set; }
         public bool Xoa { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LyLichVienChuc> LyLichVienChuc { get; set; }
     }
 }

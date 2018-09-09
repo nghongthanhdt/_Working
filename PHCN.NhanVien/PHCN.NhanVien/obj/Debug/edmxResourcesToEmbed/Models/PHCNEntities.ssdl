@@ -14,6 +14,34 @@
     <Property Name="Ngay" Type="datetime" Nullable="false" />
     <Property Name="MaNhanVien" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="BaiVietWeb">
+    <Key>
+      <PropertyRef Name="MaBaiViet" />
+    </Key>
+    <Property Name="MaBaiViet" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaChuyenMuc" Type="int" />
+    <Property Name="MaNhanVien" Type="int" />
+    <Property Name="MaHinhAnh" Type="int" />
+    <Property Name="TieuDe" Type="nvarchar" MaxLength="500" />
+    <Property Name="TieuDeRewrite" Type="nvarchar" MaxLength="500" />
+    <Property Name="TomTat" Type="nvarchar" MaxLength="2000" />
+    <Property Name="NoiDung" Type="ntext" />
+    <Property Name="Ngay" Type="datetime2" Precision="7" />
+    <Property Name="HienThiTrenTrangChu" Type="bit" />
+    <Property Name="Xoa" Type="bit" />
+    <Property Name="TacGia" Type="nvarchar" MaxLength="200" />
+    <Property Name="CapNhatLanCuoi" Type="datetime2" Precision="7" />
+    <Property Name="MaNhanVienCapNhat" Type="int" />
+  </EntityType>
+  <EntityType Name="ChinhQuyen">
+    <Key>
+      <PropertyRef Name="MaChinhQuyen" />
+    </Key>
+    <Property Name="MaChinhQuyen" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenChinhQuyen" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="STT" Type="int" Nullable="false" />
+    <Property Name="Xoa" Type="bit" Nullable="false" />
+  </EntityType>
   <EntityType Name="ChucDanhNgheNghiep">
     <Key>
       <PropertyRef Name="MaChucDanhNgheNghiep" />
@@ -40,6 +68,16 @@
     <Property Name="MaChuyenMuc" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TenChuyenMuc" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="STT" Type="int" Nullable="false" />
+    <Property Name="Xoa" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Dang">
+    <Key>
+      <PropertyRef Name="MaDang" />
+    </Key>
+    <Property Name="MaDang" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenDang" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="STT" Type="int" Nullable="false" />
+    <Property Name="Xoa" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="DanToc">
     <Key>
@@ -94,6 +132,15 @@
     <Property Name="Xoa_MaNhanVien" Type="int" />
     <Property Name="Xoa_Ngay" Type="datetime2" Precision="7" />
   </EntityType>
+  <EntityType Name="DoanThe">
+    <Key>
+      <PropertyRef Name="MaDoanThe" />
+    </Key>
+    <Property Name="MaDoanThe" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenDoanThe" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="STT" Type="int" Nullable="false" />
+    <Property Name="Xoa" Type="bit" Nullable="false" />
+  </EntityType>
   <EntityType Name="DonVi">
     <Key>
       <PropertyRef Name="MaDonVi" />
@@ -108,25 +155,6 @@
       <PropertyRef Name="MaFile" />
     </Key>
     <Property Name="MaFile" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="MaBaiViet" Type="int" Nullable="false" />
-    <Property Name="TenFile" Type="nvarchar" MaxLength="250" Nullable="false" />
-    <Property Name="TenFileFull" Type="nvarchar" MaxLength="300" Nullable="false" />
-    <Property Name="PhanMoRong" Type="nvarchar" MaxLength="10" />
-    <Property Name="NgayTaiLen" Type="datetime" Nullable="false" />
-    <Property Name="Xoa" Type="bit" Nullable="false" />
-  </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="FileDinhKemWeb">
-    <Key>
-      <PropertyRef Name="MaFile" />
-      <PropertyRef Name="MaBaiViet" />
-      <PropertyRef Name="TenFile" />
-      <PropertyRef Name="TenFileFull" />
-      <PropertyRef Name="NgayTaiLen" />
-      <PropertyRef Name="Xoa" />
-    </Key>
-    <Property Name="MaFile" Type="int" Nullable="false" />
     <Property Name="MaBaiViet" Type="int" Nullable="false" />
     <Property Name="TenFile" Type="nvarchar" MaxLength="250" Nullable="false" />
     <Property Name="TenFileFull" Type="nvarchar" MaxLength="300" Nullable="false" />
@@ -156,6 +184,7 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
     </Key>
     <Property Name="MaHinhAnh" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="MaLyLichVienChuc" Type="int" />
+    <Property Name="MaBaiViet" Type="int" />
     <Property Name="LoaiHinhAnh" Type="nvarchar" MaxLength="20" />
     <Property Name="TenFileDayDu" Type="nvarchar" MaxLength="300" Nullable="false" />
     <Property Name="DuongDan" Type="nvarchar" MaxLength="1000" Nullable="false" />
@@ -272,7 +301,10 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
     <Property Name="NgheNghiepKhiDuocTuyenDung" Type="nvarchar" MaxLength="500" />
     <Property Name="NgayTuyenDung" Type="datetime2" Precision="7" />
     <Property Name="MaCoQuanTuyenDung" Type="int" />
-    <Property Name="ChucVuChucDanhHienTai" Type="nvarchar" MaxLength="300" />
+    <Property Name="MaChinhQuyen" Type="int" />
+    <Property Name="MaDang" Type="int" />
+    <Property Name="MaDoanThe" Type="int" />
+    <Property Name="NgayBoNhiemBoNhiemLai" Type="datetime2" Precision="7" />
     <Property Name="CongViecChinhDuocGiao" Type="nvarchar" MaxLength="1000" />
     <Property Name="TrinhDoGiaoDucPhoThong" Type="nvarchar" MaxLength="20" />
     <Property Name="TrinhDoChuyenMonCaoNhat" Type="nvarchar" MaxLength="200" />
@@ -284,6 +316,10 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
     <Property Name="BoiDuongTheoTieuChuanCDNN" Type="nvarchar" MaxLength="300" />
     <Property Name="NgoaiNgu" Type="nvarchar" MaxLength="20" />
     <Property Name="TinHoc" Type="nvarchar" MaxLength="20" />
+    <Property Name="SoCCHN" Type="nvarchar" MaxLength="50" />
+    <Property Name="TenMaCCHN" Type="nvarchar" MaxLength="50" />
+    <Property Name="NgayCapCCHN" Type="datetime2" Precision="7" />
+    <Property Name="PhamViHoatDongChuyenMon" Type="nvarchar" MaxLength="2000" />
     <Property Name="NgayVaoDangCSVN" Type="datetime2" Precision="7" />
     <Property Name="NgayVaoDangCSVNChinhThuc" Type="datetime2" Precision="7" />
     <Property Name="ToChucChinhTriXH_NgayThamGia" Type="datetime2" Precision="7" />
@@ -318,6 +354,24 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
     <Property Name="Xoa" Type="bit" />
     <Property Name="GhiChu" Type="nvarchar" MaxLength="2000" />
   </EntityType>
+  <EntityType Name="MaCCHN">
+    <Key>
+      <PropertyRef Name="MaMaCCHN" />
+    </Key>
+    <Property Name="MaMaCCHN" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenMaCCHN" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="STT" Type="int" Nullable="false" />
+    <Property Name="Xoa" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NgheNghiep">
+    <Key>
+      <PropertyRef Name="MaNgheNghiep" />
+    </Key>
+    <Property Name="MaNgheNghiep" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenNgheNghiep" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="STT" Type="int" Nullable="false" />
+    <Property Name="Xoa" Type="bit" Nullable="false" />
+  </EntityType>
   <EntityType Name="NhanVien">
     <Key>
       <PropertyRef Name="MaNhanVien" />
@@ -334,6 +388,15 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
     <Property Name="Email" Type="nvarchar" MaxLength="200" />
     <Property Name="SoDienThoai" Type="nvarchar" MaxLength="200" />
     <Property Name="SoDienThoaiNoiBo" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="PhamViHoatDongChuyenMon">
+    <Key>
+      <PropertyRef Name="MaPhamViHoatDongChuyenMon" />
+    </Key>
+    <Property Name="MaPhamViHoatDongChuyenMon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenPhamViHoatDongChuyenMon" Type="nvarchar" MaxLength="2000" Nullable="false" />
+    <Property Name="STT" Type="int" Nullable="false" />
+    <Property Name="Xoa" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="PhanQuyen">
     <Key>
@@ -458,6 +521,30 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_BaiVietWeb_ChuyenMuc">
+    <End Role="ChuyenMuc" Type="Self.ChuyenMuc" Multiplicity="0..1" />
+    <End Role="BaiVietWeb" Type="Self.BaiVietWeb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChuyenMuc">
+        <PropertyRef Name="MaChuyenMuc" />
+      </Principal>
+      <Dependent Role="BaiVietWeb">
+        <PropertyRef Name="MaChuyenMuc" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BaiVietWeb_NhanVien">
+    <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="0..1" />
+    <End Role="BaiVietWeb" Type="Self.BaiVietWeb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NhanVien">
+        <PropertyRef Name="MaNhanVien" />
+      </Principal>
+      <Dependent Role="BaiVietWeb">
+        <PropertyRef Name="MaNhanVien" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_DienBienDaoTaoBoiDuong_HinhThucDaoTao">
     <End Role="HinhThucDaoTao" Type="Self.HinhThucDaoTao" Multiplicity="0..1" />
     <End Role="DienBienDaoTaoBoiDuong" Type="Self.DienBienDaoTaoBoiDuong" Multiplicity="*" />
@@ -530,6 +617,18 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_LyLichVienChuc_ChinhQuyen">
+    <End Role="ChinhQuyen" Type="Self.ChinhQuyen" Multiplicity="0..1" />
+    <End Role="LyLichVienChuc" Type="Self.LyLichVienChuc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChinhQuyen">
+        <PropertyRef Name="MaChinhQuyen" />
+      </Principal>
+      <Dependent Role="LyLichVienChuc">
+        <PropertyRef Name="MaChinhQuyen" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_LyLichVienChuc_ChuyenMon">
     <End Role="ChuyenMon" Type="Self.ChuyenMon" Multiplicity="0..1" />
     <End Role="LyLichVienChuc" Type="Self.LyLichVienChuc" Multiplicity="*" />
@@ -539,6 +638,30 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
       </Principal>
       <Dependent Role="LyLichVienChuc">
         <PropertyRef Name="MaChuyenMon" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LyLichVienChuc_Dang">
+    <End Role="Dang" Type="Self.Dang" Multiplicity="0..1" />
+    <End Role="LyLichVienChuc" Type="Self.LyLichVienChuc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dang">
+        <PropertyRef Name="MaDang" />
+      </Principal>
+      <Dependent Role="LyLichVienChuc">
+        <PropertyRef Name="MaDang" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LyLichVienChuc_DoanThe">
+    <End Role="DoanThe" Type="Self.DoanThe" Multiplicity="0..1" />
+    <End Role="LyLichVienChuc" Type="Self.LyLichVienChuc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DoanThe">
+        <PropertyRef Name="MaDoanThe" />
+      </Principal>
+      <Dependent Role="LyLichVienChuc">
+        <PropertyRef Name="MaDoanThe" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -628,13 +751,17 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
   </Association>
   <EntityContainer Name="PHCNModelStoreContainer">
     <EntitySet Name="BaiViet" EntityType="Self.BaiViet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BaiVietWeb" EntityType="Self.BaiVietWeb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ChinhQuyen" EntityType="Self.ChinhQuyen" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ChucDanhNgheNghiep" EntityType="Self.ChucDanhNgheNghiep" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ChuyenMon" EntityType="Self.ChuyenMon" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ChuyenMuc" EntityType="Self.ChuyenMuc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Dang" EntityType="Self.Dang" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DanToc" EntityType="Self.DanToc" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DienBienDaoTaoBoiDuong" EntityType="Self.DienBienDaoTaoBoiDuong" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DienBienQuaTrinhCongTac" EntityType="Self.DienBienQuaTrinhCongTac" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DienBienQuaTrinhLuong" EntityType="Self.DienBienQuaTrinhLuong" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DoanThe" EntityType="Self.DoanThe" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DonVi" EntityType="Self.DonVi" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FileDinhKem" EntityType="Self.FileDinhKem" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GuiNhan" EntityType="Self.GuiNhan" Schema="dbo" store:Type="Tables" />
@@ -648,24 +775,16 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
     <EntitySet Name="LoaiHopDong" EntityType="Self.LoaiHopDong" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Loi" EntityType="Self.Loi" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LyLichVienChuc" EntityType="Self.LyLichVienChuc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MaCCHN" EntityType="Self.MaCCHN" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NgheNghiep" EntityType="Self.NgheNghiep" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NhanVien" EntityType="Self.NhanVien" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PhamViHoatDongChuyenMon" EntityType="Self.PhamViHoatDongChuyenMon" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PhanQuyen" EntityType="Self.PhanQuyen" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Quyen" EntityType="Self.Quyen" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ThamSoHeThong" EntityType="Self.ThamSoHeThong" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TinhThanh" EntityType="Self.TinhThanh" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TonGiao" EntityType="Self.TonGiao" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="XaPhuong" EntityType="Self.XaPhuong" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="FileDinhKemWeb" EntityType="Self.FileDinhKemWeb" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [FileDinhKemWeb].[MaFile] AS [MaFile], 
-    [FileDinhKemWeb].[MaBaiViet] AS [MaBaiViet], 
-    [FileDinhKemWeb].[TenFile] AS [TenFile], 
-    [FileDinhKemWeb].[TenFileFull] AS [TenFileFull], 
-    [FileDinhKemWeb].[PhanMoRong] AS [PhanMoRong], 
-    [FileDinhKemWeb].[NgayTaiLen] AS [NgayTaiLen], 
-    [FileDinhKemWeb].[Xoa] AS [Xoa]
-    FROM [dbo].[FileDinhKemWeb] AS [FileDinhKemWeb]</DefiningQuery>
-    </EntitySet>
     <AssociationSet Name="FK__DienBienD__MaLyL__05A3D694" Association="Self.FK__DienBienD__MaLyL__05A3D694">
       <End Role="LyLichVienChuc" EntitySet="LyLichVienChuc" />
       <End Role="DienBienDaoTaoBoiDuong" EntitySet="DienBienDaoTaoBoiDuong" />
@@ -689,6 +808,14 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
     <AssociationSet Name="FK_BaiViet_NhanVien" Association="Self.FK_BaiViet_NhanVien">
       <End Role="NhanVien" EntitySet="NhanVien" />
       <End Role="BaiViet" EntitySet="BaiViet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BaiVietWeb_ChuyenMuc" Association="Self.FK_BaiVietWeb_ChuyenMuc">
+      <End Role="ChuyenMuc" EntitySet="ChuyenMuc" />
+      <End Role="BaiVietWeb" EntitySet="BaiVietWeb" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BaiVietWeb_NhanVien" Association="Self.FK_BaiVietWeb_NhanVien">
+      <End Role="NhanVien" EntitySet="NhanVien" />
+      <End Role="BaiVietWeb" EntitySet="BaiVietWeb" />
     </AssociationSet>
     <AssociationSet Name="FK_DienBienDaoTaoBoiDuong_HinhThucDaoTao" Association="Self.FK_DienBienDaoTaoBoiDuong_HinhThucDaoTao">
       <End Role="HinhThucDaoTao" EntitySet="HinhThucDaoTao" />
@@ -714,8 +841,20 @@ warning 6002: The table/view 'PHCN.dbo.FileDinhKemWeb' does not have a primary k
       <End Role="NhanVien" EntitySet="NhanVien" />
       <End Role="GuiNhan" EntitySet="GuiNhan" />
     </AssociationSet>
+    <AssociationSet Name="FK_LyLichVienChuc_ChinhQuyen" Association="Self.FK_LyLichVienChuc_ChinhQuyen">
+      <End Role="ChinhQuyen" EntitySet="ChinhQuyen" />
+      <End Role="LyLichVienChuc" EntitySet="LyLichVienChuc" />
+    </AssociationSet>
     <AssociationSet Name="FK_LyLichVienChuc_ChuyenMon" Association="Self.FK_LyLichVienChuc_ChuyenMon">
       <End Role="ChuyenMon" EntitySet="ChuyenMon" />
+      <End Role="LyLichVienChuc" EntitySet="LyLichVienChuc" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LyLichVienChuc_Dang" Association="Self.FK_LyLichVienChuc_Dang">
+      <End Role="Dang" EntitySet="Dang" />
+      <End Role="LyLichVienChuc" EntitySet="LyLichVienChuc" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LyLichVienChuc_DoanThe" Association="Self.FK_LyLichVienChuc_DoanThe">
+      <End Role="DoanThe" EntitySet="DoanThe" />
       <End Role="LyLichVienChuc" EntitySet="LyLichVienChuc" />
     </AssociationSet>
     <AssociationSet Name="FK_LyLichVienChuc_HocHam" Association="Self.FK_LyLichVienChuc_HocHam">

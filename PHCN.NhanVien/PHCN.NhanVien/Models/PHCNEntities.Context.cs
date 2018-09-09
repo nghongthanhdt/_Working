@@ -43,13 +43,11 @@ namespace PHCN.NhanVien.Models
         public virtual DbSet<TinhThanh> TinhThanh { get; set; }
         public virtual DbSet<TonGiao> TonGiao { get; set; }
         public virtual DbSet<XaPhuong> XaPhuong { get; set; }
-        public virtual DbSet<FileDinhKemWeb> FileDinhKemWeb { get; set; }
         public virtual DbSet<DienBienQuaTrinhLuong> DienBienQuaTrinhLuong { get; set; }
         public virtual DbSet<DienBienDaoTaoBoiDuong> DienBienDaoTaoBoiDuong { get; set; }
         public virtual DbSet<HinhThucDaoTao> HinhThucDaoTao { get; set; }
         public virtual DbSet<DienBienQuaTrinhCongTac> DienBienQuaTrinhCongTac { get; set; }
         public virtual DbSet<HinhAnh> HinhAnh { get; set; }
-        public virtual DbSet<LyLichVienChuc> LyLichVienChuc { get; set; }
         public virtual DbSet<NhanVien> NhanVien { get; set; }
         public virtual DbSet<ChuyenMon> ChuyenMon { get; set; }
         public virtual DbSet<HocHam> HocHam { get; set; }
@@ -59,5 +57,8 @@ namespace PHCN.NhanVien.Models
         public virtual DbSet<DoanThe> DoanThe { get; set; }
         public virtual DbSet<MaCCHN> MaCCHN { get; set; }
         public virtual DbSet<PhamViHoatDongChuyenMon> PhamViHoatDongChuyenMon { get; set; }
+        public virtual DbSet<LyLichVienChuc> LyLichVienChuc { get; set; }
+        public virtual DbSet<NgheNghiep> NgheNghiep { get; set; }
+        public virtual DbSet<BaiVietWeb> BaiVietWeb { get; set; }
     }
 }

@@ -1,0 +1,172 @@
+﻿
+
+@model List<PHCN.NhanVien.Models.ChuyenMuc>
+
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+
+            <th style="width:60px; text-align:center;">STT</th>
+            <th>Tên đơn vị</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    <input value="@item.STT" style="width:50px; text-align:center;" id="txtSTT_@item.MaChuyenMuc" />
+                </td>
+                <td>
+                    <input value="@item.TenChuyenMuc" style="width:100%;" id="txtTenDanhMuc_@item.MaChuyenMuc" />
+                </td>
+
+                <td>
+                    <a href="javascript:void(0);" class="btn btn-xs btn-success btnLuu" data-madanhmuc="@item.MaChuyenMuc">Lưu</a>
+                    <a href="javascript:void(0);" class="btn btn-xs btn-danger btnXoa" data-madanhmuc="@item.MaChuyenMuc">Xóa</a>
+                </td>
+            </tr>
+        }
+
+
+    </tbody>
+</table>
+
+<div class="modal" id="modalDanhMuc">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">đơn vị</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <label>Tên đơn vị</label>
+                        <input class="form-control" placeholder="" type="text" id="modalDanhMuc_txtTenChuyenMuc">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <label>STT</label>
+                        <input class="form-control number" placeholder="" type="text" id="modalDanhMuc_txtSTT" value="1">
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="modalDanhMuc_btnLuu"><i class="glyphicon glyphicon-ok"></i> Lưu </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+
+
+        bindmodalDanhMuc_btnLuu();
+        bindbtnXoaDanhMuc();
+        bindbtnLuuDanhMuc();
+
+
+    function bindmodalDanhMuc_btnLuu() {
+        $("#modalDanhMuc_btnLuu").unbind("click").click(function () {
+            var _TenChuyenMuc = $("#modalDanhMuc_txtTenChuyenMuc").val();
+            var _STT = $("#modalDanhMuc_txtSTT").val();
+
+            if (_TenChuyenMuc == "") {
+                thAlertShowError("Tên danh mục không được để trống");
+                return;
+            }
+            if (_STT == "") {
+                thAlertShowError("Số thứ tự không được để trống");
+                return;
+            }
+
+            var _url = _ajaxQuanLyDanhMuc + "LuuChuyenMuc";
+            var _param = {
+                MaDanhMuc: 0,
+                TenDanhMuc: _TenChuyenMuc,
+                STT: _STT
+            }
+
+            thAjaxAction(_url, _param, function (result) {
+                if (result == "ok") {
+                    $("#modalDanhMuc_txtTenChuyenMuc").val("");
+                    $("#modalDanhMuc_txtSTT").val("");
+                    $("#modalDanhMuc").modal("hide");
+
+                    var tenDanhMuc = "_p" + $("#hiddenSelectedDanhMuc").val();
+                    var timKiem = $("#txtTimKiem").val();
+                    loadDanhSachDanhMuc(tenDanhMuc, timKiem);
+
+                }
+            });
+        });
+    }
+
+    function bindbtnXoaDanhMuc() {
+        $(".btnXoa").unbind("click").click(function () {
+            if (confirm("Bạn thật sự muốn xóa ?")) {
+                var maDanhMuc = $(this).data("madanhmuc");
+                var loaiDanhMuc = "ChuyenMuc";
+                var _url = _ajaxQuanLyDanhMuc + "Xoa" + loaiDanhMuc;
+                var _param = {
+                    MaDanhMuc: maDanhMuc
+                }
+                thAjaxAction(_url, _param, function (result) {
+                    if (result == "ok") {
+                        thAlertShowSuccess("Đã xóa danh mục");
+                        loadDanhSachDanhMuc("_p" + loaiDanhMuc, "");
+                    }
+                });
+            }
+
+        });
+    }
+    function bindbtnLuuDanhMuc() {
+        $(".btnLuu").unbind("click").click(function () {
+            var maDanhMuc = $(this).data("madanhmuc");
+            var tenDanhMuc = $("#txtTenDanhMuc_" + maDanhMuc).val();
+            var stt = $("#txtSTT_" + maDanhMuc).val();
+
+            if (tenDanhMuc == "") {
+                thAlertShowError("Tên danh mục không thể để trống");
+                return;
+            }
+            if (stt == "") {
+                thAlertShowError("Số thứ tự không thể để trống");
+                return;
+            }
+
+
+            var loaiDanhMuc = "ChuyenMuc";
+            var _url = _ajaxQuanLyDanhMuc + "Luu" + loaiDanhMuc;
+            var _param = {
+                MaDanhMuc: maDanhMuc,
+                TenDanhMuc: tenDanhMuc,
+                STT: stt
+            }
+
+
+
+            thAjaxAction(_url, _param, function (result) {
+                if (result == "ok") {
+                    thAlertShowSuccess("Đã cập nhật danh mục");
+                    loadDanhSachDanhMuc("_p" + loaiDanhMuc, "");
+                }
+            });
+        });
+    }
+</script>
+
+
+
+

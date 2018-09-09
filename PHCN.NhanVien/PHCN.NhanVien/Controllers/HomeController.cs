@@ -31,13 +31,14 @@ namespace PHCN.NhanVien.Controllers
             {
                 int maNV = int.Parse(MaNhanVien);
                 NhanVien.Models.NhanVien nv = db.NhanVien.Find(maNV);
-                if (nv.MatKhau != MatKhau)
+                string matkhauMD5 = CodeController.GetMD5(MatKhau);
+                if (nv.MatKhauMD5 != matkhauMD5)
                 {
                     return RedirectToAction("DoiMatKhau", "Home", new { @thongbao = "matkhaucukhongdung" });
                 }
                 else
                 {
-                    nv.MatKhau = MatKhauMoi;
+                    nv.MatKhauMD5 = CodeController.GetMD5(MatKhauMoi);
                 }
                 db.SaveChanges();
                 return RedirectToAction("DoiMatKhau", "Home", new { @thongbao = "thanhcong" });
@@ -67,7 +68,7 @@ namespace PHCN.NhanVien.Controllers
                     ViewBag.Result = "false";
                     return View("DangNhap");
                 }
-            } catch (Exception ex)
+            } catch
             {
                 ViewBag.Result = "khongketnoi";
                 return View("DangNhap");

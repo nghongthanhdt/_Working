@@ -12,14 +12,11 @@ namespace PHCN.NhanVien.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class FileDinhKemWeb
+    public partial class NgheNghiep
     {
-        public int MaFile { get; set; }
-        public int MaBaiViet { get; set; }
-        public string TenFile { get; set; }
-        public string TenFileFull { get; set; }
-        public string PhanMoRong { get; set; }
-        public System.DateTime NgayTaiLen { get; set; }
+        public int MaNgheNghiep { get; set; }
+        public string TenNgheNghiep { get; set; }
+        public int STT { get; set; }
         public bool Xoa { get; set; }
     }
 }

@@ -56,15 +56,25 @@ namespace PHCN.NhanVien.Models
         public string NgheNghiepKhiDuocTuyenDung { get; set; }
         public Nullable<System.DateTime> NgayTuyenDung { get; set; }
         public Nullable<int> MaCoQuanTuyenDung { get; set; }
-        public string ChucVuChucDanhHienTai { get; set; }
+        public Nullable<int> MaChinhQuyen { get; set; }
+        public Nullable<int> MaDang { get; set; }
+        public Nullable<int> MaDoanThe { get; set; }
+        public Nullable<System.DateTime> NgayBoNhiemBoNhiemLai { get; set; }
         public string CongViecChinhDuocGiao { get; set; }
         public string TrinhDoGiaoDucPhoThong { get; set; }
         public string TrinhDoChuyenMonCaoNhat { get; set; }
+        public Nullable<int> MaHocHam { get; set; }
+        public Nullable<int> MaHocVi { get; set; }
+        public Nullable<int> MaChuyenMon { get; set; }
         public string LyLuanChinhTri { get; set; }
         public string QuanLyNhaNuoc { get; set; }
         public string BoiDuongTheoTieuChuanCDNN { get; set; }
         public string NgoaiNgu { get; set; }
         public string TinHoc { get; set; }
+        public string SoCCHN { get; set; }
+        public string TenMaCCHN { get; set; }
+        public Nullable<System.DateTime> NgayCapCCHN { get; set; }
+        public string PhamViHoatDongChuyenMon { get; set; }
         public Nullable<System.DateTime> NgayVaoDangCSVN { get; set; }
         public Nullable<System.DateTime> NgayVaoDangCSVNChinhThuc { get; set; }
         public Nullable<System.DateTime> ToChucChinhTriXH_NgayThamGia { get; set; }
@@ -98,24 +108,21 @@ namespace PHCN.NhanVien.Models
         public Nullable<System.DateTime> Xoa_Ngay { get; set; }
         public Nullable<bool> Xoa { get; set; }
         public string GhiChu { get; set; }
-        public Nullable<int> MaHocHam { get; set; }
-        public Nullable<int> MaHocVi { get; set; }
-        public Nullable<int> MaChuyenMon { get; set; }
-        public string SoCCHN { get; set; }
-        public Nullable<System.DateTime> NgayCapCCHN { get; set; }
-        public string PhamViHoatDongChuyenMon { get; set; }
     
+        public virtual ChinhQuyen ChinhQuyen { get; set; }
+        public virtual ChuyenMon ChuyenMon { get; set; }
+        public virtual Dang Dang { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DienBienDaoTaoBoiDuong> DienBienDaoTaoBoiDuong { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DienBienQuaTrinhCongTac> DienBienQuaTrinhCongTac { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DienBienQuaTrinhLuong> DienBienQuaTrinhLuong { get; set; }
+        public virtual DoanThe DoanThe { get; set; }
         public virtual DonVi DonVi { get; set; }
-        public virtual LoaiHopDong LoaiHopDong { get; set; }
-        public virtual NhanVien NhanVien { get; set; }
-        public virtual ChuyenMon ChuyenMon { get; set; }
         public virtual HocHam HocHam { get; set; }
         public virtual HocVi HocVi { get; set; }
+        public virtual LoaiHopDong LoaiHopDong { get; set; }
+        public virtual NhanVien NhanVien { get; set; }
     }
 }

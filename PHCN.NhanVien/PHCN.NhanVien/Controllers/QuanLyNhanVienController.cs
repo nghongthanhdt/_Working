@@ -13,7 +13,7 @@ namespace PHCN.NhanVien.Controllers
         // GET: QuanLyNhanVien
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Xem");
         }
         public ActionResult Xem(int? id)
         {

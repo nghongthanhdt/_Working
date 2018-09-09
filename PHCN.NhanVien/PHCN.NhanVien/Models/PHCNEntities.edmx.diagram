@@ -27,7 +27,6 @@
         <EntityTypeShape EntityType="PHCNModel.TinhThanh" Width="1.5" PointX="13.75" PointY="0.75" />
         <EntityTypeShape EntityType="PHCNModel.TonGiao" Width="1.5" PointX="9.75" PointY="18" />
         <EntityTypeShape EntityType="PHCNModel.XaPhuong" Width="1.5" PointX="0.75" PointY="14.75" />
-        <EntityTypeShape EntityType="PHCNModel.FileDinhKemWeb" Width="1.5" PointX="2.75" PointY="14.75" />
         <EntityTypeShape EntityType="PHCNModel.DienBienQuaTrinhLuong" Width="1.5" PointX="21.5" PointY="3.75" />
         <AssociationConnector Association="PHCNModel.FK_DienBienQuaTrinhLuong_ChucDanhNgheNghiep" />
         <EntityTypeShape EntityType="PHCNModel.DienBienDaoTaoBoiDuong" Width="1.5" PointX="19.25" PointY="7.625" />
@@ -35,30 +34,37 @@
         <AssociationConnector Association="PHCNModel.FK_DienBienDaoTaoBoiDuong_HinhThucDaoTao" />
         <EntityTypeShape EntityType="PHCNModel.DienBienQuaTrinhCongTac" Width="1.5" PointX="19.25" PointY="12" />
         <EntityTypeShape EntityType="PHCNModel.HinhAnh" Width="1.5" PointX="11.25" PointY="7.625" />
-        <EntityTypeShape EntityType="PHCNModel.LyLichVienChuc" Width="1.5" PointX="16" PointY="0.75" />
-        <AssociationConnector Association="PHCNModel.FK__DienBienD__MaLyL__05A3D694" />
-        <AssociationConnector Association="PHCNModel.FK__TomTatQua__MaLyL__0697FACD" />
-        <AssociationConnector Association="PHCNModel.FK__DienBienQ__MaLyL__04AFB25B" />
-        <AssociationConnector Association="PHCNModel.FK__LyLichVie__MaDon__03BB8E22" />
-        <AssociationConnector Association="PHCNModel.FK_LyLichVienChuc_LoaiHopDong" />
         <EntityTypeShape EntityType="PHCNModel.NhanVien" Width="1.5" PointX="3" PointY="18.875" />
         <AssociationConnector Association="PHCNModel.FK_BaiViet_NhanVien" />
         <AssociationConnector Association="PHCNModel.FK_GuiNhan_NhanVien_NguoiGui" />
         <AssociationConnector Association="PHCNModel.FK_GuiNhan_NhanVien_NguoiNhan" />
         <AssociationConnector Association="PHCNModel.FK_NhanVien_KhoaPhong" />
-        <AssociationConnector Association="PHCNModel.FK_LyLichVienChuc_NhanVien" />
         <AssociationConnector Association="PHCNModel.FK_PhanQuyen_NhanVien" />
         <EntityTypeShape EntityType="PHCNModel.ChuyenMon" Width="1.5" PointX="13.75" PointY="8.375" />
         <EntityTypeShape EntityType="PHCNModel.HocHam" Width="1.5" PointX="13.75" PointY="15.125" />
         <EntityTypeShape EntityType="PHCNModel.HocVi" Width="1.5" PointX="12.375" PointY="11.875" />
-        <AssociationConnector Association="PHCNModel.FK_LyLichVienChuc_ChuyenMon" />
-        <AssociationConnector Association="PHCNModel.FK_LyLichVienChuc_HocHam" />
-        <AssociationConnector Association="PHCNModel.FK_LyLichVienChuc_HocVi" />
         <EntityTypeShape EntityType="PHCNModel.ChinhQuyen" Width="1.5" PointX="5.375" PointY="14.75" />
         <EntityTypeShape EntityType="PHCNModel.Dang" Width="1.5" PointX="5.375" PointY="17.75" />
         <EntityTypeShape EntityType="PHCNModel.DoanThe" Width="1.5" PointX="18.375" PointY="0.75" />
         <EntityTypeShape EntityType="PHCNModel.MaCCHN" Width="1.5" PointX="18.375" PointY="3.75" />
         <EntityTypeShape EntityType="PHCNModel.PhamViHoatDongChuyenMon" Width="1.5" PointX="12.375" PointY="18.75" />
+        <EntityTypeShape EntityType="PHCNModel.LyLichVienChuc" Width="1.5" PointX="24.625" PointY="2.125" />
+        <AssociationConnector Association="PHCNModel.FK_LyLichVienChuc_ChinhQuyen" />
+        <AssociationConnector Association="PHCNModel.FK_LyLichVienChuc_ChuyenMon" />
+        <AssociationConnector Association="PHCNModel.FK_LyLichVienChuc_Dang" />
+        <AssociationConnector Association="PHCNModel.FK__DienBienD__MaLyL__05A3D694" />
+        <AssociationConnector Association="PHCNModel.FK__TomTatQua__MaLyL__0697FACD" />
+        <AssociationConnector Association="PHCNModel.FK__DienBienQ__MaLyL__04AFB25B" />
+        <AssociationConnector Association="PHCNModel.FK_LyLichVienChuc_DoanThe" />
+        <AssociationConnector Association="PHCNModel.FK__LyLichVie__MaDon__03BB8E22" />
+        <AssociationConnector Association="PHCNModel.FK_LyLichVienChuc_HocHam" />
+        <AssociationConnector Association="PHCNModel.FK_LyLichVienChuc_HocVi" />
+        <AssociationConnector Association="PHCNModel.FK_LyLichVienChuc_LoaiHopDong" />
+        <AssociationConnector Association="PHCNModel.FK_LyLichVienChuc_NhanVien" />
+        <EntityTypeShape EntityType="PHCNModel.NgheNghiep" Width="1.5" PointX="14.375" PointY="3.75" />
+        <EntityTypeShape EntityType="PHCNModel.BaiVietWeb" Width="1.5" PointX="5.25" PointY="21.25" />
+        <AssociationConnector Association="PHCNModel.FK_BaiVietWeb_ChuyenMuc" />
+        <AssociationConnector Association="PHCNModel.FK_BaiVietWeb_NhanVien" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

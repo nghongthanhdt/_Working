@@ -2,36 +2,150 @@
 @{
     ViewBag.PanelTitle = "Danh sách bài viết";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+
+    PHCN.NhanVien.Models.PHCNEntities db = new PHCN.NhanVien.Models.PHCNEntities();
+    var listChuyenMuc = db.ChuyenMuc.Where(x => x.Xoa == false).OrderBy(x => x.STT).ThenBy(x => x.MaChuyenMuc).ToList();
+
+
+    string chuyenmuc = "";
+    string timkiem = "";
+
+    try
+    {
+        chuyenmuc = Request.QueryString["chuyenmuc"].ToString();
+    }
+    catch { }
+    try
+    {
+        timkiem = Request.QueryString["timkiem"].ToString();
+    }
+    catch { }
 }
 
-
-<div class="form-horizontal">
-    
-    
-    <div class="form-group">
-        <label class="col-md-2 control-label">Chuyên mục</label>
-        <div class="col-md-10">
-            <select class="form-control">
-                <option>Tin hoạt động</option>
-                <option>Tra cứu</option>
-                <option>Bảng giá dịch vụ</option>
+<div class="row">
+    <form method="get" action="@Url.Action("Index", "QuanLyBaiViet")">
+        <div class="col-md-6">
+            <select class="form-control" name="chuyenmuc">
+                <option value=""> - Tất cả chuyên mục - </option>
+                @foreach (var item in listChuyenMuc)
+                {
+                    <option value="@item.MaChuyenMuc" @((item.MaChuyenMuc.ToString() == chuyenmuc)?"selected='selected'":"") >@item.TenChuyenMuc</option>
+                }
             </select>
         </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">Tìm kiếm</label>
-        <div class="col-md-10">
-            <input type="text" class="form-control" placeholder="từ khóa.."/>
+        <div class="col-md-6">
+
+            <div class="input-group form-search">
+                <input class="form-control search-query" type="text" placeholder="Tên bài viết ..." name="timkiem" value="@timkiem">
+                <span class="input-group-btn">
+                    <button data-type="last" class="btn btn-primary" type="submit">Tìm kiếm</button>
+                </span>
+            </div>
+
         </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <button class="btn btn-success">Xem danh sách</button>
-        </div>
-    </div>
+
+    </form>
+    
+
 </div>
+<br />
 
 <div style="width:100%; height:400px; overflow:scroll;" id="divDanhSachBaiViet">
+    <table class="table table-condensed" style="font-size:12px;">
+        <thead>
+            <tr>
+                <th style="width:3%">#</th>
+                <th style="width:37%">Tiêu đề</th>
+                <th style="width:20%">Chuyên mục</th>
+                <th style="width:10%">Hoạt động</th>
+                <th style="width:15%">Người đăng</th>
+                <th style="width:15%">Ngày</th>                
+            </tr>
+            <tr>
+                <td style="width:3%">
+                    <input type="checkbox" />
+                </td>
+                <td style="width:37%">
+                    <a href="#">Bệnh viện bổ nhiệm BSCKI. Nguyễn Văn Hồ là Phó giám đốc</a>
+                </td>
+                <td style="width:20%">Hoạt động bệnh viện</td>
+                <td style="width:10%; text-align:center;">
+                    <input type="checkbox" class="disabled" disabled="disabled" checked="checked" />
+                </td>
+                <td style="width:15%">
+                    Nguyễn Hồng Thanh
+                </td>
+                <td style="width:15%">
+                    09/09/2018 11:30 AM
+                </td>
+            </tr>
+            <tr>
+                <td style="width:3%">
+                    <input type="checkbox" />
+                </td>
+                <td style="width:37%">
+                    <a href="#">Bệnh viện bổ nhiệm BSCKI. Nguyễn Văn Hồ là Phó giám đốc</a>
+                </td>
+                <td style="width:20%">Hoạt động bệnh viện</td>
+                <td style="width:10%; text-align:center;">
+                    <input type="checkbox" class="disabled" disabled="disabled" checked="checked" />
+                </td>
+                <td style="width:15%">
+                    Nguyễn Hồng Thanh
+                </td>
+                <td style="width:15%">
+                    09/09/2018 11:30 AM
+                </td>
+            </tr>
+            <tr>
+                <td style="width:3%">
+                    <input type="checkbox" />
+                </td>
+                <td style="width:37%">
+                    <a href="#">Bệnh viện bổ nhiệm BSCKI. Nguyễn Văn Hồ là Phó giám đốc</a>
+                </td>
+                <td style="width:20%">Hoạt động bệnh viện</td>
+                <td style="width:10%; text-align:center;">
+                    <input type="checkbox" class="disabled" disabled="disabled" checked="checked" />
+                </td>
+                <td style="width:15%">
+                    Nguyễn Hồng Thanh
+                </td>
+                <td style="width:15%">
+                    09/09/2018 11:30 AM
+                </td>
+            </tr>
+            <tr>
+                <td style="width:3%">
+                    <input type="checkbox" />
+                </td>
+                <td style="width:37%">
+                    <a href="#">Bệnh viện bổ nhiệm BSCKI. Nguyễn Văn Hồ là Phó giám đốc</a>
+                </td>
+                <td style="width:20%">Hoạt động bệnh viện</td>
+                <td style="width:10%; text-align:center;">
+                    <input type="checkbox" class="disabled" disabled="disabled" checked="checked" />
+                </td>
+                <td style="width:15%">
+                    Nguyễn Hồng Thanh
+                </td>
+                <td style="width:15%">
+                    09/09/2018 11:30 AM
+                </td>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+<br/>
 
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <button class="btn btn-success" style="margin-bottom:10px;">Thêm bài mới</button>
+            <button class="btn btn-default" style="margin-bottom:10px;">Ngưng hoạt động</button>
+            <button class="btn btn-default" style="margin-bottom:10px;">Xóa</button>
+        </div>
+    </div>
 </div>

@@ -22,5 +22,6 @@ namespace PHCN.NhanVien.Models
         public string DuongDan { get; set; }
         public string PhanMoRong { get; set; }
         public Nullable<System.DateTime> NgayTaiLen { get; set; }
+        public Nullable<int> MaBaiViet { get; set; }
     }
 }
