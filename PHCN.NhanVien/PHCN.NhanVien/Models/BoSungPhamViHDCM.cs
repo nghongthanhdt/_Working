@@ -12,17 +12,12 @@ namespace PHCN.NhanVien.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class HinhAnh
+    public partial class BoSungPhamViHDCM
     {
-        public int MaHinhAnh { get; set; }
-        public Nullable<int> MaLyLichVienChuc { get; set; }
-        public string LoaiHinhAnh { get; set; }
-        public string TenFile { get; set; }
-        public string TenFileDayDu { get; set; }
-        public string DuongDan { get; set; }
-        public string PhanMoRong { get; set; }
-        public Nullable<System.DateTime> NgayTaiLen { get; set; }
-        public Nullable<int> MaBaiViet { get; set; }
+        public int MaBoSungPhamViHDCM { get; set; }
+        public string SoQuyetDinh { get; set; }
+        public Nullable<System.DateTime> NgayCap { get; set; }
+        public string NoiDungBoSung { get; set; }
         public Nullable<bool> Xoa { get; set; }
     }
 }

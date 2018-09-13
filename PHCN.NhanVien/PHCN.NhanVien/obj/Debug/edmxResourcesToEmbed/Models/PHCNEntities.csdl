@@ -472,6 +472,7 @@
     <Property Name="PhanMoRong" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="NgayTaiLen" Type="DateTime" Precision="7" />
     <Property Name="MaBaiViet" Type="Int32" />
+    <Property Name="Xoa" Type="Boolean" />
   </EntityType>
   <EntityType Name="NhanVien">
     <Key>

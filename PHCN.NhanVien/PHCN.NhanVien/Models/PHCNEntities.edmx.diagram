@@ -65,6 +65,7 @@
         <EntityTypeShape EntityType="PHCNModel.BaiVietWeb" Width="1.5" PointX="5.25" PointY="21.25" />
         <AssociationConnector Association="PHCNModel.FK_BaiVietWeb_ChuyenMuc" />
         <AssociationConnector Association="PHCNModel.FK_BaiVietWeb_NhanVien" />
+        <EntityTypeShape EntityType="PHCNModel.BoSungPhamViHDCM" Width="1.5" PointX="14.375" PointY="11.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

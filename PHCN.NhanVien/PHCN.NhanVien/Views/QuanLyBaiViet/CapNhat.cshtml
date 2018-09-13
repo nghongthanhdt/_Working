@@ -6,6 +6,7 @@
 
     var listChuyenMuc = db.ChuyenMuc.OrderBy(x => x.STT).Where(x => x.Xoa == false).ToList();
 
+    
 
 }
 
@@ -138,13 +139,13 @@
             </div>
             <div class="panel-body">
 
+
+                <div id="divDanhSachHinhAnh" data-mabaiviet="@Model.MaBaiViet">
+
+                </div>
                 
-                <img src="~/Content/ImageManager/pexels-photo-371633-20180516083140.jpeg" style="width:100%;" />
-                <br/>
-                <br/>
-                <img src="~/Content/ImageManager/3.jpg"  style="width:100%;"/>
-                <br />
-                <br />
+                
+                
                 <form id="formUploadHinhAnhWeb" action="@Url.Action("UploadFileHinhAnhWeb", "Upload")" method="post" enctype="multipart/form-data">
                     <input type="file" id="fileuploadHinhAnh" style="display:none;" name="file" accept=".jpg,.jpeg,.png,.gif,.bmp"  />
                     <input type="hidden" value="@Model.MaBaiViet" name="id" />  

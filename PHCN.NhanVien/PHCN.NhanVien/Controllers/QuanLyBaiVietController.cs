@@ -63,5 +63,24 @@ namespace PHCN.NhanVien.Controllers
             return View(bv);
 
         }
+
+        
+        public ActionResult _pDanhSachHinhAnh(int MaBaiViet)
+        {
+            if (MaBaiViet <= 0)
+            {
+                return Content("");
+            } else
+            {
+                var listHinhAnh = db.HinhAnh.Where(x => x.MaBaiViet == MaBaiViet && x.Xoa != true).OrderByDescending(x => x.MaHinhAnh).ToList();
+                if(listHinhAnh.Any())
+                {
+                    return View(listHinhAnh);
+                } else
+                {
+                    return Content("");
+                }                
+            }            
+        }
     }
 }

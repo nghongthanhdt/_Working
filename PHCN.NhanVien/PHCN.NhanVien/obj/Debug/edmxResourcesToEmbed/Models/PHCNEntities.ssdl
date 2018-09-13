@@ -191,6 +191,7 @@
     <Property Name="PhanMoRong" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="NgayTaiLen" Type="datetime2" Precision="7" />
     <Property Name="TenFile" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Xoa" Type="bit" />
   </EntityType>
   <EntityType Name="HinhThucDaoTao">
     <Key>

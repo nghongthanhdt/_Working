@@ -1,0 +1,44 @@
+﻿@model List<PHCN.NhanVien.Models.HinhAnh>
+@foreach (var hinhanh in Model)
+{
+    <a href="javascript:void(0);" class="btnHinhAnhBaiViet" data-src="@Url.Content("~" + hinhanh.DuongDan + hinhanh.TenFileDayDu)">
+        <img src="@Url.Content("~" + hinhanh.DuongDan + hinhanh.TenFileDayDu)" style="width:100%;" />
+    </a>
+    
+    <br /><br />
+}
+
+
+
+<div class="modal" id="modalHinhAnh">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Hình ảnh</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <img src="" id="modalHinhAnh_HinhAnh" style="width:100%;" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <button class="btn btn-primary btn-block">Đặt làm ảnh đại diện</button>
+                        <button class="btn btn-success btn-block">Thêm vào bài viết</button>
+                        <button class="btn btn-danger btn-block">Xóa ảnh</button>
+                        <button class="btn btn-default btn-block"  data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(".btnHinhAnhBaiViet").unbind("click").click(function () {
+        var src = $(this).data("src");
+        $("#modalHinhAnh_HinhAnh").attr("src", src);
+        $("#modalHinhAnh").modal("show");
+    });
+</script>

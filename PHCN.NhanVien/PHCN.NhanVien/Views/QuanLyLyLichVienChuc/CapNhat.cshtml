@@ -526,9 +526,47 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <label style="font-weight:normal"> Phạm vi hoạt động chuyên môn</label>
+                                    
                                     <textarea type="text" class="form-control" id="txtPhamViHoatDongChuyenMon" >@Model.PhamViHoatDongChuyenMon</textarea>
                                 </div>
                                 
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label style="font-weight:normal"><i>Bổ sung phạm vi hoạt động chuyên môn</i></label>
+                                    [ <a href="javascript:void(0);" id="btnThemBoSungPhamViHDCM">Thêm</a> ]
+                                    <table class="table">
+                                        <tr>
+                                            <th style="width:15%;"><i>Số quyết định</i></th>
+                                            <th style="width:15%;"><i>Ngày cấp</i></th>
+                                            <th style="width:70%;"><i>Nội dung</i></th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="javascript:void(0);">1232/QĐ-SYT</a>
+                                            </td>
+                                            <td>22/03/2015</td>
+                                            <td>Khám bệnh, chữa bệnh bằng Y học cổ truyền</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="javascript:void(0);">1232/QĐ-SYT</a>
+                                            </td>
+                                            <td>22/03/2015</td>
+                                            <td>Khám bệnh, chữa bệnh bằng Y học cổ truyền</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="javascript:void(0);">1232/QĐ-SYT</a>
+                                            </td>
+                                            <td>22/03/2015</td>
+                                            <td>Khám bệnh, chữa bệnh bằng Y học cổ truyền</td>
+                                        </tr>
+
+                                        
+                                    </table>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -995,7 +1033,40 @@
         </div>
     </div>
 </div>
+<div class="modal" id="modalBoSungPhamViHDCM">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Bổ sung phạm vi hoạt động chuyên môn</h4>
+            </div>
+            <div class="modal-body">
+                @*<p>Feel free to contact us for any issues you might have with our products.</p>*@
+                <div class="row">
+                    <div class="col-xs-6">
+                        <label>Số quyết định</label>
+                        <input class="form-control" type="text" id="modalBoSungPhamViHDCM_txtSoQuyetDinh">
+                    </div>
+                    <div class="col-xs-6">
+                        <label>Ngày cấp</label>
+                        <input class="form-control date" type="text" id="modalBoSungPhamViHDCM_txtNgayCap">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Nội dung bổ sung</label>
+                        <textarea class="form-control" style="height:120px;" id="modalBoSungPhamViHDCM_txtNoiDung"></textarea>
+                    </div>
+                </div>
 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="modalDienBienQuaTrinhCongTac_btnLuu" data-malylichvienchuc="@Model.MaLyLichVienChuc">Lưu</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     var _ajaxUrl = '@(HttpContext.Current.Request.Url.Scheme)://@(HttpContext.Current.Request.Url.Authority)/AjaxManager/';

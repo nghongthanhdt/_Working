@@ -1,7 +1,23 @@
 ﻿$(document).ready(function () {
     bindbtnThemHinhAnh();
+    loadDanhSachHinhAnh();
 });
-
+function loadDanhSachHinhAnh() {
+    var ajaxActionName = "_pDanhSachHinhAnh";
+    var _paramMaBaiViet = $("#divDanhSachHinhAnh").data("mabaiviet");
+    var param = {
+        MaBaiViet: _paramMaBaiViet
+    }
+    $.ajax({
+        url: _ajaxThisUrl + ajaxActionName,
+        dataType: "html",
+        data: param,
+        success: function (result) {
+            $("#divDanhSachHinhAnh").html(result);
+            //bindbtncolDienBienQuaTrinhLuong();
+        }
+    });
+}
 function bindbtnThemHinhAnh() {
     $("#btnThemHinhAnh").unbind("click").click(function () {
         $("input#fileuploadHinhAnh").trigger("click");
@@ -24,7 +40,8 @@ function bindbtnThemHinhAnh() {
                     if (result == "true") {
                         //loadHinhAnhVaoKhung();
                         //$("#modalTuyChonAvatar").modal("hide");
-                        alert(result);
+                        //alert(result);
+                        loadDanhSachHinhAnh();
                     }
                 }
             });

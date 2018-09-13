@@ -253,6 +253,7 @@
     <EntitySetMapping Name="HinhAnh">
       <EntityTypeMapping TypeName="PHCNModel.HinhAnh">
         <MappingFragment StoreEntitySet="HinhAnh">
+          <ScalarProperty Name="Xoa" ColumnName="Xoa" />
           <ScalarProperty Name="MaBaiViet" ColumnName="MaBaiViet" />
           <ScalarProperty Name="NgayTaiLen" ColumnName="NgayTaiLen" />
           <ScalarProperty Name="PhanMoRong" ColumnName="PhanMoRong" />

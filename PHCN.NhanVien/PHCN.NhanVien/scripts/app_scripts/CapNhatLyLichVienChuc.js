@@ -103,7 +103,13 @@ $(document).ready(function () {
 
     loadHinhAnhVaoKhung();
 
+
+    bindbtnThemBoSungPhamViHDCM();
+
+
     bindbtnLuu();
+
+
 
     // end document ready
 
@@ -952,6 +958,12 @@ function bindbtnLuu() {
         });
 
 
+    });
+}
+
+function bindbtnThemBoSungPhamViHDCM() {
+    $("#btnThemBoSungPhamViHDCM").unbind("click").click(function () {
+        $("#modalBoSungPhamViHDCM").modal("show");
     });
 }
 

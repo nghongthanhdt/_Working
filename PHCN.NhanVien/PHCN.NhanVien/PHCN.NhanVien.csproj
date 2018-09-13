@@ -694,6 +694,9 @@
     <Compile Include="Models\BaiVietWeb.cs">
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BoSungPhamViHDCM.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ChinhQuyen.cs">
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
@@ -898,6 +901,7 @@
     <Content Include="Views\QuanLyDanhMuc\_pNgheNghiep.cshtml" />
     <Content Include="Views\QuanLyDanhMuc\_pChuyenMuc.cshtml" />
     <Content Include="Views\QuanLyBaiViet\CapNhat.cshtml" />
+    <Content Include="Views\QuanLyBaiViet\_pDanhSachHinhAnh.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
