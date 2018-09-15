@@ -535,36 +535,8 @@
                                 <div class="col-md-12">
                                     <label style="font-weight:normal"><i>Bổ sung phạm vi hoạt động chuyên môn</i></label>
                                     [ <a href="javascript:void(0);" id="btnThemBoSungPhamViHDCM">Thêm</a> ]
-                                    <table class="table">
-                                        <tr>
-                                            <th style="width:15%;"><i>Số quyết định</i></th>
-                                            <th style="width:15%;"><i>Ngày cấp</i></th>
-                                            <th style="width:70%;"><i>Nội dung</i></th>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <a href="javascript:void(0);">1232/QĐ-SYT</a>
-                                            </td>
-                                            <td>22/03/2015</td>
-                                            <td>Khám bệnh, chữa bệnh bằng Y học cổ truyền</td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <a href="javascript:void(0);">1232/QĐ-SYT</a>
-                                            </td>
-                                            <td>22/03/2015</td>
-                                            <td>Khám bệnh, chữa bệnh bằng Y học cổ truyền</td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <a href="javascript:void(0);">1232/QĐ-SYT</a>
-                                            </td>
-                                            <td>22/03/2015</td>
-                                            <td>Khám bệnh, chữa bệnh bằng Y học cổ truyền</td>
-                                        </tr>
-
-                                        
-                                    </table>
+                                    <div id="divDienBienBoSungPhamViHDCM" data-malylichvienchuc="@Model.MaLyLichVienChuc">
+                                    </div>
                                 </div>
 
                             </div>
@@ -1033,7 +1005,7 @@
         </div>
     </div>
 </div>
-<div class="modal" id="modalBoSungPhamViHDCM">
+<div class="modal" id="modalBoSungPhamViHDCM" data-mabosungphamvihdcm>
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -1061,7 +1033,7 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" id="modalDienBienQuaTrinhCongTac_btnLuu" data-malylichvienchuc="@Model.MaLyLichVienChuc">Lưu</button>
+                <button type="button" class="btn btn-success" id="modalBoSungPhamViHDCM_btnLuu" data-malylichvienchuc="@Model.MaLyLichVienChuc">Thêm bổ sung</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
             </div>
         </div>

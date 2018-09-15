@@ -1,16 +1,15 @@
 ﻿@model List<PHCN.NhanVien.Models.HinhAnh>
 @foreach (var hinhanh in Model)
 {
-    <a href="javascript:void(0);" class="btnHinhAnhBaiViet" data-src="@Url.Content("~" + hinhanh.DuongDan + hinhanh.TenFileDayDu)">
+    <a href="javascript:void(0);" class="btnHinhAnhBaiViet hinhanh" data-mahinhanh="@hinhanh.MaHinhAnh" data-mabaiviet="@hinhanh.MaBaiViet" data-src="@Url.Content("~" + hinhanh.DuongDan + hinhanh.TenFileDayDu)">
         <img src="@Url.Content("~" + hinhanh.DuongDan + hinhanh.TenFileDayDu)" style="width:100%;" />
-    </a>
-    
+    </a>    
     <br /><br />
 }
 
 
 
-<div class="modal" id="modalHinhAnh">
+<div class="modal" id="modalHinhAnh" data-mahinhanh="0" data-mabaiviet="0">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -25,9 +24,9 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
-                        <button class="btn btn-primary btn-block">Đặt làm ảnh đại diện</button>
-                        <button class="btn btn-success btn-block">Thêm vào bài viết</button>
-                        <button class="btn btn-danger btn-block">Xóa ảnh</button>
+                        <button class="btn btn-primary btn-block" id="modalHinhAnh_btnDatLamAnhDaiDien">Đặt làm ảnh đại diện</button>
+                        <button class="btn btn-success btn-block" id="modalHinhAnh_btnThemVaoBaiViet">Thêm vào bài viết</button>
+                        <button class="btn btn-danger btn-block" id="modalHinhAnh_btnXoaAnh">Xóa ảnh</button>
                         <button class="btn btn-default btn-block"  data-dismiss="modal">Đóng</button>
                     </div>
                 </div>
@@ -38,7 +37,39 @@
 <script>
     $(".btnHinhAnhBaiViet").unbind("click").click(function () {
         var src = $(this).data("src");
+        var mahinhanh = $(this).data("mahinhanh");
+        var mabaiviet = $(this).data("mabaiviet");
         $("#modalHinhAnh_HinhAnh").attr("src", src);
+        $("#modalHinhAnh").attr("data-mahinhanh", mahinhanh)
+        $("#modalHinhAnh").attr("data-mabaiviet", mabaiviet)
+        bindbtnDatLamAnhDaiDien(mahinhanh);
         $("#modalHinhAnh").modal("show");
     });
+    
+    function bindbtnDatLamAnhDaiDien(mahinhanh) {
+        $("#modalHinhAnh_btnDatLamAnhDaiDien").unbind("click").click(function () {
+
+            var _mahinhanh = mahinhanh
+            var _mabaiviet = $("#modalHinhAnh").data("mabaiviet");
+            var _url = "@Url.Action("LuuHinhAnhDaiDienChoBaiViet", "AjaxManager")";
+            var _param = {
+                MaBaiViet: _mabaiviet,
+                MaHinhAnh: _mahinhanh
+            }
+            thAjaxAction(_url, _param, function (result) {
+                var _2mahinhanh = result;
+                var _2url = "@Url.Action("GetDuongDanHinhAnh", "AjaxManager")";
+                var _2param = {                    
+                    MaHinhAnh: _2mahinhanh
+                }
+                thAjaxAction(_2url, _2param, function (_2result) {
+                    
+                    $("#imgAnhDaiDien").attr("src", _2result);
+                    $("#modalHinhAnh").modal("hide");
+                });
+            });
+
+            
+        });
+    }
 </script>

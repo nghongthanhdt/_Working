@@ -307,7 +307,68 @@ namespace PHCN.NhanVien.Controllers
             }
         }
 
+        // diễn biến bổ sung phạm vi hoạt động chuyên môn
+        public JsonResult GetDienBienBoSungPhamViHDCM(int id)
+        {
+            BoSungPhamViHDCM bs = new BoSungPhamViHDCM();
+            bs = db.BoSungPhamViHDCM.Find(id);
+            object _bs = new
+            {
+                SoQuyetDinh = bs.SoQuyetDinh,
+                NgayCap = bs.NgayCap.ToString("dd/MM/yyyy"),
+                NoiDungBoSung = bs.NoiDungBoSung
+            };
+            return Json(_bs, JsonRequestBehavior.AllowGet);
+        }
+        public string XoaDienBienBoSungPhamViHDCM(int id)
+        {
+            //id: mã diễn biến
+            BoSungPhamViHDCM bs = db.BoSungPhamViHDCM.Find(id);
+            db.BoSungPhamViHDCM.Remove(bs);
+            db.SaveChanges();
+            return "ok";
+        }
+        public string LuuDienBienBoSungPhamViHDCM(BoSungPhamViHDCM bs)
+        {
+            if (bs.MaBoSungPhamViHDCM == 0)
+            {
+                db.BoSungPhamViHDCM.Add(bs);
+                db.SaveChanges();
+            }
+            else
+            {
+                db.Entry(bs).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            return "ok";
+        }
 
-        
+        // cập nhật hình ảnh đại diện của bài viết
+        public string LuuHinhAnhDaiDienChoBaiViet(int MaBaiViet, int MaHinhAnh)
+        {
+            try
+            {
+                BaiVietWeb bv = db.BaiVietWeb.Find(MaBaiViet);
+                bv.MaHinhAnh = MaHinhAnh;
+                db.SaveChanges();
+                return MaHinhAnh.ToString();
+            } catch (Exception ex)
+            {
+                return ex.Message;
+            }
+            
+        }
+        public string GetDuongDanHinhAnh(int MaHinhAnh)
+        {
+            var hinhanh = db.HinhAnh.Find(MaHinhAnh);
+            if (hinhanh != null)
+            {
+                string str = hinhanh.DuongDan + hinhanh.TenFileDayDu;
+                return str;
+            } else
+            {
+                return "";
+            }
+        }
     }
 }

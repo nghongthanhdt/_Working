@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () {
     bindbtnThemHinhAnh();
     loadDanhSachHinhAnh();
+    bindtxtTieuDe_Change();
 });
 function loadDanhSachHinhAnh() {
     var ajaxActionName = "_pDanhSachHinhAnh";
@@ -46,5 +47,11 @@ function bindbtnThemHinhAnh() {
                 }
             });
         });
+    });
+}
+function bindtxtTieuDe_Change() {
+    $("#txtTieuDe").unbind("change").change(function () {
+        var text = RewriteTieuDe($(this).val());
+        $("#txtRewriteTieuDe").val(text);
     });
 }

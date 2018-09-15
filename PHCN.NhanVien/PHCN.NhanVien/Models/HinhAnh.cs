@@ -14,6 +14,12 @@ namespace PHCN.NhanVien.Models
     
     public partial class HinhAnh
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public HinhAnh()
+        {
+            this.BaiVietWeb = new HashSet<BaiVietWeb>();
+        }
+    
         public int MaHinhAnh { get; set; }
         public Nullable<int> MaLyLichVienChuc { get; set; }
         public string LoaiHinhAnh { get; set; }
@@ -24,5 +30,8 @@ namespace PHCN.NhanVien.Models
         public Nullable<System.DateTime> NgayTaiLen { get; set; }
         public Nullable<int> MaBaiViet { get; set; }
         public Nullable<bool> Xoa { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BaiVietWeb> BaiVietWeb { get; set; }
     }
 }

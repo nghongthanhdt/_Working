@@ -67,6 +67,13 @@ namespace PHCN.NhanVien.Controllers
             return View(list);
         }
 
+        public ActionResult _pDienBienBoSungPhamViHDCM(int id)
+        {
+            //id: mã lý lịch viên chức
+            List<BoSungPhamViHDCM> list = db.BoSungPhamViHDCM.Where(x => x.MaLyLichVienChuc == id).OrderBy(x => x.NgayCap).ToList();
+            return View(list);
+        }
+
 
     }
 }

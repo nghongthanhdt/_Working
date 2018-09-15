@@ -486,5 +486,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="BoSungPhamViHDCM">
+      <EntityTypeMapping TypeName="PHCNModel.BoSungPhamViHDCM">
+        <MappingFragment StoreEntitySet="BoSungPhamViHDCM">
+          <ScalarProperty Name="NoiDungBoSung" ColumnName="NoiDungBoSung" />
+          <ScalarProperty Name="NgayCap" ColumnName="NgayCap" />
+          <ScalarProperty Name="SoQuyetDinh" ColumnName="SoQuyetDinh" />
+          <ScalarProperty Name="MaLyLichVienChuc" ColumnName="MaLyLichVienChuc" />
+          <ScalarProperty Name="MaBoSungPhamViHDCM" ColumnName="MaBoSungPhamViHDCM" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

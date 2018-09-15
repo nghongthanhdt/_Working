@@ -157,6 +157,15 @@
       <End Role="NhanVien" EntitySet="NhanVien" />
       <End Role="BaiVietWeb" EntitySet="BaiVietWeb" />
     </AssociationSet>
+    <EntitySet Name="BoSungPhamViHDCM" EntityType="PHCNModel.BoSungPhamViHDCM" />
+    <AssociationSet Name="FK_BoSungPhamViHDCM_LyLichVienChuc" Association="PHCNModel.FK_BoSungPhamViHDCM_LyLichVienChuc">
+      <End Role="LyLichVienChuc" EntitySet="LyLichVienChuc" />
+      <End Role="BoSungPhamViHDCM" EntitySet="BoSungPhamViHDCM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BaiVietWeb_HinhAnh" Association="PHCNModel.FK_BaiVietWeb_HinhAnh">
+      <End Role="HinhAnh" EntitySet="HinhAnh" />
+      <End Role="BaiVietWeb" EntitySet="BaiVietWeb" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Loi">
     <Key>
@@ -473,6 +482,7 @@
     <Property Name="NgayTaiLen" Type="DateTime" Precision="7" />
     <Property Name="MaBaiViet" Type="Int32" />
     <Property Name="Xoa" Type="Boolean" />
+    <NavigationProperty Name="BaiVietWeb" Relationship="PHCNModel.FK_BaiVietWeb_HinhAnh" FromRole="HinhAnh" ToRole="BaiVietWeb" />
   </EntityType>
   <EntityType Name="NhanVien">
     <Key>
@@ -738,6 +748,7 @@
     <NavigationProperty Name="HocVi" Relationship="PHCNModel.FK_LyLichVienChuc_HocVi" FromRole="LyLichVienChuc" ToRole="HocVi" />
     <NavigationProperty Name="LoaiHopDong" Relationship="PHCNModel.FK_LyLichVienChuc_LoaiHopDong" FromRole="LyLichVienChuc" ToRole="LoaiHopDong" />
     <NavigationProperty Name="NhanVien" Relationship="PHCNModel.FK_LyLichVienChuc_NhanVien" FromRole="LyLichVienChuc" ToRole="NhanVien" />
+    <NavigationProperty Name="BoSungPhamViHDCM" Relationship="PHCNModel.FK_BoSungPhamViHDCM_LyLichVienChuc" FromRole="LyLichVienChuc" ToRole="BoSungPhamViHDCM" />
   </EntityType>
   <Association Name="FK_LyLichVienChuc_ChinhQuyen">
     <End Type="PHCNModel.ChinhQuyen" Role="ChinhQuyen" Multiplicity="0..1" />
@@ -912,6 +923,7 @@
     <NavigationProperty Name="NhanVien" Relationship="PHCNModel.FK_BaiVietWeb_NhanVien" FromRole="BaiVietWeb" ToRole="NhanVien" />
     <Property Name="CapNhatLanCuoi" Type="DateTime" Precision="7" />
     <Property Name="MaNhanVienCapNhat" Type="Int32" />
+    <NavigationProperty Name="HinhAnh" Relationship="PHCNModel.FK_BaiVietWeb_HinhAnh" FromRole="BaiVietWeb" ToRole="HinhAnh" />
   </EntityType>
   <Association Name="FK_BaiVietWeb_ChuyenMuc">
     <End Type="PHCNModel.ChuyenMuc" Role="ChuyenMuc" Multiplicity="0..1" />
@@ -934,6 +946,41 @@
       </Principal>
       <Dependent Role="BaiVietWeb">
         <PropertyRef Name="MaNhanVien" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="BoSungPhamViHDCM">
+    <Key>
+      <PropertyRef Name="MaBoSungPhamViHDCM" />
+    </Key>
+    <Property Name="MaBoSungPhamViHDCM" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MaLyLichVienChuc" Type="Int32" Nullable="false" />
+    <Property Name="SoQuyetDinh" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NgayCap" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="NoiDungBoSung" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="LyLichVienChuc" Relationship="PHCNModel.FK_BoSungPhamViHDCM_LyLichVienChuc" FromRole="BoSungPhamViHDCM" ToRole="LyLichVienChuc" />
+  </EntityType>
+  <Association Name="FK_BoSungPhamViHDCM_LyLichVienChuc">
+    <End Type="PHCNModel.LyLichVienChuc" Role="LyLichVienChuc" Multiplicity="1" />
+    <End Type="PHCNModel.BoSungPhamViHDCM" Role="BoSungPhamViHDCM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LyLichVienChuc">
+        <PropertyRef Name="MaLyLichVienChuc" />
+      </Principal>
+      <Dependent Role="BoSungPhamViHDCM">
+        <PropertyRef Name="MaLyLichVienChuc" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BaiVietWeb_HinhAnh">
+    <End Type="PHCNModel.HinhAnh" Role="HinhAnh" Multiplicity="0..1" />
+    <End Type="PHCNModel.BaiVietWeb" Role="BaiVietWeb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HinhAnh">
+        <PropertyRef Name="MaHinhAnh" />
+      </Principal>
+      <Dependent Role="BaiVietWeb">
+        <PropertyRef Name="MaHinhAnh" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

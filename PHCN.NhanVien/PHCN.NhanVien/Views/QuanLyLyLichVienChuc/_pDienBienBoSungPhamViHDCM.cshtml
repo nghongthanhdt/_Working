@@ -1,0 +1,42 @@
+﻿@model List<PHCN.NhanVien.Models.BoSungPhamViHDCM>
+
+@if (Model.Any())
+{
+    <table class="table">
+        <tr>
+            <th style="width:15%;"><i>Số quyết định</i></th>
+            <th style="width:15%;"><i>Ngày cấp</i></th>
+            <th style="width:60%;"><i>Nội dung</i></th>
+            <th style="width:10%;">
+
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a href="javascript:void(0);" class="rowSuaDienBienBoSungPhamViHDCM" data-mabosungphamvihdcm="@item.MaBoSungPhamViHDCM">@item.SoQuyetDinh</a>
+                </td>
+                <td>@(DateTime.Parse(item.NgayCap.ToString()).ToString("dd/MM/yyyy"))</td>
+                <td>@item.NoiDungBoSung</td>
+
+                <td>
+                    <a href="javascript:void(0);" data-mabosungphamvihdcm="@item.MaBoSungPhamViHDCM" class="rowSuaDienBienBoSungPhamViHDCM btn btn-xs btn-default">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                        ...
+                    </a>
+                    <a href="javascript:void(0);" data-mabosungphamvihdcm="@item.MaBoSungPhamViHDCM" class="rowXoaDienBienBoSungPhamViHDCM btn btn-xs btn-default">
+                        <i class="glyphicon glyphicon-remove"></i>
+                    </a>
+
+                </td>
+
+            </tr>
+        }
+
+
+
+
+    </table>
+}
+

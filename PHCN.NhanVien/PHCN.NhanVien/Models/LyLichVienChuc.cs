@@ -20,6 +20,7 @@ namespace PHCN.NhanVien.Models
             this.DienBienDaoTaoBoiDuong = new HashSet<DienBienDaoTaoBoiDuong>();
             this.DienBienQuaTrinhCongTac = new HashSet<DienBienQuaTrinhCongTac>();
             this.DienBienQuaTrinhLuong = new HashSet<DienBienQuaTrinhLuong>();
+            this.BoSungPhamViHDCM = new HashSet<BoSungPhamViHDCM>();
         }
     
         public Nullable<int> MaNhanVien { get; set; }
@@ -124,5 +125,7 @@ namespace PHCN.NhanVien.Models
         public virtual HocVi HocVi { get; set; }
         public virtual LoaiHopDong LoaiHopDong { get; set; }
         public virtual NhanVien NhanVien { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BoSungPhamViHDCM> BoSungPhamViHDCM { get; set; }
     }
 }

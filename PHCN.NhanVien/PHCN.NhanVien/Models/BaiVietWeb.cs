@@ -31,5 +31,6 @@ namespace PHCN.NhanVien.Models
     
         public virtual ChuyenMuc ChuyenMuc { get; set; }
         public virtual NhanVien NhanVien { get; set; }
+        public virtual HinhAnh HinhAnh { get; set; }
     }
 }

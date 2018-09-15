@@ -524,6 +524,7 @@
     <Content Include="Content\ckeditor\skins\moono-lisa\images\refresh.png" />
     <Content Include="Content\ckeditor\skins\moono-lisa\images\spinner.gif" />
     <Content Include="Content\ckeditor\styles.js" />
+    <Content Include="Content\ImageManager\ClickChonAnhDaiDien.jpg" />
     <Content Include="Content\css\site.min.css" />
     <Content Include="Content\ImageAvatar\default-avatar.png" />
     <Content Include="Content\ImageManager\3.jpg" />
@@ -902,6 +903,7 @@
     <Content Include="Views\QuanLyDanhMuc\_pChuyenMuc.cshtml" />
     <Content Include="Views\QuanLyBaiViet\CapNhat.cshtml" />
     <Content Include="Views\QuanLyBaiViet\_pDanhSachHinhAnh.cshtml" />
+    <Content Include="Views\QuanLyLyLichVienChuc\_pDienBienBoSungPhamViHDCM.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

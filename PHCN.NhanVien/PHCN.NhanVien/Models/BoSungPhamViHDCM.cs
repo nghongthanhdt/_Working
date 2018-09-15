@@ -15,9 +15,11 @@ namespace PHCN.NhanVien.Models
     public partial class BoSungPhamViHDCM
     {
         public int MaBoSungPhamViHDCM { get; set; }
+        public int MaLyLichVienChuc { get; set; }
         public string SoQuyetDinh { get; set; }
-        public Nullable<System.DateTime> NgayCap { get; set; }
+        public System.DateTime NgayCap { get; set; }
         public string NoiDungBoSung { get; set; }
-        public Nullable<bool> Xoa { get; set; }
+    
+        public virtual LyLichVienChuc LyLichVienChuc { get; set; }
     }
 }

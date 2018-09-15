@@ -33,6 +33,16 @@
     <Property Name="CapNhatLanCuoi" Type="datetime2" Precision="7" />
     <Property Name="MaNhanVienCapNhat" Type="int" />
   </EntityType>
+  <EntityType Name="BoSungPhamViHDCM">
+    <Key>
+      <PropertyRef Name="MaBoSungPhamViHDCM" />
+    </Key>
+    <Property Name="MaBoSungPhamViHDCM" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaLyLichVienChuc" Type="int" Nullable="false" />
+    <Property Name="SoQuyetDinh" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="NgayCap" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="NoiDungBoSung" Type="nvarchar" MaxLength="2000" Nullable="false" />
+  </EntityType>
   <EntityType Name="ChinhQuyen">
     <Key>
       <PropertyRef Name="MaChinhQuyen" />
@@ -534,6 +544,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_BaiVietWeb_HinhAnh">
+    <End Role="HinhAnh" Type="Self.HinhAnh" Multiplicity="0..1" />
+    <End Role="BaiVietWeb" Type="Self.BaiVietWeb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HinhAnh">
+        <PropertyRef Name="MaHinhAnh" />
+      </Principal>
+      <Dependent Role="BaiVietWeb">
+        <PropertyRef Name="MaHinhAnh" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_BaiVietWeb_NhanVien">
     <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="0..1" />
     <End Role="BaiVietWeb" Type="Self.BaiVietWeb" Multiplicity="*" />
@@ -543,6 +565,18 @@
       </Principal>
       <Dependent Role="BaiVietWeb">
         <PropertyRef Name="MaNhanVien" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BoSungPhamViHDCM_LyLichVienChuc">
+    <End Role="LyLichVienChuc" Type="Self.LyLichVienChuc" Multiplicity="1" />
+    <End Role="BoSungPhamViHDCM" Type="Self.BoSungPhamViHDCM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LyLichVienChuc">
+        <PropertyRef Name="MaLyLichVienChuc" />
+      </Principal>
+      <Dependent Role="BoSungPhamViHDCM">
+        <PropertyRef Name="MaLyLichVienChuc" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -753,6 +787,7 @@
   <EntityContainer Name="PHCNModelStoreContainer">
     <EntitySet Name="BaiViet" EntityType="Self.BaiViet" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BaiVietWeb" EntityType="Self.BaiVietWeb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BoSungPhamViHDCM" EntityType="Self.BoSungPhamViHDCM" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ChinhQuyen" EntityType="Self.ChinhQuyen" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ChucDanhNgheNghiep" EntityType="Self.ChucDanhNgheNghiep" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ChuyenMon" EntityType="Self.ChuyenMon" Schema="dbo" store:Type="Tables" />
@@ -814,9 +849,17 @@
       <End Role="ChuyenMuc" EntitySet="ChuyenMuc" />
       <End Role="BaiVietWeb" EntitySet="BaiVietWeb" />
     </AssociationSet>
+    <AssociationSet Name="FK_BaiVietWeb_HinhAnh" Association="Self.FK_BaiVietWeb_HinhAnh">
+      <End Role="HinhAnh" EntitySet="HinhAnh" />
+      <End Role="BaiVietWeb" EntitySet="BaiVietWeb" />
+    </AssociationSet>
     <AssociationSet Name="FK_BaiVietWeb_NhanVien" Association="Self.FK_BaiVietWeb_NhanVien">
       <End Role="NhanVien" EntitySet="NhanVien" />
       <End Role="BaiVietWeb" EntitySet="BaiVietWeb" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BoSungPhamViHDCM_LyLichVienChuc" Association="Self.FK_BoSungPhamViHDCM_LyLichVienChuc">
+      <End Role="LyLichVienChuc" EntitySet="LyLichVienChuc" />
+      <End Role="BoSungPhamViHDCM" EntitySet="BoSungPhamViHDCM" />
     </AssociationSet>
     <AssociationSet Name="FK_DienBienDaoTaoBoiDuong_HinhThucDaoTao" Association="Self.FK_DienBienDaoTaoBoiDuong_HinhThucDaoTao">
       <End Role="HinhThucDaoTao" EntitySet="HinhThucDaoTao" />

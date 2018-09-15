@@ -105,12 +105,12 @@ $(document).ready(function () {
 
 
     bindbtnThemBoSungPhamViHDCM();
-
+    loadDienBienBoSungPhamViHDCM();
 
     bindbtnLuu();
 
 
-
+    
     // end document ready
 
     
@@ -961,11 +961,144 @@ function bindbtnLuu() {
     });
 }
 
+function loadDienBienBoSungPhamViHDCM() {
+    var ajaxActionName = "_pDienBienBoSungPhamViHDCM";
+    var _pDienBienBoSungPhamViHDCM = $("#divDienBienBoSungPhamViHDCM").data("malylichvienchuc");
+    var param = {
+        id: _pDienBienBoSungPhamViHDCM
+    }
+    $.ajax({
+        url: _ajaxThisUrl + ajaxActionName,
+        dataType: "html",
+        data: param,
+        success: function (result) {
+            $("#divDienBienBoSungPhamViHDCM").html(result);
+            bindrowSuaDienBienBoSungPhamViHDCM();            
+            bindrowXoaDienBienBoSungPhamViHDCM();
+        }
+    });
+}
 function bindbtnThemBoSungPhamViHDCM() {
     $("#btnThemBoSungPhamViHDCM").unbind("click").click(function () {
+        $("#modalBoSungPhamViHDCM").attr("data-mabosungphamvihdcm", "0");
+        $("#modalBoSungPhamViHDCM_txtSoQuyetDinh").val("");
+        $("#modalBoSungPhamViHDCM_txtNgayCap").val("");
+        $("#modalBoSungPhamViHDCM_txtNoiDung").val("");
+        $("#modalBoSungPhamViHDCM_btnLuu").text("Thêm bổ sung");
+        $("#modalBoSungPhamViHDCM").modal("show");
+        bindmodalBoSungPhamViHDCM_btnLuu(0);
+    });
+}
+function bindrowSuaDienBienBoSungPhamViHDCM() {
+    $(".rowSuaDienBienBoSungPhamViHDCM").unbind("click").click(function () {
+        var mabosungphamvihdcm = $(this).data("mabosungphamvihdcm");
+        // gửi ajax lấy về diễn biến theo mã được chọn        
+        if (mabosungphamvihdcm > 0) {
+            var ajaxActionName = "GetDienBienBoSungPhamViHDCM";
+            $.ajax({
+                method: "POST",
+                url: _ajaxUrl + ajaxActionName,
+                dataType: "json",
+                data: {
+                    id: mabosungphamvihdcm
+                },
+                success: function (result) {
+                    _selectedBoSungPhamViHDCM = result;
+                    $("#modalBoSungPhamViHDCM_txtSoQuyetDinh").val(_selectedBoSungPhamViHDCM.SoQuyetDinh);
+                    $("#modalBoSungPhamViHDCM_txtNgayCap").val(_selectedBoSungPhamViHDCM.NgayCap);
+                    $("#modalBoSungPhamViHDCM_txtNoiDung").val(_selectedBoSungPhamViHDCM.NoiDungBoSung);
+                    $("#modalBoSungPhamViHDCM_btnLuu").attr("data-mabosungphamvihdcm", mabosungphamvihdcm);
+                    $("#modalBoSungPhamViHDCM_btnLuu").text("Lưu bổ sung");
+                    bindmodalBoSungPhamViHDCM_btnLuu(mabosungphamvihdcm);
+                }
+            });
+        } 
         $("#modalBoSungPhamViHDCM").modal("show");
     });
 }
+function bindrowXoaDienBienBoSungPhamViHDCM() {
+    $(".rowXoaDienBienBoSungPhamViHDCM").unbind("click").click(function () {
+        if (confirm("Bạn thật sự muốn xóa ?")) {
+            var mabosungphamvihdcm = $(this).data("mabosungphamvihdcm");
+            var param = {
+                id: mabosungphamvihdcm
+            }
+            $.ajax({
+                method: "POST",
+                url: _ajaxUrl + "XoaDienBienBoSungPhamViHDCM",
+                data: param,
+                success: function (data) {
+                    if (data == "ok") {
+                        loadDienBienBoSungPhamViHDCM();
+                    }
+                }
+            });
+        }
+    });
+}
+function bindmodalBoSungPhamViHDCM_btnLuu(idDienBien) {
+    $("#modalBoSungPhamViHDCM_btnLuu").unbind("click").click(function () {
+        var mabosungphamvihdcm = idDienBien;
+        var _MaLyLichVienChuc = $("#divDienBienBoSungPhamViHDCM").data("malylichvienchuc");         
+        var _SoQuyetDinh = $("#modalBoSungPhamViHDCM_txtSoQuyetDinh").val();
+        var _NgayCap = $("#modalBoSungPhamViHDCM_txtNgayCap").val();
+        var _NoiDungBoSung = $("#modalBoSungPhamViHDCM_txtNoiDung").val();
+
+
+        if (_SoQuyetDinh == "") {
+            alert("Chưa nhập \"Số quyết định\"");
+            return;
+        }
+
+        if (_NgayCap == "") {
+            alert("Chưa nhập \"Ngày cấp\"");
+            return;
+        }
+
+
+        var pattern = /^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/;
+        if (!pattern.test(_NgayCap)) {
+            //alert(_TuThangNam);
+            alert("\"Ngày cấp\" chưa đúng định dạng");
+            return;
+        }        
+        var ngayCapSplit = _NgayCap.split("/");
+        if (!isValidDate(ngayCapSplit[0], ngayCapSplit[1], ngayCapSplit[2])) {
+            alert("\"Ngày cấp\" không có thật, vui lòng kiểm tra lại");
+            return;
+        }
+        if (_NoiDungBoSung == "") {
+            alert("Chưa nhập nội dung bổ sung");
+            return;
+        }
+        
+
+
+        var BoSungPhamViHDCM = {
+            MaBoSungPhamViHDCM: mabosungphamvihdcm,
+            MaLyLichVienChuc: _MaLyLichVienChuc,
+            SoQuyetDinh: _SoQuyetDinh,
+            NgayCap: _NgayCap,
+            NoiDungBoSung: _NoiDungBoSung
+
+        }
+        $.ajax({
+            method: "POST",
+            url: _ajaxUrl + "LuuDienBienBoSungPhamViHDCM",
+            data: BoSungPhamViHDCM,
+            success: function (data) {
+                if (data == "ok") {
+                    
+                    $("#modalBoSungPhamViHDCM").modal("hide");
+                    loadDienBienBoSungPhamViHDCM();
+                }
+            }
+        });
+
+    });
+}
+
+
 
 function kiemTraNgaySinh() {
     var ngaySinh = $("#txtNgaySinh_Ngay").val();
