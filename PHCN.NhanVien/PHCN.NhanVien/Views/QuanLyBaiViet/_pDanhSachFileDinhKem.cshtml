@@ -1,0 +1,41 @@
+﻿@model List<PHCN.NhanVien.Models.FileDinhKem>
+<ul>
+    @foreach (var item in Model)
+    {
+        <li style="margin-top:5px; margin-bottom:5px; padding-right:10px;">
+            <a href="javascript:void(0);" class="linkFileDinhKem" data-tenfile="@item.TenFile" data-tenfilefull="@item.TenFileFull" data-mafile="@item.MaFile" >@item.TenFile</a>
+        </li>
+    }
+
+    
+</ul>
+
+<div class="modal" id="modalFileDinhKem" data-mafile="0" data-mabaiviet="0">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" style="font-weight:normal;"><i class="glyphicon glyphicon-tags"></i> &nbsp; Đính kèm</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <img src="~/Content/img/file-icon.png" style="width:120px;" />
+                    </div>
+                    <div class="col-xs-8">                        
+                        <h5 id="lblTenFile">Tên file...</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        
+                        <a class="btn btn-success btn-block" id="modalFileDinhKem_btnTaiFile" href="">Tải file xuống máy tính</a>
+                        <button class="btn btn-danger btn-block" id="modalFileDinhKem_btnXoaFile" data-mafile="0">Xóa file</button>
+                        <button class="btn btn-default btn-block" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -30,19 +30,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="FileDinhKem">
-      <EntityTypeMapping TypeName="PHCNModel.FileDinhKem">
-        <MappingFragment StoreEntitySet="FileDinhKem">
-          <ScalarProperty Name="Xoa" ColumnName="Xoa" />
-          <ScalarProperty Name="NgayTaiLen" ColumnName="NgayTaiLen" />
-          <ScalarProperty Name="PhanMoRong" ColumnName="PhanMoRong" />
-          <ScalarProperty Name="TenFileFull" ColumnName="TenFileFull" />
-          <ScalarProperty Name="TenFile" ColumnName="TenFile" />
-          <ScalarProperty Name="MaBaiViet" ColumnName="MaBaiViet" />
-          <ScalarProperty Name="MaFile" ColumnName="MaFile" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="GuiNhan">
       <EntityTypeMapping TypeName="PHCNModel.GuiNhan">
         <MappingFragment StoreEntitySet="GuiNhan">
@@ -84,21 +71,6 @@
         <MappingFragment StoreEntitySet="Quyen">
           <ScalarProperty Name="TenQuyen" ColumnName="TenQuyen" />
           <ScalarProperty Name="MaQuyen" ColumnName="MaQuyen" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="BaiViet">
-      <EntityTypeMapping TypeName="PHCNModel.BaiViet">
-        <MappingFragment StoreEntitySet="BaiViet">
-          <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
-          <ScalarProperty Name="Ngay" ColumnName="Ngay" />
-          <ScalarProperty Name="NguoiXoa" ColumnName="NguoiXoa" />
-          <ScalarProperty Name="NgayXoa" ColumnName="NgayXoa" />
-          <ScalarProperty Name="Xoa" ColumnName="Xoa" />
-          <ScalarProperty Name="LoaiBaiViet" ColumnName="LoaiBaiViet" />
-          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
-          <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
-          <ScalarProperty Name="MaBaiViet" ColumnName="MaBaiViet" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -250,22 +222,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="HinhAnh">
-      <EntityTypeMapping TypeName="PHCNModel.HinhAnh">
-        <MappingFragment StoreEntitySet="HinhAnh">
-          <ScalarProperty Name="Xoa" ColumnName="Xoa" />
-          <ScalarProperty Name="MaBaiViet" ColumnName="MaBaiViet" />
-          <ScalarProperty Name="NgayTaiLen" ColumnName="NgayTaiLen" />
-          <ScalarProperty Name="PhanMoRong" ColumnName="PhanMoRong" />
-          <ScalarProperty Name="DuongDan" ColumnName="DuongDan" />
-          <ScalarProperty Name="TenFileDayDu" ColumnName="TenFileDayDu" />
-          <ScalarProperty Name="TenFile" ColumnName="TenFile" />
-          <ScalarProperty Name="LoaiHinhAnh" ColumnName="LoaiHinhAnh" />
-          <ScalarProperty Name="MaLyLichVienChuc" ColumnName="MaLyLichVienChuc" />
-          <ScalarProperty Name="MaHinhAnh" ColumnName="MaHinhAnh" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="NhanVien">
       <EntityTypeMapping TypeName="PHCNModel.NhanVien">
         <MappingFragment StoreEntitySet="NhanVien">
@@ -364,6 +320,92 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="NgheNghiep">
+      <EntityTypeMapping TypeName="PHCNModel.NgheNghiep">
+        <MappingFragment StoreEntitySet="NgheNghiep">
+          <ScalarProperty Name="Xoa" ColumnName="Xoa" />
+          <ScalarProperty Name="STT" ColumnName="STT" />
+          <ScalarProperty Name="TenNgheNghiep" ColumnName="TenNgheNghiep" />
+          <ScalarProperty Name="MaNgheNghiep" ColumnName="MaNgheNghiep" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BoSungPhamViHDCM">
+      <EntityTypeMapping TypeName="PHCNModel.BoSungPhamViHDCM">
+        <MappingFragment StoreEntitySet="BoSungPhamViHDCM">
+          <ScalarProperty Name="NoiDungBoSung" ColumnName="NoiDungBoSung" />
+          <ScalarProperty Name="NgayCap" ColumnName="NgayCap" />
+          <ScalarProperty Name="SoQuyetDinh" ColumnName="SoQuyetDinh" />
+          <ScalarProperty Name="MaLyLichVienChuc" ColumnName="MaLyLichVienChuc" />
+          <ScalarProperty Name="MaBoSungPhamViHDCM" ColumnName="MaBoSungPhamViHDCM" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BaiViet">
+      <EntityTypeMapping TypeName="PHCNModel.BaiViet">
+        <MappingFragment StoreEntitySet="BaiViet">
+          <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
+          <ScalarProperty Name="Ngay" ColumnName="Ngay" />
+          <ScalarProperty Name="NguoiXoa" ColumnName="NguoiXoa" />
+          <ScalarProperty Name="NgayXoa" ColumnName="NgayXoa" />
+          <ScalarProperty Name="Xoa" ColumnName="Xoa" />
+          <ScalarProperty Name="LoaiBaiViet" ColumnName="LoaiBaiViet" />
+          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+          <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
+          <ScalarProperty Name="MaBaiViet" ColumnName="MaBaiViet" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FileDinhKem">
+      <EntityTypeMapping TypeName="PHCNModel.FileDinhKem">
+        <MappingFragment StoreEntitySet="FileDinhKem">
+          <ScalarProperty Name="Xoa" ColumnName="Xoa" />
+          <ScalarProperty Name="NgayTaiLen" ColumnName="NgayTaiLen" />
+          <ScalarProperty Name="PhanMoRong" ColumnName="PhanMoRong" />
+          <ScalarProperty Name="TenFileFull" ColumnName="TenFileFull" />
+          <ScalarProperty Name="TenFile" ColumnName="TenFile" />
+          <ScalarProperty Name="LoaiFileDinhKem" ColumnName="LoaiFileDinhKem" />
+          <ScalarProperty Name="MaBaiVietWeb" ColumnName="MaBaiVietWeb" />
+          <ScalarProperty Name="MaBaiViet" ColumnName="MaBaiViet" />
+          <ScalarProperty Name="MaFile" ColumnName="MaFile" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BaiVietWeb">
+      <EntityTypeMapping TypeName="PHCNModel.BaiVietWeb">
+        <MappingFragment StoreEntitySet="BaiVietWeb">
+          <ScalarProperty Name="CapNhatLanCuoi" ColumnName="CapNhatLanCuoi" />
+          <ScalarProperty Name="TacGia" ColumnName="TacGia" />
+          <ScalarProperty Name="Xoa" ColumnName="Xoa" />
+          <ScalarProperty Name="HienThiTrenTrangChu" ColumnName="HienThiTrenTrangChu" />
+          <ScalarProperty Name="Ngay" ColumnName="Ngay" />
+          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+          <ScalarProperty Name="TomTat" ColumnName="TomTat" />
+          <ScalarProperty Name="TieuDeRewrite" ColumnName="TieuDeRewrite" />
+          <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
+          <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
+          <ScalarProperty Name="MaChuyenMuc" ColumnName="MaChuyenMuc" />
+          <ScalarProperty Name="MaBaiViet" ColumnName="MaBaiViet" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HinhAnh">
+      <EntityTypeMapping TypeName="PHCNModel.HinhAnh">
+        <MappingFragment StoreEntitySet="HinhAnh">
+          <ScalarProperty Name="DaiDienBaiVietWeb" ColumnName="DaiDienBaiVietWeb" />
+          <ScalarProperty Name="Xoa" ColumnName="Xoa" />
+          <ScalarProperty Name="TenFile" ColumnName="TenFile" />
+          <ScalarProperty Name="NgayTaiLen" ColumnName="NgayTaiLen" />
+          <ScalarProperty Name="PhanMoRong" ColumnName="PhanMoRong" />
+          <ScalarProperty Name="DuongDan" ColumnName="DuongDan" />
+          <ScalarProperty Name="TenFileDayDu" ColumnName="TenFileDayDu" />
+          <ScalarProperty Name="LoaiHinhAnh" ColumnName="LoaiHinhAnh" />
+          <ScalarProperty Name="MaBaiViet" ColumnName="MaBaiViet" />
+          <ScalarProperty Name="MaLyLichVienChuc" ColumnName="MaLyLichVienChuc" />
+          <ScalarProperty Name="MaHinhAnh" ColumnName="MaHinhAnh" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="LyLichVienChuc">
       <EntityTypeMapping TypeName="PHCNModel.LyLichVienChuc">
         <MappingFragment StoreEntitySet="LyLichVienChuc">
@@ -451,49 +493,7 @@
           <ScalarProperty Name="MaDonViThamQuyenQuanLy" ColumnName="MaDonViThamQuyenQuanLy" />
           <ScalarProperty Name="MaDonVi" ColumnName="MaDonVi" />
           <ScalarProperty Name="MaLyLichVienChuc" ColumnName="MaLyLichVienChuc" />
-          <ScalarProperty Name="MaHinhAnh" ColumnName="MaHinhAnh" />
           <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="NgheNghiep">
-      <EntityTypeMapping TypeName="PHCNModel.NgheNghiep">
-        <MappingFragment StoreEntitySet="NgheNghiep">
-          <ScalarProperty Name="Xoa" ColumnName="Xoa" />
-          <ScalarProperty Name="STT" ColumnName="STT" />
-          <ScalarProperty Name="TenNgheNghiep" ColumnName="TenNgheNghiep" />
-          <ScalarProperty Name="MaNgheNghiep" ColumnName="MaNgheNghiep" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="BaiVietWeb">
-      <EntityTypeMapping TypeName="PHCNModel.BaiVietWeb">
-        <MappingFragment StoreEntitySet="BaiVietWeb">
-          <ScalarProperty Name="MaNhanVienCapNhat" ColumnName="MaNhanVienCapNhat" />
-          <ScalarProperty Name="CapNhatLanCuoi" ColumnName="CapNhatLanCuoi" />
-          <ScalarProperty Name="TacGia" ColumnName="TacGia" />
-          <ScalarProperty Name="Xoa" ColumnName="Xoa" />
-          <ScalarProperty Name="HienThiTrenTrangChu" ColumnName="HienThiTrenTrangChu" />
-          <ScalarProperty Name="Ngay" ColumnName="Ngay" />
-          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
-          <ScalarProperty Name="TomTat" ColumnName="TomTat" />
-          <ScalarProperty Name="TieuDeRewrite" ColumnName="TieuDeRewrite" />
-          <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
-          <ScalarProperty Name="MaHinhAnh" ColumnName="MaHinhAnh" />
-          <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
-          <ScalarProperty Name="MaChuyenMuc" ColumnName="MaChuyenMuc" />
-          <ScalarProperty Name="MaBaiViet" ColumnName="MaBaiViet" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="BoSungPhamViHDCM">
-      <EntityTypeMapping TypeName="PHCNModel.BoSungPhamViHDCM">
-        <MappingFragment StoreEntitySet="BoSungPhamViHDCM">
-          <ScalarProperty Name="NoiDungBoSung" ColumnName="NoiDungBoSung" />
-          <ScalarProperty Name="NgayCap" ColumnName="NgayCap" />
-          <ScalarProperty Name="SoQuyetDinh" ColumnName="SoQuyetDinh" />
-          <ScalarProperty Name="MaLyLichVienChuc" ColumnName="MaLyLichVienChuc" />
-          <ScalarProperty Name="MaBoSungPhamViHDCM" ColumnName="MaBoSungPhamViHDCM" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

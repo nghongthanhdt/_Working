@@ -15,7 +15,9 @@ namespace PHCN.NhanVien.Models
     public partial class FileDinhKem
     {
         public int MaFile { get; set; }
-        public int MaBaiViet { get; set; }
+        public Nullable<int> MaBaiViet { get; set; }
+        public Nullable<int> MaBaiVietWeb { get; set; }
+        public string LoaiFileDinhKem { get; set; }
         public string TenFile { get; set; }
         public string TenFileFull { get; set; }
         public string PhanMoRong { get; set; }
@@ -23,5 +25,6 @@ namespace PHCN.NhanVien.Models
         public bool Xoa { get; set; }
     
         public virtual BaiViet BaiViet { get; set; }
+        public virtual BaiVietWeb BaiVietWeb { get; set; }
     }
 }

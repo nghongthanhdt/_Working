@@ -344,19 +344,19 @@ namespace PHCN.NhanVien.Controllers
         }
 
         // cập nhật hình ảnh đại diện của bài viết
-        public string LuuHinhAnhDaiDienChoBaiViet(int MaBaiViet, int MaHinhAnh)
+        public JsonResult LuuHinhAnhDaiDienChoBaiViet(int MaBaiViet, int MaHinhAnh)
         {
-            try
-            {
-                BaiVietWeb bv = db.BaiVietWeb.Find(MaBaiViet);
-                bv.MaHinhAnh = MaHinhAnh;
-                db.SaveChanges();
-                return MaHinhAnh.ToString();
-            } catch (Exception ex)
-            {
-                return ex.Message;
-            }
             
+            var listHinhAnh = db.HinhAnh.Where(x => x.LoaiHinhAnh == "baivietweb" && x.Xoa != true && x.MaBaiViet == MaBaiViet).ToList();
+            foreach (var item in listHinhAnh)
+            {
+                item.DaiDienBaiVietWeb = false;
+            }
+            db.SaveChanges();
+            var hinhanh = db.HinhAnh.Find(MaHinhAnh);
+            hinhanh.DaiDienBaiVietWeb = true;
+            db.SaveChanges();
+            return Json(hinhanh);
         }
         public string GetDuongDanHinhAnh(int MaHinhAnh)
         {
@@ -369,6 +369,66 @@ namespace PHCN.NhanVien.Controllers
             {
                 return "";
             }
+        }
+        public string XoaHinhAnh(int MaHinhAnh)
+        {
+            try
+            {
+                var hinhanh = db.HinhAnh.Find(MaHinhAnh);
+                hinhanh.Xoa = true;
+                db.SaveChanges();
+                return "ok";
+            } catch (Exception ex)
+            {
+                return ex.Message;
+            }
+            
+        }
+        [HttpPost]
+        public string XoaFileDinhKemWeb(int MaFile)
+        {
+            try
+            {
+                var file = db.FileDinhKem.Find(MaFile);
+                file.Xoa = true;
+                db.SaveChanges();
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+        [HttpPost]
+        public string XoaAnhDaiDien(int MaBaiViet)
+        {
+            try
+            {
+                var listHinhAnh = db.HinhAnh.Where(x => x.LoaiHinhAnh == "baivietweb" && x.Xoa != true && x.MaBaiViet == MaBaiViet).ToList();
+                foreach (var item in listHinhAnh)
+                {
+                    item.DaiDienBaiVietWeb = false;
+                }                
+                db.SaveChanges();
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+        [ValidateInput(false)]
+        public string LuuBaiVietWeb(BaiVietWeb baiviet)
+        {
+
+            if (baiviet.MaBaiViet > 0)
+            {
+                //update bài viết
+                baiviet.CapNhatLanCuoi = DateTime.Now;                
+                db.Entry(baiviet).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+            return "ok";
         }
     }
 }

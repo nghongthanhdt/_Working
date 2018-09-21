@@ -28,12 +28,10 @@ namespace PHCN.NhanVien.Models
         public virtual DbSet<KhoaPhong> KhoaPhong { get; set; }
         public virtual DbSet<LoaiBaiViet> LoaiBaiViet { get; set; }
         public virtual DbSet<Loi> Loi { get; set; }
-        public virtual DbSet<FileDinhKem> FileDinhKem { get; set; }
         public virtual DbSet<GuiNhan> GuiNhan { get; set; }
         public virtual DbSet<ThamSoHeThong> ThamSoHeThong { get; set; }
         public virtual DbSet<PhanQuyen> PhanQuyen { get; set; }
         public virtual DbSet<Quyen> Quyen { get; set; }
-        public virtual DbSet<BaiViet> BaiViet { get; set; }
         public virtual DbSet<ChucDanhNgheNghiep> ChucDanhNgheNghiep { get; set; }
         public virtual DbSet<ChuyenMuc> ChuyenMuc { get; set; }
         public virtual DbSet<DanToc> DanToc { get; set; }
@@ -47,7 +45,6 @@ namespace PHCN.NhanVien.Models
         public virtual DbSet<DienBienDaoTaoBoiDuong> DienBienDaoTaoBoiDuong { get; set; }
         public virtual DbSet<HinhThucDaoTao> HinhThucDaoTao { get; set; }
         public virtual DbSet<DienBienQuaTrinhCongTac> DienBienQuaTrinhCongTac { get; set; }
-        public virtual DbSet<HinhAnh> HinhAnh { get; set; }
         public virtual DbSet<NhanVien> NhanVien { get; set; }
         public virtual DbSet<ChuyenMon> ChuyenMon { get; set; }
         public virtual DbSet<HocHam> HocHam { get; set; }
@@ -57,9 +54,12 @@ namespace PHCN.NhanVien.Models
         public virtual DbSet<DoanThe> DoanThe { get; set; }
         public virtual DbSet<MaCCHN> MaCCHN { get; set; }
         public virtual DbSet<PhamViHoatDongChuyenMon> PhamViHoatDongChuyenMon { get; set; }
-        public virtual DbSet<LyLichVienChuc> LyLichVienChuc { get; set; }
         public virtual DbSet<NgheNghiep> NgheNghiep { get; set; }
-        public virtual DbSet<BaiVietWeb> BaiVietWeb { get; set; }
         public virtual DbSet<BoSungPhamViHDCM> BoSungPhamViHDCM { get; set; }
+        public virtual DbSet<BaiViet> BaiViet { get; set; }
+        public virtual DbSet<FileDinhKem> FileDinhKem { get; set; }
+        public virtual DbSet<BaiVietWeb> BaiVietWeb { get; set; }
+        public virtual DbSet<HinhAnh> HinhAnh { get; set; }
+        public virtual DbSet<LyLichVienChuc> LyLichVienChuc { get; set; }
     }
 }

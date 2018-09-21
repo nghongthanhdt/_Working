@@ -21,7 +21,6 @@
     <Property Name="MaBaiViet" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="MaChuyenMuc" Type="int" />
     <Property Name="MaNhanVien" Type="int" />
-    <Property Name="MaHinhAnh" Type="int" />
     <Property Name="TieuDe" Type="nvarchar" MaxLength="500" />
     <Property Name="TieuDeRewrite" Type="nvarchar" MaxLength="500" />
     <Property Name="TomTat" Type="nvarchar" MaxLength="2000" />
@@ -31,7 +30,6 @@
     <Property Name="Xoa" Type="bit" />
     <Property Name="TacGia" Type="nvarchar" MaxLength="200" />
     <Property Name="CapNhatLanCuoi" Type="datetime2" Precision="7" />
-    <Property Name="MaNhanVienCapNhat" Type="int" />
   </EntityType>
   <EntityType Name="BoSungPhamViHDCM">
     <Key>
@@ -165,7 +163,9 @@
       <PropertyRef Name="MaFile" />
     </Key>
     <Property Name="MaFile" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="MaBaiViet" Type="int" Nullable="false" />
+    <Property Name="MaBaiViet" Type="int" />
+    <Property Name="MaBaiVietWeb" Type="int" />
+    <Property Name="LoaiFileDinhKem" Type="nvarchar" MaxLength="50" />
     <Property Name="TenFile" Type="nvarchar" MaxLength="250" Nullable="false" />
     <Property Name="TenFileFull" Type="nvarchar" MaxLength="300" Nullable="false" />
     <Property Name="PhanMoRong" Type="nvarchar" MaxLength="10" />
@@ -202,6 +202,7 @@
     <Property Name="NgayTaiLen" Type="datetime2" Precision="7" />
     <Property Name="TenFile" Type="nvarchar" MaxLength="300" Nullable="false" />
     <Property Name="Xoa" Type="bit" />
+    <Property Name="DaiDienBaiVietWeb" Type="bit" />
   </EntityType>
   <EntityType Name="HinhThucDaoTao">
     <Key>
@@ -279,7 +280,6 @@
       <PropertyRef Name="MaLyLichVienChuc" />
     </Key>
     <Property Name="MaNhanVien" Type="int" />
-    <Property Name="MaHinhAnh" Type="int" />
     <Property Name="MaLyLichVienChuc" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="MaDonVi" Type="int" />
     <Property Name="MaDonViThamQuyenQuanLy" Type="int" />
@@ -544,18 +544,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_BaiVietWeb_HinhAnh">
-    <End Role="HinhAnh" Type="Self.HinhAnh" Multiplicity="0..1" />
-    <End Role="BaiVietWeb" Type="Self.BaiVietWeb" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="HinhAnh">
-        <PropertyRef Name="MaHinhAnh" />
-      </Principal>
-      <Dependent Role="BaiVietWeb">
-        <PropertyRef Name="MaHinhAnh" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_BaiVietWeb_NhanVien">
     <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="0..1" />
     <End Role="BaiVietWeb" Type="Self.BaiVietWeb" Multiplicity="*" />
@@ -605,7 +593,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_FileDinhKem_BaiViet">
-    <End Role="BaiViet" Type="Self.BaiViet" Multiplicity="1" />
+    <End Role="BaiViet" Type="Self.BaiViet" Multiplicity="0..1" />
     <End Role="FileDinhKem" Type="Self.FileDinhKem" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="BaiViet">
@@ -613,6 +601,18 @@
       </Principal>
       <Dependent Role="FileDinhKem">
         <PropertyRef Name="MaBaiViet" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FileDinhKem_BaiVietWeb">
+    <End Role="BaiVietWeb" Type="Self.BaiVietWeb" Multiplicity="0..1" />
+    <End Role="FileDinhKem" Type="Self.FileDinhKem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BaiVietWeb">
+        <PropertyRef Name="MaBaiViet" />
+      </Principal>
+      <Dependent Role="FileDinhKem">
+        <PropertyRef Name="MaBaiVietWeb" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -849,10 +849,6 @@
       <End Role="ChuyenMuc" EntitySet="ChuyenMuc" />
       <End Role="BaiVietWeb" EntitySet="BaiVietWeb" />
     </AssociationSet>
-    <AssociationSet Name="FK_BaiVietWeb_HinhAnh" Association="Self.FK_BaiVietWeb_HinhAnh">
-      <End Role="HinhAnh" EntitySet="HinhAnh" />
-      <End Role="BaiVietWeb" EntitySet="BaiVietWeb" />
-    </AssociationSet>
     <AssociationSet Name="FK_BaiVietWeb_NhanVien" Association="Self.FK_BaiVietWeb_NhanVien">
       <End Role="NhanVien" EntitySet="NhanVien" />
       <End Role="BaiVietWeb" EntitySet="BaiVietWeb" />
@@ -871,6 +867,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_FileDinhKem_BaiViet" Association="Self.FK_FileDinhKem_BaiViet">
       <End Role="BaiViet" EntitySet="BaiViet" />
+      <End Role="FileDinhKem" EntitySet="FileDinhKem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FileDinhKem_BaiVietWeb" Association="Self.FK_FileDinhKem_BaiVietWeb">
+      <End Role="BaiVietWeb" EntitySet="BaiVietWeb" />
       <End Role="FileDinhKem" EntitySet="FileDinhKem" />
     </AssociationSet>
     <AssociationSet Name="FK_GuiNhan_BaiViet" Association="Self.FK_GuiNhan_BaiViet">

@@ -17,14 +17,13 @@ namespace PHCN.NhanVien.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public LyLichVienChuc()
         {
+            this.BoSungPhamViHDCM = new HashSet<BoSungPhamViHDCM>();
             this.DienBienDaoTaoBoiDuong = new HashSet<DienBienDaoTaoBoiDuong>();
             this.DienBienQuaTrinhCongTac = new HashSet<DienBienQuaTrinhCongTac>();
             this.DienBienQuaTrinhLuong = new HashSet<DienBienQuaTrinhLuong>();
-            this.BoSungPhamViHDCM = new HashSet<BoSungPhamViHDCM>();
         }
     
         public Nullable<int> MaNhanVien { get; set; }
-        public Nullable<int> MaHinhAnh { get; set; }
         public int MaLyLichVienChuc { get; set; }
         public Nullable<int> MaDonVi { get; set; }
         public Nullable<int> MaDonViThamQuyenQuanLy { get; set; }
@@ -110,6 +109,8 @@ namespace PHCN.NhanVien.Models
         public Nullable<bool> Xoa { get; set; }
         public string GhiChu { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BoSungPhamViHDCM> BoSungPhamViHDCM { get; set; }
         public virtual ChinhQuyen ChinhQuyen { get; set; }
         public virtual ChuyenMon ChuyenMon { get; set; }
         public virtual Dang Dang { get; set; }
@@ -125,7 +126,5 @@ namespace PHCN.NhanVien.Models
         public virtual HocVi HocVi { get; set; }
         public virtual LoaiHopDong LoaiHopDong { get; set; }
         public virtual NhanVien NhanVien { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BoSungPhamViHDCM> BoSungPhamViHDCM { get; set; }
     }
 }

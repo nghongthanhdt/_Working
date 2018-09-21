@@ -149,6 +149,38 @@ namespace PHCN.NhanVien.Controllers
                 return Content("Lỗi hệ thống: " + ex.Message);
             }
         }
+        public ActionResult UploadFileDinhKemWeb(int id, HttpPostedFileBase file)
+        {
+            // id là mã bài viết web
+            try
+            {
+                //var file = Request.Files[0];
+                if (file != null && file.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(file.FileName);
+                    var fileExtension = Path.GetExtension(file.FileName).ToLower();
+                    var serverDateTime = CodeController.GetServerDateTime();
+                    var fileFullName = fileName.Replace(fileExtension, "") + "-" + serverDateTime.ToString("yyyyMMddhhmmss") + fileExtension;
+                    var path = Path.Combine(Server.MapPath("~/Content/FileManager/"), fileFullName);
+                    file.SaveAs(path);
+                    FileDinhKem fileDinhKem = new FileDinhKem();
+                    fileDinhKem.MaBaiVietWeb = id;
+                    fileDinhKem.TenFile = fileName;
+                    fileDinhKem.TenFileFull = fileFullName;
+                    fileDinhKem.PhanMoRong = fileExtension;
+                    fileDinhKem.NgayTaiLen = CodeController.GetServerDateTime();
+                    fileDinhKem.LoaiFileDinhKem = "filedinhkemweb";
+                    db.FileDinhKem.Add(fileDinhKem);
+                    db.SaveChanges();
+                    return Content("ok");
+                }
+                else return Content("File không hợp lệ !");
+            }
+            catch (Exception ex)
+            {
+                return Content("Lỗi hệ thống: " + ex.Message);
+            }
+        }
 
         [HttpPost] 
         public ActionResult XoaFileDinhKem(int id)

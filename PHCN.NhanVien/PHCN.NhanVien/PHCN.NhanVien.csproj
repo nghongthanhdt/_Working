@@ -524,6 +524,8 @@
     <Content Include="Content\ckeditor\skins\moono-lisa\images\refresh.png" />
     <Content Include="Content\ckeditor\skins\moono-lisa\images\spinner.gif" />
     <Content Include="Content\ckeditor\styles.js" />
+    <Content Include="Content\img\content-loading.gif" />
+    <Content Include="Content\img\file-icon.png" />
     <Content Include="Content\ImageManager\ClickChonAnhDaiDien.jpg" />
     <Content Include="Content\css\site.min.css" />
     <Content Include="Content\ImageAvatar\default-avatar.png" />
@@ -648,6 +650,7 @@
     <None Include="scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="scripts\app_scripts\CapNhatBaiVietWeb.js" />
     <Content Include="scripts\app_scripts\CapNhatLyLichVienChuc.js" />
+    <Content Include="scripts\app_scripts\DanhSachBaiViet.js" />
     <Content Include="scripts\app_scripts\QuanLyDanhMuc.js" />
     <Content Include="scripts\app_scripts\QuanLyNhanVien.js" />
     <Content Include="scripts\app_scripts\SoanThu.js" />
@@ -904,6 +907,7 @@
     <Content Include="Views\QuanLyBaiViet\CapNhat.cshtml" />
     <Content Include="Views\QuanLyBaiViet\_pDanhSachHinhAnh.cshtml" />
     <Content Include="Views\QuanLyLyLichVienChuc\_pDienBienBoSungPhamViHDCM.cshtml" />
+    <Content Include="Views\QuanLyBaiViet\_pDanhSachFileDinhKem.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

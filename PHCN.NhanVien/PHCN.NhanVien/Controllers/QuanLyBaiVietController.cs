@@ -44,7 +44,7 @@ namespace PHCN.NhanVien.Controllers
                 bv.Ngay = CodeController.GetServerDateTime();
                 bv.Xoa = true;
                 bv.CapNhatLanCuoi = CodeController.GetServerDateTime();
-                bv.MaNhanVienCapNhat = 1;
+                
                 //bv.MaNhanVienCapNhat = ViewBag.MaNhanVienDangNhap;
                 db.BaiVietWeb.Add(bv);
                 db.SaveChanges();
@@ -81,6 +81,25 @@ namespace PHCN.NhanVien.Controllers
                     return Content("");
                 }                
             }            
+        }
+        public ActionResult _pDanhSachFileDinhKem(int MaBaiViet)
+        {
+            if (MaBaiViet <= 0)
+            {
+                return Content("");
+            }
+            else
+            {
+                var listFileDinhKem = db.FileDinhKem.Where(x => x.MaBaiVietWeb == MaBaiViet && x.Xoa != true).OrderBy(x => x.MaFile).ToList();
+                if (listFileDinhKem.Any())
+                {
+                    return View(listFileDinhKem);
+                }
+                else
+                {
+                    return Content("");
+                }
+            }
         }
     }
 }

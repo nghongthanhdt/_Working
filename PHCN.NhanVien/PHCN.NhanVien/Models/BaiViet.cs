@@ -32,10 +32,10 @@ namespace PHCN.NhanVien.Models
         public int MaNhanVien { get; set; }
     
         public virtual LoaiBaiViet LoaiBaiViet1 { get; set; }
+        public virtual NhanVien NhanVien { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FileDinhKem> FileDinhKem { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GuiNhan> GuiNhan { get; set; }
-        public virtual NhanVien NhanVien { get; set; }
     }
 }

@@ -43,7 +43,7 @@
 <div class="form-group" style="display:none;">
     <form id="formFileDinhKem" action="@Url.Action("UploadFile", "Upload")" method="post" enctype="multipart/form-data">
         <label>Thêm file</label>
-        <input id="fileuploadDinhKem" type="file" name="file" accept=".xls,.xlsx,.doc,.docx,.pdf,.zip,.rar,.jpg,.jpeg,.png,.gif">
+        <input id="fileuploadDinhKem" type="file" name="file" accept=".xls,.xlsx,.ppt,.pptx,.doc,.docx,.pdf,.zip,.rar,.jpg,.jpeg,.png,.gif">
         <input type="hidden" value="@idBaiViet" name="id" />        
     </form>
 </div>
@@ -61,7 +61,7 @@
         $("input#fileuploadHinhAnh").trigger('click'); 
     }); 
     $("input#fileuploadDinhKem").on('change', function(){
-        var allowedExtensions = /(\.xls|\.xlsx|\.doc|\.docx|\.pdf|\.zip|\.rar|\.jpg|\.jpeg|\.png|\.gif)$/i;
+        var allowedExtensions = /(\.xls|\.xlsx|\.ppt|\.pptx|\.doc|\.docx|\.pdf|\.zip|\.rar|\.jpg|\.jpeg|\.png|\.gif)$/i;
         if(!allowedExtensions.exec(this.value)){
             alert('Chỉ cho phép đính kèm các file xls,xlsx,doc,docx,pdf,zip,rar,jpg,jpeg,png,gif');
             this.value = "";

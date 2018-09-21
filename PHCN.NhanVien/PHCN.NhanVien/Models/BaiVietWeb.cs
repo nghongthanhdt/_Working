@@ -14,10 +14,15 @@ namespace PHCN.NhanVien.Models
     
     public partial class BaiVietWeb
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public BaiVietWeb()
+        {
+            this.FileDinhKem = new HashSet<FileDinhKem>();
+        }
+    
         public int MaBaiViet { get; set; }
         public Nullable<int> MaChuyenMuc { get; set; }
         public Nullable<int> MaNhanVien { get; set; }
-        public Nullable<int> MaHinhAnh { get; set; }
         public string TieuDe { get; set; }
         public string TieuDeRewrite { get; set; }
         public string TomTat { get; set; }
@@ -27,10 +32,10 @@ namespace PHCN.NhanVien.Models
         public Nullable<bool> Xoa { get; set; }
         public string TacGia { get; set; }
         public Nullable<System.DateTime> CapNhatLanCuoi { get; set; }
-        public Nullable<int> MaNhanVienCapNhat { get; set; }
     
         public virtual ChuyenMuc ChuyenMuc { get; set; }
         public virtual NhanVien NhanVien { get; set; }
-        public virtual HinhAnh HinhAnh { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FileDinhKem> FileDinhKem { get; set; }
     }
 }

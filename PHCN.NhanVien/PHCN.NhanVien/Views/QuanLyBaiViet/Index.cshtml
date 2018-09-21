@@ -21,28 +21,32 @@
         timkiem = Request.QueryString["timkiem"].ToString();
     }
     catch { }
+
+    
+    var listBaiViet = db.BaiVietWeb.OrderByDescending(x => x.MaBaiViet).Where(x => (x.TieuDe.Contains(timkiem) || timkiem == "") && (x.MaChuyenMuc.ToString() == chuyenmuc || chuyenmuc == "")).ToList();
 }
 
 <div class="row">
     <form method="get" action="@Url.Action("Index", "QuanLyBaiViet")">
-        <div class="col-md-6">
-            <select class="form-control" name="chuyenmuc">
-                <option value=""> - Tất cả chuyên mục - </option>
-                @foreach (var item in listChuyenMuc)
-                {
-                    <option value="@item.MaChuyenMuc" @((item.MaChuyenMuc.ToString() == chuyenmuc)?"selected='selected'":"") >@item.TenChuyenMuc</option>
-                }
-            </select>
-        </div>
+        
         <div class="col-md-6">
 
             <div class="input-group form-search">
-                <input class="form-control search-query" type="text" placeholder="Tên bài viết ..." name="timkiem" value="@timkiem">
+                <input class="form-control search-query" id="txtTimKiem" type="text" placeholder="Tên bài viết ..." name="timkiem" value="@timkiem">
                 <span class="input-group-btn">
                     <button data-type="last" class="btn btn-primary" type="submit">Tìm kiếm</button>
                 </span>
             </div>
 
+        </div>
+        <div class="col-md-6">
+            <select class="form-control" name="chuyenmuc">
+                <option value=""> - Tất cả chuyên mục - </option>
+                @foreach (var item in listChuyenMuc)
+                {
+                    <option value="@item.MaChuyenMuc" @((item.MaChuyenMuc.ToString() == chuyenmuc) ? "selected='selected'" : "")>@item.TenChuyenMuc</option>
+                }
+            </select>
         </div>
 
     </form>
@@ -62,78 +66,30 @@
                 <th style="width:15%">Người đăng</th>
                 <th style="width:15%">Ngày</th>                
             </tr>
-            <tr>
-                <td style="width:3%">
-                    <input type="checkbox" />
-                </td>
-                <td style="width:37%">
-                    <a href="#">Bệnh viện bổ nhiệm BSCKI. Nguyễn Văn Hồ là Phó giám đốc</a>
-                </td>
-                <td style="width:20%">Hoạt động bệnh viện</td>
-                <td style="width:10%; text-align:center;">
-                    <input type="checkbox" class="disabled" disabled="disabled" checked="checked" />
-                </td>
-                <td style="width:15%">
-                    Nguyễn Hồng Thanh
-                </td>
-                <td style="width:15%">
-                    09/09/2018 11:30 AM
-                </td>
-            </tr>
-            <tr>
-                <td style="width:3%">
-                    <input type="checkbox" />
-                </td>
-                <td style="width:37%">
-                    <a href="#">Bệnh viện bổ nhiệm BSCKI. Nguyễn Văn Hồ là Phó giám đốc</a>
-                </td>
-                <td style="width:20%">Hoạt động bệnh viện</td>
-                <td style="width:10%; text-align:center;">
-                    <input type="checkbox" class="disabled" disabled="disabled" checked="checked" />
-                </td>
-                <td style="width:15%">
-                    Nguyễn Hồng Thanh
-                </td>
-                <td style="width:15%">
-                    09/09/2018 11:30 AM
-                </td>
-            </tr>
-            <tr>
-                <td style="width:3%">
-                    <input type="checkbox" />
-                </td>
-                <td style="width:37%">
-                    <a href="#">Bệnh viện bổ nhiệm BSCKI. Nguyễn Văn Hồ là Phó giám đốc</a>
-                </td>
-                <td style="width:20%">Hoạt động bệnh viện</td>
-                <td style="width:10%; text-align:center;">
-                    <input type="checkbox" class="disabled" disabled="disabled" checked="checked" />
-                </td>
-                <td style="width:15%">
-                    Nguyễn Hồng Thanh
-                </td>
-                <td style="width:15%">
-                    09/09/2018 11:30 AM
-                </td>
-            </tr>
-            <tr>
-                <td style="width:3%">
-                    <input type="checkbox" />
-                </td>
-                <td style="width:37%">
-                    <a href="#">Bệnh viện bổ nhiệm BSCKI. Nguyễn Văn Hồ là Phó giám đốc</a>
-                </td>
-                <td style="width:20%">Hoạt động bệnh viện</td>
-                <td style="width:10%; text-align:center;">
-                    <input type="checkbox" class="disabled" disabled="disabled" checked="checked" />
-                </td>
-                <td style="width:15%">
-                    Nguyễn Hồng Thanh
-                </td>
-                <td style="width:15%">
-                    09/09/2018 11:30 AM
-                </td>
-            </tr>
+            @foreach (var item in listBaiViet)
+            {
+                <tr>
+                    <td style="width:3%">
+                        <input type="checkbox" class="checkboxChonBaiViet" data-mabaiviet="@item.MaBaiViet" />
+                    </td>
+                    <td style="width:37%">
+                        <a href="@Url.Action("CapNhat", "QuanLyBaiViet", new { @id = item.MaBaiViet, @timkiem = timkiem, @chuyenmuc = chuyenmuc})">@item.TieuDe</a>
+                    </td>
+                    <td style="width:20%">@item.ChuyenMuc.TenChuyenMuc</td>
+                    <td style="width:10%; text-align:center;">
+                        <input type="checkbox" class="disabled" @((item.HienThiTrenTrangChu == true)? " checked='checked' ":"") disabled="disabled"  />
+                    </td>
+                    <td style="width:15%">
+                        @item.NhanVien.HoTen
+                    </td>
+                    <td style="width:15%">
+                        @item.Ngay
+                    </td>
+                </tr>
+            }
+
+            
+
         </thead>
         <tbody></tbody>
     </table>
@@ -144,8 +100,18 @@
     <div class="col-md-12">
         <div class="form-group">
             <button class="btn btn-success" style="margin-bottom:10px;">Thêm bài mới</button>
-            <button class="btn btn-default" style="margin-bottom:10px;">Ngưng hoạt động</button>
+            <button class="btn btn-default" id="btnNgungHoatDong" style="margin-bottom:10px;">Ngưng hoạt động</button>
             <button class="btn btn-default" style="margin-bottom:10px;">Xóa</button>
         </div>
     </div>
 </div>
+
+<script>
+    var _ajaxUrl = '@(HttpContext.Current.Request.Url.Scheme)://@(HttpContext.Current.Request.Url.Authority)/AjaxManager/';
+    var _ajaxThisUrl = '@(HttpContext.Current.Request.Url.Scheme)://@(HttpContext.Current.Request.Url.Authority)/QuanLyBaiViet/';
+</script>
+
+<script src="~/scripts/core-scripts/sweetalert2.all.min.js"></script>
+<script src="~/scripts/core-scripts/th.core.js?@("v="+DateTime.Now.ToString("yyMMddhhmmss"))"></script>
+<script src="~/scripts/app_scripts/DanhSachBaiViet.js?@("v="+DateTime.Now.ToString("yyMMddhhmmss"))"></script>
+

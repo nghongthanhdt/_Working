@@ -6,9 +6,45 @@
 
     var listChuyenMuc = db.ChuyenMuc.OrderBy(x => x.STT).Where(x => x.Xoa == false).ToList();
 
-    
+    var listAnhDaiDien = db.HinhAnh.Where(x => x.LoaiHinhAnh == "baivietweb" && x.Xoa != true && x.MaBaiViet == Model.MaBaiViet && x.DaiDienBaiVietWeb == true).OrderByDescending(x => x.MaHinhAnh).ToList();
+    var anhDaiDien = new PHCN.NhanVien.Models.HinhAnh();
+    int _maAnhDaiDien = 0;
+    if (listAnhDaiDien.Any())
+    {
+        anhDaiDien = listAnhDaiDien.First();
+        _maAnhDaiDien = anhDaiDien.MaHinhAnh;
+        
+    }
+    // chạy thật
+
+    //var nhanVienDangNhap = (PHCN.NhanVien.Models.NhanVien)Session["NhanVienDangNhap"];
+    //if (nhanVienDangNhap == null)
+    //{
+    //    Response.Redirect(Url.Action("DangNhap", "Home"));
+    //}
+    //var listPhanQuyen = nhanVienDangNhap.PhanQuyen.ToList();
+    //int _maNhanVienDangNhap = nhanVienDangNhap.MaNhanVien;
+    //string box = "";
+    //try
+    //{
+    //    box = Request.QueryString["box"].ToString();
+    //}
+
+    // chạy dev
+
+    int _maNhanVienDangNhap = 35;
+
 
 }
+
+<script>
+    var _maBaiViet = '@Model.MaBaiViet';
+    
+    var _maNhanVien = '@_maNhanVienDangNhap';
+    var _maHinhAnh = '@_maAnhDaiDien';
+    
+    
+</script>
 
 <script src="~/Content/ckeditor/ckeditor.js"></script>
 <link href="~/Content/css/jquery-ui.css" rel="stylesheet" />
@@ -21,13 +57,12 @@
         
             <div class="form-group">
                 <label for="txtTieuDe">Tiêu đề</label>
-                <input class="form-control" id="txtTieuDe" placeholder="" />
-            </div>
-        
+                <input class="form-control" id="txtTieuDe" placeholder="" value="@Model.TieuDe" />
+            </div>        
     </div>
 </div>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
 
         <label>Chuyên mục</label>
         <select id="selectChuyenMuc" class="form-control">
@@ -41,10 +76,16 @@
         </select>
 
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
 
         <label>Ngày đăng</label>
-        <input type="text" class="date form-control disabled" disabled="disabled" value="@Model.Ngay" />
+        <input type="text" id="txtNgay" class="date form-control disabled" disabled="disabled" value="@Model.Ngay" />
+
+    </div>
+    <div class="col-md-4">
+
+        <label>Người đăng</label>
+        <input type="text" id="txtNguoiDang" class="date form-control disabled" disabled="disabled" value="@Model.NhanVien.HoTen" />
 
     </div>
 </div>
@@ -77,7 +118,9 @@
                      
                 </style>
                 <a id="divAnhDaiDien" class="hinhanh">
-                    <img id="imgAnhDaiDien" src="@((Model.MaHinhAnh != null) ? (Model.HinhAnh.DuongDan + Model.HinhAnh.TenFileDayDu) : Url.Content("~/Content/ImageManager/ClickChonAnhDaiDien.jpg"))" style="width:100%;" />
+                    <img id="imgAnhDaiDien" src="@((anhDaiDien.DaiDienBaiVietWeb == true) ? (anhDaiDien.DuongDan + anhDaiDien.TenFileDayDu) : Url.Content("~/Content/ImageManager/ClickChonAnhDaiDien.jpg"))" style="width:100%;" />
+                    <input type="hidden" id="hiddenMaBaiViet" value="@Model.MaBaiViet" />
+                    <input type="hidden" id="hiddenMaHinhAnh" value="@_maAnhDaiDien" />
                 </a>
             </div>
         </div>
@@ -85,17 +128,17 @@
             <div class="col-md-12">
 
                 <label>Tóm tắt</label>
-                <textarea id="txtTomTat" class="form-control"></textarea>
+                <textarea id="txtTomTat" class="form-control" style="height:120px;">@Model.TomTat</textarea>
 
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <label>Nội dung</label>
-                <textarea id="txtNoiDung"></textarea>
+                <textarea id="txtNoiDung">@Model.NoiDung</textarea>
                 <script>
                     CKEDITOR.replace('txtNoiDung');
-                    CKEDITOR.config.height = 450;
+                    CKEDITOR.config.height = 650;
                 </script>
 
             </div>
@@ -103,7 +146,7 @@
         <div class="row">
             <div class="col-md-12">
                 <label>Tác giả bài viết</label>
-                <input type="text" class="date form-control" value="" />
+                <input type="text" class="date form-control" id="txtTacGia" value="@Model.TacGia" />
             </div>
         </div>
         <div class="row">
@@ -111,17 +154,15 @@
                 <label>Thiết lập</label>
                 <div class="clear"></div>
                 <label style="font-weight:normal;">
-                    <input type="checkbox" checked="checked" /> Hiển thị bài viết trên trang chủ
+                    <input type="checkbox" id="checkboxHienThiTrenTrangChu" @((Model.HienThiTrenTrangChu == true)?"checked='checked'":"") /> Hiển thị bài viết trên trang chủ
                 </label>
-
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <label style="font-weight:normal;">Tên đường dẫn</label>
                 <div class="clear"></div>
-                <input type="text"  class="form-control" id="txtRewriteTieuDe" />
-
+                <input type="text"  class="form-control" id="txtTieuDeRewrite" value="@Model.TieuDeRewrite" />
             </div>
         </div>
         <div class="row">
@@ -129,7 +170,7 @@
                 <label>Cập nhật lần cuối</label>
                 <div class="clear"></div>
                 <label style="font-weight:normal;">
-                    09/09/2018 03:30PM - bởi <a href="#">Nguyễn Hồng Thanh</a>
+                    @Model.CapNhatLanCuoi - bởi <strong>@Model.NhanVien.HoTen </strong>
                 </label>
 
             </div>
@@ -147,7 +188,7 @@
 
 
                 <div id="divDanhSachHinhAnh" data-mabaiviet="@Model.MaBaiViet">
-
+                    <img src="~/Content/img/content-loading.gif" style="width:50px;" />
                 </div>
                 
                 
@@ -161,27 +202,70 @@
         </div>
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title"><i class="glyphicon glyphicon-file"></i> Tài liệu</h3>
+                <h3 class="panel-title"><i class="glyphicon glyphicon-tags"></i>&nbsp; Đính kèm</h3>
             </div>
             <div class="panel-body">
-                <button class="btn btn-default  btn-block"><i class="glyphicon glyphicon-plus"></i> Thêm</button>
+                <div id="divDanhSachFileDinhKem" data-mabaiviet="@Model.MaBaiViet">
+                    <img src="~/Content/img/content-loading.gif" style="width:50px;" />
+                </div>
+                <div class="form-group" style="display:none;">
+                    <form id="formFileDinhKem" action="@Url.Action("UploadFileDinhKemWeb", "Upload")" method="post" enctype="multipart/form-data">
+                        <label>Thêm file</label>
+                        <input id="fileuploadDinhKem" type="file" name="file" accept=".xls,.xlsx,.ppt,.pptx,.doc,.docx,.pdf,.zip,.rar,.jpg,.jpeg,.png,.gif">
+                        <input type="hidden" value="@Model.MaBaiViet" name="id" />
+                    </form>
+                </div>
+                <button class="btn btn-default  btn-block" id="btnThemFileDinhKem"><i class="glyphicon glyphicon-plus"></i> Thêm</button>
             </div>
         </div>
     </div>
 </div>
 
+<div class="modal" id="modalTuyChonAnhDaiDien">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Ảnh đại diện</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <button class="btn btn-danger btn-block" id="modalTuyChonAnhDaiDien_XoaAnh">Hủy bỏ ảnh đại diện</button>
+                        <button class="btn btn-default btn-block" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
+@{
+    string chuyenmuc = "";
+    string timkiem = "";
 
+    try
+    {
+        chuyenmuc = Request.QueryString["chuyenmuc"].ToString();
+    }
+    catch { }
+    try
+    {
+        timkiem = Request.QueryString["timkiem"].ToString();
+    }
+    catch { }
+}
 <div style="position:fixed; bottom:10px; right:10px;">
-    <a class="btn btn-lg btn-default" id="btnTroVeDanhSach" href="/QuanLyNhanVien/Xem/3">Trở về danh sách</a>
-    <button class="btn btn-lg btn-success" id="btnLuu" data-malylichvienchuc="46">Lưu dữ liệu</button>
+    <a class="btn btn-lg btn-default" id="btnTroVeDanhSach" href="@Url.Action("Index", "QuanLyBaiViet", new { @timkiem = timkiem,  @chuyenmuc = chuyenmuc})">Trở về danh sách</a>
+    <button class="btn btn-lg btn-success" id="btnLuu">Lưu bài viết</button>
 </div>
 
 
 <script>
     var _ajaxUrl = '@(HttpContext.Current.Request.Url.Scheme)://@(HttpContext.Current.Request.Url.Authority)/AjaxManager/';
     var _ajaxThisUrl = '@(HttpContext.Current.Request.Url.Scheme)://@(HttpContext.Current.Request.Url.Authority)/QuanLyBaiViet/';
-
+    var _FileManagerUrl = '@Url.Content("~/Content/FileManager/")';
+    var _urlClickChonAnhDaiDien = '@Url.Content("~/Content/ImageManager/ClickChonAnhDaiDien.jpg")';
 </script>
 
 <script src="~/scripts/core-scripts/sweetalert2.all.min.js"></script>

@@ -21,7 +21,7 @@ function revertDMY(date) {
 function thAlert(message) {
     swal(
       message,
-      'Thành công',
+      '',
       'success'
     )
 }
@@ -63,6 +63,18 @@ function thAjaxAction(_url, _param, _success) {
         data: _param,
         success: _success,
         error: function (xhr, ajaxOptions, thrownError) {            
+            alert("Lỗi hệ thống, vui lòng liên hệ quản trị: #" + xhr.status + ": " + thrownError);
+        }
+    });
+}
+function thAjaxReturnJson(_url, _param, _success) {
+    $.ajax({
+        method: "POST",
+        type: "json",
+        url: _url,
+        data: _param,
+        success: _success,
+        error: function (xhr, ajaxOptions, thrownError) {
             alert("Lỗi hệ thống, vui lòng liên hệ quản trị: #" + xhr.status + ": " + thrownError);
         }
     });

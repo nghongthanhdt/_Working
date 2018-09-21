@@ -26,8 +26,8 @@ namespace PHCN.NhanVien.Models
         public int STTGui { get; set; }
         public bool Xoa { get; set; }
     
-        public virtual BaiViet BaiViet { get; set; }
         public virtual NhanVien NhanVien { get; set; }
         public virtual NhanVien NhanVien1 { get; set; }
+        public virtual BaiViet BaiViet { get; set; }
     }
 }
