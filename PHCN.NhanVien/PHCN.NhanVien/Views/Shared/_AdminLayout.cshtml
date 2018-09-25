@@ -2,27 +2,27 @@
 
     // chạy dev
 
-    PHCN.NhanVien.Models.PHCNEntities db = new PHCN.NhanVien.Models.PHCNEntities();
-    var nhanVienDangNhap = db.NhanVien.Find(1);
-    Session["NhanVienDangNhap"] = nhanVienDangNhap;
-    var listPhanQuyen = nhanVienDangNhap.PhanQuyen.ToList();
-    string box = "";
+    //PHCN.NhanVien.Models.PHCNEntities db = new PHCN.NhanVien.Models.PHCNEntities();
+    //var nhanVienDangNhap = db.NhanVien.Find(1);
+    //Session["NhanVienDangNhap"] = nhanVienDangNhap;
+    //var listPhanQuyen = nhanVienDangNhap.PhanQuyen.ToList();
+    //string box = "";
 
     //chạy thật
 
-    //var nhanVienDangNhap = (PHCN.NhanVien.Models.NhanVien)Session["NhanVienDangNhap"];
-    //if (nhanVienDangNhap == null)
-    //{
-    //    Response.Redirect(Url.Action("DangNhap", "Home"));
-    //}
-    //var listPhanQuyen = nhanVienDangNhap.PhanQuyen.ToList();
-    //int _maNhanVienDangNhap = nhanVienDangNhap.MaNhanVien;
-    //string box = "";
-    //try
-    //{
-    //    box = Request.QueryString["box"].ToString();
-    //}
-    //catch { }
+    var nhanVienDangNhap = (PHCN.NhanVien.Models.NhanVien)Session["NhanVienDangNhap"];
+    if (nhanVienDangNhap == null)
+    {
+        Response.Redirect(Url.Action("DangNhap", "Home"));
+    }
+    var listPhanQuyen = nhanVienDangNhap.PhanQuyen.ToList();
+    int _maNhanVienDangNhap = nhanVienDangNhap.MaNhanVien;
+    string box = "";
+    try
+    {
+        box = Request.QueryString["box"].ToString();
+    }
+    catch { }
 }
 <!DOCTYPE html>
 <html>
@@ -36,6 +36,7 @@
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,800,700,400italic,600italic,700italic,800italic,300italic" rel="stylesheet" type="text/css">
     <script src="~/scripts/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="~/Content/js/site.min.js"></script>
+    <link href="~/Content/css/admin-layout.css?@("v="+DateTime.Now.ToString("yyMMddhhmmss"))" rel="stylesheet" />
 </head>
 <body>
     <nav role="navigation" class="navbar navbar-custom" style="background-color:#004f02;">
@@ -70,75 +71,141 @@
             </div>
         </div>
     </nav>
+
+    <style>
+        .list-group {
+            margin-bottom:0px;
+        }
+    </style>
     <!--header-->
     <div class="container-fluid">
         <!--documents-->
+        
         <div class="row row-offcanvas row-offcanvas-left">
-            <div class="col-xs-6 col-sm-3 sidebar-offcanvas" role="navigation">
+            <div class="col-xs-6 col-sm-4 sidebar-offcanvas" role="navigation">
                 @{ 
                     bool isAdmin = listPhanQuyen.Where(x => x.MaQuyen == "admin").Any();
                     bool isQuanLyLyLichVienChuc = listPhanQuyen.Where(x => x.MaQuyen == "quanlylylichvienchuc").Any();
+                    bool isQuanLyWebsite = listPhanQuyen.Where(x => x.MaQuyen == "quanlywebsite").Any();
                     if (nhanVienDangNhap.TenDangNhap == "admin")
                     {
                         isAdmin = true;
-                    } 
+                    }
                 }
 
-                @if (isAdmin)
-                {
-                    <ul class="list-group panel">
-                        <li class="list-group-item">
-                            <a href="javascript:void(0);" class="btn btn-success" style="width:100%">
-                                Hệ Thống
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="list-group">
-                        <a href="@Url.Action("NhanVien", "Admin")" class="list-group-item">Nhân viên</a>
-                        <a href="@Url.Action("PhanQuyen", "Admin")" class="list-group-item">Phân quyền</a>
-                        <a href="@Url.Action("KhoaPhong", "Admin")" class="list-group-item">Khoa phòng</a>
 
-                        <a href="@Url.Action("ThamSoHeThong", "Admin")" class="list-group-item">Tham số hệ thống</a>
-                        <a href="@Url.Action("Index", "QuanLyDanhMuc")" class="list-group-item">Danh mục</a>
-                    </div>
-
-                }  
-                @if (isQuanLyLyLichVienChuc || isAdmin)
-                {
-                    <ul class="list-group panel">
-                        <li class="list-group-item">
-                            <a href="@Url.Action("Xem", "QuanLyNhanVien")" class="btn btn-success" style="width:100%">
-                                Quản lý nhân viên
-                            </a>
-                        </li>
-                    </ul>
-                    @*<div class="list-group">
-                        <a href="@Url.Action("DanhSach", "QuanLyLyLichVienChuc")" class="list-group-item">Danh sách</a>
-                    </div>*@
-                }
+                
                 
 
                 <ul class="list-group panel">
                     <li class="list-group-item">
-                        <a href="@Url.Action("SoanThu","ThuNoiBo")" class="btn btn-success" style="width:100%">
-                            Soạn thư
+                        <a href="@Url.Action("SoanThu","ThuNoiBo")" class="btn btn-default" style="width:100%">
+                            <i class="glyphicon glyphicon-pencil"></i> Soạn thư
                         </a>
                     </li>
                 </ul>
                 
-                <div class="list-group">
-                    <a href="@Url.Action("Index", "ThuNoiBo", new { box = "ThuDen"})" class="list-group-item @((box=="ThuDen")?"active":"")">Hộp thư đến</a>                    
-                    <a href="@Url.Action("Index", "ThuNoiBo", new { box = "DaGui"})" class="list-group-item @((box=="DaGui")?"active":"")">Thư đã gửi</a>                    
-                    <a href="@Url.Action("Index", "ThuNoiBo", new { box = "DaXoa"})" class="list-group-item @((box=="DaXoa")?"active":"")">Thùng rác</a>
+                 
+                <div style="clear:both;"></div>
+                <div class="panel-group panel-group-lists" style="">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse"  href="#collapseThuNoiBo" class="tieu-de-menu" style="color:white;">Thư nội bộ</a>
+                            </h4>
+                        </div>
+                        <div id="collapseThuNoiBo" class="panel-collapse collapse in" style="">
+                            
+                                <div class="list-group">
+                                    <a href="@Url.Action("Index", "ThuNoiBo", new { box = "ThuDen"})" class="list-group-item ">Hộp thư đến</a>
+                                    <a href="@Url.Action("Index", "ThuNoiBo", new { box = "DaGui"})" class="list-group-item ">Thư đã gửi</a>
+                                    <a href="@Url.Action("Index", "ThuNoiBo", new { box = "DaXoa"})" class="list-group-item ">Thùng rác</a>
+                                </div>
+                            
+                        </div>
+                    </div>
+
+                    @if (isQuanLyLyLichVienChuc || isAdmin)
+                    {
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse"  href="#collapseQuanLyNhanVien" class="tieu-de-menu" style="color:white;">Quản lý nhân viên</a>
+                            </h4>
+                        </div>
+                        <div id="collapseQuanLyNhanVien" class="panel-collapse collapse" style="">
+
+                            
+                            
+                                <div class="list-group">                                    
+                                        <a href="@Url.Action("Index", "QuanLyNhanVien")" class="list-group-item">
+                                            Lý lịch viên chức
+                                        </a>   
+                                </div>
+                            
+
+                        </div>
+                    </div>
+                    }
+                    @if (isAdmin)
+                    {
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapseQuanLyHeThong" class="tieu-de-menu" style="color:white;">Hệ thống</a>
+                            </h4>
+                        </div>
+                        <div id="collapseQuanLyHeThong" class="panel-collapse collapse" style="">
+
+
+                            
+                                
+                                <div class="list-group">
+                                    <a href="@Url.Action("NhanVien", "Admin")" class="list-group-item">Tài khoản người dùng</a>
+                                    <a href="@Url.Action("PhanQuyen", "Admin")" class="list-group-item">Phân quyền</a>
+                                    <a href="@Url.Action("KhoaPhong", "Admin")" class="list-group-item">Khoa phòng</a>
+
+                                    <a href="@Url.Action("ThamSoHeThong", "Admin")" class="list-group-item">Tham số hệ thống</a>
+                                    <a href="@Url.Action("Index", "QuanLyDanhMuc")" class="list-group-item">Danh mục</a>
+                                </div>
+                            
+
+                        </div>
+                    </div>
+                    }
+                    @if (isAdmin || isQuanLyWebsite)
+                    {
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapseQuanLyWebsite" class="tieu-de-menu" style="color:white;">Website</a>
+                            </h4>
+                        </div>
+                        <div id="collapseQuanLyWebsite" class="panel-collapse collapse" style="">
+
+
+                            
+
+                                <div class="list-group panel">
+                                    
+                                        <a href="@Url.Action("Index", "QuanLyBaiViet")" class="list-group-item" style="width:100%">
+                                            Danh sách bài viết
+                                        </a>
+                                    
+                                </div>
+                            
+
+                        </div>
+                    </div>
+                    }
                 </div>
-                    
             </div>
-            <div class="col-xs-12 col-sm-9 content">
+            <div class="col-xs-12 col-sm-8 content">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">
                             <a href="javascript:void(0);" class="toggle-sidebar"><span class="fa fa-angle-double-left" data-toggle="offcanvas" title="Maximize Panel"></span></a>
-                            <span style="font-size:22px; font-weight:bold;">
+                            <span style="font-size:18px; font-weight:bold;">
                                 @ViewBag.PanelTitle
                             </span>                            
                             
@@ -151,6 +218,7 @@
                 </div>
             </div><!-- content -->
         </div>
+
     </div>
     <!--footer-->
     @*<div class="site-footer">
@@ -164,5 +232,8 @@
             </div>
         </div>
     </div>*@
+
+    
+    
 </body>
 </html>

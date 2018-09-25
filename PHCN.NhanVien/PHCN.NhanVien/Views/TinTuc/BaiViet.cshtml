@@ -1,0 +1,334 @@
+﻿@model PHCN.NhanVien.Models.BaiVietWeb
+@{
+
+
+
+    ViewBag.Title = "BaiViet";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+    PHCN.NhanVien.Models.PHCNEntities db = new PHCN.NhanVien.Models.PHCNEntities();
+    var listChuyenMuc = db.ChuyenMuc.OrderBy(x => x.STT).ThenBy(x => x.MaChuyenMuc).ToList();
+
+    string tenChuyenMucRewrite = "";
+    try
+    {
+        tenChuyenMucRewrite = ViewContext.RouteData.Values["TenChuyenMucRewrite"].ToString();
+    }
+    catch { }
+
+    var selectedChuyenMuc = new PHCN.NhanVien.Models.ChuyenMuc();
+    if (tenChuyenMucRewrite != "")
+    {
+        try
+        {
+            selectedChuyenMuc = listChuyenMuc.Where(x => x.TenChuyenMucRewrite == tenChuyenMucRewrite).First();
+        }
+        catch
+        {
+
+        }
+
+
+    }
+
+    var listHinhAnh = db.HinhAnh.Where(x => x.LoaiHinhAnh == "baivietweb" && x.Xoa != true && x.MaBaiViet == Model.MaBaiViet).ToList();
+    var listHinhAnhDaiDien = listHinhAnh.Where(x => x.DaiDienBaiVietWeb == true).ToList();
+    var listTinCungChuyenMuc = db.BaiVietWeb.Where(x => x.MaChuyenMuc == Model.MaChuyenMuc && x.Xoa != true && x.HienThiTrenTrangChu == true && x.MaBaiViet != Model.MaBaiViet).ToList();
+    var listFileDinhKem = db.FileDinhKem.Where(x => x.MaBaiVietWeb == Model.MaBaiViet && x.Xoa != true).OrderBy(x => x.MaFile).ToList();
+
+
+    ViewBag.PageUrl = Request.Url.AbsoluteUri.ToString().ToLower();
+    ViewBag.PageTitle = Model.TieuDe;
+    ViewBag.PageDescription = Model.TomTat;
+    if (listHinhAnhDaiDien.Any())
+    {
+        var hinhDaiDien = listHinhAnhDaiDien.First();
+        ViewBag.PageImage = hinhDaiDien.DuongDan + hinhDaiDien.TenFileDayDu;
+    } else
+    {
+        ViewBag.PageImage = "";
+    }
+
+}
+<link href="~/Content/plugins/back-to-top/css/style.css" rel="stylesheet" />
+
+<style>
+    body {
+        color:black;
+    }
+    .breadcrumb a {
+        color: white;
+    }
+
+        .breadcrumb a:hover {
+            color: #d4d4d4;
+        }
+
+    .blog-item {
+        margin-bottom: 0px;
+    }
+</style>
+<div id="breadcrumb">
+    <div class="container">
+        <div class="breadcrumb">
+
+            <li><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
+            <li><a href="@Url.Action("Index", "TinTuc", new { @TenChuyenMucRewrite = ""})">Tin tức</a></li>
+            <li><a href="@Url.Action("Index", "TinTuc", new { @TenChuyenMucRewrite = selectedChuyenMuc.TenChuyenMucRewrite})">@selectedChuyenMuc.TenChuyenMuc</a></li>
+
+        </div>
+    </div>
+</div>
+
+<section id="blog" class="container">
+    <div class="blog">
+        <div class="row">
+            
+            <div class="col-md-9">
+
+                <style>
+                    .tieu-de {
+                        color: #004e06;
+                        text-decoration: none;
+                    }
+
+                        .tieu-de:hover {
+                            color: #008f07;
+                        }
+
+                    .ten-chuyen-muc {
+                        color: #00a4b5;
+                        text-decoration: none;
+                    }
+
+                        .ten-chuyen-muc:hover {
+                            color: #004f68;
+                        }
+
+                </style>
+                <div class="blog-item">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 blog-content">
+                            <h1 style="margin-top:0px;">
+                                
+                                    @Model.TieuDe
+                                
+                            </h1>
+
+
+                            <div style="clear:both"></div>
+                            <p>
+                                <i class="glyphicon glyphicon-ok"></i> @Model.Ngay - <a href="@Url.Action("Index", "TinTuc", new { @TenChuyenMucRewrite = Model.ChuyenMuc.TenChuyenMucRewrite})" class="ten-chuyen-muc">@Model.ChuyenMuc.TenChuyenMuc</a>
+                            </p>
+                            @{
+                                    
+                                if (listHinhAnhDaiDien.Any())
+                                {
+                                    var hinhdaidien = listHinhAnhDaiDien.First();
+                                    <img class="img-responsive" src="@(hinhdaidien.DuongDan + hinhdaidien.TenFileDayDu)" style="width:100%; border: 1px solid gray" alt="" />
+                                    <br />
+                                }
+                                else
+                                {
+                                    @*<img class="img-responsive" src="~/Content/home/images/blog/blog1.jpg" width="100%" alt="" />
+                                    <br />*@
+                                }
+                            }
+                            <div style="clear:both;"></div>
+                            <p style="font-size:16px; font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-weight:bold;">
+                                @Model.TomTat
+                            </p>
+                            <style>
+                                #divNoiDung * {
+                                    font-size:20px;
+                                    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                                    text-align:justify;
+                                }
+                                #divTacGia {
+                                    padding-top:35px;
+                                    text-align:right;
+                                    font-size:18px;
+                                }
+                               #divNoiDung img {
+                                   border:1px solid gray;                                   
+                               }
+                            </style>
+                            <div id="divNoiDung">
+                                @*nội dung*@
+
+                                @Html.Raw(Model.NoiDung)
+
+                                
+                            </div>
+                            <div style="clear:both;"></div>
+                            <div id="divTacGia">
+                                <strong>Tác giả</strong> @Html.Raw(Model.TacGia)
+                            </div>
+                            <hr />
+                        </div>
+                    </div>
+
+                    @if (listFileDinhKem.Any())
+                    {
+                        <div class="row">
+                            <style>
+                                #divDinhKem ul li {
+                                    list-style-type: none;
+                                }
+
+                                #divDinhKem a {
+                                    color: #00a4b5;
+                                    text-decoration: none;
+                                }
+
+                                    #divDinhKem a:hover {
+                                        color: #004f68;
+                                    }
+                            </style>
+                            <div class="col-md-12">
+                                <h4>
+                                    <i class="glyphicon glyphicon-tags"></i>
+                                    &nbsp;
+                                    Đính kèm
+                                </h4>
+                                <div class="well" id="divDinhKem">
+                                    <ul>
+                                        @foreach (var item in listFileDinhKem)
+                                        {
+                                            <li>
+                                                <i class="glyphicon glyphicon-file"></i>&nbsp;<a href="@((Url.Content("~/Content/FileManager/" + item.TenFileFull)))">@item.TenFile</a>
+                                            </li>
+                                        }
+                                        
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    
+                    <div class="row">
+                        <div class="col-md-12 text-right">
+                            <!-- Your share button code -->
+                            Chia sẻ facebook: 
+                            <div class="fb-share-button"
+                                 data-href="@Request.Url.AbsoluteUri.ToString().ToLower()"
+                                 data-layout="button_count">
+                            </div>
+                            <div style="clear:both;"></div>
+                            <br/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a href="javascript:history.back();" class="btn btn-success btn-block hidden-xs">
+                                <i class="glyphicon glyphicon-chevron-left"></i> Trở lại
+                            </a>
+                            
+                            @if (listTinCungChuyenMuc.Any())
+                            {
+
+                                <style>
+                                    #divTinCungChuyenMuc a {
+                                        color: #004f68;
+                                    }
+
+                                        #divTinCungChuyenMuc a:hover {
+                                            color: #00a4b5;
+                                        }
+
+                                    #divTinCungChuyenMuc ul li {
+                                        list-style-type: circle;
+                                    }
+                                </style>
+                                <h3>
+                                    <i class="glyphicon glyphicon-list"></i>
+                                    &nbsp;
+                                    Tin cùng chuyên mục
+                                </h3>
+                                <div style="width:100%;" id="divTinCungChuyenMuc">
+                                    <ul>
+                                        @foreach (var baiviet in listTinCungChuyenMuc)
+                                        {
+                                            <li>
+                                                <a href="@(HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/tin-tuc/" + baiviet.ChuyenMuc.TenChuyenMucRewrite + "/" + baiviet.TieuDeRewrite + "." + baiviet.MaBaiViet + ".html")">
+                                                    @baiviet.TieuDe
+                                                </a>
+                                            </li>
+                                        }
+                                        
+
+                                    </ul>
+                                </div>
+                                <br />
+                                <hr />
+                            }
+                           
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+                <!--/.pagination-->
+            </div>
+            <!--/.col-md-8-->
+
+            <aside class="col-md-3">
+                
+                
+                <a href="javascript:history.back();" class="btn btn-success btn-block">
+                    <i class="glyphicon glyphicon-chevron-left"></i> Trở lại
+                </a>
+
+
+
+                <div class="widget archieve">
+                    <h3>Chuyên mục</h3>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <ul class="blog_archieve">
+
+
+                                @foreach (var item in listChuyenMuc)
+                                {
+                                    <li><a href="@Url.Action("Index", "TinTuc", new { @TenChuyenMucRewrite = item.TenChuyenMucRewrite})"><i class="fa fa-angle-double-right"></i> @item.TenChuyenMuc </a></li>
+                                }
+
+
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--/.archieve-->
+
+
+
+            </aside>
+        </div>
+        <!--/.row-->
+
+
+    </div>
+</section>
+
+<a href="#0" class="cd-top js-cd-top">Top</a>
+<script src="~/Content/plugins/back-to-top/js/main.js"></script>
+
+<div id="fb-root"></div>
+<script>
+(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>

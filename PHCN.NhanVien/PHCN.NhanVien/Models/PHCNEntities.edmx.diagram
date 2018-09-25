@@ -14,7 +14,6 @@
         <EntityTypeShape EntityType="PHCNModel.Quyen" Width="1.5" PointX="4.5" PointY="11.5" />
         <AssociationConnector Association="PHCNModel.FK_PhanQuyen_Quyen" />
         <EntityTypeShape EntityType="PHCNModel.ChucDanhNgheNghiep" Width="1.5" PointX="19.25" PointY="15.125" />
-        <EntityTypeShape EntityType="PHCNModel.ChuyenMuc" Width="1.5" PointX="0.75" PointY="8.75" />
         <EntityTypeShape EntityType="PHCNModel.DanToc" Width="1.5" PointX="9.75" PointY="14.625" />
         <EntityTypeShape EntityType="PHCNModel.DonVi" Width="1.5" PointX="9.75" PointY="11.25" />
         <EntityTypeShape EntityType="PHCNModel.HuyenThi" Width="1.5" PointX="0.75" PointY="11.75" />
@@ -51,7 +50,6 @@
         <AssociationConnector Association="PHCNModel.FK_GuiNhan_BaiViet" />
         <EntityTypeShape EntityType="PHCNModel.BaiVietWeb" Width="1.5" PointX="5.25" PointY="21.25" />
         <EntityTypeShape EntityType="PHCNModel.HinhAnh" Width="1.5" PointX="9.375" PointY="0.75" />
-        <AssociationConnector Association="PHCNModel.FK_BaiVietWeb_ChuyenMuc" />
         <AssociationConnector Association="PHCNModel.FK_BaiVietWeb_NhanVien" />
         <AssociationConnector Association="PHCNModel.FK_FileDinhKem_BaiVietWeb" />
         <EntityTypeShape EntityType="PHCNModel.LyLichVienChuc" Width="1.5" PointX="24.625" PointY="2.25" />
@@ -68,6 +66,8 @@
         <AssociationConnector Association="PHCNModel.FK_LyLichVienChuc_HocVi" />
         <AssociationConnector Association="PHCNModel.FK_LyLichVienChuc_LoaiHopDong" />
         <AssociationConnector Association="PHCNModel.FK_LyLichVienChuc_NhanVien" />
+        <EntityTypeShape EntityType="PHCNModel.ChuyenMuc" Width="1.5" PointX="9.375" PointY="7.875" />
+        <AssociationConnector Association="PHCNModel.FK_BaiVietWeb_ChuyenMuc" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

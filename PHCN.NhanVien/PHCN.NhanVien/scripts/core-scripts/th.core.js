@@ -1,4 +1,12 @@
-﻿var daysInMonth = function (m, y) {
+﻿
+$(document).ready(function () {
+    $('.date').mask('00/00/0000', { placeholder: "__/__/____" });
+    $('.number').mask('00000000000');
+    $('.decimal').mask('0.00', { placeholder: "_.__" });
+    $('.giaoducphothong').mask('00/00', { placeholder: "__/__" });
+    $('.thangnam').mask('00/0000', { placeholder: "__/____" });
+});
+var daysInMonth = function (m, y) {
     switch (m) {
         case 1:
             return (y % 4 == 0 && y % 100) || y % 400 == 0 ? 29 : 28;

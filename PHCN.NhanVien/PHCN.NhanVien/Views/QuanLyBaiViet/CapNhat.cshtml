@@ -13,26 +13,27 @@
     {
         anhDaiDien = listAnhDaiDien.First();
         _maAnhDaiDien = anhDaiDien.MaHinhAnh;
-        
+
     }
     // chạy thật
 
-    //var nhanVienDangNhap = (PHCN.NhanVien.Models.NhanVien)Session["NhanVienDangNhap"];
-    //if (nhanVienDangNhap == null)
-    //{
-    //    Response.Redirect(Url.Action("DangNhap", "Home"));
-    //}
-    //var listPhanQuyen = nhanVienDangNhap.PhanQuyen.ToList();
-    //int _maNhanVienDangNhap = nhanVienDangNhap.MaNhanVien;
-    //string box = "";
-    //try
-    //{
-    //    box = Request.QueryString["box"].ToString();
-    //}
+    var nhanVienDangNhap = (PHCN.NhanVien.Models.NhanVien)Session["NhanVienDangNhap"];
+    if (nhanVienDangNhap == null)
+    {
+        Response.Redirect(Url.Action("DangNhap", "Home"));
+    }
+    var listPhanQuyen = nhanVienDangNhap.PhanQuyen.ToList();
+    int _maNhanVienDangNhap = nhanVienDangNhap.MaNhanVien;
+    string box = "";
+    try
+    {
+        box = Request.QueryString["box"].ToString();
+    }
+    catch { }
 
     // chạy dev
 
-    int _maNhanVienDangNhap = 35;
+    //int _maNhanVienDangNhap = 35;
 
 
 }

@@ -2,8 +2,22 @@
 @{
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
     PHCN.NhanVien.Models.PHCNEntities db = new PHCN.NhanVien.Models.PHCNEntities();
-    var listBaiVietWeb = db.BaiVietWeb.Where(x => x.Xoa == false).OrderByDescending(x => x.MaBaiViet).ToList();
+    var listBaiVietWeb = db.BaiVietWeb.Where(x => x.Xoa != true && x.HienThiTrenTrangChu == true).OrderByDescending(x => x.MaBaiViet).Take(6).ToList();
+    //var listHinhAnh = db.HinhAnh.Where(x => x.LoaiHinhAnh == "baivietweb" && x.Xoa != true).ToList();
+    ViewBag.PageTitle = "Trang chủ";
 }
+
+<style>
+    .hinh-anh{
+        border:3px solid green;
+    }
+    .hinh-anh:hover {
+        box-shadow:2px 2px 5px gray;
+    }
+    .tieu-de-tin-tuc:hover {
+        color:#076300;
+    }
+</style>
 <section id="main-slider" class="no-margin">
     <div class="carousel slide">
         <div class="carousel-inner">
@@ -110,7 +124,7 @@
 
             </p>
             <br /><br />
-            @*<a class="btn btn-lg btn-success" href="#">Xem thêm...</a>*@
+            <a class="btn btn-lg btn-success" href="@Url.Action("Index","TinTuc", new { @TenChuyenMucRewrite = "gioi-thieu"})">Xem thêm...</a>
             
             
         </div>
@@ -123,38 +137,64 @@
         <div class="text-center">
             <h2>Tin mới</h2>
         </div>
+
+        @{ 
+            int count = 0;
+        }
+
         @foreach (var item in listBaiVietWeb)
         {
+            count++;
+            var listHinhAnh = db.HinhAnh.Where(x => x.LoaiHinhAnh == "baivietweb" && x.MaBaiViet == item.MaBaiViet && x.Xoa != true && x.DaiDienBaiVietWeb == true).OrderByDescending(x => x.MaHinhAnh).ToList();
+
+
             <div class="col-md-4 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms">
-                <img src="@(item.HinhAnh.DuongDan + item.HinhAnh.TenFileDayDu)" class="img-responsive" />
-                <h3>@item.TieuDe</h3>
+                @if (listHinhAnh.Any())
+                {
+                    
+                    @*<img src="@(listHinhAnh.First().DuongDan + listHinhAnh.First().TenFileDayDu)" class="img-responsive" />*@
+                    <a href="@(HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/tin-tuc/" + item.ChuyenMuc.TenChuyenMucRewrite + "/" + item.TieuDeRewrite + "." + item.MaBaiViet + ".html")">
+                        <div class="hinh-anh" style="background-image:url('@(listHinhAnh.First().DuongDan + listHinhAnh.First().TenFileDayDu)'); width:100%; height:200px; background-size: cover;">
+                        </div>
+                    </a>
+
+                    
+                }
+                else
+                {
+
+                    <a href="@(HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/tin-tuc/" + item.ChuyenMuc.TenChuyenMucRewrite + "/" + item.TieuDeRewrite + "." + item.MaBaiViet + ".html")">
+                        <div class="hinh-anh" style="background-image:url('@Url.Content("~/Content/img/no-image.jpg")'); width:100%; height:200px; background-size: cover;">
+                        </div>
+                    </a>
+
+                    
+                }
+
+                <h4>
+                    <a class="tieu-de-tin-tuc" href="@(HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/tin-tuc/" + item.ChuyenMuc.TenChuyenMucRewrite + "/" + item.TieuDeRewrite + "." + item.MaBaiViet + ".html")">
+                        @item.TieuDe
+                    </a>
+                    
+                </h4>
                 <p>
                     @item.TomTat
                 </p>
             </div>
+
+            if (count == 3 || count == 6)
+            {
+                <div style="clear:both;"></div>
+            }
         }
         
-
-        @*<div class="col-md-4 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
-            <img src="~/Content/home/images/4.jpg" class="img-responsive" />
-            <h3>Template built with Twitter Bootstrap</h3>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus interdum erat libero, pulvinar tincidunt leo consectetur eget. Curabitur lacinia pellentesque libero, pulvinar tincidunt leo consectetur eget. Curabitur lacinia pellentesque libero,
-                pulvinar tincidunt leo consectetur eget. Curabitur lacinia pellentesque
-            </p>
-        </div>
-
-        <div class="col-md-4 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="900ms">
-            <img src="~/Content/home/images/4.jpg" class="img-responsive" />
-            <h3>Template built with Twitter Bootstrap</h3>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus interdum erat libero, pulvinar tincidunt leo consectetur eget. Curabitur lacinia pellentesque libero, pulvinar tincidunt leo consectetur eget. Curabitur lacinia pellentesque libero,
-                pulvinar tincidunt leo consectetur eget. Curabitur lacinia pellentesque
-            </p>
-        </div>*@
+        
+        <div style="clear:both;"></div>
+        
+        
         <div class="text-center">
             <br />
-            <a class="btn btn-lg btn-default" href="#" style="border:1px solid #cbcbcb;">Xem thêm...</a>
+            <a class="btn btn-lg btn-default" href="@Url.Action("Index", "TinTuc")" style="border:1px solid #cbcbcb;">Xem thêm...</a>
         </div>
     </div>
 </div>

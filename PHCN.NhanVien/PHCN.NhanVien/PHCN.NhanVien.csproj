@@ -524,6 +524,7 @@
     <Content Include="Content\ckeditor\skins\moono-lisa\images\refresh.png" />
     <Content Include="Content\ckeditor\skins\moono-lisa\images\spinner.gif" />
     <Content Include="Content\ckeditor\styles.js" />
+    <Content Include="Content\css\admin-layout.css" />
     <Content Include="Content\img\content-loading.gif" />
     <Content Include="Content\img\file-icon.png" />
     <Content Include="Content\ImageManager\ClickChonAnhDaiDien.jpg" />
@@ -562,6 +563,7 @@
     <Content Include="Content\img\logo-index.png" />
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\mail.ico" />
+    <Content Include="Content\img\no-image.jpg" />
     <Content Include="Content\img\photo-1.jpg" />
     <Content Include="Content\img\photo-2.jpg" />
     <Content Include="Content\img\photo-3.jpg" />
@@ -581,6 +583,12 @@
     <Content Include="Content\img\wild_flowers.png" />
     <Content Include="Content\css\jquery-ui.css" />
     <Content Include="Content\js\site.min.js" />
+    <Content Include="Content\img\mini-banner.jpg" />
+    <Content Include="Content\plugins\back-to-top\css\demo.css" />
+    <Content Include="Content\plugins\back-to-top\css\reset.css" />
+    <Content Include="Content\plugins\back-to-top\css\style.css" />
+    <Content Include="Content\plugins\back-to-top\img\cd-top-arrow.svg" />
+    <Content Include="Content\plugins\back-to-top\js\main.js" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -654,6 +662,7 @@
     <Content Include="scripts\app_scripts\QuanLyDanhMuc.js" />
     <Content Include="scripts\app_scripts\QuanLyNhanVien.js" />
     <Content Include="scripts\app_scripts\SoanThu.js" />
+    <Content Include="scripts\app_scripts\ThuNoiBo.js" />
     <Content Include="scripts\core-scripts\sweetalert2.all.min.js" />
     <Content Include="scripts\core-scripts\th.core.js" />
     <Content Include="scripts\jquery-3.3.1.js" />
@@ -908,6 +917,7 @@
     <Content Include="Views\QuanLyBaiViet\_pDanhSachHinhAnh.cshtml" />
     <Content Include="Views\QuanLyLyLichVienChuc\_pDienBienBoSungPhamViHDCM.cshtml" />
     <Content Include="Views\QuanLyBaiViet\_pDanhSachFileDinhKem.cshtml" />
+    <Content Include="Views\TinTuc\BaiViet.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

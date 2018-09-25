@@ -23,7 +23,7 @@
     <Property Name="MaNhanVien" Type="int" />
     <Property Name="TieuDe" Type="nvarchar" MaxLength="500" />
     <Property Name="TieuDeRewrite" Type="nvarchar" MaxLength="500" />
-    <Property Name="TomTat" Type="nvarchar" MaxLength="2000" />
+    <Property Name="TomTat" Type="ntext" />
     <Property Name="NoiDung" Type="ntext" />
     <Property Name="Ngay" Type="datetime2" Precision="7" />
     <Property Name="HienThiTrenTrangChu" Type="bit" />
@@ -75,6 +75,7 @@
     </Key>
     <Property Name="MaChuyenMuc" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TenChuyenMuc" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="TenChuyenMucRewrite" Type="nvarchar" MaxLength="200" />
     <Property Name="STT" Type="int" Nullable="false" />
     <Property Name="Xoa" Type="bit" Nullable="false" />
   </EntityType>

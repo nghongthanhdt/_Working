@@ -85,16 +85,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ChuyenMuc">
-      <EntityTypeMapping TypeName="PHCNModel.ChuyenMuc">
-        <MappingFragment StoreEntitySet="ChuyenMuc">
-          <ScalarProperty Name="Xoa" ColumnName="Xoa" />
-          <ScalarProperty Name="STT" ColumnName="STT" />
-          <ScalarProperty Name="TenChuyenMuc" ColumnName="TenChuyenMuc" />
-          <ScalarProperty Name="MaChuyenMuc" ColumnName="MaChuyenMuc" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="DanToc">
       <EntityTypeMapping TypeName="PHCNModel.DanToc">
         <MappingFragment StoreEntitySet="DanToc">
@@ -494,6 +484,17 @@
           <ScalarProperty Name="MaDonVi" ColumnName="MaDonVi" />
           <ScalarProperty Name="MaLyLichVienChuc" ColumnName="MaLyLichVienChuc" />
           <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ChuyenMuc">
+      <EntityTypeMapping TypeName="PHCNModel.ChuyenMuc">
+        <MappingFragment StoreEntitySet="ChuyenMuc">
+          <ScalarProperty Name="Xoa" ColumnName="Xoa" />
+          <ScalarProperty Name="STT" ColumnName="STT" />
+          <ScalarProperty Name="TenChuyenMucRewrite" ColumnName="TenChuyenMucRewrite" />
+          <ScalarProperty Name="TenChuyenMuc" ColumnName="TenChuyenMuc" />
+          <ScalarProperty Name="MaChuyenMuc" ColumnName="MaChuyenMuc" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -2,13 +2,74 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
+
+    PHCN.NhanVien.Models.PHCNEntities db = new PHCN.NhanVien.Models.PHCNEntities();
+    var listChuyenMuc = db.ChuyenMuc.OrderBy(x => x.STT).ThenBy(x => x.MaChuyenMuc).ToList();
+
+    string tenChuyenMucRewrite = "";
+    try
+    {
+        tenChuyenMucRewrite = ViewContext.RouteData.Values["TenChuyenMucRewrite"].ToString();
+    }
+    catch { }
+
+    int page = 1;
+    try
+    {
+        page = int.Parse(Request.QueryString["page"].ToString());
+    }
+    catch { }
+
+
+    var selectedChuyenMuc = new PHCN.NhanVien.Models.ChuyenMuc();
+    if (tenChuyenMucRewrite != "")
+    {
+        try
+        {
+            selectedChuyenMuc = listChuyenMuc.Where(x => x.TenChuyenMucRewrite == tenChuyenMucRewrite).First();
+        } catch
+        {
+
+        }
+
+
+    }
+    string timkiem = "";
+    try
+    {
+        timkiem = Request.QueryString["timkiem"].ToString();
+    }
+    catch { }
+    int soDongTrenMotTrang = 30;
+    var listTatCaBaiViet = db.BaiVietWeb.Where(x => x.Xoa != true && x.HienThiTrenTrangChu == true && (x.ChuyenMuc.TenChuyenMucRewrite == tenChuyenMucRewrite || tenChuyenMucRewrite == "") && (x.TieuDe.Contains(timkiem) || timkiem == "")).OrderByDescending(x => x.MaBaiViet).ToList();
+    var listBaiViet = listTatCaBaiViet.Skip(soDongTrenMotTrang * (page - 1)).Take(soDongTrenMotTrang).ToList();
+    var listHinhAnh = db.HinhAnh.ToList();
+
+    int tongsoTrang = listTatCaBaiViet.Count()/soDongTrenMotTrang + 1;
 }
+<link href="~/Content/plugins/back-to-top/css/style.css" rel="stylesheet" />
+<style>
+    .breadcrumb a {
+        color:white;
+    }
+    .breadcrumb a:hover {
+        color:#d4d4d4;
+        
+    }
+    .blog-item {
+        margin-bottom:0px;
+    }
+</style>
+
 
 <div id="breadcrumb">
     <div class="container">
         <div class="breadcrumb">
-            <li><a href="index.html">Trang chủ</a></li>
-            <li>Tin tức</li>
+            
+                <li><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
+                <li><a href="@Url.Action("Index", "TinTuc", new { @TenChuyenMucRewrite = ""})">Tin tức</a></li>
+                <li><a href="@Url.Action("Index", "TinTuc", new { @TenChuyenMucRewrite = selectedChuyenMuc.TenChuyenMucRewrite})">@selectedChuyenMuc.TenChuyenMuc</a></li>
+            
         </div>
     </div>
 </div>
@@ -18,8 +79,8 @@
         <div class="row">
             <aside class="col-md-4">
                 <div class="widget search">
-                    <form role="form">
-                        <input type="text" class="form-control search_box" autocomplete="off" placeholder="Tìm kiếm">
+                    <form role="form" action="">
+                        <input type="text" name="timkiem" class="form-control search_box" autocomplete="off" placeholder="Tìm kiếm" value="@timkiem">
                     </form>
                 </div>
                 <!--/.search-->
@@ -33,8 +94,13 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <ul class="blog_archieve">
-                                <li><a href="#"><i class="fa fa-angle-double-right"></i> Tin tức hoạt động </a></li>
-                                <li><a href="#"><i class="fa fa-angle-double-right"></i> Bảng giá dịch vụ </a></li>
+
+                                
+                                @foreach (var item in listChuyenMuc)
+                                {
+                                    <li><a href="@Url.Action("Index", "TinTuc", new { @TenChuyenMucRewrite = item.TenChuyenMucRewrite})"><i class="fa fa-angle-double-right"></i> @item.TenChuyenMuc </a></li>
+                                }                               
+                                
 
 
                             </ul>
@@ -47,47 +113,99 @@
 
             </aside>
             <div class="col-md-8">
-                <div class="blog-item">
-                    <div class="row">
-                        
 
-                        <div class="col-xs-12 col-sm-12 blog-content">
-                            <a href="#"><img class="img-responsive img-blog" src="~/Content/home/images/blog/blog1.jpg" width="100%" alt="" /></a>
-                            <h4>Consequat bibendum quam liquam viverra</h4>
-                            <p>
-                                Curabitur quis libero leo, pharetra mattis eros. Praesent consequat libero eget dolor convallis vel rhoncus magna scelerisque. Donec nisl ante, elementum eget posuere a, consectetur a metus. Proin a adipiscing sapien. Suspendisse vehicula
-                                porta lectus vel semper. Nullam sapien elit, lacinia eu tristique non.posuere at mi. Morbi at turpis id urna ullamcorper ullamcorper.
-                            </p>
-                            <a class="btn btn-primary readmore">Read More <i class="fa fa-angle-right"></i></a>
+                <style>
+                    .tieu-de{
+                        color:#004e06;
+                        text-decoration:none;
+                    }
+                    .tieu-de:hover{
+                        color:#008f07;
+                    }
+                    .ten-chuyen-muc {
+                        color:#00a4b5;
+                        text-decoration:none;
+                    }
+                    .ten-chuyen-muc:hover {
+                        color:#004f68;
+                    }
+                    
+                </style>
+
+                @foreach (var baiviet in listBaiViet)
+                {
+
+                    <div class="blog-item wow fadeInDown"  data-wow-duration="1000ms" data-wow-delay="300ms">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 blog-content">
+                                <h2>
+                                    <a href="@(HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/tin-tuc/" + baiviet.ChuyenMuc.TenChuyenMucRewrite + "/" + baiviet.TieuDeRewrite + "." + baiviet.MaBaiViet + ".html")" class="tieu-de">
+                                        @baiviet.TieuDe
+                                    </a>
+                                </h2>
+                                    
+                                
+                                <div style="clear:both"></div>
+                                <p>
+                                    <i class="glyphicon glyphicon-ok"></i> @baiviet.Ngay - <a href="@Url.Action("Index", "TinTuc", new { @TenChuyenMucRewrite = baiviet.ChuyenMuc.TenChuyenMucRewrite})" class="ten-chuyen-muc">@baiviet.ChuyenMuc.TenChuyenMuc</a>
+                                </p>
+                                <p style="font-size:16px;">
+                                    @baiviet.TomTat
+                                </p>
+                                <a href="@(HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/tin-tuc/" + baiviet.ChuyenMuc.TenChuyenMucRewrite + "/" + baiviet.TieuDeRewrite + "." + baiviet.MaBaiViet + ".html")">
+
+                                    @{
+                                        var listHinhDaiDien = listHinhAnh.Where(x => x.LoaiHinhAnh == "baivietweb" && x.MaBaiViet == baiviet.MaBaiViet && x.DaiDienBaiVietWeb == true && x.Xoa != true).ToList();
+                                        if (listHinhDaiDien.Any())
+                                        {
+                                            var hinhdaidien = listHinhDaiDien.First();
+                                            <img class="img-responsive img-blog" src="@(hinhdaidien.DuongDan + hinhdaidien.TenFileDayDu)" style="width:100%;" alt="" />
+                                        }
+                                        else
+                                        {
+                                            @*<img class="img-responsive img-blog" src="~/Content/img/no-image.jpg" style="width:100%;" alt="" />*@
+                                        }
+                                    }
+                                    
+                                </a>
+                                
+                                
+                                <a class="btn btn-primary readmore pull-right" href="@(HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/tin-tuc/" + baiviet.ChuyenMuc.TenChuyenMucRewrite + "/" + baiviet.TieuDeRewrite + "." + baiviet.MaBaiViet + ".html")">Xem bài viết <i class="fa fa-angle-right"></i></a>
+                                <div style="clear:both;"></div>
+                                <hr/>
+                            </div>
                         </div>
                     </div>
-                </div>
                 <!--/.blog-item-->
+                                        }
 
-                <div class="blog-item">
-                    <div class="row">
-                        
-                        <div class="col-sm-12 blog-content">
-                            <a href=""><img class="img-responsive img-blog" src="~/Content/home/images/3.jpg" width="100%" alt="" /></a>
-                            <h4>Consequat bibendum quam liquam viverra</h4>
-                            <p>
-                                Curabitur quis libero leo, pharetra mattis eros. Praesent consequat libero eget dolor convallis vel rhoncus magna scelerisque. Donec nisl ante, elementum eget posuere a, consectetur a metus. Proin a adipiscing sapien. Suspendisse vehicula
-                                porta lectus vel semper. Nullam sapien elit, lacinia eu tristique non.posuere at mi. Morbi at turpis id urna ullamcorper ullamcorper.
-                            </p>
-                            <a class="btn btn-primary readmore">Read More <i class="fa fa-angle-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <!--/.blog-item-->
 
-                <ul class="pagination pagination-lg">
-                    <li><a href="#"><i class="fa fa-long-arrow-left"></i>Previous Page</a></li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">Next Page<i class="fa fa-long-arrow-right"></i></a></li>
+
+
+                
+                <ul class="pagination pagination-lg wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+                    <li>
+                        <a href="javascript:void(0);">Trang: </a>
+                    </li>
+                    @if (page > 1)
+                    {
+                        <li>
+                            <a href="@((page>1)?("?page=" + (page-1).ToString()):"")"><i class="fa fa-long-arrow-left"></i> Trước </a>
+                        </li>
+                    }
+                    
+                    @for (int i = 1; i <= tongsoTrang; i++)
+                    {
+                        <li  class="@((page == i)?"active":"")"><a href="?page=@i">@i</a></li>
+                    }
+                    
+                    @if (page < tongsoTrang)
+                    {
+                        <li>
+                            <a href="@((page<tongsoTrang)?("?page=" + (page+1).ToString()):"")"> Kế tiếp <i class="fa fa-long-arrow-right"></i></a>
+                        </li>
+                    }
+                    
                 </ul>
                 <!--/.pagination-->
             </div>
@@ -100,3 +218,5 @@
 </section>
 <!--/#blog-->
 
+<a href="#0" class="cd-top js-cd-top">Top</a>
+<script src="~/Content/plugins/back-to-top/js/main.js"></script>

@@ -22,6 +22,7 @@ namespace PHCN.NhanVien.Models
     
         public int MaChuyenMuc { get; set; }
         public string TenChuyenMuc { get; set; }
+        public string TenChuyenMucRewrite { get; set; }
         public int STT { get; set; }
         public bool Xoa { get; set; }
     

@@ -11,7 +11,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bệnh viện Phục hồi chức năng Đồng Tháp</title>
+    <title>@ViewBag.PageTitle - Bệnh viện Phục hồi chức năng Đồng Tháp</title>
 
     <!-- Bootstrap -->
     <link href="~/Content/home/css/bootstrap.min.css" rel="stylesheet">
@@ -19,12 +19,13 @@
     <link rel="stylesheet" href="~/Content/home/css/animate.css">
     <link href="~/Content/home/css/prettyPhoto.css" rel="stylesheet">
     <link href="~/Content/home/css/style.css" rel="stylesheet" />
-    <!-- =======================================================
-      Theme Name: Company
-      Theme URL: https://bootstrapmade.com/company-free-html-bootstrap-template/
-      Author: BootstrapMade
-      Author URL: https://bootstrapmade.com
-    ======================================================= -->
+
+    <meta property="og:url" content="@ViewBag.PageUrl" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="@ViewBag.PageTitle" />
+    <meta property="og:description" content="@ViewBag.PageDescription" />
+    <meta property="og:image" content="http://bvphcndt.com@(ViewBag.PageImage)" />
+
 </head>
 
 <body>
@@ -50,6 +51,7 @@
                             <ul class="nav nav-tabs" role="tablist">
                                 <li role="presentation"><a href="@Url.Action("Index", "Home")#TrangChu" class="active">Trang chủ</a></li>
                                 <li role="presentation"><a href="@Url.Action("Index", "Home")#GioiThieu">Giới thiệu</a></li>
+                                <li role="presentation"><a href="@Url.Action("Index", "Home")#TinTuc">Tin tức</a></li>
                                 <li role="presentation"><a href="@Url.Action("Index", "Home")#DichVu">Dịch vụ</a></li>
                                 <li role="presentation"><a href="@Url.Action("Index", "Home")#LienHe">Liên hệ</a></li>
                                 <li role="presentation"><a href="@Url.Action("Index", "NoiBo")">Nội bộ</a></li>

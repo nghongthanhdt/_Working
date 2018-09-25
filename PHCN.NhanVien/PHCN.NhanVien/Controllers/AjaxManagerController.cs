@@ -430,5 +430,62 @@ namespace PHCN.NhanVien.Controllers
             }
             return "ok";
         }
+
+        public string NgungHoatDongBaiViet(string ListBaiViet)
+        {
+            try
+            {
+                // listBaiViet: 1,2,3,4
+                var listIntBaiViet = ListBaiViet.Split(',').Select(Int32.Parse).ToList();
+
+                foreach (int i in listIntBaiViet)
+                {                    
+                    db.BaiVietWeb.Find(i).HienThiTrenTrangChu = false;
+                }
+                db.SaveChanges();
+                return "ok";
+            } catch (Exception ex)
+            {
+                return ex.Message;
+            }
+            
+        }
+        public string HoatDongBaiViet(string ListBaiViet)
+        {
+            try
+            {
+                // listBaiViet: 1,2,3,4
+                var listIntBaiViet = ListBaiViet.Split(',').Select(Int32.Parse).ToList();
+                foreach (int i in listIntBaiViet)
+                {
+                    db.BaiVietWeb.Find(i).HienThiTrenTrangChu = true;
+                }
+                db.SaveChanges();
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+        public string XoaBaiViet(string ListBaiViet)
+        {
+            try
+            {
+                // listBaiViet: 1,2,3,4
+                var listIntBaiViet = ListBaiViet.Split(',').Select(Int32.Parse).ToList();
+                foreach (int i in listIntBaiViet)
+                {                    
+                    db.BaiVietWeb.Find(i).HienThiTrenTrangChu = false;
+                    db.BaiVietWeb.Find(i).Xoa = true;
+                }
+                db.SaveChanges();
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
     }
 }

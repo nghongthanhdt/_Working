@@ -23,29 +23,26 @@ namespace PHCN.NhanVien.Controllers
         public ActionResult CapNhat(string id)
         {
 
-            // nhớ chỉnh lại thông tin người cập nhật cho đúng với người đăng nhập
+            
             PHCN.NhanVien.Models.NhanVien nhanVienDangNhap = (PHCN.NhanVien.Models.NhanVien)Session["NhanVienDangNhap"];
 
-            //if (nhanVienDangNhap == null)
-            //{
-            //    return RedirectToAction("DangNhap", "Home");
-            //}
-            //ViewBag.MaNhanVienDangNhap = nhanVienDangNhap.MaNhanVien;
-            ViewBag.MaNhanVienDangNhap = 1;
+            if (nhanVienDangNhap == null)
+            {
+                return RedirectToAction("DangNhap", "Home");
+            }
+            ViewBag.MaNhanVienDangNhap = nhanVienDangNhap.MaNhanVien;
+            
 
 
             BaiVietWeb bv;
             int maBaiViet = 0;
             if (id == null || id == "")
             {
-                bv = new BaiVietWeb();
-                bv.MaNhanVien = 1;
-                //bv.MaNhanVien = ViewBag.MaNhanVienDangNhap;
+                bv = new BaiVietWeb();                
+                bv.MaNhanVien = ViewBag.MaNhanVienDangNhap;
                 bv.Ngay = CodeController.GetServerDateTime();
                 bv.Xoa = true;
-                bv.CapNhatLanCuoi = CodeController.GetServerDateTime();
-                
-                //bv.MaNhanVienCapNhat = ViewBag.MaNhanVienDangNhap;
+                bv.CapNhatLanCuoi = CodeController.GetServerDateTime();                
                 db.BaiVietWeb.Add(bv);
                 db.SaveChanges();
                 return RedirectToAction("CapNhat", new { id = bv.MaBaiViet });

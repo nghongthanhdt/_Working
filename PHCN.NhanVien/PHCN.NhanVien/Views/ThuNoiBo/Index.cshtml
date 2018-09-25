@@ -2,27 +2,35 @@
 @{
     ViewBag.Title = "Thư nội bộ";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-
+    PHCN.NhanVien.Models.PHCNEntities db = new PHCN.NhanVien.Models.PHCNEntities();
 
     var nhanVienDangNhap = (PHCN.NhanVien.Models.NhanVien)Session["NhanVienDangNhap"];
     if (nhanVienDangNhap == null) { Response.Redirect(Url.Action("DangNhap", "Home")); }
     int _maNhanVienDangNhap = nhanVienDangNhap.MaNhanVien;
     string _trangThai = ViewBag.TrangThai.ToString();
     string box = "";
-    try
+    try { box = Request.QueryString["box"].ToString();}catch { }
+    string getTieuDe = "";
+    try { getTieuDe = Request.QueryString["tieude"].ToString(); } catch { }
+    int getNguoiGui = 0;
+    try { getNguoiGui = int.Parse(Request.QueryString["nguoigui"].ToString()); } catch { }
+    string getNgayGui = "";
+    try { getNgayGui = Request.QueryString["ngaygui"].ToString(); } catch { }
+
+    bool modeTimKiem = false;
+    if((getTieuDe != "")||(getNguoiGui != 0)||(getNgayGui!=""))
     {
-        box = Request.QueryString["box"].ToString();
+        modeTimKiem = true;
     }
-    catch { }
+
+    var listNhanVien = db.NhanVien.Where(x => x.NhanThu == true && x.Xoa == false).OrderBy(x => x.KhoaPhong.STT).ThenBy(x => x.STT).ToList();
+    var listKhoaPhong = db.KhoaPhong.Where(x => x.Xoa == false).OrderBy(x => x.STT).ToList();
 
     ViewBag.PanelTitle = "";
     switch(box)
     {
         case "ThuDen":
-            ViewBag.PanelTitle = "Thư đến";
-            break;
-        case "QuanTrong":
-            ViewBag.PanelTitle = "Thư quan trọng";
+            ViewBag.PanelTitle = "Hộp thư đến";
             break;
         case "DaGui":
             ViewBag.PanelTitle = "Thư đã gửi";
@@ -32,7 +40,7 @@
             break;
         default:
             ViewBag.PanelTitle = "Hộp thư đến";
-            break; 
+            break;
     }
 
 }
@@ -40,158 +48,115 @@
 <script>
     var _maNhanVienDangNhap = @_maNhanVienDangNhap;
     var _trangThai = '@_trangThai';
+
+    var _getTieuDe = '@getTieuDe';
+    var _getNguoiGui = '@getNguoiGui';
+    var _getNgayGui = '@getNgayGui';
 </script>
  
-<div style="width:100%; height:400px; overflow:scroll;" id="divDanhSachThu">
-                            
+
+
+<link href="~/Content/css/jquery-ui.css" rel="stylesheet" />
+<script src="~/scripts/jquery.mask.js"></script>
+<script src="~/scripts/jquery-ui-1.12.1.min.js"></script>
+
+
+
+<div style="width:100%; height:500px; overflow-y:scroll;" id="divDanhSachThu">
+
+    <img src="~/Content/img/content-loading.gif" style="width:150px;" />          
 </div>
 <br/>
-@if (_trangThai == "DaXoa")
-{
-    <button class="btn btn-default" id="btnTraVeThuDen">Trả về thư đến</button>
-}
-@if (_trangThai == "ThuDen" || _trangThai == "DaGui" || _trangThai == "DaXoa")
-{
-    <button class="btn btn-default" id="btnXoaThu">Xóa thư</button>
-}                                                                  
-<button class="btn btn-default" id="btnChonTatCa">Chọn tất cả</button>
 
+<div id="divActionButton">
+    <button class="btn btn-default" id="btnChonTatCa" style="margin-bottom:5px;"><i class="glyphicon glyphicon-ok"></i> Chọn tất cả</button>
+    @if (_trangThai == "DaXoa")
+    {
+        <button class="btn btn-default" id="btnTraVeThuDen" style="margin-bottom:5px;"><i class="glyphicon glyphicon-share-alt"></i> Trả về thư đến</button>
+    }
+    @if (_trangThai == "ThuDen" || _trangThai == "DaGui" || _trangThai == "DaXoa")
+    {
+        <button class="btn btn-default" id="btnXoaThu" style="margin-bottom:5px;"><i class="glyphicon glyphicon-remove"></i> Xóa thư</button>
+    }
+    <button class="btn btn-default" id="btnTimKiem" style="margin-bottom:5px;" data-toggle="collapse" data-target="#panelTimKiem"><i class="glyphicon glyphicon-search"></i> Tìm kiếm</button>
+    <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle " style="margin-bottom:5px;" data-toggle="dropdown">Tùy chọn &nbsp; <span class="caret"></span></button>
+        <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Đánh dấu đã xem</a></li>
+            <li><a href="#">Đánh dấu chưa xem</a></li>
+
+        </ul>
+    </div>
+    <div class="pull-right" style="padding:5px; font-size:12px;" id="thongtinThu">
+
+    </div>
+    <br />
+    <br />
+
+    <div class="row collapse @((modeTimKiem)?"in":"")" id="panelTimKiem">
+        <div class="col-sm-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="glyphicon glyphicon-search"></i> Tìm kiếm</h3>
+                </div>
+                <div class="panel-body">
+                    <form method="get" action="@Url.Action("Index","ThuNoiBo")">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input class="form-control input-sm" type="text" placeholder="Tiêu đề..." name="tieude" value="@getTieuDe">
+                            </div>
+                        </div>
+                        <div class="row">
+                            
+                            <div class="col-md-3">
+                                <select class="form-control input-sm" name="nguoigui">
+                                    <option value=""> Người gửi... </option>
+                                    @foreach (var khoaphong in listKhoaPhong)
+                                    {
+                                        <optgroup label="@khoaphong.TenKhoa">
+                                            @foreach(var nhanvien in listNhanVien.Where(x => x.MaKhoa == khoaphong.MaKhoa).OrderBy(x => x.STT).ToList())
+                                            {
+                                                <option value="@nhanvien.MaNhanVien" @((getNguoiGui == nhanvien.MaNhanVien)?"selected='selected'":"") >@nhanvien.HoTen</option>
+                                            }
+                                        </optgroup>
+                                    }
+                                    
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <input class="form-control input-sm date" type="text" name="ngaygui" placeholder="Ngày gửi..." value="@getNgayGui">
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-sm btn-success btn-block">Tìm </button>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="@Url.Action("Index", "ThuNoiBo")" class="btn btn-sm btn-danger btn-block">Hủy bỏ </a>
+                            </div>
+                        </div>
+                        <input type="hidden" value="@box" name="box" />
+                    </form>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button class="btn btn-default btn-block" data-toggle="collapse" data-target="#panelTimKiem">Đóng</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
-    $(document).ready(function () {
-
-        loadDanhSachThu();
-
-    });
-    function loadDanhSachThu() {
-        var url = '@Url.Action("_pDanhSachThu", "ThuNoiBo")';
-
-        var param = {
-            maNhanVienDangNhap:_maNhanVienDangNhap,
-            trangThai:_trangThai
-        }
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: param,
-            success: function (data) {
-                $("#divDanhSachThu").html(data);
-                //if (_trangThai == "DaGui") {
-                //    //$("#btnDanhDauQuanTrong").hide();
-                //    //$("#btnDanhDauXoa").hide();
-                //}
-                //if (_trangThai == "DaXoa") {
-                //    $("#btnTraVeThuDen").show();
-                //} else {
-                //    $("#btnTraVeThuDen").hide();
-                //}
-            },
-            dataType: "html"
-        });
-    }
-    $("#btnChonTatCa").click(function () {
-        if ($(".checkboxThu").prop("checked") == false) {
-            $(".checkboxThu").prop("checked", true);
-        } else {
-            $(".checkboxThu").prop("checked", false);
-        }
-
-    });
-
-    $("#btnTraVeThuDen").click(function () {
-        
-        var listCheckedThu = $('.checkboxThu:checkbox:checked').map(function () {
-            return $(this).data("id-gui-nhan");
-        }).get();
-        listThuDaChon = listCheckedThu.join(",");
-        if (listThuDaChon == "") {
-            alert("Chưa chọn thư nào");
-            return;
-        }
-        if (!confirm("Bạn muốn trả thư này về hộp thư đến ?")) {
-            return;
-        }
-        // send ajax - đánh dấu trả về thư đến
-        var url = '@Url.Action("TraVeThuDenList", "ThuNoiBo")';
-        var param = {
-            listGuiNhanTraVeThuDen: listThuDaChon
-        }
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: param,
-            success: function (result) {
-                if (result == "true") {
-                    //alert ("Đã trả về hộp thư đến thành công");
-                    loadDanhSachThu();
-                } else {
-                    alert(result);
-                }
-            },
-            dataType: "html"
-        });
-    });
-    $("#btnXoaThu").click(function () {
-        if (_trangThai == "DaGui") {
-            alert("Không thể xóa thư đã gửi");
-            return;
-        }
-        var listCheckedThu = $('.checkboxThu:checkbox:checked').map(function () {
-            return $(this).data("id-gui-nhan");
-        }).get();
-        listThuDaChon = listCheckedThu.join(",");
-        if (listThuDaChon == "") {
-            alert("Chưa chọn thư nào");
-            return;
-        }
-        if (_trangThai != "DaXoa") {
-            if (confirm("Bạn thật sự muốn xóa ?") == false) {
-                return;
-            }
-            // send ajax - đánh dấu xóa
-            var url = '@Url.Action("DanhDauXoaList", "ThuNoiBo")';
-            var param = {
-                listGuiNhanXoa: listThuDaChon
-            }
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: param,
-                success: function (result) {
-                    if (result == "true") {
-                        //alert ("Đã xóa thư thành công");
-                        loadDanhSachThu();
-                    } else {
-                        alert(result);
-                    }
-                },
-                dataType: "html"
-            });
-        } else {
-            if (confirm("Bạn thật sự muốn xóa vĩnh viễn các thư này ?") == false) {
-                return;
-            }
-            // send ajax xóa vĩnh viễn        
-            var url = '@Url.Action("XoaVinhVienList", "ThuNoiBo")';
-            var param = {
-                listGuiNhanXoa: listThuDaChon
-            }
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: param,
-                success: function (result) {
-                    if (result == "true") {
-                        //alert ("Đã xóa thư thành công");
-                        loadDanhSachThu();
-                    } else {
-                        alert(result);
-                    }
-                },
-                dataType: "html"
-            });
-        }
-
-    });
+    var _urlDanhSachThu = '@Url.Action("_pDanhSachThu", "ThuNoiBo")';
+    var _urlTraVeThuDen = '@Url.Action("TraVeThuDenList", "ThuNoiBo")';
+    var _urlDanhDauXoa = '@Url.Action("DanhDauXoaList", "ThuNoiBo")';
+    var _urlXoaThuVinhVien = '@Url.Action("XoaVinhVienList", "ThuNoiBo")';
+    var _urlLayTongSoThu = '@Url.Action("LayTongSoThu", "ThuNoiBo")';
 </script>
+
+
+<script src="~/scripts/core-scripts/sweetalert2.all.min.js"></script>
+<script src="~/scripts/core-scripts/th.core.js?@("v="+DateTime.Now.ToString("yyMMddhhmmss"))"></script>
+<script src="~/scripts/app_scripts/ThuNoiBo.js?@("v="+DateTime.Now.ToString("yyMMddhhmmss"))"></script>
+
   

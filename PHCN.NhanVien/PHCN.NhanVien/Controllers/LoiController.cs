@@ -23,5 +23,6 @@ namespace PHCN.NhanVien.Controllers
             ViewBag.TenLoi = loi.TenLoi;
             return View();
         }
+
     }
 }
