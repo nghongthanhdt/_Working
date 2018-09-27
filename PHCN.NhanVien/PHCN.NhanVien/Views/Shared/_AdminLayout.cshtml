@@ -111,15 +111,15 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse"  href="#collapseThuNoiBo" class="tieu-de-menu" style="color:white;">Thư nội bộ</a>
+                                <a data-toggle="collapse"  href="#collapseThuNoiBo" class="tieu-de-menu" style="color:white;"><i class="glyphicon glyphicon-envelope"></i> Thư nội bộ</a>
                             </h4>
                         </div>
                         <div id="collapseThuNoiBo" class="panel-collapse collapse in" style="">
                             
                                 <div class="list-group">
-                                    <a href="@Url.Action("Index", "ThuNoiBo", new { box = "ThuDen"})" class="list-group-item ">Hộp thư đến</a>
-                                    <a href="@Url.Action("Index", "ThuNoiBo", new { box = "DaGui"})" class="list-group-item ">Thư đã gửi</a>
-                                    <a href="@Url.Action("Index", "ThuNoiBo", new { box = "DaXoa"})" class="list-group-item ">Thùng rác</a>
+                                    <a href="@Url.Action("Index", "ThuNoiBo", new { box = "ThuDen"})" class="list-group-item "><i class="glyphicon glyphicon-save"></i> Hộp thư đến</a>
+                                    <a href="@Url.Action("Index", "ThuNoiBo", new { box = "DaGui"})" class="list-group-item "><i class="glyphicon glyphicon-send"></i>Thư đã gửi</a>
+                                    <a href="@Url.Action("Index", "ThuNoiBo", new { box = "DaXoa"})" class="list-group-item "><i class="glyphicon glyphicon-trash"></i>Thư đã xóa</a>
                                 </div>
                             
                         </div>

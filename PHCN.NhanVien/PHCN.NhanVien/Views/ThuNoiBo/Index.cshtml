@@ -63,8 +63,12 @@
 
 
 <div style="width:100%; height:500px; overflow-y:scroll;" id="divDanhSachThu">
-
-    <img src="~/Content/img/content-loading.gif" style="width:150px;" />          
+    <div class="text-center">
+        <br /><br /><br /><br />
+        Đang tải, vui lòng chờ ...
+                 
+    </div>
+    
 </div>
 <br/>
 
@@ -82,9 +86,9 @@
     <div class="btn-group">
         <button type="button" class="btn btn-default dropdown-toggle " style="margin-bottom:5px;" data-toggle="dropdown">Tùy chọn &nbsp; <span class="caret"></span></button>
         <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Đánh dấu đã xem</a></li>
-            <li><a href="#">Đánh dấu chưa xem</a></li>
-
+            <li><a href="#" id="btnDanhDauDaXem">Đánh dấu đã xem</a></li>
+            <li><a href="#" id="btnDanhDauChuaXem">Đánh dấu chưa xem</a></li>
+            <li><a href="#" id="btnDanhDauDaXemTatCa">Đánh dấu đã xem tất cả</a></li>
         </ul>
     </div>
     <div class="pull-right" style="padding:5px; font-size:12px;" id="thongtinThu">
@@ -152,6 +156,9 @@
     var _urlDanhDauXoa = '@Url.Action("DanhDauXoaList", "ThuNoiBo")';
     var _urlXoaThuVinhVien = '@Url.Action("XoaVinhVienList", "ThuNoiBo")';
     var _urlLayTongSoThu = '@Url.Action("LayTongSoThu", "ThuNoiBo")';
+    var _urlDanhDauDaXemList = '@Url.Action("DanhDauDaXemList", "ThuNoiBo")';
+    var _urlDanhDauChuaXemList = '@Url.Action("DanhDauChuaXemList", "ThuNoiBo")';
+    var _urlDanhDauDaXemTatCa = '@Url.Action("DanhDauDaXemTatCa", "ThuNoiBo")';
 </script>
 
 

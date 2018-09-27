@@ -30,15 +30,12 @@
     Người gửi: <strong>@guiNhan.NhanVien.HoTen</strong> - <a href="javascript:void(0);" id="linkNguoiNhan">Người nhận</a> - @baiViet.Ngay.ToString("dd/MM/yyyy HH:mm:ss")
 </div>
 <div style="clear:both;"></div>
-@*<label for="exampleInputEmail1">Nội dung</label>*@
-<div class="well" style="font-size:@(fontSize)px;">
+
+<div class="well" style="font-size:@(fontSize)px; box-shadow:3px 3px 5px gray; border:1px solid #008000; border-radius:0px; margin-top:10px; padding:15px;">
     @Html.Raw(baiViet.NoiDung)
 </div>
 
-<!--<textarea id="txtNoiDung"></textarea>
-<script>
-  CKEDITOR.replace( 'txtNoiDung');
-</script>-->
+
 <div id="divDanhSachFileDinhKem" style="font-size:@(fontSize)px;">
     @*lấy ajax hiển thị ra đây*@
 </div>
@@ -61,7 +58,7 @@
     });
 </script>
 
-<a href="javascript:history.back();" class="btn btn-primary">Trở lại</a>
+<a href="javascript:history.back();" class="btn btn-primary btn-lg btn-block"><i class="glyphicon glyphicon-arrow-left"></i> Trở lại</a>
 
 
 

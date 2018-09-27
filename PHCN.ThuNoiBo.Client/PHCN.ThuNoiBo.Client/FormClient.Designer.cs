@@ -33,6 +33,7 @@
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.tabHopThu = new DevExpress.XtraTab.XtraTabPage();
+            this.txtLinkHopThu = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblThongBao = new System.Windows.Forms.Label();
             this.btnDenHopThu = new DevExpress.XtraEditors.SimpleButton();
@@ -72,14 +73,6 @@
             this.txtConnectServer = new System.Windows.Forms.TextBox();
             this.btnLuuCauHinh = new DevExpress.XtraEditors.SimpleButton();
             this.btnCapNhatCauHinh = new DevExpress.XtraEditors.SimpleButton();
-            this.tabTienIch = new DevExpress.XtraTab.XtraTabPage();
-            this.txtLinkHopThu = new System.Windows.Forms.TextBox();
-            this.checkboxAutoStart = new System.Windows.Forms.CheckBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.checkboxTienIch = new System.Windows.Forms.CheckBox();
-            this.txtAutoGetMailTimer = new System.Windows.Forms.TextBox();
-            this.checkboxAutoGetMail = new System.Windows.Forms.CheckBox();
-            this.checkboxShowOnStart = new System.Windows.Forms.CheckBox();
             this.notifyIconMain = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStripClient = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuHienThu = new System.Windows.Forms.ToolStripMenuItem();
@@ -99,7 +92,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvTaiKhoan)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectKhoaPhong.Properties)).BeginInit();
             this.tabCauHinh.SuspendLayout();
-            this.tabTienIch.SuspendLayout();
             this.contextMenuStripClient.SuspendLayout();
             this.statusStripClient.SuspendLayout();
             this.SuspendLayout();
@@ -124,11 +116,11 @@
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.tabHopThu,
             this.tabTaiKhoan,
-            this.tabCauHinh,
-            this.tabTienIch});
+            this.tabCauHinh});
             // 
             // tabHopThu
             // 
+            this.tabHopThu.Controls.Add(this.txtLinkHopThu);
             this.tabHopThu.Controls.Add(this.pictureBox1);
             this.tabHopThu.Controls.Add(this.lblThongBao);
             this.tabHopThu.Controls.Add(this.btnDenHopThu);
@@ -137,6 +129,17 @@
             this.tabHopThu.Name = "tabHopThu";
             this.tabHopThu.Size = new System.Drawing.Size(476, 278);
             this.tabHopThu.Text = "Hộp thư";
+            // 
+            // txtLinkHopThu
+            // 
+            this.txtLinkHopThu.Location = new System.Drawing.Point(14, 245);
+            this.txtLinkHopThu.Name = "txtLinkHopThu";
+            this.txtLinkHopThu.ReadOnly = true;
+            this.txtLinkHopThu.Size = new System.Drawing.Size(72, 21);
+            this.txtLinkHopThu.TabIndex = 5;
+            this.txtLinkHopThu.Text = "http://128.0.0.101:1234/ThuNoiBo/ClientLogin/?TenDangNhap=nghongthanhdt&MatKhau=s" +
+    "dhjgdjh3hdh3hfdhfhdj";
+            this.txtLinkHopThu.Visible = false;
             // 
             // pictureBox1
             // 
@@ -269,7 +272,6 @@
             this.label14.Size = new System.Drawing.Size(57, 13);
             this.label14.TabIndex = 1;
             this.label14.Text = "Tài khoản:";
-            this.label14.Click += new System.EventHandler(this.label12_Click);
             // 
             // label12
             // 
@@ -279,7 +281,6 @@
             this.label12.Size = new System.Drawing.Size(68, 13);
             this.label12.TabIndex = 1;
             this.label12.Text = "Khoa phòng:";
-            this.label12.Click += new System.EventHandler(this.label12_Click);
             // 
             // selectKhoaPhong
             // 
@@ -524,103 +525,6 @@
             this.btnCapNhatCauHinh.Text = "Cập nhật";
             this.btnCapNhatCauHinh.Click += new System.EventHandler(this.btnCapNhatCauHinh_Click);
             // 
-            // tabTienIch
-            // 
-            this.tabTienIch.Controls.Add(this.txtLinkHopThu);
-            this.tabTienIch.Controls.Add(this.checkboxAutoStart);
-            this.tabTienIch.Controls.Add(this.label9);
-            this.tabTienIch.Controls.Add(this.checkboxTienIch);
-            this.tabTienIch.Controls.Add(this.txtAutoGetMailTimer);
-            this.tabTienIch.Controls.Add(this.checkboxAutoGetMail);
-            this.tabTienIch.Controls.Add(this.checkboxShowOnStart);
-            this.tabTienIch.Name = "tabTienIch";
-            this.tabTienIch.PageVisible = false;
-            this.tabTienIch.Size = new System.Drawing.Size(476, 278);
-            this.tabTienIch.Text = "Tiện ích";
-            // 
-            // txtLinkHopThu
-            // 
-            this.txtLinkHopThu.Location = new System.Drawing.Point(14, 12);
-            this.txtLinkHopThu.Name = "txtLinkHopThu";
-            this.txtLinkHopThu.ReadOnly = true;
-            this.txtLinkHopThu.Size = new System.Drawing.Size(448, 21);
-            this.txtLinkHopThu.TabIndex = 0;
-            this.txtLinkHopThu.Text = "http://128.0.0.101:1234/ThuNoiBo/ClientLogin/?TenDangNhap=nghongthanhdt&MatKhau=s" +
-    "dhjgdjh3hdh3hfdhfhdj";
-            // 
-            // checkboxAutoStart
-            // 
-            this.checkboxAutoStart.AutoSize = true;
-            this.checkboxAutoStart.Checked = true;
-            this.checkboxAutoStart.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkboxAutoStart.Location = new System.Drawing.Point(14, 39);
-            this.checkboxAutoStart.Name = "checkboxAutoStart";
-            this.checkboxAutoStart.Size = new System.Drawing.Size(145, 17);
-            this.checkboxAutoStart.TabIndex = 10;
-            this.checkboxAutoStart.Text = "Khởi động cùng Windows";
-            this.checkboxAutoStart.UseVisualStyleBackColor = true;
-            this.checkboxAutoStart.Visible = false;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(171, 63);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(27, 13);
-            this.label9.TabIndex = 6;
-            this.label9.Text = "giây";
-            this.label9.Visible = false;
-            // 
-            // checkboxTienIch
-            // 
-            this.checkboxTienIch.AutoSize = true;
-            this.checkboxTienIch.Location = new System.Drawing.Point(14, 85);
-            this.checkboxTienIch.Name = "checkboxTienIch";
-            this.checkboxTienIch.Size = new System.Drawing.Size(62, 17);
-            this.checkboxTienIch.TabIndex = 17;
-            this.checkboxTienIch.TabStop = false;
-            this.checkboxTienIch.Text = "Tiện ích";
-            this.checkboxTienIch.UseVisualStyleBackColor = true;
-            this.checkboxTienIch.Visible = false;
-            this.checkboxTienIch.CheckedChanged += new System.EventHandler(this.checkboxTienIch_CheckedChanged);
-            // 
-            // txtAutoGetMailTimer
-            // 
-            this.txtAutoGetMailTimer.Location = new System.Drawing.Point(133, 60);
-            this.txtAutoGetMailTimer.Name = "txtAutoGetMailTimer";
-            this.txtAutoGetMailTimer.Size = new System.Drawing.Size(30, 21);
-            this.txtAutoGetMailTimer.TabIndex = 13;
-            this.txtAutoGetMailTimer.Text = "30";
-            this.txtAutoGetMailTimer.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtAutoGetMailTimer.Visible = false;
-            // 
-            // checkboxAutoGetMail
-            // 
-            this.checkboxAutoGetMail.AutoSize = true;
-            this.checkboxAutoGetMail.Checked = true;
-            this.checkboxAutoGetMail.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkboxAutoGetMail.Enabled = false;
-            this.checkboxAutoGetMail.Location = new System.Drawing.Point(14, 62);
-            this.checkboxAutoGetMail.Name = "checkboxAutoGetMail";
-            this.checkboxAutoGetMail.Size = new System.Drawing.Size(115, 17);
-            this.checkboxAutoGetMail.TabIndex = 12;
-            this.checkboxAutoGetMail.Text = "Tự lấy thư mới sau";
-            this.checkboxAutoGetMail.UseVisualStyleBackColor = true;
-            this.checkboxAutoGetMail.Visible = false;
-            // 
-            // checkboxShowOnStart
-            // 
-            this.checkboxShowOnStart.AutoSize = true;
-            this.checkboxShowOnStart.Checked = true;
-            this.checkboxShowOnStart.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkboxShowOnStart.Location = new System.Drawing.Point(14, 108);
-            this.checkboxShowOnStart.Name = "checkboxShowOnStart";
-            this.checkboxShowOnStart.Size = new System.Drawing.Size(151, 17);
-            this.checkboxShowOnStart.TabIndex = 11;
-            this.checkboxShowOnStart.Text = "Bật hội thoại khi khởi động";
-            this.checkboxShowOnStart.UseVisualStyleBackColor = true;
-            this.checkboxShowOnStart.Visible = false;
-            // 
             // notifyIconMain
             // 
             this.notifyIconMain.ContextMenuStrip = this.contextMenuStripClient;
@@ -722,7 +626,7 @@
             this.MinimizeBox = false;
             this.Name = "FormClient";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "BỆNH VIỆN PHỤC HỒI CHỨC NĂNG ĐỒNG THÁP";
+            this.Text = "BỆNH VIỆN PHỤC HỒI CHỨC NĂNG ĐỒNG THÁP [v18.09.26]";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormClient_FormClosed);
             this.Load += new System.EventHandler(this.FormClient_Load);
             this.VisibleChanged += new System.EventHandler(this.FormClient_VisibleChanged);
@@ -738,8 +642,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.selectKhoaPhong.Properties)).EndInit();
             this.tabCauHinh.ResumeLayout(false);
             this.tabCauHinh.PerformLayout();
-            this.tabTienIch.ResumeLayout(false);
-            this.tabTienIch.PerformLayout();
             this.contextMenuStripClient.ResumeLayout(false);
             this.statusStripClient.ResumeLayout(false);
             this.statusStripClient.PerformLayout();
@@ -758,7 +660,6 @@
         private DevExpress.XtraEditors.LabelControl lblHoTen;
         private DevExpress.XtraTab.XtraTabPage tabCauHinh;
         private System.Windows.Forms.Label label2;
-        private DevExpress.XtraTab.XtraTabPage tabTienIch;
         private System.Windows.Forms.TextBox txtConnectPassword;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtConnectUserName;
@@ -777,24 +678,17 @@
         private System.Windows.Forms.ToolStripMenuItem menuHienThu;
         private System.Windows.Forms.ToolStripMenuItem menuDenHopThu;
         private System.Windows.Forms.ToolStripMenuItem menuThoat;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox txtAutoGetMailTimer;
-        private System.Windows.Forms.CheckBox checkboxAutoGetMail;
-        private System.Windows.Forms.CheckBox checkboxShowOnStart;
-        private System.Windows.Forms.CheckBox checkboxAutoStart;
         private DevExpress.XtraEditors.SimpleButton btnBoQua;
         private System.Windows.Forms.TextBox txtPort;
         private System.Windows.Forms.TextBox txtWebServer;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox txtLinkHopThu;
         private DevExpress.XtraEditors.SimpleButton btnThoatChuongTrinh;
         private System.Windows.Forms.StatusStrip statusStripClient;
         private System.Windows.Forms.TextBox txtTenKhoa;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txtHoTen;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.CheckBox checkboxTienIch;
         private System.Windows.Forms.ToolStripStatusLabel statusBanQuyen;
         public System.Windows.Forms.Timer timerLayThu;
         private System.Windows.Forms.PictureBox pictureBox1;
@@ -810,6 +704,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn colHoTen;
         private DevExpress.XtraGrid.Columns.GridColumn colTenDangNhap;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox txtLinkHopThu;
     }
 }
 

@@ -225,6 +225,65 @@ namespace PHCN.NhanVien.Controllers
                 return Content("Lỗi hệ thống: " + ex.Message);
             }
         }
+        public ActionResult DanhDauDaXemList(string listGuiNhanDaXem)
+        {
+            try
+            {
+                var listIntGuiNhanDaXem = listGuiNhanDaXem.Split(',').Select(Int32.Parse).ToList();
+                foreach (var item in listIntGuiNhanDaXem)
+                {
+                    GuiNhan gn = db.GuiNhan.Find(item);
+                    gn.DaXem = true;
+                }
+                db.SaveChanges();
+                return Content("true");
+            }
+            catch (Exception ex)
+            {
+                return Content("Lỗi hệ thống: " + ex.Message);
+            }
+        }
+        public ActionResult DanhDauChuaXemList(string listGuiNhanChuaXem)
+        {
+            try
+            {
+                var listIntGuiNhanChuaXem = listGuiNhanChuaXem.Split(',').Select(Int32.Parse).ToList();
+                foreach (var item in listIntGuiNhanChuaXem)
+                {
+                    GuiNhan gn = db.GuiNhan.Find(item);
+                    gn.DaXem = false;
+                }
+                db.SaveChanges();
+                return Content("true");
+            }
+            catch (Exception ex)
+            {
+                return Content("Lỗi hệ thống: " + ex.Message);
+            }
+        }
+        public ActionResult DanhDauDaXemTatCa()
+        {
+            PHCN.NhanVien.Models.NhanVien nhanVienDangNhap = (PHCN.NhanVien.Models.NhanVien)Session["NhanVienDangNhap"];
+
+            if (nhanVienDangNhap == null)
+            {
+                return Content("Phiên làm việc hết hạn, vui lòng đăng nhập lại");
+            }
+            try
+            {
+                var listGuiNhan = db.GuiNhan.Where(x => x.NguoiNhan == nhanVienDangNhap.MaNhanVien);
+                foreach (var item in listGuiNhan)
+                {                    
+                    item.DaXem = true;
+                }
+                db.SaveChanges();
+                return Content("true");
+            }
+            catch (Exception ex)
+            {
+                return Content("Lỗi hệ thống: " + ex.Message);
+            }
+        }
         public ActionResult TraVeThuDenList(string listGuiNhanTraVeThuDen)
         {
             try

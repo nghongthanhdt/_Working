@@ -28,7 +28,7 @@ namespace PHCN.ThuNoiBo.Client
         string _MaNhanVien = "0";
         int _SoThuMoi = 0;
         string _PathConFig = @"C:\configThuNoiBo.xml";
-        string _loginMD5prefix = "hongthanh_";
+        
         int _macdinhThoiGianLayThu = 10000; // 10 giây
         public FormClient()
         {
@@ -141,16 +141,7 @@ namespace PHCN.ThuNoiBo.Client
             loadCauHinh();
             modeXemCauHinh();
         }
-        private void checkboxTienIch_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkboxTienIch.Checked)
-            {
-                tabTienIch.PageVisible = true;
-            } else
-            {
-                tabTienIch.PageVisible = false;
-            }
-        }
+
         private void loadCauHinh()
         {     
             // đọc file cấu hình, lấy thông tin load lên các control
@@ -184,10 +175,7 @@ namespace PHCN.ThuNoiBo.Client
             txtConnectPassword.Text = clientConfig.ConnectPassword;
             txtAccountUserName.Text = clientConfig.AccountUserName;
             txtAccountPassword.Text = clientConfig.AccountPassword;
-            checkboxAutoStart.Checked = clientConfig.AutoStart;
-            checkboxShowOnStart.Checked = clientConfig.ShowOnStart;
-            checkboxAutoGetMail.Checked = clientConfig.AutoGetMail;
-            txtAutoGetMailTimer.Text = clientConfig.AutoGetMailTimer.ToString();
+
             txtWebServer.Text = clientConfig.WebServer;
             txtPort.Text = clientConfig.Port;
             txtDatabase.Text = clientConfig.Database;
@@ -195,8 +183,8 @@ namespace PHCN.ThuNoiBo.Client
             txtTenKhoa.Text = clientConfig.TenKhoa;
             _MaNhanVien = clientConfig.MaNhanVien;
             // ví dụ tên đăng nhập là nhthanh thì pass md5 là hongthanh_nhthanh ->> md5code
-            string md5Password = getMd5(_loginMD5prefix+txtAccountUserName.Text).ToLower();
-            txtLinkHopThu.Text = "http://" + txtWebServer.Text + ((txtPort.Text != "") ? (":" + txtPort.Text) : "") + "/Home/ClientLogin/?TenDangNhap=" + txtAccountUserName.Text.ToLower() + "&MatKhau=" + md5Password;
+            string md5AccountUserName = getMd5(txtAccountUserName.Text).ToLower();
+            txtLinkHopThu.Text = "http://" + txtWebServer.Text + ((txtPort.Text != "") ? (":" + txtPort.Text) : "") + "/Home/ClientLogin/?TenDangNhap=" + txtAccountUserName.Text.ToLower() + "&MatKhau=" + md5AccountUserName;
             lblTenKhoa.Text = clientConfig.TenKhoa;
             lblHoTen.Text = clientConfig.HoTen;
             lblThongBao.Text = "";
@@ -213,7 +201,7 @@ namespace PHCN.ThuNoiBo.Client
                 timerLayThu.Interval = _macdinhThoiGianLayThu;
             } 
             statusBanQuyen.Text = layThamSoHeThong("banquyen");
-            txtAutoGetMailTimer.Text = layThamSoHeThong("thoigianlaythu");
+            
 
             // load danh sách khoa phòng vào select khoa phòng
             if (_ConnnectionString != "")
@@ -398,10 +386,10 @@ namespace PHCN.ThuNoiBo.Client
             clientConfig.AccountUserName = txtAccountUserName.Text;
             clientConfig.AccountPassword = txtAccountPassword.Text;
             clientConfig.Database = txtDatabase.Text;
-            clientConfig.AutoStart = checkboxAutoStart.Checked;
-            clientConfig.ShowOnStart = checkboxShowOnStart.Checked;
-            clientConfig.AutoGetMail = checkboxAutoGetMail.Checked;
-            clientConfig.AutoGetMailTimer = int.Parse(txtAutoGetMailTimer.Text);
+            clientConfig.AutoStart = true;
+            clientConfig.ShowOnStart = true;
+            clientConfig.AutoGetMail = true;
+            clientConfig.AutoGetMailTimer = 15;
             clientConfig.WebServer = txtWebServer.Text;
             clientConfig.Port = txtPort.Text;
             string md5Password = getMd5(txtAccountPassword.Text).ToLower();
@@ -412,7 +400,7 @@ namespace PHCN.ThuNoiBo.Client
                 connection.Open();
                 
             }
-            catch (Exception ex)
+            catch 
             {
                 MessageBox.Show("Không thể kết nối đến máy chủ, vui lòng kiểm tra thông tin kết nối!");
                 return;
@@ -424,9 +412,9 @@ namespace PHCN.ThuNoiBo.Client
                 cmd.Connection = connection;
                 cmd.CommandText = @"select khoa.TenKhoa, nv.HoTen, nv.TenDangNhap, nv.MatKhau, nv.MaNhanVien, nv.NhanThu from NhanVien as nv
                                             inner join KhoaPhong as khoa on nv.MaKhoa = khoa.MaKhoa
-                                            where TenDangNhap = @TenDangNhap and MatKhau = @MatKhau";
+                                            where TenDangNhap = @TenDangNhap and MatKhauMD5 = @MatKhau";
                 cmd.Parameters.AddWithValue("@TenDangNhap", txtAccountUserName.Text);
-                cmd.Parameters.AddWithValue("@MatKhau", txtAccountPassword.Text);
+                cmd.Parameters.AddWithValue("@MatKhau", md5Password);
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 adapter.Fill(dt);
                 if (dt.Rows.Count == 0)
@@ -509,18 +497,11 @@ namespace PHCN.ThuNoiBo.Client
             txtConnectPassword.Enabled = true;
             txtAccountUserName.Enabled = true;
             txtAccountPassword.Enabled = true;
-            checkboxAutoStart.Enabled = true;
-            checkboxShowOnStart.Enabled = true;
-            checkboxAutoGetMail.Enabled = true;
-            txtAutoGetMailTimer.Enabled = true;
+
             txtWebServer.Enabled = true;
             txtPort.Enabled = true;
             txtDatabase.Enabled = true;
-            checkboxAutoStart.Enabled = true;
-            checkboxShowOnStart.Enabled = true;
-            checkboxAutoGetMail.Enabled = true;
-            txtAutoGetMailTimer.Enabled = true;
-            btnCapNhatCauHinh.Enabled = false;
+
             btnLuuCauHinh.Enabled = true;
             btnBoQua.Enabled = true;
         }
@@ -531,17 +512,11 @@ namespace PHCN.ThuNoiBo.Client
             txtConnectPassword.Enabled = false;
             txtAccountUserName.Enabled = false;
             txtAccountPassword.Enabled = false;
-            checkboxAutoStart.Enabled = false;
-            checkboxShowOnStart.Enabled = false;
-            checkboxAutoGetMail.Enabled = false;
-            txtAutoGetMailTimer.Enabled = false;
+
             txtWebServer.Enabled = false;
             txtPort.Enabled = false;
             txtDatabase.Enabled = false;
-            checkboxAutoStart.Enabled = false;
-            checkboxShowOnStart.Enabled = false;
-            checkboxAutoGetMail.Enabled = false;
-            txtAutoGetMailTimer.Enabled = false;
+
             btnCapNhatCauHinh.Enabled = true;
             btnLuuCauHinh.Enabled = false;
             btnBoQua.Enabled = false;
@@ -631,10 +606,7 @@ namespace PHCN.ThuNoiBo.Client
             Application.Exit();
         }
 
-        private void label12_Click(object sender, EventArgs e)
-        {
 
-        }
 
         private void btnChonTaiKhoan_Click(object sender, EventArgs e)
         {

@@ -2,10 +2,14 @@
 
     loadDanhSachThu();
     loadThongTinSoThu(_trangThai);
+    bindbtnDanhDauDaXem();
+    bindbtnDanhDauChuaXem();
+    bindbtnDanhDauDaXemTatCa();
+
     setInterval(function () {
         loadDanhSachThu();
         loadThongTinSoThu(_trangThai);
-    }, 60000);
+    }, 15000);
     
 });
 function loadDanhSachThu() {
@@ -160,5 +164,101 @@ function loadThongTinSoThu(trangthai) {
             }
         },
         dataType: "json"
+    });
+}
+function bindbtnDanhDauDaXem() {
+    $("#btnDanhDauDaXem").unbind("click").click(function () {
+        var listCheckedThu = $('.checkboxThu:checkbox:checked').map(function () {
+            return $(this).data("id-gui-nhan");
+        }).get();
+        listThuDaChon = listCheckedThu.join(",");
+        if (listThuDaChon == "") {
+            alert("Chưa chọn thư nào");
+            return;
+        }
+        if (!confirm("Bạn muốn đánh dấu đã xem các thư này ?")) {
+            return;
+        }
+        // send ajax - đánh dấu trả về thư đến
+        var url = _urlDanhDauDaXemList;
+        var param = {
+            listGuiNhanDaXem: listThuDaChon
+        }
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: param,
+            success: function (result) {
+                if (result == "true") {
+                    //alert ("Đã trả về hộp thư đến thành công");
+                    loadDanhSachThu();
+                    loadThongTinSoThu(_trangThai);
+                } else {
+                    alert(result);
+                }
+            },
+            dataType: "html"
+        });
+    });
+}
+function bindbtnDanhDauChuaXem() {
+    $("#btnDanhDauChuaXem").unbind("click").click(function () {
+        var listCheckedThu = $('.checkboxThu:checkbox:checked').map(function () {
+            return $(this).data("id-gui-nhan");
+        }).get();
+        listThuDaChon = listCheckedThu.join(",");
+        if (listThuDaChon == "") {
+            alert("Chưa chọn thư nào");
+            return;
+        }
+        if (!confirm("Bạn muốn đánh dấu chưa xem các thư này ?")) {
+            return;
+        }
+        // send ajax - đánh dấu trả về thư đến
+        var url = _urlDanhDauChuaXemList;
+        var param = {
+            listGuiNhanChuaXem: listThuDaChon
+        }
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: param,
+            success: function (result) {
+                if (result == "true") {
+                    //alert ("Đã trả về hộp thư đến thành công");
+                    loadDanhSachThu();
+                    loadThongTinSoThu(_trangThai);
+                } else {
+                    alert(result);
+                }
+            },
+            dataType: "html"
+        });
+    });
+}
+function bindbtnDanhDauDaXemTatCa() {
+    $("#btnDanhDauDaXemTatCa").unbind("click").click(function () {
+        
+        if (!confirm("Bạn muốn đánh dấu đã xem tất cả thư ?")) {
+            return;
+        }
+        // send ajax - đánh dấu trả về thư đến
+        var url = _urlDanhDauDaXemTatCa;
+        var param = {};
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: param,
+            success: function (result) {
+                if (result == "true") {
+                    //alert ("Đã trả về hộp thư đến thành công");
+                    loadDanhSachThu();
+                    loadThongTinSoThu(_trangThai);
+                } else {
+                    alert(result);
+                }
+            },
+            dataType: "html"
+        });
     });
 }

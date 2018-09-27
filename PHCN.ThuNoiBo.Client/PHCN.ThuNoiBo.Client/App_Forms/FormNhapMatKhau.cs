@@ -11,6 +11,7 @@ using DevExpress.XtraEditors;
 using PHCN.ThuNoiBo.Client.Controller;
 using System.IO;
 using System.Xml.Serialization;
+using System.Security.Cryptography;
 
 namespace PHCN.ThuNoiBo.Client.App_Forms
 {
@@ -28,16 +29,25 @@ namespace PHCN.ThuNoiBo.Client.App_Forms
             maNhanVien = 0;
             this.Close();
         }
-
+        private string getMd5(string input)
+        {
+            MD5 md5Hash = MD5.Create();
+            byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+            StringBuilder sBuilder = new StringBuilder();
+            for (int i = 0; i < data.Length; i++)
+            {
+                sBuilder.Append(data[i].ToString("x2"));
+            }
+            return sBuilder.ToString();
+        }
         private void btnDongY_Click(object sender, EventArgs e)
         {
 
             string tenDangNhap = txtTenDangNhap.Text;
             string matKhau = txtMatKhau.Text;
-
             ClientController controller = new ClientController();
-            DataTable dt = new DataTable();
-            string query = "select NhanVien.MaNhanVien, NhanVien.HoTen, NhanVien.TenDangNhap, NhanVien.MatKhau, KhoaPhong.TenKhoa, NhanVien.NhanThu from NhanVien inner join KhoaPhong on NhanVien.MaKhoa = KhoaPhong.MaKhoa where TenDangNhap = '" + tenDangNhap + "' and MatKhau = '" + matKhau + "'";
+            DataTable dt = new DataTable();            
+            string query = "select NhanVien.MaNhanVien, NhanVien.HoTen, NhanVien.TenDangNhap, NhanVien.MatKhau, KhoaPhong.TenKhoa, NhanVien.NhanThu from NhanVien inner join KhoaPhong on NhanVien.MaKhoa = KhoaPhong.MaKhoa where TenDangNhap = '" + tenDangNhap + "' and MatKhauMD5 = '" + getMd5(matKhau).ToLower() + "'";
             dt = controller.runQuery(query);
             if (dt.Rows.Count > 0)
             { // set client config

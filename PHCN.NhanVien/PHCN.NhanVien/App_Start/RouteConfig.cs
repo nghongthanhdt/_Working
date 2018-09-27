@@ -12,8 +12,10 @@ namespace PHCN.NhanVien
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+            
             routes.MapRoute(
-                name: "XamBaiViet",
+                name: "XemBaiViet",
                 url: "tin-tuc/{TenChuyenMucRewrite}/{TenBaiVietRewrite}.{MaBaiViet}.html",
                 defaults: new { controller = "TinTuc", action = "XemBaiViet"}
             );
