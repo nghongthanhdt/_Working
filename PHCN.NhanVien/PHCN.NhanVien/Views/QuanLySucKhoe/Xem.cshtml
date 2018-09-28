@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "Xem";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.PanelTitle = "Quản lý sức khỏe";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <ul id="myTab1" class="nav nav-tabs nav-justified">
+                <li class="active"><a href="#divTabThongTinChung" data-toggle="tab">Thông tin chung</a></li>
+                <li class=""><a href="#divTabLuotKham" data-toggle="tab">Lượt khám</a></li>
+                
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade active in" id="divTabThongTinChung">
+                    
+                    @Html.Partial("_pThongTinChung")
+
+                    <div style="position:fixed; bottom:10px; right:10px;">
+                        <a class="btn btn-lg btn-default" id="btnTroVeDanhSach" href="/QuanLyNhanVien/Xem/3">Trở về danh sách</a>
+                        <button class="btn btn-lg btn-success" id="btnLuu" data-malylichvienchuc="56">Lưu thông tin</button>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="divTabLuotKham">
+                    
+                    <table class="table">
+                        <tr>
+                            <th>Ngày khám</th>
+                            <th>Phân loại sức khỏe</th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="#">28/09/2018</a>
+                            </td>
+                            <td>II (chiều cao)</td>
+                            <td>
+                                <a href="javascript:void(0);" data-mabosungphamvihdcm="12" class="rowSuaDienBienBoSungPhamViHDCM btn btn-xs btn-default">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                    ...
+                                </a>
+                                <a href="javascript:void(0);" data-mabosungphamvihdcm="12" class="rowXoaDienBienBoSungPhamViHDCM btn btn-xs btn-default">
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div style="position:fixed; bottom:10px; right:10px;">
+                        <a class="btn btn-lg btn-default" id="btnTroVeDanhSach" href="/QuanLyNhanVien/Xem/3">Thêm lượt khám</a>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+

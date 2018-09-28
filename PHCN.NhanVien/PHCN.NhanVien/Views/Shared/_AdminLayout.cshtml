@@ -2,27 +2,27 @@
 
     // chạy dev
 
-    //PHCN.NhanVien.Models.PHCNEntities db = new PHCN.NhanVien.Models.PHCNEntities();
-    //var nhanVienDangNhap = db.NhanVien.Find(1);
-    //Session["NhanVienDangNhap"] = nhanVienDangNhap;
-    //var listPhanQuyen = nhanVienDangNhap.PhanQuyen.ToList();
-    //string box = "";
+    PHCN.NhanVien.Models.PHCNEntities db = new PHCN.NhanVien.Models.PHCNEntities();
+    var nhanVienDangNhap = db.NhanVien.Find(1);
+    Session["NhanVienDangNhap"] = nhanVienDangNhap;
+    var listPhanQuyen = nhanVienDangNhap.PhanQuyen.ToList();
+    string box = "";
 
     //chạy thật
 
-    var nhanVienDangNhap = (PHCN.NhanVien.Models.NhanVien)Session["NhanVienDangNhap"];
-    if (nhanVienDangNhap == null)
-    {
-        Response.Redirect(Url.Action("DangNhap", "Home"));
-    }
-    var listPhanQuyen = nhanVienDangNhap.PhanQuyen.ToList();
-    int _maNhanVienDangNhap = nhanVienDangNhap.MaNhanVien;
-    string box = "";
-    try
-    {
-        box = Request.QueryString["box"].ToString();
-    }
-    catch { }
+    //var nhanVienDangNhap = (PHCN.NhanVien.Models.NhanVien)Session["NhanVienDangNhap"];
+    //if (nhanVienDangNhap == null)
+    //{
+    //    Response.Redirect(Url.Action("DangNhap", "Home"));
+    //}
+    //var listPhanQuyen = nhanVienDangNhap.PhanQuyen.ToList();
+    //int _maNhanVienDangNhap = nhanVienDangNhap.MaNhanVien;
+    //string box = "";
+    //try
+    //{
+    //    box = Request.QueryString["box"].ToString();
+    //}
+    //catch { }
 }
 <!DOCTYPE html>
 <html>

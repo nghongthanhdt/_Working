@@ -1,0 +1,682 @@
+﻿
+@{
+    ViewBag.Title = "LuotKham";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">KHÁM SỨC KHỎE ĐỊNH KỲ</h3>
+    </div>
+    <div class="panel-body">
+        <div id="divKhamSucKhoeDinhKy">
+            @*@Html.Partial("_pKhamSucKhoeDinhKy")*@
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>I. TIỀN SỬ BỆNH TẬT</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label>I. KHÁM THỂ LỰC</label>
+                </div>
+                <div class="col-md-4">
+                    <label style="font-weight:normal;">Chiều cao</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="">
+                        <span class="input-group-addon">cm</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label style="font-weight:normal;">Cân nặng</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="">
+                        <span class="input-group-addon">kg</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    
+                    <div class="form-group">
+                        <label style="font-weight:normal;">Chỉ số BMI</label>
+                        <input type="text" class="form-control" placeholder="">
+                        
+                    </div>
+                </div>                
+            
+                <div class="col-md-4">
+                    <label style="font-weight:normal;">Mạch</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="">
+                        <span class="input-group-addon">lần/phút</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label style="font-weight:normal;">Huyết áp</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="">
+                        <span class="input-group-addon">mmHg</span>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    
+                    <div class="form-group">
+                        <label style="">Phân loại thể lực</label>    
+                        <select class="form-control">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>I. KHÁM LÂM SÀNG</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>1. Nội khoa</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label style="font-weight:normal">a) Tuần hoàn</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label style="font-weight:normal">Phân loại</label>
+                        <select class="form-control">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label style="font-weight:normal">b) Hô hấp</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label style="font-weight:normal">Phân loại</label>
+                        <select class="form-control">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label style="font-weight:normal">c) Tiêu hóa</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label style="font-weight:normal">Phân loại</label>
+                        <select class="form-control">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label style="font-weight:normal">d) Thận - tiết niệu</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label style="font-weight:normal">Phân loại</label>
+                        <select class="form-control">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label style="font-weight:normal">đ) Nội tiết</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label style="font-weight:normal">Phân loại</label>
+                        <select class="form-control">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label style="font-weight:normal">e) Cơ - xương - khớp</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label style="font-weight:normal">Phân loại</label>
+                        <select class="form-control">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label style="font-weight:normal">g) Thần kinh</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label style="font-weight:normal">Phân loại</label>
+                        <select class="form-control">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label style="font-weight:normal">h) Tâm thần</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label style="font-weight:normal">Phân loại</label>
+                        <select class="form-control">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label style="font-weight:normal">Họ tên bác sĩ ký</label>
+                        <select class="form-control">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>2. Ngoại khoa</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label style="font-weight:normal">Phân loại</label>
+                        <select class="form-control">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>           
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label style="font-weight:normal">Họ tên bác sĩ ký</label>
+                        <select class="form-control">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>3. Sản phụ khoa</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label style="font-weight:normal">Phân loại</label>
+                        <select class="form-control">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label style="font-weight:normal">Họ tên bác sĩ ký</label>
+                        <select class="form-control">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>4. Mắt</label>
+                        <label style="font-weight:normal;">Kết quả khám thị lực</label>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label style="font-weight:normal;">Không kính Mắt phải</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label style="font-weight:normal;">Không kính Mắt trái</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label style="font-weight:normal;">Có kính Mắt phải</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label style="font-weight:normal;">Có kính Mắt trái</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label style="font-weight:normal;">Các bệnh về mắt (nếu có):</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label style="font-weight:normal">Phân loại</label>
+                        <select class="form-control">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label style="font-weight:normal">Họ tên bác sĩ ký</label>
+                        <select class="form-control">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>5. Tai - Mũi - Họng</label>
+                        <label style="font-weight:normal;">Kết quả khám thính lực</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label style="font-weight:normal;">Tai trái Nói thường</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="">
+                        <span class="input-group-addon">m</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label style="font-weight:normal;">Tai trái Nói thầm</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="">
+                        <span class="input-group-addon">m</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label style="font-weight:normal;">Tai phải Nói thường</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="">
+                        <span class="input-group-addon">m</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label style="font-weight:normal;">Tai phải Nói thầm</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="">
+                        <span class="input-group-addon">m</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label style="font-weight:normal;">Các bệnh về tai mũi họng (nếu có):</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label style="font-weight:normal">Phân loại</label>
+                        <select class="form-control">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label style="font-weight:normal">Họ tên bác sĩ ký</label>
+                        <select class="form-control">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>6. Răng - Hàm - Mặt</label>
+                        <label style="font-weight:normal;">Kết quả khám</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">                    
+                    <div class="form-group">
+                        <label style="font-weight:normal;">Hàm trên</label>
+                        <input type="text" class="form-control" placeholder="">                        
+                    </div>
+                </div>
+                <div class="col-md-6">                    
+                    <div class="form-group">
+                        <label style="font-weight:normal;">Hàm dưới</label>
+                        <input type="text" class="form-control" placeholder="">                        
+                    </div>
+                </div>
+            </div>            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label style="font-weight:normal;">Các bệnh về răng hàm mặt (nếu có):</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label style="font-weight:normal">Phân loại</label>
+                        <select class="form-control">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label style="font-weight:normal">Họ tên bác sĩ ký</label>
+                        <select class="form-control">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>7. Da liễu</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label style="font-weight:normal">Phân loại</label>
+                        <select class="form-control">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label style="font-weight:normal">Họ tên bác sĩ ký</label>
+                        <select class="form-control">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>IV. KHÁM CẬN LÂM SÀNG</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h6>a) Kết quả</h6>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>1. Xét nghiệm máu</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <label style="font-weight:normal;">Hồng cầu</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="">
+                        <span class="input-group-addon">x10^12/L</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label style="font-weight:normal;">Bạch cầu</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="">
+                        <span class="input-group-addon">x10^9/L</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label style="font-weight:normal;">Tiểu cầu</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="">
+                        <span class="input-group-addon">x10^9/L</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label style="font-weight:normal;">HCT</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="">
+                        <span class="input-group-addon">%</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label style="font-weight:normal;">Glucose</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="">
+                        <span class="input-group-addon">mmol/L</span>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>2. Xét nghiệm nước tiểu</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label style="font-weight:normal;">Glucose</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label style="font-weight:normal;">Protein</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+                <div class="col-md-4">                    
+                    <div class="form-group">
+                        <label style="font-weight:normal;">pH</label>
+                        <input type="text" class="form-control" placeholder="">                        
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+            </div>      
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>3. Xét nghiệm phân</label>
+                        <label style="font-weight:normal;">Soi phân tìm ký sinh trùng đường ruột</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+            </div>      
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>4. Các xét nghiệm khác</label>
+                        <textarea class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>    
+            <div class="row">
+                <div class="col-md-12">
+                    <h6>b) Đánh giá</h6>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <textarea class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>   
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label style="font-weight:normal">Họ tên bác sĩ ký</label>
+                        <select class="form-control">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>V. KẾT LUẬN</label>
+                    </div>
+                </div>
+            </div> 
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>1. Phân loại sức khỏe</label>
+                        <select class="form-control">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Ghi chú</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>2. Các bệnh tật khác (nếu có)</label>
+                        <textarea class="form-control"></textarea>
+                    </div>
+                </div>
+            </div> 
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>KÝ KẾT LUẬN</label>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input class="form-control" placeholder="Tại..." type="text" id="txtNgaySinh_Nam" maxlength="11">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Ngày</label>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input class="form-control text-right number" placeholder="" type="text" id="txtNgaySinh_Nam" maxlength="11">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label>NGƯỜI KẾT LUẬN</label>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <select class="form-control">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
