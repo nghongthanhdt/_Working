@@ -23,6 +23,7 @@ namespace PHCN.NhanVien.Models
             this.BaiViet = new HashSet<BaiViet>();
             this.BaiVietWeb = new HashSet<BaiVietWeb>();
             this.LyLichVienChuc = new HashSet<LyLichVienChuc>();
+            this.SoKSK = new HashSet<SoKSK>();
         }
     
         public int MaNhanVien { get; set; }
@@ -51,5 +52,7 @@ namespace PHCN.NhanVien.Models
         public virtual ICollection<BaiVietWeb> BaiVietWeb { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LyLichVienChuc> LyLichVienChuc { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SoKSK> SoKSK { get; set; }
     }
 }

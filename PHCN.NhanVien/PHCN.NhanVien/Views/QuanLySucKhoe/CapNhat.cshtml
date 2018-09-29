@@ -1,26 +1,31 @@
-﻿
+﻿@model PHCN.NhanVien.Models.SoKSK
 @{
     ViewBag.Title = "Xem";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    ViewBag.PanelTitle = "Quản lý sức khỏe";
+    ViewBag.PanelTitle = "Sổ khám sức khỏe định kỳ";
 }
+
+
+<script>
+    var urlController = '@(HttpContext.Current.Request.Url.Scheme)://@(HttpContext.Current.Request.Url.Authority)/@(HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString())/';        
+</script>
+<input type="hidden" id="hiddenMaSoKSK" value="@Model.MaSoKSK"/>
 
 <div class="row">
     <div class="col-md-12">
         <div class="panel">
             <ul id="myTab1" class="nav nav-tabs nav-justified">
                 <li class="active"><a href="#divTabThongTinChung" data-toggle="tab">Thông tin chung</a></li>
-                <li class=""><a href="#divTabLuotKham" data-toggle="tab">Lượt khám</a></li>
-                
+                <li class=""><a href="#divTabLuotKham" data-toggle="tab">Lượt khám</a></li>                
             </ul>
             <div id="myTabContent" class="tab-content">
                 <div class="tab-pane fade active in" id="divTabThongTinChung">
                     
-                    @Html.Partial("_pThongTinChung")
+                    @Html.Partial("_pThongTinChung", Model)
 
                     <div style="position:fixed; bottom:10px; right:10px;">
                         <a class="btn btn-lg btn-default" id="btnTroVeDanhSach" href="/QuanLyNhanVien/Xem/3">Trở về danh sách</a>
-                        <button class="btn btn-lg btn-success" id="btnLuu" data-malylichvienchuc="56">Lưu thông tin</button>
+                        <button class="btn btn-lg btn-success" id="btnLuu">Lưu thông tin</button>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="divTabLuotKham">
@@ -49,8 +54,7 @@
                     </table>
 
                     <div style="position:fixed; bottom:10px; right:10px;">
-                        <a class="btn btn-lg btn-default" id="btnTroVeDanhSach" href="/QuanLyNhanVien/Xem/3">Thêm lượt khám</a>
-                        
+                        <a class="btn btn-lg btn-default" id="btnTroVeDanhSach" href="/QuanLyNhanVien/Xem/3">Thêm lượt khám</a>                        
                     </div>
                 </div>
                 
@@ -59,3 +63,7 @@
     </div>
 </div>
 
+
+<script src="~/scripts/core-scripts/sweetalert2.all.min.js"></script>
+<script src="~/scripts/core-scripts/th.core.js?@("v="+DateTime.Now.ToString("yyMMddhhmmss"))"></script>
+<script src="~/scripts/app_scripts/CapNhatSoKSK.js?@("v="+DateTime.Now.ToString("yyMMddhhmmss"))"></script>

@@ -430,6 +430,35 @@
           <Property Name="MaQuyen" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="TenQuyen" Type="nvarchar" MaxLength="250" Nullable="false" />
         </EntityType>
+        <EntityType Name="SoKSK">
+          <Key>
+            <PropertyRef Name="MaSoKSK" />
+          </Key>
+          <Property Name="MaSoKSK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaNhanVien" Type="int" />
+          <Property Name="MaSo" Type="nvarchar" MaxLength="50" />
+          <Property Name="HoTen" Type="nvarchar" MaxLength="100" />
+          <Property Name="GioiTinh" Type="int" />
+          <Property Name="NamSinh" Type="int" />
+          <Property Name="SoCMND" Type="nvarchar" MaxLength="20" />
+          <Property Name="NgayCapCMND" Type="datetime2" Precision="7" />
+          <Property Name="NoiCapCMND" Type="nvarchar" MaxLength="100" />
+          <Property Name="HoKhauThuongTru" Type="nvarchar" MaxLength="50" />
+          <Property Name="ChoOHienTai" Type="nvarchar" MaxLength="500" />
+          <Property Name="NgheNghiep" Type="nvarchar" MaxLength="100" />
+          <Property Name="NoiCongTacHocTap" Type="nvarchar" MaxLength="500" />
+          <Property Name="NgayBatDauHocTapLamviec" Type="datetime2" Precision="7" />
+          <Property Name="NgheCongViecTruocDay" Type="nvarchar" MaxLength="500" />
+          <Property Name="TienSuBenhTatCuaGiaDinh" Type="nvarchar" MaxLength="500" />
+          <Property Name="TienSuBanThan" Type="nvarchar" MaxLength="500" />
+          <Property Name="LapSoKSK_NoiKy" Type="nvarchar" MaxLength="100" />
+          <Property Name="LapSoKSK_NgayKy" Type="datetime2" Precision="7" />
+          <Property Name="LapSoKSK_NguoiKy" Type="nvarchar" MaxLength="100" />
+          <Property Name="MaNhanVienNhap" Type="int" />
+          <Property Name="NgayNhap" Type="datetime2" Precision="7" />
+          <Property Name="Xoa" Type="bit" />
+          <Property Name="NgayXoa" Type="datetime2" Precision="7" />
+        </EntityType>
         <EntityType Name="ThamSoHeThong">
           <Key>
             <PropertyRef Name="MaThamSo" />
@@ -790,6 +819,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SoKSK_NhanVien">
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="0..1" />
+          <End Role="SoKSK" Type="Self.SoKSK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="MaNhanVien" />
+            </Principal>
+            <Dependent Role="SoKSK">
+              <PropertyRef Name="MaNhanVien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="PHCNModelStoreContainer">
           <EntitySet Name="BaiViet" EntityType="Self.BaiViet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BaiVietWeb" EntityType="Self.BaiVietWeb" Schema="dbo" store:Type="Tables" />
@@ -823,6 +864,7 @@
           <EntitySet Name="PhamViHoatDongChuyenMon" EntityType="Self.PhamViHoatDongChuyenMon" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PhanQuyen" EntityType="Self.PhanQuyen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Quyen" EntityType="Self.Quyen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SoKSK" EntityType="Self.SoKSK" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ThamSoHeThong" EntityType="Self.ThamSoHeThong" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TinhThanh" EntityType="Self.TinhThanh" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TonGiao" EntityType="Self.TonGiao" Schema="dbo" store:Type="Tables" />
@@ -934,6 +976,10 @@
           <AssociationSet Name="FK_PhanQuyen_Quyen" Association="Self.FK_PhanQuyen_Quyen">
             <End Role="Quyen" EntitySet="Quyen" />
             <End Role="PhanQuyen" EntitySet="PhanQuyen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SoKSK_NhanVien" Association="Self.FK_SoKSK_NhanVien">
+            <End Role="NhanVien" EntitySet="NhanVien" />
+            <End Role="SoKSK" EntitySet="SoKSK" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -1105,6 +1151,11 @@
           <AssociationSet Name="FK_BaiVietWeb_ChuyenMuc" Association="PHCNModel.FK_BaiVietWeb_ChuyenMuc">
             <End Role="ChuyenMuc" EntitySet="ChuyenMuc" />
             <End Role="BaiVietWeb" EntitySet="BaiVietWeb" />
+          </AssociationSet>
+          <EntitySet Name="SoKSK" EntityType="PHCNModel.SoKSK" />
+          <AssociationSet Name="FK_SoKSK_NhanVien" Association="PHCNModel.FK_SoKSK_NhanVien">
+            <End Role="NhanVien" EntitySet="NhanVien" />
+            <End Role="SoKSK" EntitySet="SoKSK" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Loi">
@@ -1354,6 +1405,7 @@
           <NavigationProperty Name="BaiViet" Relationship="PHCNModel.FK_BaiViet_NhanVien" FromRole="NhanVien" ToRole="BaiViet" />
           <NavigationProperty Name="BaiVietWeb" Relationship="PHCNModel.FK_BaiVietWeb_NhanVien" FromRole="NhanVien" ToRole="BaiVietWeb" />
           <NavigationProperty Name="LyLichVienChuc" Relationship="PHCNModel.FK_LyLichVienChuc_NhanVien" FromRole="NhanVien" ToRole="LyLichVienChuc" />
+          <NavigationProperty Name="SoKSK" Relationship="PHCNModel.FK_SoKSK_NhanVien" FromRole="NhanVien" ToRole="SoKSK" />
           </EntityType>
         <Association Name="FK_GuiNhan_NhanVien_NguoiGui">
           <End Type="PHCNModel.NhanVien" Role="NhanVien" Multiplicity="1" />
@@ -1925,6 +1977,48 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="SoKSK">
+          <Key>
+            <PropertyRef Name="MaSoKSK" />
+          </Key>
+          <Property Name="MaSoKSK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaNhanVien" Type="Int32" />
+          <Property Name="MaSo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HoTen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="GioiTinh" Type="Int32" />
+          <Property Name="NamSinh" Type="Int32" />
+          <Property Name="SoCMND" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NgayCapCMND" Type="DateTime" Precision="7" />
+          <Property Name="NoiCapCMND" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HoKhauThuongTru" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ChoOHienTai" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="NgheNghiep" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NoiCongTacHocTap" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="NgayBatDauHocTapLamviec" Type="DateTime" Precision="7" />
+          <Property Name="NgheCongViecTruocDay" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="TienSuBenhTatCuaGiaDinh" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="TienSuBanThan" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LapSoKSK_NoiKy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LapSoKSK_NgayKy" Type="DateTime" Precision="7" />
+          <Property Name="LapSoKSK_NguoiKy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MaNhanVienNhap" Type="Int32" />
+          <Property Name="NgayNhap" Type="DateTime" Precision="7" />
+          <Property Name="Xoa" Type="Boolean" />
+          <Property Name="NgayXoa" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="NhanVien" Relationship="PHCNModel.FK_SoKSK_NhanVien" FromRole="SoKSK" ToRole="NhanVien" />
+        </EntityType>
+        <Association Name="FK_SoKSK_NhanVien">
+          <End Type="PHCNModel.NhanVien" Role="NhanVien" Multiplicity="0..1" />
+          <End Type="PHCNModel.SoKSK" Role="SoKSK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="MaNhanVien" />
+            </Principal>
+            <Dependent Role="SoKSK">
+              <PropertyRef Name="MaNhanVien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2425,6 +2519,36 @@
                 <ScalarProperty Name="TenChuyenMucRewrite" ColumnName="TenChuyenMucRewrite" />
                 <ScalarProperty Name="TenChuyenMuc" ColumnName="TenChuyenMuc" />
                 <ScalarProperty Name="MaChuyenMuc" ColumnName="MaChuyenMuc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SoKSK">
+            <EntityTypeMapping TypeName="PHCNModel.SoKSK">
+              <MappingFragment StoreEntitySet="SoKSK">
+                <ScalarProperty Name="NgayXoa" ColumnName="NgayXoa" />
+                <ScalarProperty Name="Xoa" ColumnName="Xoa" />
+                <ScalarProperty Name="NgayNhap" ColumnName="NgayNhap" />
+                <ScalarProperty Name="MaNhanVienNhap" ColumnName="MaNhanVienNhap" />
+                <ScalarProperty Name="LapSoKSK_NguoiKy" ColumnName="LapSoKSK_NguoiKy" />
+                <ScalarProperty Name="LapSoKSK_NgayKy" ColumnName="LapSoKSK_NgayKy" />
+                <ScalarProperty Name="LapSoKSK_NoiKy" ColumnName="LapSoKSK_NoiKy" />
+                <ScalarProperty Name="TienSuBanThan" ColumnName="TienSuBanThan" />
+                <ScalarProperty Name="TienSuBenhTatCuaGiaDinh" ColumnName="TienSuBenhTatCuaGiaDinh" />
+                <ScalarProperty Name="NgheCongViecTruocDay" ColumnName="NgheCongViecTruocDay" />
+                <ScalarProperty Name="NgayBatDauHocTapLamviec" ColumnName="NgayBatDauHocTapLamviec" />
+                <ScalarProperty Name="NoiCongTacHocTap" ColumnName="NoiCongTacHocTap" />
+                <ScalarProperty Name="NgheNghiep" ColumnName="NgheNghiep" />
+                <ScalarProperty Name="ChoOHienTai" ColumnName="ChoOHienTai" />
+                <ScalarProperty Name="HoKhauThuongTru" ColumnName="HoKhauThuongTru" />
+                <ScalarProperty Name="NoiCapCMND" ColumnName="NoiCapCMND" />
+                <ScalarProperty Name="NgayCapCMND" ColumnName="NgayCapCMND" />
+                <ScalarProperty Name="SoCMND" ColumnName="SoCMND" />
+                <ScalarProperty Name="NamSinh" ColumnName="NamSinh" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="MaSo" ColumnName="MaSo" />
+                <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
+                <ScalarProperty Name="MaSoKSK" ColumnName="MaSoKSK" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

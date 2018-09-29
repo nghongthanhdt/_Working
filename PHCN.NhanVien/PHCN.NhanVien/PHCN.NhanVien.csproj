@@ -658,6 +658,7 @@
     <None Include="scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="scripts\app_scripts\CapNhatBaiVietWeb.js" />
     <Content Include="scripts\app_scripts\CapNhatLyLichVienChuc.js" />
+    <Content Include="scripts\app_scripts\CapNhatSoKSK.js" />
     <Content Include="scripts\app_scripts\DanhSachBaiViet.js" />
     <Content Include="scripts\app_scripts\QuanLyDanhMuc.js" />
     <Content Include="scripts\app_scripts\QuanLyNhanVien.js" />
@@ -813,6 +814,9 @@
     <Compile Include="Models\Quyen.cs">
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SoKSK.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ThamSoHeThong.cs">
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
@@ -919,10 +923,11 @@
     <Content Include="Views\QuanLyLyLichVienChuc\_pDienBienBoSungPhamViHDCM.cshtml" />
     <Content Include="Views\QuanLyBaiViet\_pDanhSachFileDinhKem.cshtml" />
     <Content Include="Views\TinTuc\BaiViet.cshtml" />
-    <Content Include="Views\QuanLySucKhoe\Xem.cshtml" />
+    <Content Include="Views\QuanLySucKhoe\CapNhat.cshtml" />
     <Content Include="Views\QuanLySucKhoe\_pThongTinChung.cshtml" />
-    <Content Include="Views\QuanLySucKhoe\_pKhamSucKhoeDinhKy.cshtml" />
     <Content Include="Views\QuanLySucKhoe\LuotKham.cshtml" />
+    <Content Include="Views\QuanLySucKhoe\_pSoKSK_Benh.cshtml" />
+    <Content Include="Views\QuanLySucKhoe\_pmodalChiTietBenh.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
