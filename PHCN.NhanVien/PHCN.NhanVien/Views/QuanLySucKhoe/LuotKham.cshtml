@@ -1,681 +1,855 @@
-﻿
+﻿@model PHCN.NhanVien.Models.LuotKSK
 @{
     ViewBag.Title = "LuotKham";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+
+    PHCN.NhanVien.Models.PHCNEntities db = new PHCN.NhanVien.Models.PHCNEntities();
+
+    var listPhanLoaiSK = db.PhanLoaiSK.Where(x => x.Xoa == false).OrderBy(x => x.STT).ToList();
+    //var listBacSySK = db.BacSyKSK.ToList();
+    List<PHCN.NhanVien.Models.BacSyKSK> listBacSySK = db.BacSyKSK.Where(x => x.Xoa == false).OrderBy(x => x.STT).ToList();
 }
+
+
+<input type="hidden" id="hiddenMaLuotKSK" value="@Model.MaLuotKSK" />
+<input type="hidden" id="hiddenMaSoKSK" value="@Model.SoKSK.MaSoKSK" />
 
 <div class="panel panel-primary">
     <div class="panel-heading">
         <h3 class="panel-title">KHÁM SỨC KHỎE ĐỊNH KỲ</h3>
     </div>
     <div class="panel-body">
-        <div id="divKhamSucKhoeDinhKy">
-            @*@Html.Partial("_pKhamSucKhoeDinhKy")*@
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label>I. TIỀN SỬ BỆNH TẬT</label>
-                        <input type="text" class="form-control" placeholder="">
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <label>I. KHÁM THỂ LỰC</label>
-                </div>
-                <div class="col-md-4">
-                    <label style="font-weight:normal;">Chiều cao</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="">
-                        <span class="input-group-addon">cm</span>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <label style="font-weight:normal;">Cân nặng</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="">
-                        <span class="input-group-addon">kg</span>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    
-                    <div class="form-group">
-                        <label style="font-weight:normal;">Chỉ số BMI</label>
-                        <input type="text" class="form-control" placeholder="">                        
-                    </div>
-                </div>                
-            
-                <div class="col-md-4">
-                    <label style="font-weight:normal;">Mạch</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="">
-                        <span class="input-group-addon">lần/phút</span>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <label style="font-weight:normal;">Huyết áp</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="">
-                        <span class="input-group-addon">mmHg</span>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    
-                    <div class="form-group">
-                        <label style="">Phân loại thể lực</label>    
-                        <select class="form-control">
-                            <option value=""></option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label>I. KHÁM LÂM SÀNG</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label>1. Nội khoa</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label style="font-weight:normal">a) Tuần hoàn</label>
-                        <input type="text" class="form-control" placeholder="">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label style="font-weight:normal">Phân loại</label>
-                        <select class="form-control">
-                            <option value=""></option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label style="font-weight:normal">b) Hô hấp</label>
-                        <input type="text" class="form-control" placeholder="">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label style="font-weight:normal">Phân loại</label>
-                        <select class="form-control">
-                            <option value=""></option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label style="font-weight:normal">c) Tiêu hóa</label>
-                        <input type="text" class="form-control" placeholder="">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label style="font-weight:normal">Phân loại</label>
-                        <select class="form-control">
-                            <option value=""></option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label style="font-weight:normal">d) Thận - tiết niệu</label>
-                        <input type="text" class="form-control" placeholder="">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label style="font-weight:normal">Phân loại</label>
-                        <select class="form-control">
-                            <option value=""></option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label style="font-weight:normal">đ) Nội tiết</label>
-                        <input type="text" class="form-control" placeholder="">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label style="font-weight:normal">Phân loại</label>
-                        <select class="form-control">
-                            <option value=""></option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label style="font-weight:normal">e) Cơ - xương - khớp</label>
-                        <input type="text" class="form-control" placeholder="">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label style="font-weight:normal">Phân loại</label>
-                        <select class="form-control">
-                            <option value=""></option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label style="font-weight:normal">g) Thần kinh</label>
-                        <input type="text" class="form-control" placeholder="">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label style="font-weight:normal">Phân loại</label>
-                        <select class="form-control">
-                            <option value=""></option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label style="font-weight:normal">h) Tâm thần</label>
-                        <input type="text" class="form-control" placeholder="">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label style="font-weight:normal">Phân loại</label>
-                        <select class="form-control">
-                            <option value=""></option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label style="font-weight:normal">Họ tên bác sĩ ký</label>
-                        <select class="form-control">
-                            <option value=""></option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>2. Ngoại khoa</label>
-                        <input type="text" class="form-control" placeholder="">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label style="font-weight:normal">Phân loại</label>
-                        <select class="form-control">
-                            <option value=""></option>
-                        </select>
-                    </div>
-                </div>
-            </div>           
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label style="font-weight:normal">Họ tên bác sĩ ký</label>
-                        <select class="form-control">
-                            <option value=""></option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>3. Sản phụ khoa</label>
-                        <input type="text" class="form-control" placeholder="">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label style="font-weight:normal">Phân loại</label>
-                        <select class="form-control">
-                            <option value=""></option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label style="font-weight:normal">Họ tên bác sĩ ký</label>
-                        <select class="form-control">
-                            <option value=""></option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label>4. Mắt</label>
-                        <label style="font-weight:normal;">Kết quả khám thị lực</label>
-                    </div>
-                </div>
-            </div>
-
-            
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label style="font-weight:normal;">Không kính Mắt phải</label>
-                        <input type="text" class="form-control" placeholder="">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label style="font-weight:normal;">Không kính Mắt trái</label>
-                        <input type="text" class="form-control" placeholder="">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label style="font-weight:normal;">Có kính Mắt phải</label>
-                        <input type="text" class="form-control" placeholder="">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label style="font-weight:normal;">Có kính Mắt trái</label>
-                        <input type="text" class="form-control" placeholder="">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label style="font-weight:normal;">Các bệnh về mắt (nếu có):</label>
-                        <input type="text" class="form-control" placeholder="">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label style="font-weight:normal">Phân loại</label>
-                        <select class="form-control">
-                            <option value=""></option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label style="font-weight:normal">Họ tên bác sĩ ký</label>
-                        <select class="form-control">
-                            <option value=""></option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label>5. Tai - Mũi - Họng</label>
-                        <label style="font-weight:normal;">Kết quả khám thính lực</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <label style="font-weight:normal;">Tai trái Nói thường</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="">
-                        <span class="input-group-addon">m</span>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <label style="font-weight:normal;">Tai trái Nói thầm</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="">
-                        <span class="input-group-addon">m</span>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <label style="font-weight:normal;">Tai phải Nói thường</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="">
-                        <span class="input-group-addon">m</span>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <label style="font-weight:normal;">Tai phải Nói thầm</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="">
-                        <span class="input-group-addon">m</span>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label style="font-weight:normal;">Các bệnh về tai mũi họng (nếu có):</label>
-                        <input type="text" class="form-control" placeholder="">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label style="font-weight:normal">Phân loại</label>
-                        <select class="form-control">
-                            <option value=""></option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label style="font-weight:normal">Họ tên bác sĩ ký</label>
-                        <select class="form-control">
-                            <option value=""></option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label>6. Răng - Hàm - Mặt</label>
-                        <label style="font-weight:normal;">Kết quả khám</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">                    
-                    <div class="form-group">
-                        <label style="font-weight:normal;">Hàm trên</label>
-                        <input type="text" class="form-control" placeholder="">                        
-                    </div>
-                </div>
-                <div class="col-md-6">                    
-                    <div class="form-group">
-                        <label style="font-weight:normal;">Hàm dưới</label>
-                        <input type="text" class="form-control" placeholder="">                        
-                    </div>
-                </div>
-            </div>            
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label style="font-weight:normal;">Các bệnh về răng hàm mặt (nếu có):</label>
-                        <input type="text" class="form-control" placeholder="">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label style="font-weight:normal">Phân loại</label>
-                        <select class="form-control">
-                            <option value=""></option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label style="font-weight:normal">Họ tên bác sĩ ký</label>
-                        <select class="form-control">
-                            <option value=""></option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>7. Da liễu</label>
-                        <input type="text" class="form-control" placeholder="">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label style="font-weight:normal">Phân loại</label>
-                        <select class="form-control">
-                            <option value=""></option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label style="font-weight:normal">Họ tên bác sĩ ký</label>
-                        <select class="form-control">
-                            <option value=""></option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label>IV. KHÁM CẬN LÂM SÀNG</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <h6>a) Kết quả</h6>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label>1. Xét nghiệm máu</label>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-md-6">
-                    <label style="font-weight:normal;">Hồng cầu</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="">
-                        <span class="input-group-addon">x10^12/L</span>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <label style="font-weight:normal;">Bạch cầu</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="">
-                        <span class="input-group-addon">x10^9/L</span>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <label style="font-weight:normal;">Tiểu cầu</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="">
-                        <span class="input-group-addon">x10^9/L</span>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <label style="font-weight:normal;">HCT</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="">
-                        <span class="input-group-addon">%</span>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <label style="font-weight:normal;">Glucose</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="">
-                        <span class="input-group-addon">mmol/L</span>
-                    </div>
-                </div>
-            </div>
-            <br/>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label>2. Xét nghiệm nước tiểu</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label style="font-weight:normal;">Glucose</label>
-                        <input type="text" class="form-control" placeholder="">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label style="font-weight:normal;">Protein</label>
-                        <input type="text" class="form-control" placeholder="">
-                    </div>
-                </div>
-                <div class="col-md-4">                    
-                    <div class="form-group">
-                        <label style="font-weight:normal;">pH</label>
-                        <input type="text" class="form-control" placeholder="">                        
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="">
-                    </div>
-                </div>
-            </div>      
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label>3. Xét nghiệm phân</label>
-                        <label style="font-weight:normal;">Soi phân tìm ký sinh trùng đường ruột</label>
-                        <input type="text" class="form-control" placeholder="">
-                    </div>
-                </div>
-            </div>      
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label>4. Các xét nghiệm khác</label>
-                        <textarea class="form-control"></textarea>
-                    </div>
-                </div>
-            </div>    
-            <div class="row">
-                <div class="col-md-12">
-                    <h6>b) Đánh giá</h6>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <textarea class="form-control"></textarea>
-                    </div>
-                </div>
-            </div>   
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label style="font-weight:normal">Họ tên bác sĩ ký</label>
-                        <select class="form-control">
-                            <option value=""></option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label>V. KẾT LUẬN</label>
-                    </div>
-                </div>
-            </div> 
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>1. Phân loại sức khỏe</label>
-                        <select class="form-control">
-                            <option value=""></option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Ghi chú</label>
-                        <input type="text" class="form-control" placeholder="">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label>2. Các bệnh tật khác (nếu có)</label>
-                        <textarea class="form-control"></textarea>
-                    </div>
-                </div>
-            </div> 
-            <div class="row">
-                <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-9">
+                <div id="divKhamSucKhoeDinhKy">
+                    @*@Html.Partial("_pKhamSucKhoeDinhKy")*@
                     <div class="row">
                         <div class="col-md-4">
-                            <label>KÝ KẾT LUẬN</label>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <input class="form-control" placeholder="Tại..." type="text" id="txtNgaySinh_Nam" maxlength="11">
-                                </div>
+                            <div class="form-group">
+                                <label>Ngày</label>
+                                <input type="text" class="form-control date" placeholder="" id="txtNgay" value="@(DateTime.Parse(Model.Ngay.ToString()).ToShortDateString())">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>I. TIỀN SỬ BỆNH TẬT</label>
+                                <input type="text" class="form-control" placeholder="" id="txtTienSuBenhTat" value="@Model.TienSuBenhTat">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>I. KHÁM THỂ LỰC</label>
+                        </div>
+                        <div class="col-md-4">
+                            <label style="font-weight:normal;">Chiều cao</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control number" placeholder="" id="txtTL_ChieuCao" value="@Model.TL_ChieuCao" maxlength="5">
+                                <span class="input-group-addon">cm</span>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <label>Ngày</label>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <input class="form-control text-right number" placeholder="" type="text" id="txtNgaySinh_Nam" maxlength="11">
-                                </div>
+                            <label style="font-weight:normal;">Cân nặng</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control number" placeholder="" id="txtTL_CanNang" value="@Model.TL_CanNang" maxlength="3">
+                                <span class="input-group-addon">kg</span>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <label>NGƯỜI KẾT LUẬN</label>
+
+                            <div class="form-group">
+                                <label style="font-weight:normal;">Chỉ số BMI</label>
+                                <input type="text" class="form-control decimal" placeholder="" id="txtTL_ChiSoBMI" value="@Model.TL_ChiSoBMI" maxlength="5">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label style="font-weight:normal;">Mạch</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control number" placeholder="" id="txtTL_Mach" value="@Model.TL_Mach" maxlength="3">
+                                <span class="input-group-addon">lần/phút</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label style="font-weight:normal;">Huyết áp</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control huyetap" placeholder="" id="txtTL_HuyetAp" value="@Model.TL_HuyetAp" maxlength="10">
+                                <span class="input-group-addon">mmHg</span>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+
+                            <div class="form-group">
+                                <label style="">Phân loại thể lực</label>
+                                <select class="form-control" id="selectTL_PhanLoaiTheLuc">
+                                    <option value=""></option>
+                                    @foreach (var item in listPhanLoaiSK)
+                                    {
+                                        <option value="@item.TenPhanLoaiSK" @((item.TenPhanLoaiSK == Model.TL_PhanLoaiTheLuc) ? "selected" : "")>@item.TenPhanLoaiSK</option>
+                                    }
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>I. KHÁM LÂM SÀNG</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>1. Nội khoa</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label style="font-weight:normal">a) Tuần hoàn</label>
+                                <input type="text" class="form-control noidungksk" placeholder="" id="txtLS_NoiKhoa_TuanHoan" value="@Model.LS_NoiKhoa_TuanHoan">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label style="font-weight:normal">Phân loại</label>
+                                <select class="form-control" id="selectLS_NoiKhoa_TuanHoan_PhanLoai">
+                                    <option value=""></option>
+                                    @foreach (var item in listPhanLoaiSK)
+                                    {
+                                        <option value="@item.TenPhanLoaiSK" @((item.TenPhanLoaiSK == Model.LS_NoiKhoa_TuanHoan_PhanLoai) ? "selected" : "")>@item.TenPhanLoaiSK</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label style="font-weight:normal">b) Hô hấp</label>
+                                <input type="text" class="form-control noidungksk" placeholder="" id="txtLS_NoiKhoa_HoHap" value="@Model.LS_NoiKhoa_HoHap">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label style="font-weight:normal">Phân loại</label>
+                                <select class="form-control" id="selectLS_NoiKhoa_HoHap_PhanLoai">
+                                    <option value=""></option>
+                                    @foreach (var item in listPhanLoaiSK)
+                                    {
+                                        <option value="@item.TenPhanLoaiSK" @((item.TenPhanLoaiSK == Model.LS_NoiKhoa_HoHap_PhanLoai) ? "selected" : "")>@item.TenPhanLoaiSK</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label style="font-weight:normal">c) Tiêu hóa</label>
+                                <input type="text" class="form-control noidungksk" placeholder="" id="txtLS_NoiKhoa_TieuHoa" value="@Model.LS_NoiKhoa_TieuHoa">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label style="font-weight:normal">Phân loại</label>
+                                <select class="form-control" id="selectLS_NoiKhoa_TieuHoa_PhanLoai">
+                                    <option value=""></option>
+                                    @foreach (var item in listPhanLoaiSK)
+                                    {
+                                        <option value="@item.TenPhanLoaiSK" @((item.TenPhanLoaiSK == Model.LS_NoiKhoa_TieuHoa_PhanLoai) ? "selected" : "")>@item.TenPhanLoaiSK</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label style="font-weight:normal">d) Thận - tiết niệu</label>
+                                <input type="text" class="form-control noidungksk" placeholder="" id="txtLS_NoiKhoa_ThanTietNieu" value="@Model.LS_NoiKhoa_ThanTietNieu">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label style="font-weight:normal">Phân loại</label>
+                                <select class="form-control" id="selectLS_NoiKhoa_ThanTietNieu_PhanLoai">
+                                    <option value=""></option>
+                                    @foreach (var item in listPhanLoaiSK)
+                                    {
+                                        <option value="@item.TenPhanLoaiSK" @((item.TenPhanLoaiSK == Model.LS_NoiKhoa_ThanTietNieu_PhanLoai) ? "selected" : "")>@item.TenPhanLoaiSK</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label style="font-weight:normal">đ) Nội tiết</label>
+                                <input type="text" class="form-control noidungksk" placeholder="" id="txtLS_NoiKhoa_NoiTiet" value="@Model.LS_NoiKhoa_NoiTiet">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label style="font-weight:normal">Phân loại</label>
+                                <select class="form-control" id="selectLS_NoiKhoa_NoiTiet_PhanLoai">
+                                    <option value=""></option>
+                                    @foreach (var item in listPhanLoaiSK)
+                                    {
+                                        <option value="@item.TenPhanLoaiSK" @((item.TenPhanLoaiSK == Model.LS_NoiKhoa_NoiTiet_PhanLoai) ? "selected" : "")>@item.TenPhanLoaiSK</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label style="font-weight:normal">e) Cơ - xương - khớp</label>
+                                <input type="text" class="form-control noidungksk" placeholder="" id="txtLS_NoiKhoa_CoXuongKhop" value="@Model.LS_NoiKhoa_CoXuongKhop">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label style="font-weight:normal">Phân loại</label>
+                                <select class="form-control" id="selectLS_NoiKhoa_CoXuongKhop_PhanLoai">
+                                    <option value=""></option>
+                                    @foreach (var item in listPhanLoaiSK)
+                                    {
+                                        <option value="@item.TenPhanLoaiSK" @((item.TenPhanLoaiSK == Model.LS_NoiKhoa_CoXuongKhop_PhanLoai) ? "selected" : "")>@item.TenPhanLoaiSK</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label style="font-weight:normal">g) Thần kinh</label>
+                                <input type="text" class="form-control noidungksk" placeholder="" id="txtLS_NoiKhoa_ThanKinh" value="@Model.LS_NoiKhoa_ThanKinh">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label style="font-weight:normal">Phân loại</label>
+                                <select class="form-control" id="selectLS_NoiKhoa_ThanKinh_PhanLoai">
+                                    <option value=""></option>
+                                    @foreach (var item in listPhanLoaiSK)
+                                    {
+                                        <option value="@item.TenPhanLoaiSK" @((item.TenPhanLoaiSK == Model.LS_NoiKhoa_ThanKinh_PhanLoai) ? "selected" : "")>@item.TenPhanLoaiSK</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label style="font-weight:normal">h) Tâm thần</label>
+                                <input type="text" class="form-control noidungksk" placeholder="" id="txtLS_NoiKhoa_TamThan" value="@Model.LS_NoiKhoa_TamThan">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label style="font-weight:normal">Phân loại</label>
+                                <select class="form-control" id="selectLS_NoiKhoa_ThamThan_PhanLoai">
+                                    <option value=""></option>
+                                    @foreach (var item in listPhanLoaiSK)
+                                    {
+                                        <option value="@item.TenPhanLoaiSK" @((item.TenPhanLoaiSK == Model.LS_NoiKhoa_ThamThan_PhanLoai) ? "selected" : "")>@item.TenPhanLoaiSK</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label style="font-weight:normal">Họ tên bác sĩ ký</label>
+                                <select class="form-control" id="selectLS_NoiKhoa_BacSiKy">
+                                    <option value=""></option>
+                                    @foreach (var item in listBacSySK)
+                                    {
+                                        <option value="@item.TenBacSyKSK" @((item.TenBacSyKSK == Model.LS_NoiKhoa_BacSiKy) ? "selected" : "")>@item.TenBacSyKSK</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>2. Ngoại khoa</label>
+                                <input type="text" class="form-control noidungksk" placeholder="" id="txtLS_NgoaiKhoa" value="@Model.LS_NgoaiKhoa">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label style="font-weight:normal">Phân loại</label>
+                                <select class="form-control" id="selectLS_NgoaiKhoa_PhanLoai">
+                                    <option value=""></option>
+                                    @foreach (var item in listPhanLoaiSK)
+                                    {
+                                        <option value="@item.TenPhanLoaiSK" @((item.TenPhanLoaiSK == Model.LS_NgoaiKhoa_PhanLoai) ? "selected" : "")>@item.TenPhanLoaiSK</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label style="font-weight:normal">Họ tên bác sĩ ký</label>
+                                <select class="form-control" id="selectLS_NgoaiKhoa_BacSiKy">
+                                    <option value=""></option>
+                                    @foreach (var item in listBacSySK)
+                                    {
+                                        <option value="@item.TenBacSyKSK" @((item.TenBacSyKSK == Model.LS_NgoaiKhoa_BacSiKy) ? "selected" : "")>@item.TenBacSyKSK</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>3. Sản phụ khoa</label>
+                                <input type="text" class="form-control noidungksk" placeholder="" id="txtLS_SanPhuKhoa" value="@Model.LS_SanPhuKhoa">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label style="font-weight:normal">Phân loại</label>
+                                <select class="form-control" id="selectLS_SanPhuKhoa_PhanLoai">
+                                    <option value=""></option>
+                                    @foreach (var item in listPhanLoaiSK)
+                                    {
+                                        <option value="@item.TenPhanLoaiSK" @((item.TenPhanLoaiSK == Model.LS_SanPhuKhoa_PhanLoai) ? "selected" : "")>@item.TenPhanLoaiSK</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label style="font-weight:normal">Họ tên bác sĩ ký</label>
+                                <select class="form-control" id="selectLS_SanPhuKhoa_BacSiKy">
+                                    <option value=""></option>
+                                    @foreach (var item in listBacSySK)
+                                    {
+                                        <option value="@item.TenBacSyKSK" @((item.TenBacSyKSK == Model.LS_SanPhuKhoa_BacSiKy) ? "selected" : "")>@item.TenBacSyKSK</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>4. Mắt</label>
+                                <label style="font-weight:normal;">Kết quả khám thị lực</label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label style="font-weight:normal;">Không kính Mắt phải</label>
+                                <input type="text" class="form-control noidungksk" placeholder="" id="txtLS_Mat_KhongKinhMatPhai" value="@Model.LS_Mat_KhongKinhMatPhai" maxlength="50">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label style="font-weight:normal;">Không kính Mắt trái</label>
+                                <input type="text" class="form-control noidungksk" placeholder="" id="txtLS_Mat_KhongKinhMatTrai" value="@Model.LS_Mat_KhongKinhMatTrai" maxlength="50">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label style="font-weight:normal;">Có kính Mắt phải</label>
+                                <input type="text" class="form-control noidungksk" placeholder="" id="txtLS_Mat_CoKinhMatPhai" value="@Model.LS_Mat_CoKinhMatPhai" maxlength="50">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label style="font-weight:normal;">Có kính Mắt trái</label>
+                                <input type="text" class="form-control noidungksk" placeholder="" id="txtLS_Mat_CoKinhMatTrai" value="@Model.LS_Mat_CoKinhMatTrai" maxlength="50">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label style="font-weight:normal;">Các bệnh về mắt (nếu có):</label>
+                                <input type="text" class="form-control noidungksk" placeholder="" id="txtLS_Mat_CacBenhVeMat" value="@Model.LS_Mat_CacBenhVeMat" maxlength="50">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label style="font-weight:normal">Phân loại</label>
+                                <select class="form-control" id="selectLS_Mat_PhanLoai">
+                                    <option value=""></option>
+                                    @foreach (var item in listPhanLoaiSK)
+                                    {
+                                        <option value="@item.TenPhanLoaiSK" @((item.TenPhanLoaiSK == Model.LS_Mat_PhanLoai) ? "selected" : "")>@item.TenPhanLoaiSK</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label style="font-weight:normal">Họ tên bác sĩ ký</label>
+                                <select class="form-control" id="selectLS_Mat_BacSiKy">
+                                    <option value=""></option>
+                                    @foreach (var item in listBacSySK)
+                                    {
+                                        <option value="@item.TenBacSyKSK" @((item.TenBacSyKSK == Model.LS_Mat_BacSiKy) ? "selected" : "")>@item.TenBacSyKSK</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>5. Tai - Mũi - Họng</label>
+                                <label style="font-weight:normal;">Kết quả khám thính lực</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label style="font-weight:normal;">Tai trái Nói thường</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control noidungksk" placeholder="" id="txtLS_TaiMuiHong_TaiTraiNoiThuong" value="@Model.LS_TaiMuiHong_TaiTraiNoiThuong" maxlength="10">
+                                <span class="input-group-addon">m</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label style="font-weight:normal;">Tai trái Nói thầm</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control noidungksk" placeholder="" id="txtLS_TaiMuiHong_TaiTraiNoiTham" value="@Model.LS_TaiMuiHong_TaiTraiNoiTham" maxlength="10">
+                                <span class="input-group-addon">m</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label style="font-weight:normal;">Tai phải Nói thường</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control noidungksk" placeholder="" id="txtLS_TaiMuiHong_TaiPhaiNoiThuong" value="@Model.LS_TaiMuiHong_TaiPhaiNoiThuong" maxlength="10" />
+                                <span class="input-group-addon">m</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label style="font-weight:normal;">Tai phải Nói thầm</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control noidungksk" placeholder="" id="txtLS_TaiMuiHong_TaiPhaiNoiTham" value="@Model.LS_TaiMuiHong_TaiPhaiNoiTham" maxlength="10">
+                                <span class="input-group-addon">m</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label style="font-weight:normal;">Các bệnh về tai mũi họng (nếu có):</label>
+                                <input type="text" class="form-control noidungksk" placeholder="" id="txtLS_TaiMuiHong_CacBenhVeTaiMuiHong" value="@Model.LS_TaiMuiHong_CacBenhVeTaiMuiHong">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label style="font-weight:normal">Phân loại</label>
+                                <select class="form-control" id="selectLS_TaiMuiHong_PhanLoai">
+                                    <option value=""></option>
+                                    @foreach (var item in listPhanLoaiSK)
+                                    {
+                                        <option value="@item.TenPhanLoaiSK" @((item.TenPhanLoaiSK == Model.LS_TaiMuiHong_PhanLoai) ? "selected" : "")>@item.TenPhanLoaiSK</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label style="font-weight:normal">Họ tên bác sĩ ký</label>
+                                <select class="form-control" id="selectLS_TaiMuiHong_BacSiKy">
+                                    <option value=""></option>
+                                    @foreach (var item in listBacSySK)
+                                    {
+                                        <option value="@item.TenBacSyKSK" @((item.TenBacSyKSK == Model.LS_TaiMuiHong_BacSiKy) ? "selected" : "")>@item.TenBacSyKSK</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>6. Răng - Hàm - Mặt</label>
+                                <label style="font-weight:normal;">Kết quả khám</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label style="font-weight:normal;">Hàm trên</label>
+                                <input type="text" class="form-control noidungksk" placeholder="" id="txtLS_RangHamMat_HamTren" value="@Model.LS_RangHamMat_HamTren" maxlength="100">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label style="font-weight:normal;">Hàm dưới</label>
+                                <input type="text" class="form-control noidungksk" placeholder="" id="txtLS_RangHamMat_HamDuoi" value="@Model.LS_RangHamMat_HamDuoi" maxlength="100">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label style="font-weight:normal;">Các bệnh về răng hàm mặt (nếu có):</label>
+                                <input type="text" class="form-control noidungksk" placeholder="" id="txtLS_RangHamMat_CacBenhVeRangHamMat" value="@Model.LS_RangHamMat_CacBenhVeRangHamMat">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label style="font-weight:normal">Phân loại</label>
+                                <select class="form-control" id="selectLS_RangHamMat_PhanLoai">
+                                    <option value=""></option>
+                                    @foreach (var item in listPhanLoaiSK)
+                                    {
+                                        <option value="@item.TenPhanLoaiSK" @((item.TenPhanLoaiSK == Model.LS_RangHamMat_PhanLoai) ? "selected" : "")>@item.TenPhanLoaiSK</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label style="font-weight:normal">Họ tên bác sĩ ký</label>
+                                <select class="form-control" id="selectLS_RangHamMat_BacSiKy">
+                                    <option value=""></option>
+                                    @foreach (var item in listBacSySK)
+                                    {
+                                        <option value="@item.TenBacSyKSK" @((item.TenBacSyKSK == Model.LS_RangHamMat_BacSiKy) ? "selected" : "")>@item.TenBacSyKSK</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>7. Da liễu</label>
+                                <input type="text" class="form-control noidungksk" placeholder="" id="txtLS_DaLieu" value="@Model.LS_DaLieu">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label style="font-weight:normal">Phân loại</label>
+                                <select class="form-control" id="selectLS_DaLieu_PhanLoai">
+                                    <option value=""></option>
+                                    @foreach (var item in listPhanLoaiSK)
+                                    {
+                                        <option value="@item.TenPhanLoaiSK" @((item.TenPhanLoaiSK == Model.LS_DaLieu_PhanLoai) ? "selected" : "")>@item.TenPhanLoaiSK</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label style="font-weight:normal">Họ tên bác sĩ ký</label>
+                                <select class="form-control" id="selectLS_DaLieu_BacSiKy">
+                                    <option value=""></option>
+                                    @foreach (var item in listBacSySK)
+                                    {
+                                        <option value="@item.TenBacSyKSK" @((item.TenBacSyKSK == Model.LS_DaLieu_BacSiKy) ? "selected" : "")>@item.TenBacSyKSK</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    @*tới đây rồi nhe mậy*@
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>IV. KHÁM CẬN LÂM SÀNG</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h6>a) Kết quả</h6>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>1. Xét nghiệm máu</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label style="font-weight:normal;">Hồng cầu</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="" id="txtCLS_XetNghiemMau_HongCau" value="@Model.CLS_XetNghiemMau_HongCau" maxlength="10">
+                                <span class="input-group-addon">x10^12/L</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label style="font-weight:normal;">Bạch cầu</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="" id="txtCLS_XetNghiemMau_BachCau" value="@Model.CLS_XetNghiemMau_BachCau" maxlength="10">
+                                <span class="input-group-addon">x10^9/L</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label style="font-weight:normal;">Tiểu cầu</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="" id="txtCLS_XetNghiemMau_TieuCau" value="@Model.CLS_XetNghiemMau_TieuCau" maxlength="10">
+                                <span class="input-group-addon">x10^9/L</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label style="font-weight:normal;">HCT</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="" id="txtCLS_XetNghiemMau_HCT" value="@Model.CLS_XetNghiemMau_HCT" maxlength="10">
+                                <span class="input-group-addon">%</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label style="font-weight:normal;">Glucose</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="" id="txtCLS_XetNghiemMau_Glucose" value="@Model.CLS_XetNghiemMau_Glucose" maxlength="10">
+                                <span class="input-group-addon">mmol/L</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control noidungksk" placeholder="" id="txtCLS_XetNghiemMau" value="@Model.CLS_XetNghiemMau">
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>2. Xét nghiệm nước tiểu</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label style="font-weight:normal;">Glucose</label>
+                                <input type="text" class="form-control" placeholder="" id="txtCLS_XetNghiemNuocTieu_Glucose" value="@Model.CLS_XetNghiemNuocTieu_Glucose">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label style="font-weight:normal;">Protein</label>
+                                <input type="text" class="form-control" placeholder="" id="txtCLS_XetNghiemNuocTieu_Protein" value="@Model.CLS_XetNghiemNuocTieu_Protein">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label style="font-weight:normal;">pH</label>
+                                <input type="text" class="form-control" placeholder="" id="txtCLS_XetNghiemNuocTieu_pH" value="@Model.CLS_XetNghiemNuocTieu_pH">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control noidungksk" placeholder="" id="txtCLS_XetNghiemNuocTieu" value="@Model.CLS_XetNghiemNuocTieu">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>3. Xét nghiệm phân</label>
+                                <label style="font-weight:normal;">Soi phân tìm ký sinh trùng đường ruột</label>
+                                <input type="text" class="form-control noidungksk" placeholder="" id="txtCLS_XetNghiemPhan" value="@Model.CLS_XetNghiemPhan">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>4. Các xét nghiệm khác</label>
+                                <textarea class="form-control noidungksk" id="txtCLS_CacXetNghiemKhac">@Model.CLS_CacXetNghiemKhac</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h6>b) Đánh giá</h6>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <textarea class="form-control noidungksk" id="txtCLS_DanhGia">@Model.CLS_DanhGia</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label style="font-weight:normal">Họ tên bác sĩ ký</label>
+                                <select class="form-control" id="selectCLS_BacSiKy">
+                                    <option value=""></option>
+                                    @foreach (var item in listBacSySK)
+                                    {
+                                        <option value="@item.TenBacSyKSK" @((item.TenBacSyKSK == Model.CLS_BacSiKy) ? "selected" : "")>@item.TenBacSyKSK</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>V. KẾT LUẬN</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>1. Phân loại sức khỏe</label>
+                                <select class="form-control" id="selectKL_PhanLoaiSucKhoe">
+                                    <option value=""></option>
+                                    @foreach (var item in listPhanLoaiSK)
+                                    {
+                                        <option value="@item.TenPhanLoaiSK" @((item.TenPhanLoaiSK == Model.KL_PhanLoaiSucKhoe) ? "selected" : "")>@item.TenPhanLoaiSK</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Ghi chú</label>
+                                <input type="text" class="form-control noidungksk" placeholder="" id="txtKL_PhanLoaiSucKhoe_GhiChu" value="@Model.KL_PhanLoaiSucKhoe_GhiChu">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>2. Các bệnh tật khác (nếu có)</label>
+                                <textarea class="form-control noidungksk" id="txtKL_CacBenhTatNeuCo">@Model.KL_CacBenhTatNeuCo</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
                             <div class="row">
-                                <div class="col-md-12">
-                                    <select class="form-control">
-                                        <option value=""></option>
-                                    </select>
+                                <div class="col-md-4">
+                                    <label>KÝ KẾT LUẬN</label>
+                                    <label style="font-weight:normal;">Tại</label>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <input class="form-control noidungksk" placeholder="Tại..." type="text" id="txtKL_NoiKy" value="@Model.KL_NoiKy">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label style="font-weight:normal;">Ngày</label>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <input class="form-control date" placeholder="" type="text" id="txtKL_NgayKy" value="@Model.KL_NgayKy">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>NGƯỜI KẾT LUẬN</label>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <select class="form-control" id="selectKL_NguoiKetLuan">
+                                                <option value=""></option>
+                                                @foreach (var item in listBacSySK)
+                                                {
+                                                    <option value="@item.TenBacSyKSK" @((item.TenBacSyKSK == Model.KL_NguoiKetLuan) ? "selected" : "")>@item.TenBacSyKSK</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            
+                            <button class="btn btn-lg btn-success" id="btnLuu">Lưu dữ liệu</button>
+                            <a href="@Url.Action("XoaLuotKham", "QuanLySucKhoe", new { @id = Model.MaLuotKSK})" class="btn btn-lg btn-danger" id="btnXoa" onclick="return confirm('Bạn thật sự muốn xóa ?');">Xóa</a>
+                            
+                        </div>
+                    </div>
                 </div>
             </div>
+            
         </div>
     </div>
 </div>
+<div style="position:fixed; bottom:10px; right:10px; z-index:1000;">
+    
+    <a class="btn btn-lg btn-default" id="btnTroVe" href="@(Url.Action("CapNhat", "QuanLySucKhoe", new { @id = Model.MaSoKSK}))#divTabLuotKham">Trở về sổ KSK</a>
+    
+</div>
+<script>
+    var urlController = '@(HttpContext.Current.Request.Url.Scheme)://@(HttpContext.Current.Request.Url.Authority)/@(HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString())/';
+</script>
+
+
+<div id="loading" style="position:fixed; top:0px; left:0px; width: 100%; height:100%; z-index:100000000; padding-top: 20%; background-color:rgba(0, 0, 0, 0.6); display:none;">
+    <div class="row">
+        <div class="col-xs-3">
+        </div>
+        <div class="col-xs-6" style="text-align:center; font-size:16px;">
+            <span style="color:white;">Hệ thống đang xử lý, vui lòng chờ...</span>
+            <br /><br />
+            <div class="progress progress-striped active" style="z-index:10000000000;">
+                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; ">
+                    <span class="sr-only"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-3">
+        </div>
+    </div>
+
+</div>
+
+<script src="~/scripts/app_scripts/LuotKham.js?@("v="+DateTime.Now.ToString("yyMMddhhmmss"))"></script>

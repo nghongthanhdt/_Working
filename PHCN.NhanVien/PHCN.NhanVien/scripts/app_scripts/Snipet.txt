@@ -1,0 +1,11 @@
+﻿
+## insert js datetime now to string
+
+?@("v="+DateTime.Now.ToString("yyMMddhhmmss"))
+
+
+## url controller
+
+<script>
+    var urlController = '@(HttpContext.Current.Request.Url.Scheme)://@(HttpContext.Current.Request.Url.Authority)/@(HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString())/';        
+</script>

@@ -657,11 +657,13 @@
     <None Include="Properties\PublishProfiles\PHCN.NhanVien.pubxml" />
     <None Include="scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="scripts\app_scripts\CapNhatBaiVietWeb.js" />
+    <Content Include="scripts\app_scripts\LuotKham.js" />
     <Content Include="scripts\app_scripts\CapNhatLyLichVienChuc.js" />
     <Content Include="scripts\app_scripts\CapNhatSoKSK.js" />
     <Content Include="scripts\app_scripts\DanhSachBaiViet.js" />
     <Content Include="scripts\app_scripts\QuanLyDanhMuc.js" />
     <Content Include="scripts\app_scripts\QuanLyNhanVien.js" />
+    <Content Include="scripts\app_scripts\Snipet.txt" />
     <Content Include="scripts\app_scripts\SoanThu.js" />
     <Content Include="scripts\app_scripts\ThuNoiBo.js" />
     <Content Include="scripts\core-scripts\sweetalert2.all.min.js" />
@@ -702,6 +704,9 @@
     <Compile Include="Controllers\VanBanController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BacSyKSK.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BaiViet.cs">
       <DependentUpon>PHCNEntities.tt</DependentUpon>
@@ -778,6 +783,9 @@
     <Compile Include="Models\Loi.cs">
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LuotKSK.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\LyLichVienChuc.cs">
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
@@ -790,7 +798,13 @@
     <Compile Include="Models\NhanVien.cs">
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\NoiDungKSK.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\PhamViHoatDongChuyenMon.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PhanLoaiSK.cs">
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PhanQuyen.cs">
@@ -815,6 +829,9 @@
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SoKSK.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SoKSK_Benh.cs">
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ThamSoHeThong.cs">
@@ -928,6 +945,10 @@
     <Content Include="Views\QuanLySucKhoe\LuotKham.cshtml" />
     <Content Include="Views\QuanLySucKhoe\_pSoKSK_Benh.cshtml" />
     <Content Include="Views\QuanLySucKhoe\_pmodalChiTietBenh.cshtml" />
+    <Content Include="Views\QuanLySucKhoe\CapNhatLuotKSK.cshtml" />
+    <Content Include="Views\QuanLyDanhMuc\_pPhanLoaiSK.cshtml" />
+    <Content Include="Views\QuanLyDanhMuc\_pBacSyKSK.cshtml" />
+    <Content Include="Views\QuanLyDanhMuc\_pNoiDungKSK.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

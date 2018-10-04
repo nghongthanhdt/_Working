@@ -21,6 +21,8 @@
     catch { };
     var listKhoaPhong = db.KhoaPhong.Where(x => x.Xoa == false).OrderBy(x => x.STT).ToList();
     var listLyLichVienChuc = db.LyLichVienChuc.Where(x => x.MaNhanVien == id && (x.Xoa == false || x.Xoa == null)).OrderBy(x => x.MaLyLichVienChuc).ToList();
+    var listSoKSK = db.SoKSK.Where(x => x.MaNhanVien == id && (x.Xoa == false || x.Xoa == null)).OrderBy(x => x.MaSoKSK).ToList();
+
 
     PHCN.NhanVien.Models.LyLichVienChuc lylich = new PHCN.NhanVien.Models.LyLichVienChuc();
     PHCN.NhanVien.Models.HinhAnh hinhDaiDien = new PHCN.NhanVien.Models.HinhAnh();
@@ -38,7 +40,10 @@
     }
 
 
+
 }
+
+
 <div class="row">
     
     <div class="col-md-6">
@@ -203,7 +208,29 @@ else
 
                             </div>
                             <div class="tab-pane fade" id="suckhoe">
-                                sức khỏe
+                                @if (listSoKSK.Any())
+                                {
+                                    var soKSK = listSoKSK.Last();
+                                    var listLuotKSK = db.LuotKSK.Where(x => x.MaSoKSK == soKSK.MaSoKSK && x.Xoa == false && x.Ngay != null).OrderByDescending(x => x.Ngay);
+
+                                    if (listLuotKSK.Any())
+                                    {
+                                        <ul>
+                                            @foreach (var item in listLuotKSK)
+                                            {
+                                                <li><a href="@Url.Action("LuotKham", "QuanLySucKhoe", new { @id = item.MaLuotKSK})">@(DateTime.Parse(item.Ngay.ToString()).ToShortDateString())</a></li>
+                                            }
+                                            
+                                        </ul>
+                                    }
+
+                                                            <a href="@Url.Action("CapNhat", "QuanLySucKhoe", new { @id = soKSK.MaSoKSK})" class="btn btn-primary">Cập nhật sổ</a>
+                                }
+                                else
+                                {
+                                    <span>Chưa có thông tin, hãy bắt đầu cập nhật...</span>
+                                    <a href="@Url.Action("TaoSoKSK", "QuanLySucKhoe", new { @id = nv.MaNhanVien})" class="btn btn-primary">Cập nhật sổ</a>
+                                }
                             </div>
 
                         </div>

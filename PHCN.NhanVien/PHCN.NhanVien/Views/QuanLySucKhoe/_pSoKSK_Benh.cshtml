@@ -1,40 +1,38 @@
-﻿<table class="table">
-    <tr>
-        <th style="width:50%;">Tên bệnh</th>
-        <th style="width:30%;">Phát hiện năm</th>
-        <th style="width:20%;"></th>
-    </tr>
-    <tr>
-        <td>Thoái hóa đa khớp</td>
-        <td>1998</td>
-        <td>
-            <a href="javascript:void(0);" data-mabosungphamvihdcm="12" class="rowSuaDienBienBoSungPhamViHDCM btn btn-xs btn-default">
-                <i class="glyphicon glyphicon-pencil"></i>
-                ...
-            </a>
-            <a href="javascript:void(0);" data-mabosungphamvihdcm="12" class="rowXoaDienBienBoSungPhamViHDCM btn btn-xs btn-default">
-                <i class="glyphicon glyphicon-remove"></i>
-            </a>
-        </td>
-    </tr>
-</table>
-<table class="table">
-    <tr>
-        <th style="width:50%;">Tên bệnh nghề nghiệp</th>
-        <th style="width:30%;">Phát hiện năm</th>
-        <th style="width:20%;"></th>
-    </tr>
-    <tr>
-        <td>Đau mỏi vai gáy</td>
-        <td>1998</td>
-        <td>
-            <a href="javascript:void(0);" data-mabosungphamvihdcm="12" class="rowSuaDienBienBoSungPhamViHDCM btn btn-xs btn-default">
-                <i class="glyphicon glyphicon-pencil"></i>
-                ...
-            </a>
-            <a href="javascript:void(0);" data-mabosungphamvihdcm="12" class="rowXoaDienBienBoSungPhamViHDCM btn btn-xs btn-default">
-                <i class="glyphicon glyphicon-remove"></i>
-            </a>
-        </td>
-    </tr>
-</table>
+﻿@model List<PHCN.NhanVien.Models.SoKSK_Benh>
+
+@if (Model.Any())
+{
+
+    <table class="table">
+        <tr>
+            <th style="width:55%;">Tên bệnh</th>
+            <th style="width:15%; text-align:center;">Bệnh nghề nghiệp</th>
+            <th style="width:15%; text-align:center;">Phát hiện năm</th>
+            <th style="width:15%;"></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.TenBenh</td>
+                <td style="text-align:center;">
+                    <input type="checkbox" @((item.BenhNgheNghiep) ? "checked='checked'" : "")  disabled="disabled"/>
+                </td>
+                <td style="text-align:center;">@item.PhatHienNam</td>
+                <td style="text-align:center;">
+                    <a href="javascript:void(0);" data-mabenh="@item.MaBenh" class="rowSuaBenhKSK btn btn-xs btn-default">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                        ...
+                    </a>
+                    <a href="javascript:void(0);" data-mabenh="@item.MaBenh" class="rowXoaBenhKSK btn btn-xs btn-default">
+                        <i class="glyphicon glyphicon-remove"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </table>
+
+}
+
+
+

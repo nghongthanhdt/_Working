@@ -3,6 +3,10 @@
     ViewBag.Title = "Xem";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewBag.PanelTitle = "Sổ khám sức khỏe định kỳ";
+
+    PHCN.NhanVien.Models.PHCNEntities db = new PHCN.NhanVien.Models.PHCNEntities();
+
+    var listLuotKham = db.LuotKSK.Where(x => x.MaSoKSK == Model.MaSoKSK && x.Xoa == false).OrderBy(x => x.Ngay).ToList();
 }
 
 
@@ -10,60 +14,66 @@
     var urlController = '@(HttpContext.Current.Request.Url.Scheme)://@(HttpContext.Current.Request.Url.Authority)/@(HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString())/';        
 </script>
 <input type="hidden" id="hiddenMaSoKSK" value="@Model.MaSoKSK"/>
-
+<input type="hidden" id="hiddenMaBenh" value="0" />
+<input type="hidden" value="@Model.MaNhanVien" id="hiddenMaNhanVien" />
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-8">
         <div class="panel">
-            <ul id="myTab1" class="nav nav-tabs nav-justified">
-                <li class="active"><a href="#divTabThongTinChung" data-toggle="tab">Thông tin chung</a></li>
-                <li class=""><a href="#divTabLuotKham" data-toggle="tab">Lượt khám</a></li>                
-            </ul>
-            <div id="myTabContent" class="tab-content">
-                <div class="tab-pane fade active in" id="divTabThongTinChung">
-                    
-                    @Html.Partial("_pThongTinChung", Model)
+            @Html.Partial("_pThongTinChung", Model)
 
-                    <div style="position:fixed; bottom:10px; right:10px;">
-                        <a class="btn btn-lg btn-default" id="btnTroVeDanhSach" href="/QuanLyNhanVien/Xem/3">Trở về danh sách</a>
-                        <button class="btn btn-lg btn-success" id="btnLuu">Lưu thông tin</button>
-                    </div>
+            
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Ngày khám<span class="badge pull-right">@listLuotKham.Count</span></h3>
                 </div>
-                <div class="tab-pane fade" id="divTabLuotKham">
-                    
-                    <table class="table">
-                        <tr>
-                            <th>Ngày khám</th>
-                            <th>Phân loại sức khỏe</th>
-                            <th></th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="#">28/09/2018</a>
-                            </td>
-                            <td>II (chiều cao)</td>
-                            <td>
-                                <a href="javascript:void(0);" data-mabosungphamvihdcm="12" class="rowSuaDienBienBoSungPhamViHDCM btn btn-xs btn-default">
-                                    <i class="glyphicon glyphicon-pencil"></i>
-                                    ...
-                                </a>
-                                <a href="javascript:void(0);" data-mabosungphamvihdcm="12" class="rowXoaDienBienBoSungPhamViHDCM btn btn-xs btn-default">
-                                    <i class="glyphicon glyphicon-remove"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    </table>
+                <div class="panel-body">
+                    <ul id="myTab2" class="nav nav-pills nav-stacked">
+                        
+                        @foreach (var item in listLuotKham)
+                        {
+                            <li><a href="@Url.Action("LuotKham", "QuanLySucKhoe", new { @id = item.MaLuotKSK })">@(DateTime.Parse(item.Ngay.ToString()).ToShortDateString())</a></li>
+                        }
+                        @if (Model.Xoa == false)
+                        {
+                            <li class="active"><a href="@Url.Action("ThemLuotKSK", "QuanLySucKhoe", new { @id = Model.MaSoKSK})">Thêm ngày khám</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="javascript:void(0);">Lưu sổ KSK để thêm ngày khám...</a></li>
+                        }
 
-                    <div style="position:fixed; bottom:10px; right:10px;">
-                        <a class="btn btn-lg btn-default" id="btnTroVeDanhSach" href="/QuanLyNhanVien/Xem/3">Thêm lượt khám</a>                        
-                    </div>
+                    </ul>
                 </div>
-                
             </div>
         </div>
     </div>
 </div>
+<div style="position:fixed; bottom:10px; right:10px;">
+    <a class="btn btn-lg btn-default" id="btnTroVeDanhSach" href="@Url.Action("Xem", "QuanLyNhanVien", new { @id = Model.MaNhanVien})">Trở về nhân viên</a>
+    
+</div>
+<div id="loading" style="position:fixed; top:0px; left:0px; width: 100%; height:100%; z-index:100000000; padding-top: 20%; background-color:rgba(0, 0, 0, 0.6); display:none;">
+    <div class="row">
+        <div class="col-xs-3">
+        </div>
+        <div class="col-xs-6" style="text-align:center; font-size:16px;">
+            <span style="color:white;">Hệ thống đang xử lý, vui lòng chờ...</span>
+            <br /><br />
+            <div class="progress progress-striped active" style="z-index:10000000000;">
+                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; ">
+                    <span class="sr-only"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-3">
+        </div>
+    </div>
 
-
+</div>
 <script src="~/scripts/core-scripts/sweetalert2.all.min.js"></script>
 <script src="~/scripts/core-scripts/th.core.js?@("v="+DateTime.Now.ToString("yyMMddhhmmss"))"></script>
 <script src="~/scripts/app_scripts/CapNhatSoKSK.js?@("v="+DateTime.Now.ToString("yyMMddhhmmss"))"></script>

@@ -5,6 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="PHCNModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BacSyKSK">
+          <Key>
+            <PropertyRef Name="MaBacSyKSK" />
+          </Key>
+          <Property Name="MaBacSyKSK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenBacSyKSK" Type="nvarchar" MaxLength="200" />
+          <Property Name="STT" Type="int" />
+          <Property Name="Xoa" Type="bit" />
+        </EntityType>
         <EntityType Name="BaiViet">
           <Key>
             <PropertyRef Name="MaBaiViet" />
@@ -281,6 +290,90 @@
           <Property Name="MaLoi" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="TenLoi" Type="nvarchar" MaxLength="2000" Nullable="false" />
         </EntityType>
+        <EntityType Name="LuotKSK">
+          <Key>
+            <PropertyRef Name="MaLuotKSK" />
+          </Key>
+          <Property Name="MaLuotKSK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaSoKSK" Type="int" Nullable="false" />
+          <Property Name="Ngay" Type="datetime2" Precision="7" />
+          <Property Name="TienSuBenhTat" Type="nvarchar" MaxLength="500" />
+          <Property Name="TL_ChieuCao" Type="int" />
+          <Property Name="TL_CanNang" Type="int" />
+          <Property Name="TL_ChiSoBMI" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TL_Mach" Type="int" />
+          <Property Name="TL_HuyetAp" Type="nvarchar" MaxLength="10" />
+          <Property Name="TL_PhanLoaiTheLuc" Type="nvarchar" MaxLength="50" />
+          <Property Name="LS_NoiKhoa_TuanHoan" Type="nvarchar" MaxLength="200" />
+          <Property Name="LS_NoiKhoa_TuanHoan_PhanLoai" Type="nvarchar" MaxLength="50" />
+          <Property Name="LS_NoiKhoa_HoHap" Type="nvarchar" MaxLength="200" />
+          <Property Name="LS_NoiKhoa_HoHap_PhanLoai" Type="nvarchar" MaxLength="50" />
+          <Property Name="LS_NoiKhoa_TieuHoa" Type="nvarchar" MaxLength="200" />
+          <Property Name="LS_NoiKhoa_TieuHoa_PhanLoai" Type="nvarchar" MaxLength="50" />
+          <Property Name="LS_NoiKhoa_ThanTietNieu" Type="nvarchar" MaxLength="200" />
+          <Property Name="LS_NoiKhoa_ThanTietNieu_PhanLoai" Type="nvarchar" MaxLength="50" />
+          <Property Name="LS_NoiKhoa_NoiTiet" Type="nvarchar" MaxLength="200" />
+          <Property Name="LS_NoiKhoa_NoiTiet_PhanLoai" Type="nvarchar" MaxLength="50" />
+          <Property Name="LS_NoiKhoa_CoXuongKhop" Type="nvarchar" MaxLength="200" />
+          <Property Name="LS_NoiKhoa_CoXuongKhop_PhanLoai" Type="nvarchar" MaxLength="50" />
+          <Property Name="LS_NoiKhoa_ThanKinh" Type="nvarchar" MaxLength="200" />
+          <Property Name="LS_NoiKhoa_ThanKinh_PhanLoai" Type="nvarchar" MaxLength="50" />
+          <Property Name="LS_NoiKhoa_TamThan" Type="nvarchar" MaxLength="200" />
+          <Property Name="LS_NoiKhoa_ThamThan_PhanLoai" Type="nvarchar" MaxLength="50" />
+          <Property Name="LS_NoiKhoa_BacSiKy" Type="nvarchar" MaxLength="100" />
+          <Property Name="LS_NgoaiKhoa" Type="nvarchar" MaxLength="200" />
+          <Property Name="LS_NgoaiKhoa_PhanLoai" Type="nvarchar" MaxLength="50" />
+          <Property Name="LS_NgoaiKhoa_BacSiKy" Type="nvarchar" MaxLength="100" />
+          <Property Name="LS_SanPhuKhoa" Type="nvarchar" MaxLength="200" />
+          <Property Name="LS_SanPhuKhoa_PhanLoai" Type="nvarchar" MaxLength="50" />
+          <Property Name="LS_SanPhuKhoa_BacSiKy" Type="nvarchar" MaxLength="100" />
+          <Property Name="LS_Mat_KhongKinhMatPhai" Type="nvarchar" MaxLength="50" />
+          <Property Name="LS_Mat_KhongKinhMatTrai" Type="nvarchar" MaxLength="50" />
+          <Property Name="LS_Mat_CoKinhMatPhai" Type="nvarchar" MaxLength="50" />
+          <Property Name="LS_Mat_CoKinhMatTrai" Type="nvarchar" MaxLength="50" />
+          <Property Name="LS_Mat_CacBenhVeMat" Type="nvarchar" MaxLength="200" />
+          <Property Name="LS_Mat_PhanLoai" Type="nvarchar" MaxLength="50" />
+          <Property Name="LS_Mat_BacSiKy" Type="nvarchar" MaxLength="100" />
+          <Property Name="LS_TaiMuiHong_TaiTraiNoiThuong" Type="nvarchar" MaxLength="10" />
+          <Property Name="LS_TaiMuiHong_TaiTraiNoiTham" Type="nvarchar" MaxLength="10" />
+          <Property Name="LS_TaiMuiHong_TaiPhaiNoiThuong" Type="nvarchar" MaxLength="10" />
+          <Property Name="LS_TaiMuiHong_TaiPhaiNoiTham" Type="nvarchar" MaxLength="10" />
+          <Property Name="LS_TaiMuiHong_CacBenhVeTaiMuiHong" Type="nvarchar" MaxLength="200" />
+          <Property Name="LS_TaiMuiHong_PhanLoai" Type="nvarchar" MaxLength="50" />
+          <Property Name="LS_TaiMuiHong_BacSiKy" Type="nvarchar" MaxLength="100" />
+          <Property Name="LS_RangHamMat_HamTren" Type="nvarchar" MaxLength="100" />
+          <Property Name="LS_RangHamMat_HamDuoi" Type="nvarchar" MaxLength="100" />
+          <Property Name="LS_RangHamMat_CacBenhVeRangHamMat" Type="nvarchar" MaxLength="200" />
+          <Property Name="LS_RangHamMat_PhanLoai" Type="nvarchar" MaxLength="50" />
+          <Property Name="LS_RangHamMat_BacSiKy" Type="nvarchar" MaxLength="100" />
+          <Property Name="LS_DaLieu" Type="nvarchar" MaxLength="200" />
+          <Property Name="LS_DaLieu_PhanLoai" Type="nvarchar" MaxLength="50" />
+          <Property Name="LS_DaLieu_BacSiKy" Type="nvarchar" MaxLength="100" />
+          <Property Name="CLS_XetNghiemMau_HongCau" Type="nvarchar" MaxLength="10" />
+          <Property Name="CLS_XetNghiemMau_BachCau" Type="nvarchar" MaxLength="10" />
+          <Property Name="CLS_XetNghiemMau_TieuCau" Type="nvarchar" MaxLength="10" />
+          <Property Name="CLS_XetNghiemMau_HCT" Type="nvarchar" MaxLength="10" />
+          <Property Name="CLS_XetNghiemMau_Glucose" Type="nvarchar" MaxLength="10" />
+          <Property Name="CLS_XetNghiemMau" Type="nvarchar" MaxLength="200" />
+          <Property Name="CLS_XetNghiemNuocTieu_Glucose" Type="nvarchar" MaxLength="10" />
+          <Property Name="CLS_XetNghiemNuocTieu_Protein" Type="nvarchar" MaxLength="10" />
+          <Property Name="CLS_XetNghiemNuocTieu_pH" Type="nvarchar" MaxLength="10" />
+          <Property Name="CLS_XetNghiemNuocTieu" Type="nvarchar" MaxLength="200" />
+          <Property Name="CLS_XetNghiemPhan" Type="nvarchar" MaxLength="200" />
+          <Property Name="CLS_CacXetNghiemKhac" Type="nvarchar" MaxLength="500" />
+          <Property Name="CLS_DanhGia" Type="nvarchar" MaxLength="500" />
+          <Property Name="CLS_BacSiKy" Type="nvarchar" MaxLength="100" />
+          <Property Name="KL_PhanLoaiSucKhoe" Type="nvarchar" MaxLength="50" />
+          <Property Name="KL_PhanLoaiSucKhoe_GhiChu" Type="nvarchar" MaxLength="200" />
+          <Property Name="KL_CacBenhTatNeuCo" Type="nvarchar" MaxLength="500" />
+          <Property Name="KL_NoiKy" Type="nvarchar" MaxLength="100" />
+          <Property Name="KL_NgayKy" Type="datetime2" Precision="7" />
+          <Property Name="KL_NguoiKetLuan" Type="nvarchar" MaxLength="100" />
+          <Property Name="MaNhanVienNhap" Type="int" />
+          <Property Name="NgayNhap" Type="datetime2" Precision="7" />
+          <Property Name="Xoa" Type="bit" />
+          <Property Name="NgayXoa" Type="datetime2" Precision="7" />
+        </EntityType>
         <EntityType Name="LyLichVienChuc">
           <Key>
             <PropertyRef Name="MaLyLichVienChuc" />
@@ -406,12 +499,30 @@
           <Property Name="SoDienThoai" Type="nvarchar" MaxLength="200" />
           <Property Name="SoDienThoaiNoiBo" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="NoiDungKSK">
+          <Key>
+            <PropertyRef Name="MaNoiDungKSK" />
+          </Key>
+          <Property Name="MaNoiDungKSK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenNoiDungKSK" Type="nvarchar" MaxLength="2000" Nullable="false" />
+          <Property Name="STT" Type="int" Nullable="false" />
+          <Property Name="Xoa" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="PhamViHoatDongChuyenMon">
           <Key>
             <PropertyRef Name="MaPhamViHoatDongChuyenMon" />
           </Key>
           <Property Name="MaPhamViHoatDongChuyenMon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TenPhamViHoatDongChuyenMon" Type="nvarchar" MaxLength="2000" Nullable="false" />
+          <Property Name="STT" Type="int" Nullable="false" />
+          <Property Name="Xoa" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PhanLoaiSK">
+          <Key>
+            <PropertyRef Name="MaPhanLoaiSK" />
+          </Key>
+          <Property Name="MaPhanLoaiSK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenPhanLoaiSK" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="STT" Type="int" Nullable="false" />
           <Property Name="Xoa" Type="bit" Nullable="false" />
         </EntityType>
@@ -443,12 +554,12 @@
           <Property Name="SoCMND" Type="nvarchar" MaxLength="20" />
           <Property Name="NgayCapCMND" Type="datetime2" Precision="7" />
           <Property Name="NoiCapCMND" Type="nvarchar" MaxLength="100" />
-          <Property Name="HoKhauThuongTru" Type="nvarchar" MaxLength="50" />
-          <Property Name="ChoOHienTai" Type="nvarchar" MaxLength="500" />
+          <Property Name="HoKhauThuongTru" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ChoOHienTai" Type="nvarchar" MaxLength="1000" />
           <Property Name="NgheNghiep" Type="nvarchar" MaxLength="100" />
-          <Property Name="NoiCongTacHocTap" Type="nvarchar" MaxLength="500" />
+          <Property Name="NoiCongTacHocTap" Type="nvarchar" MaxLength="1000" />
           <Property Name="NgayBatDauHocTapLamviec" Type="datetime2" Precision="7" />
-          <Property Name="NgheCongViecTruocDay" Type="nvarchar" MaxLength="500" />
+          <Property Name="NgheCongViecTruocDay" Type="nvarchar" MaxLength="1000" />
           <Property Name="TienSuBenhTatCuaGiaDinh" Type="nvarchar" MaxLength="500" />
           <Property Name="TienSuBanThan" Type="nvarchar" MaxLength="500" />
           <Property Name="LapSoKSK_NoiKy" Type="nvarchar" MaxLength="100" />
@@ -458,6 +569,16 @@
           <Property Name="NgayNhap" Type="datetime2" Precision="7" />
           <Property Name="Xoa" Type="bit" />
           <Property Name="NgayXoa" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="SoKSK_Benh">
+          <Key>
+            <PropertyRef Name="MaBenh" />
+          </Key>
+          <Property Name="MaBenh" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaSoKSK" Type="int" Nullable="false" />
+          <Property Name="TenBenh" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="BenhNgheNghiep" Type="bit" Nullable="false" />
+          <Property Name="PhatHienNam" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ThamSoHeThong">
           <Key>
@@ -687,6 +808,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_LuotKSK_SoKSK">
+          <End Role="SoKSK" Type="Self.SoKSK" Multiplicity="1" />
+          <End Role="LuotKSK" Type="Self.LuotKSK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SoKSK">
+              <PropertyRef Name="MaSoKSK" />
+            </Principal>
+            <Dependent Role="LuotKSK">
+              <PropertyRef Name="MaSoKSK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_LyLichVienChuc_ChinhQuyen">
           <End Role="ChinhQuyen" Type="Self.ChinhQuyen" Multiplicity="0..1" />
           <End Role="LyLichVienChuc" Type="Self.LyLichVienChuc" Multiplicity="*" />
@@ -832,6 +965,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="PHCNModelStoreContainer">
+          <EntitySet Name="BacSyKSK" EntityType="Self.BacSyKSK" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BaiViet" EntityType="Self.BaiViet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BaiVietWeb" EntityType="Self.BaiVietWeb" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BoSungPhamViHDCM" EntityType="Self.BoSungPhamViHDCM" Schema="dbo" store:Type="Tables" />
@@ -857,14 +991,18 @@
           <EntitySet Name="LoaiBaiViet" EntityType="Self.LoaiBaiViet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoaiHopDong" EntityType="Self.LoaiHopDong" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Loi" EntityType="Self.Loi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LuotKSK" EntityType="Self.LuotKSK" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LyLichVienChuc" EntityType="Self.LyLichVienChuc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MaCCHN" EntityType="Self.MaCCHN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NgheNghiep" EntityType="Self.NgheNghiep" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NhanVien" EntityType="Self.NhanVien" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NoiDungKSK" EntityType="Self.NoiDungKSK" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PhamViHoatDongChuyenMon" EntityType="Self.PhamViHoatDongChuyenMon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhanLoaiSK" EntityType="Self.PhanLoaiSK" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PhanQuyen" EntityType="Self.PhanQuyen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Quyen" EntityType="Self.Quyen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SoKSK" EntityType="Self.SoKSK" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SoKSK_Benh" EntityType="Self.SoKSK_Benh" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ThamSoHeThong" EntityType="Self.ThamSoHeThong" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TinhThanh" EntityType="Self.TinhThanh" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TonGiao" EntityType="Self.TonGiao" Schema="dbo" store:Type="Tables" />
@@ -932,6 +1070,10 @@
           <AssociationSet Name="FK_GuiNhan_NhanVien_NguoiNhan" Association="Self.FK_GuiNhan_NhanVien_NguoiNhan">
             <End Role="NhanVien" EntitySet="NhanVien" />
             <End Role="GuiNhan" EntitySet="GuiNhan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LuotKSK_SoKSK" Association="Self.FK_LuotKSK_SoKSK">
+            <End Role="SoKSK" EntitySet="SoKSK" />
+            <End Role="LuotKSK" EntitySet="LuotKSK" />
           </AssociationSet>
           <AssociationSet Name="FK_LyLichVienChuc_ChinhQuyen" Association="Self.FK_LyLichVienChuc_ChinhQuyen">
             <End Role="ChinhQuyen" EntitySet="ChinhQuyen" />
@@ -1152,10 +1294,19 @@
             <End Role="ChuyenMuc" EntitySet="ChuyenMuc" />
             <End Role="BaiVietWeb" EntitySet="BaiVietWeb" />
           </AssociationSet>
+          <EntitySet Name="SoKSK_Benh" EntityType="PHCNModel.SoKSK_Benh" />
+          <EntitySet Name="NoiDungKSK" EntityType="PHCNModel.NoiDungKSK" />
+          <EntitySet Name="PhanLoaiSK" EntityType="PHCNModel.PhanLoaiSK" />
           <EntitySet Name="SoKSK" EntityType="PHCNModel.SoKSK" />
           <AssociationSet Name="FK_SoKSK_NhanVien" Association="PHCNModel.FK_SoKSK_NhanVien">
             <End Role="NhanVien" EntitySet="NhanVien" />
             <End Role="SoKSK" EntitySet="SoKSK" />
+          </AssociationSet>
+          <EntitySet Name="BacSyKSK" EntityType="PHCNModel.BacSyKSK" />
+          <EntitySet Name="LuotKSK" EntityType="PHCNModel.LuotKSK" />
+          <AssociationSet Name="FK_LuotKSK_SoKSK" Association="PHCNModel.FK_LuotKSK_SoKSK">
+            <End Role="SoKSK" EntitySet="SoKSK" />
+            <End Role="LuotKSK" EntitySet="LuotKSK" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Loi">
@@ -1977,6 +2128,34 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="SoKSK_Benh">
+          <Key>
+            <PropertyRef Name="MaBenh" />
+          </Key>
+          <Property Name="MaBenh" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaSoKSK" Type="Int32" Nullable="false" />
+          <Property Name="TenBenh" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="BenhNgheNghiep" Type="Boolean" Nullable="false" />
+          <Property Name="PhatHienNam" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NoiDungKSK">
+          <Key>
+            <PropertyRef Name="MaNoiDungKSK" />
+          </Key>
+          <Property Name="MaNoiDungKSK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenNoiDungKSK" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="STT" Type="Int32" Nullable="false" />
+          <Property Name="Xoa" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PhanLoaiSK">
+          <Key>
+            <PropertyRef Name="MaPhanLoaiSK" />
+          </Key>
+          <Property Name="MaPhanLoaiSK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenPhanLoaiSK" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="STT" Type="Int32" Nullable="false" />
+          <Property Name="Xoa" Type="Boolean" Nullable="false" />
+        </EntityType>
         <EntityType Name="SoKSK">
           <Key>
             <PropertyRef Name="MaSoKSK" />
@@ -1990,12 +2169,12 @@
           <Property Name="SoCMND" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="NgayCapCMND" Type="DateTime" Precision="7" />
           <Property Name="NoiCapCMND" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="HoKhauThuongTru" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ChoOHienTai" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="HoKhauThuongTru" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ChoOHienTai" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="NgheNghiep" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="NoiCongTacHocTap" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="NoiCongTacHocTap" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="NgayBatDauHocTapLamviec" Type="DateTime" Precision="7" />
-          <Property Name="NgheCongViecTruocDay" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="NgheCongViecTruocDay" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="TienSuBenhTatCuaGiaDinh" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="TienSuBanThan" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="LapSoKSK_NoiKy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -2006,6 +2185,7 @@
           <Property Name="Xoa" Type="Boolean" />
           <Property Name="NgayXoa" Type="DateTime" Precision="7" />
           <NavigationProperty Name="NhanVien" Relationship="PHCNModel.FK_SoKSK_NhanVien" FromRole="SoKSK" ToRole="NhanVien" />
+          <NavigationProperty Name="LuotKSK" Relationship="PHCNModel.FK_LuotKSK_SoKSK" FromRole="SoKSK" ToRole="LuotKSK" />
         </EntityType>
         <Association Name="FK_SoKSK_NhanVien">
           <End Type="PHCNModel.NhanVien" Role="NhanVien" Multiplicity="0..1" />
@@ -2016,6 +2196,112 @@
             </Principal>
             <Dependent Role="SoKSK">
               <PropertyRef Name="MaNhanVien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="BacSyKSK">
+          <Key>
+            <PropertyRef Name="MaBacSyKSK" />
+          </Key>
+          <Property Name="MaBacSyKSK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenBacSyKSK" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="STT" Type="Int32" />
+          <Property Name="Xoa" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="LuotKSK">
+          <Key>
+            <PropertyRef Name="MaLuotKSK" />
+          </Key>
+          <Property Name="MaLuotKSK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaSoKSK" Type="Int32" Nullable="false" />
+          <Property Name="Ngay" Type="DateTime" Precision="7" />
+          <Property Name="TienSuBenhTat" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="TL_ChieuCao" Type="Int32" />
+          <Property Name="TL_CanNang" Type="Int32" />
+          <Property Name="TL_ChiSoBMI" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TL_Mach" Type="Int32" />
+          <Property Name="TL_HuyetAp" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="TL_PhanLoaiTheLuc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LS_NoiKhoa_TuanHoan" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LS_NoiKhoa_TuanHoan_PhanLoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LS_NoiKhoa_HoHap" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LS_NoiKhoa_HoHap_PhanLoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LS_NoiKhoa_TieuHoa" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LS_NoiKhoa_TieuHoa_PhanLoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LS_NoiKhoa_ThanTietNieu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LS_NoiKhoa_ThanTietNieu_PhanLoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LS_NoiKhoa_NoiTiet" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LS_NoiKhoa_NoiTiet_PhanLoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LS_NoiKhoa_CoXuongKhop" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LS_NoiKhoa_CoXuongKhop_PhanLoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LS_NoiKhoa_ThanKinh" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LS_NoiKhoa_ThanKinh_PhanLoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LS_NoiKhoa_TamThan" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LS_NoiKhoa_ThamThan_PhanLoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LS_NoiKhoa_BacSiKy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LS_NgoaiKhoa" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LS_NgoaiKhoa_PhanLoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LS_NgoaiKhoa_BacSiKy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LS_SanPhuKhoa" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LS_SanPhuKhoa_PhanLoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LS_SanPhuKhoa_BacSiKy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LS_Mat_KhongKinhMatPhai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LS_Mat_KhongKinhMatTrai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LS_Mat_CoKinhMatPhai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LS_Mat_CoKinhMatTrai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LS_Mat_CacBenhVeMat" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LS_Mat_PhanLoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LS_Mat_BacSiKy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LS_TaiMuiHong_TaiTraiNoiThuong" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="LS_TaiMuiHong_TaiTraiNoiTham" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="LS_TaiMuiHong_TaiPhaiNoiThuong" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="LS_TaiMuiHong_TaiPhaiNoiTham" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="LS_TaiMuiHong_CacBenhVeTaiMuiHong" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LS_TaiMuiHong_PhanLoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LS_TaiMuiHong_BacSiKy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LS_RangHamMat_HamTren" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LS_RangHamMat_HamDuoi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LS_RangHamMat_CacBenhVeRangHamMat" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LS_RangHamMat_PhanLoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LS_RangHamMat_BacSiKy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LS_DaLieu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LS_DaLieu_PhanLoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LS_DaLieu_BacSiKy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CLS_XetNghiemMau_HongCau" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CLS_XetNghiemMau_BachCau" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CLS_XetNghiemMau_TieuCau" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CLS_XetNghiemMau_HCT" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CLS_XetNghiemMau_Glucose" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CLS_XetNghiemMau" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CLS_XetNghiemNuocTieu_Glucose" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CLS_XetNghiemNuocTieu_Protein" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CLS_XetNghiemNuocTieu_pH" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CLS_XetNghiemNuocTieu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CLS_XetNghiemPhan" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CLS_CacXetNghiemKhac" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CLS_DanhGia" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CLS_BacSiKy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="KL_PhanLoaiSucKhoe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KL_PhanLoaiSucKhoe_GhiChu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="KL_CacBenhTatNeuCo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="KL_NoiKy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="KL_NgayKy" Type="DateTime" Precision="7" />
+          <Property Name="KL_NguoiKetLuan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MaNhanVienNhap" Type="Int32" />
+          <Property Name="NgayNhap" Type="DateTime" Precision="7" />
+          <Property Name="Xoa" Type="Boolean" />
+          <Property Name="NgayXoa" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="SoKSK" Relationship="PHCNModel.FK_LuotKSK_SoKSK" FromRole="LuotKSK" ToRole="SoKSK" />
+        </EntityType>
+        <Association Name="FK_LuotKSK_SoKSK">
+          <End Type="PHCNModel.SoKSK" Role="SoKSK" Multiplicity="1" />
+          <End Type="PHCNModel.LuotKSK" Role="LuotKSK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SoKSK">
+              <PropertyRef Name="MaSoKSK" />
+            </Principal>
+            <Dependent Role="LuotKSK">
+              <PropertyRef Name="MaSoKSK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2522,6 +2808,37 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="SoKSK_Benh">
+            <EntityTypeMapping TypeName="PHCNModel.SoKSK_Benh">
+              <MappingFragment StoreEntitySet="SoKSK_Benh">
+                <ScalarProperty Name="PhatHienNam" ColumnName="PhatHienNam" />
+                <ScalarProperty Name="BenhNgheNghiep" ColumnName="BenhNgheNghiep" />
+                <ScalarProperty Name="TenBenh" ColumnName="TenBenh" />
+                <ScalarProperty Name="MaSoKSK" ColumnName="MaSoKSK" />
+                <ScalarProperty Name="MaBenh" ColumnName="MaBenh" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NoiDungKSK">
+            <EntityTypeMapping TypeName="PHCNModel.NoiDungKSK">
+              <MappingFragment StoreEntitySet="NoiDungKSK">
+                <ScalarProperty Name="Xoa" ColumnName="Xoa" />
+                <ScalarProperty Name="STT" ColumnName="STT" />
+                <ScalarProperty Name="TenNoiDungKSK" ColumnName="TenNoiDungKSK" />
+                <ScalarProperty Name="MaNoiDungKSK" ColumnName="MaNoiDungKSK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhanLoaiSK">
+            <EntityTypeMapping TypeName="PHCNModel.PhanLoaiSK">
+              <MappingFragment StoreEntitySet="PhanLoaiSK">
+                <ScalarProperty Name="Xoa" ColumnName="Xoa" />
+                <ScalarProperty Name="STT" ColumnName="STT" />
+                <ScalarProperty Name="TenPhanLoaiSK" ColumnName="TenPhanLoaiSK" />
+                <ScalarProperty Name="MaPhanLoaiSK" ColumnName="MaPhanLoaiSK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="SoKSK">
             <EntityTypeMapping TypeName="PHCNModel.SoKSK">
               <MappingFragment StoreEntitySet="SoKSK">
@@ -2549,6 +2866,101 @@
                 <ScalarProperty Name="MaSo" ColumnName="MaSo" />
                 <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
                 <ScalarProperty Name="MaSoKSK" ColumnName="MaSoKSK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BacSyKSK">
+            <EntityTypeMapping TypeName="PHCNModel.BacSyKSK">
+              <MappingFragment StoreEntitySet="BacSyKSK">
+                <ScalarProperty Name="Xoa" ColumnName="Xoa" />
+                <ScalarProperty Name="STT" ColumnName="STT" />
+                <ScalarProperty Name="TenBacSyKSK" ColumnName="TenBacSyKSK" />
+                <ScalarProperty Name="MaBacSyKSK" ColumnName="MaBacSyKSK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LuotKSK">
+            <EntityTypeMapping TypeName="PHCNModel.LuotKSK">
+              <MappingFragment StoreEntitySet="LuotKSK">
+                <ScalarProperty Name="NgayXoa" ColumnName="NgayXoa" />
+                <ScalarProperty Name="Xoa" ColumnName="Xoa" />
+                <ScalarProperty Name="NgayNhap" ColumnName="NgayNhap" />
+                <ScalarProperty Name="MaNhanVienNhap" ColumnName="MaNhanVienNhap" />
+                <ScalarProperty Name="KL_NguoiKetLuan" ColumnName="KL_NguoiKetLuan" />
+                <ScalarProperty Name="KL_NgayKy" ColumnName="KL_NgayKy" />
+                <ScalarProperty Name="KL_NoiKy" ColumnName="KL_NoiKy" />
+                <ScalarProperty Name="KL_CacBenhTatNeuCo" ColumnName="KL_CacBenhTatNeuCo" />
+                <ScalarProperty Name="KL_PhanLoaiSucKhoe_GhiChu" ColumnName="KL_PhanLoaiSucKhoe_GhiChu" />
+                <ScalarProperty Name="KL_PhanLoaiSucKhoe" ColumnName="KL_PhanLoaiSucKhoe" />
+                <ScalarProperty Name="CLS_BacSiKy" ColumnName="CLS_BacSiKy" />
+                <ScalarProperty Name="CLS_DanhGia" ColumnName="CLS_DanhGia" />
+                <ScalarProperty Name="CLS_CacXetNghiemKhac" ColumnName="CLS_CacXetNghiemKhac" />
+                <ScalarProperty Name="CLS_XetNghiemPhan" ColumnName="CLS_XetNghiemPhan" />
+                <ScalarProperty Name="CLS_XetNghiemNuocTieu" ColumnName="CLS_XetNghiemNuocTieu" />
+                <ScalarProperty Name="CLS_XetNghiemNuocTieu_pH" ColumnName="CLS_XetNghiemNuocTieu_pH" />
+                <ScalarProperty Name="CLS_XetNghiemNuocTieu_Protein" ColumnName="CLS_XetNghiemNuocTieu_Protein" />
+                <ScalarProperty Name="CLS_XetNghiemNuocTieu_Glucose" ColumnName="CLS_XetNghiemNuocTieu_Glucose" />
+                <ScalarProperty Name="CLS_XetNghiemMau" ColumnName="CLS_XetNghiemMau" />
+                <ScalarProperty Name="CLS_XetNghiemMau_Glucose" ColumnName="CLS_XetNghiemMau_Glucose" />
+                <ScalarProperty Name="CLS_XetNghiemMau_HCT" ColumnName="CLS_XetNghiemMau_HCT" />
+                <ScalarProperty Name="CLS_XetNghiemMau_TieuCau" ColumnName="CLS_XetNghiemMau_TieuCau" />
+                <ScalarProperty Name="CLS_XetNghiemMau_BachCau" ColumnName="CLS_XetNghiemMau_BachCau" />
+                <ScalarProperty Name="CLS_XetNghiemMau_HongCau" ColumnName="CLS_XetNghiemMau_HongCau" />
+                <ScalarProperty Name="LS_DaLieu_BacSiKy" ColumnName="LS_DaLieu_BacSiKy" />
+                <ScalarProperty Name="LS_DaLieu_PhanLoai" ColumnName="LS_DaLieu_PhanLoai" />
+                <ScalarProperty Name="LS_DaLieu" ColumnName="LS_DaLieu" />
+                <ScalarProperty Name="LS_RangHamMat_BacSiKy" ColumnName="LS_RangHamMat_BacSiKy" />
+                <ScalarProperty Name="LS_RangHamMat_PhanLoai" ColumnName="LS_RangHamMat_PhanLoai" />
+                <ScalarProperty Name="LS_RangHamMat_CacBenhVeRangHamMat" ColumnName="LS_RangHamMat_CacBenhVeRangHamMat" />
+                <ScalarProperty Name="LS_RangHamMat_HamDuoi" ColumnName="LS_RangHamMat_HamDuoi" />
+                <ScalarProperty Name="LS_RangHamMat_HamTren" ColumnName="LS_RangHamMat_HamTren" />
+                <ScalarProperty Name="LS_TaiMuiHong_BacSiKy" ColumnName="LS_TaiMuiHong_BacSiKy" />
+                <ScalarProperty Name="LS_TaiMuiHong_PhanLoai" ColumnName="LS_TaiMuiHong_PhanLoai" />
+                <ScalarProperty Name="LS_TaiMuiHong_CacBenhVeTaiMuiHong" ColumnName="LS_TaiMuiHong_CacBenhVeTaiMuiHong" />
+                <ScalarProperty Name="LS_TaiMuiHong_TaiPhaiNoiTham" ColumnName="LS_TaiMuiHong_TaiPhaiNoiTham" />
+                <ScalarProperty Name="LS_TaiMuiHong_TaiPhaiNoiThuong" ColumnName="LS_TaiMuiHong_TaiPhaiNoiThuong" />
+                <ScalarProperty Name="LS_TaiMuiHong_TaiTraiNoiTham" ColumnName="LS_TaiMuiHong_TaiTraiNoiTham" />
+                <ScalarProperty Name="LS_TaiMuiHong_TaiTraiNoiThuong" ColumnName="LS_TaiMuiHong_TaiTraiNoiThuong" />
+                <ScalarProperty Name="LS_Mat_BacSiKy" ColumnName="LS_Mat_BacSiKy" />
+                <ScalarProperty Name="LS_Mat_PhanLoai" ColumnName="LS_Mat_PhanLoai" />
+                <ScalarProperty Name="LS_Mat_CacBenhVeMat" ColumnName="LS_Mat_CacBenhVeMat" />
+                <ScalarProperty Name="LS_Mat_CoKinhMatTrai" ColumnName="LS_Mat_CoKinhMatTrai" />
+                <ScalarProperty Name="LS_Mat_CoKinhMatPhai" ColumnName="LS_Mat_CoKinhMatPhai" />
+                <ScalarProperty Name="LS_Mat_KhongKinhMatTrai" ColumnName="LS_Mat_KhongKinhMatTrai" />
+                <ScalarProperty Name="LS_Mat_KhongKinhMatPhai" ColumnName="LS_Mat_KhongKinhMatPhai" />
+                <ScalarProperty Name="LS_SanPhuKhoa_BacSiKy" ColumnName="LS_SanPhuKhoa_BacSiKy" />
+                <ScalarProperty Name="LS_SanPhuKhoa_PhanLoai" ColumnName="LS_SanPhuKhoa_PhanLoai" />
+                <ScalarProperty Name="LS_SanPhuKhoa" ColumnName="LS_SanPhuKhoa" />
+                <ScalarProperty Name="LS_NgoaiKhoa_BacSiKy" ColumnName="LS_NgoaiKhoa_BacSiKy" />
+                <ScalarProperty Name="LS_NgoaiKhoa_PhanLoai" ColumnName="LS_NgoaiKhoa_PhanLoai" />
+                <ScalarProperty Name="LS_NgoaiKhoa" ColumnName="LS_NgoaiKhoa" />
+                <ScalarProperty Name="LS_NoiKhoa_BacSiKy" ColumnName="LS_NoiKhoa_BacSiKy" />
+                <ScalarProperty Name="LS_NoiKhoa_ThamThan_PhanLoai" ColumnName="LS_NoiKhoa_ThamThan_PhanLoai" />
+                <ScalarProperty Name="LS_NoiKhoa_TamThan" ColumnName="LS_NoiKhoa_TamThan" />
+                <ScalarProperty Name="LS_NoiKhoa_ThanKinh_PhanLoai" ColumnName="LS_NoiKhoa_ThanKinh_PhanLoai" />
+                <ScalarProperty Name="LS_NoiKhoa_ThanKinh" ColumnName="LS_NoiKhoa_ThanKinh" />
+                <ScalarProperty Name="LS_NoiKhoa_CoXuongKhop_PhanLoai" ColumnName="LS_NoiKhoa_CoXuongKhop_PhanLoai" />
+                <ScalarProperty Name="LS_NoiKhoa_CoXuongKhop" ColumnName="LS_NoiKhoa_CoXuongKhop" />
+                <ScalarProperty Name="LS_NoiKhoa_NoiTiet_PhanLoai" ColumnName="LS_NoiKhoa_NoiTiet_PhanLoai" />
+                <ScalarProperty Name="LS_NoiKhoa_NoiTiet" ColumnName="LS_NoiKhoa_NoiTiet" />
+                <ScalarProperty Name="LS_NoiKhoa_ThanTietNieu_PhanLoai" ColumnName="LS_NoiKhoa_ThanTietNieu_PhanLoai" />
+                <ScalarProperty Name="LS_NoiKhoa_ThanTietNieu" ColumnName="LS_NoiKhoa_ThanTietNieu" />
+                <ScalarProperty Name="LS_NoiKhoa_TieuHoa_PhanLoai" ColumnName="LS_NoiKhoa_TieuHoa_PhanLoai" />
+                <ScalarProperty Name="LS_NoiKhoa_TieuHoa" ColumnName="LS_NoiKhoa_TieuHoa" />
+                <ScalarProperty Name="LS_NoiKhoa_HoHap_PhanLoai" ColumnName="LS_NoiKhoa_HoHap_PhanLoai" />
+                <ScalarProperty Name="LS_NoiKhoa_HoHap" ColumnName="LS_NoiKhoa_HoHap" />
+                <ScalarProperty Name="LS_NoiKhoa_TuanHoan_PhanLoai" ColumnName="LS_NoiKhoa_TuanHoan_PhanLoai" />
+                <ScalarProperty Name="LS_NoiKhoa_TuanHoan" ColumnName="LS_NoiKhoa_TuanHoan" />
+                <ScalarProperty Name="TL_PhanLoaiTheLuc" ColumnName="TL_PhanLoaiTheLuc" />
+                <ScalarProperty Name="TL_HuyetAp" ColumnName="TL_HuyetAp" />
+                <ScalarProperty Name="TL_Mach" ColumnName="TL_Mach" />
+                <ScalarProperty Name="TL_ChiSoBMI" ColumnName="TL_ChiSoBMI" />
+                <ScalarProperty Name="TL_CanNang" ColumnName="TL_CanNang" />
+                <ScalarProperty Name="TL_ChieuCao" ColumnName="TL_ChieuCao" />
+                <ScalarProperty Name="TienSuBenhTat" ColumnName="TienSuBenhTat" />
+                <ScalarProperty Name="Ngay" ColumnName="Ngay" />
+                <ScalarProperty Name="MaSoKSK" ColumnName="MaSoKSK" />
+                <ScalarProperty Name="MaLuotKSK" ColumnName="MaLuotKSK" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

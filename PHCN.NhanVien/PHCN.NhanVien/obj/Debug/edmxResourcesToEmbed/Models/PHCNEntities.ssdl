@@ -1,5 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="PHCNModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BacSyKSK">
+    <Key>
+      <PropertyRef Name="MaBacSyKSK" />
+    </Key>
+    <Property Name="MaBacSyKSK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenBacSyKSK" Type="nvarchar" MaxLength="200" />
+    <Property Name="STT" Type="int" />
+    <Property Name="Xoa" Type="bit" />
+  </EntityType>
   <EntityType Name="BaiViet">
     <Key>
       <PropertyRef Name="MaBaiViet" />
@@ -276,6 +285,90 @@
     <Property Name="MaLoi" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="TenLoi" Type="nvarchar" MaxLength="2000" Nullable="false" />
   </EntityType>
+  <EntityType Name="LuotKSK">
+    <Key>
+      <PropertyRef Name="MaLuotKSK" />
+    </Key>
+    <Property Name="MaLuotKSK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaSoKSK" Type="int" Nullable="false" />
+    <Property Name="Ngay" Type="datetime2" Precision="7" />
+    <Property Name="TienSuBenhTat" Type="nvarchar" MaxLength="500" />
+    <Property Name="TL_ChieuCao" Type="int" />
+    <Property Name="TL_CanNang" Type="int" />
+    <Property Name="TL_ChiSoBMI" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TL_Mach" Type="int" />
+    <Property Name="TL_HuyetAp" Type="nvarchar" MaxLength="10" />
+    <Property Name="TL_PhanLoaiTheLuc" Type="nvarchar" MaxLength="50" />
+    <Property Name="LS_NoiKhoa_TuanHoan" Type="nvarchar" MaxLength="200" />
+    <Property Name="LS_NoiKhoa_TuanHoan_PhanLoai" Type="nvarchar" MaxLength="50" />
+    <Property Name="LS_NoiKhoa_HoHap" Type="nvarchar" MaxLength="200" />
+    <Property Name="LS_NoiKhoa_HoHap_PhanLoai" Type="nvarchar" MaxLength="50" />
+    <Property Name="LS_NoiKhoa_TieuHoa" Type="nvarchar" MaxLength="200" />
+    <Property Name="LS_NoiKhoa_TieuHoa_PhanLoai" Type="nvarchar" MaxLength="50" />
+    <Property Name="LS_NoiKhoa_ThanTietNieu" Type="nvarchar" MaxLength="200" />
+    <Property Name="LS_NoiKhoa_ThanTietNieu_PhanLoai" Type="nvarchar" MaxLength="50" />
+    <Property Name="LS_NoiKhoa_NoiTiet" Type="nvarchar" MaxLength="200" />
+    <Property Name="LS_NoiKhoa_NoiTiet_PhanLoai" Type="nvarchar" MaxLength="50" />
+    <Property Name="LS_NoiKhoa_CoXuongKhop" Type="nvarchar" MaxLength="200" />
+    <Property Name="LS_NoiKhoa_CoXuongKhop_PhanLoai" Type="nvarchar" MaxLength="50" />
+    <Property Name="LS_NoiKhoa_ThanKinh" Type="nvarchar" MaxLength="200" />
+    <Property Name="LS_NoiKhoa_ThanKinh_PhanLoai" Type="nvarchar" MaxLength="50" />
+    <Property Name="LS_NoiKhoa_TamThan" Type="nvarchar" MaxLength="200" />
+    <Property Name="LS_NoiKhoa_ThamThan_PhanLoai" Type="nvarchar" MaxLength="50" />
+    <Property Name="LS_NoiKhoa_BacSiKy" Type="nvarchar" MaxLength="100" />
+    <Property Name="LS_NgoaiKhoa" Type="nvarchar" MaxLength="200" />
+    <Property Name="LS_NgoaiKhoa_PhanLoai" Type="nvarchar" MaxLength="50" />
+    <Property Name="LS_NgoaiKhoa_BacSiKy" Type="nvarchar" MaxLength="100" />
+    <Property Name="LS_SanPhuKhoa" Type="nvarchar" MaxLength="200" />
+    <Property Name="LS_SanPhuKhoa_PhanLoai" Type="nvarchar" MaxLength="50" />
+    <Property Name="LS_SanPhuKhoa_BacSiKy" Type="nvarchar" MaxLength="100" />
+    <Property Name="LS_Mat_KhongKinhMatPhai" Type="nvarchar" MaxLength="50" />
+    <Property Name="LS_Mat_KhongKinhMatTrai" Type="nvarchar" MaxLength="50" />
+    <Property Name="LS_Mat_CoKinhMatPhai" Type="nvarchar" MaxLength="50" />
+    <Property Name="LS_Mat_CoKinhMatTrai" Type="nvarchar" MaxLength="50" />
+    <Property Name="LS_Mat_CacBenhVeMat" Type="nvarchar" MaxLength="200" />
+    <Property Name="LS_Mat_PhanLoai" Type="nvarchar" MaxLength="50" />
+    <Property Name="LS_Mat_BacSiKy" Type="nvarchar" MaxLength="100" />
+    <Property Name="LS_TaiMuiHong_TaiTraiNoiThuong" Type="nvarchar" MaxLength="10" />
+    <Property Name="LS_TaiMuiHong_TaiTraiNoiTham" Type="nvarchar" MaxLength="10" />
+    <Property Name="LS_TaiMuiHong_TaiPhaiNoiThuong" Type="nvarchar" MaxLength="10" />
+    <Property Name="LS_TaiMuiHong_TaiPhaiNoiTham" Type="nvarchar" MaxLength="10" />
+    <Property Name="LS_TaiMuiHong_CacBenhVeTaiMuiHong" Type="nvarchar" MaxLength="200" />
+    <Property Name="LS_TaiMuiHong_PhanLoai" Type="nvarchar" MaxLength="50" />
+    <Property Name="LS_TaiMuiHong_BacSiKy" Type="nvarchar" MaxLength="100" />
+    <Property Name="LS_RangHamMat_HamTren" Type="nvarchar" MaxLength="100" />
+    <Property Name="LS_RangHamMat_HamDuoi" Type="nvarchar" MaxLength="100" />
+    <Property Name="LS_RangHamMat_CacBenhVeRangHamMat" Type="nvarchar" MaxLength="200" />
+    <Property Name="LS_RangHamMat_PhanLoai" Type="nvarchar" MaxLength="50" />
+    <Property Name="LS_RangHamMat_BacSiKy" Type="nvarchar" MaxLength="100" />
+    <Property Name="LS_DaLieu" Type="nvarchar" MaxLength="200" />
+    <Property Name="LS_DaLieu_PhanLoai" Type="nvarchar" MaxLength="50" />
+    <Property Name="LS_DaLieu_BacSiKy" Type="nvarchar" MaxLength="100" />
+    <Property Name="CLS_XetNghiemMau_HongCau" Type="nvarchar" MaxLength="10" />
+    <Property Name="CLS_XetNghiemMau_BachCau" Type="nvarchar" MaxLength="10" />
+    <Property Name="CLS_XetNghiemMau_TieuCau" Type="nvarchar" MaxLength="10" />
+    <Property Name="CLS_XetNghiemMau_HCT" Type="nvarchar" MaxLength="10" />
+    <Property Name="CLS_XetNghiemMau_Glucose" Type="nvarchar" MaxLength="10" />
+    <Property Name="CLS_XetNghiemMau" Type="nvarchar" MaxLength="200" />
+    <Property Name="CLS_XetNghiemNuocTieu_Glucose" Type="nvarchar" MaxLength="10" />
+    <Property Name="CLS_XetNghiemNuocTieu_Protein" Type="nvarchar" MaxLength="10" />
+    <Property Name="CLS_XetNghiemNuocTieu_pH" Type="nvarchar" MaxLength="10" />
+    <Property Name="CLS_XetNghiemNuocTieu" Type="nvarchar" MaxLength="200" />
+    <Property Name="CLS_XetNghiemPhan" Type="nvarchar" MaxLength="200" />
+    <Property Name="CLS_CacXetNghiemKhac" Type="nvarchar" MaxLength="500" />
+    <Property Name="CLS_DanhGia" Type="nvarchar" MaxLength="500" />
+    <Property Name="CLS_BacSiKy" Type="nvarchar" MaxLength="100" />
+    <Property Name="KL_PhanLoaiSucKhoe" Type="nvarchar" MaxLength="50" />
+    <Property Name="KL_PhanLoaiSucKhoe_GhiChu" Type="nvarchar" MaxLength="200" />
+    <Property Name="KL_CacBenhTatNeuCo" Type="nvarchar" MaxLength="500" />
+    <Property Name="KL_NoiKy" Type="nvarchar" MaxLength="100" />
+    <Property Name="KL_NgayKy" Type="datetime2" Precision="7" />
+    <Property Name="KL_NguoiKetLuan" Type="nvarchar" MaxLength="100" />
+    <Property Name="MaNhanVienNhap" Type="int" />
+    <Property Name="NgayNhap" Type="datetime2" Precision="7" />
+    <Property Name="Xoa" Type="bit" />
+    <Property Name="NgayXoa" Type="datetime2" Precision="7" />
+  </EntityType>
   <EntityType Name="LyLichVienChuc">
     <Key>
       <PropertyRef Name="MaLyLichVienChuc" />
@@ -401,12 +494,30 @@
     <Property Name="SoDienThoai" Type="nvarchar" MaxLength="200" />
     <Property Name="SoDienThoaiNoiBo" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="NoiDungKSK">
+    <Key>
+      <PropertyRef Name="MaNoiDungKSK" />
+    </Key>
+    <Property Name="MaNoiDungKSK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenNoiDungKSK" Type="nvarchar" MaxLength="2000" Nullable="false" />
+    <Property Name="STT" Type="int" Nullable="false" />
+    <Property Name="Xoa" Type="bit" Nullable="false" />
+  </EntityType>
   <EntityType Name="PhamViHoatDongChuyenMon">
     <Key>
       <PropertyRef Name="MaPhamViHoatDongChuyenMon" />
     </Key>
     <Property Name="MaPhamViHoatDongChuyenMon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TenPhamViHoatDongChuyenMon" Type="nvarchar" MaxLength="2000" Nullable="false" />
+    <Property Name="STT" Type="int" Nullable="false" />
+    <Property Name="Xoa" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PhanLoaiSK">
+    <Key>
+      <PropertyRef Name="MaPhanLoaiSK" />
+    </Key>
+    <Property Name="MaPhanLoaiSK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenPhanLoaiSK" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="STT" Type="int" Nullable="false" />
     <Property Name="Xoa" Type="bit" Nullable="false" />
   </EntityType>
@@ -438,12 +549,12 @@
     <Property Name="SoCMND" Type="nvarchar" MaxLength="20" />
     <Property Name="NgayCapCMND" Type="datetime2" Precision="7" />
     <Property Name="NoiCapCMND" Type="nvarchar" MaxLength="100" />
-    <Property Name="HoKhauThuongTru" Type="nvarchar" MaxLength="50" />
-    <Property Name="ChoOHienTai" Type="nvarchar" MaxLength="500" />
+    <Property Name="HoKhauThuongTru" Type="nvarchar" MaxLength="1000" />
+    <Property Name="ChoOHienTai" Type="nvarchar" MaxLength="1000" />
     <Property Name="NgheNghiep" Type="nvarchar" MaxLength="100" />
-    <Property Name="NoiCongTacHocTap" Type="nvarchar" MaxLength="500" />
+    <Property Name="NoiCongTacHocTap" Type="nvarchar" MaxLength="1000" />
     <Property Name="NgayBatDauHocTapLamviec" Type="datetime2" Precision="7" />
-    <Property Name="NgheCongViecTruocDay" Type="nvarchar" MaxLength="500" />
+    <Property Name="NgheCongViecTruocDay" Type="nvarchar" MaxLength="1000" />
     <Property Name="TienSuBenhTatCuaGiaDinh" Type="nvarchar" MaxLength="500" />
     <Property Name="TienSuBanThan" Type="nvarchar" MaxLength="500" />
     <Property Name="LapSoKSK_NoiKy" Type="nvarchar" MaxLength="100" />
@@ -453,6 +564,16 @@
     <Property Name="NgayNhap" Type="datetime2" Precision="7" />
     <Property Name="Xoa" Type="bit" />
     <Property Name="NgayXoa" Type="datetime2" Precision="7" />
+  </EntityType>
+  <EntityType Name="SoKSK_Benh">
+    <Key>
+      <PropertyRef Name="MaBenh" />
+    </Key>
+    <Property Name="MaBenh" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaSoKSK" Type="int" Nullable="false" />
+    <Property Name="TenBenh" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="BenhNgheNghiep" Type="bit" Nullable="false" />
+    <Property Name="PhatHienNam" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ThamSoHeThong">
     <Key>
@@ -682,6 +803,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_LuotKSK_SoKSK">
+    <End Role="SoKSK" Type="Self.SoKSK" Multiplicity="1" />
+    <End Role="LuotKSK" Type="Self.LuotKSK" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SoKSK">
+        <PropertyRef Name="MaSoKSK" />
+      </Principal>
+      <Dependent Role="LuotKSK">
+        <PropertyRef Name="MaSoKSK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_LyLichVienChuc_ChinhQuyen">
     <End Role="ChinhQuyen" Type="Self.ChinhQuyen" Multiplicity="0..1" />
     <End Role="LyLichVienChuc" Type="Self.LyLichVienChuc" Multiplicity="*" />
@@ -827,6 +960,7 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="PHCNModelStoreContainer">
+    <EntitySet Name="BacSyKSK" EntityType="Self.BacSyKSK" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BaiViet" EntityType="Self.BaiViet" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BaiVietWeb" EntityType="Self.BaiVietWeb" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BoSungPhamViHDCM" EntityType="Self.BoSungPhamViHDCM" Schema="dbo" store:Type="Tables" />
@@ -852,14 +986,18 @@
     <EntitySet Name="LoaiBaiViet" EntityType="Self.LoaiBaiViet" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LoaiHopDong" EntityType="Self.LoaiHopDong" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Loi" EntityType="Self.Loi" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LuotKSK" EntityType="Self.LuotKSK" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LyLichVienChuc" EntityType="Self.LyLichVienChuc" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MaCCHN" EntityType="Self.MaCCHN" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NgheNghiep" EntityType="Self.NgheNghiep" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NhanVien" EntityType="Self.NhanVien" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NoiDungKSK" EntityType="Self.NoiDungKSK" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PhamViHoatDongChuyenMon" EntityType="Self.PhamViHoatDongChuyenMon" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PhanLoaiSK" EntityType="Self.PhanLoaiSK" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PhanQuyen" EntityType="Self.PhanQuyen" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Quyen" EntityType="Self.Quyen" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SoKSK" EntityType="Self.SoKSK" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SoKSK_Benh" EntityType="Self.SoKSK_Benh" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ThamSoHeThong" EntityType="Self.ThamSoHeThong" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TinhThanh" EntityType="Self.TinhThanh" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TonGiao" EntityType="Self.TonGiao" Schema="dbo" store:Type="Tables" />
@@ -927,6 +1065,10 @@
     <AssociationSet Name="FK_GuiNhan_NhanVien_NguoiNhan" Association="Self.FK_GuiNhan_NhanVien_NguoiNhan">
       <End Role="NhanVien" EntitySet="NhanVien" />
       <End Role="GuiNhan" EntitySet="GuiNhan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LuotKSK_SoKSK" Association="Self.FK_LuotKSK_SoKSK">
+      <End Role="SoKSK" EntitySet="SoKSK" />
+      <End Role="LuotKSK" EntitySet="LuotKSK" />
     </AssociationSet>
     <AssociationSet Name="FK_LyLichVienChuc_ChinhQuyen" Association="Self.FK_LyLichVienChuc_ChinhQuyen">
       <End Role="ChinhQuyen" EntitySet="ChinhQuyen" />

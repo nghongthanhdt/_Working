@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="82d5b28938ed4f9da5a1f41af467c1e6" Name="Diagram1">
+      <Diagram DiagramId="82d5b28938ed4f9da5a1f41af467c1e6" Name="Diagram1" ZoomLevel="34">
         <EntityTypeShape EntityType="PHCNModel.KhoaPhong" Width="1.5" PointX="2.5" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="PHCNModel.LoaiBaiViet" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
         <EntityTypeShape EntityType="PHCNModel.Loi" Width="1.5" PointX="9" PointY="4.875" />
@@ -68,8 +68,14 @@
         <AssociationConnector Association="PHCNModel.FK_LyLichVienChuc_NhanVien" />
         <EntityTypeShape EntityType="PHCNModel.ChuyenMuc" Width="1.5" PointX="9.375" PointY="7.875" />
         <AssociationConnector Association="PHCNModel.FK_BaiVietWeb_ChuyenMuc" />
-        <EntityTypeShape EntityType="PHCNModel.SoKSK" Width="1.5" PointX="5.25" PointY="26.375" />
+        <EntityTypeShape EntityType="PHCNModel.SoKSK_Benh" Width="1.5" PointX="5.375" PointY="6.75" />
+        <EntityTypeShape EntityType="PHCNModel.NoiDungKSK" Width="1.5" PointX="14.75" PointY="11.75" />
+        <EntityTypeShape EntityType="PHCNModel.PhanLoaiSK" Width="1.5" PointX="16.75" PointY="6.75" />
+        <EntityTypeShape EntityType="PHCNModel.SoKSK" Width="1.5" PointX="5.25" PointY="31.25" />
         <AssociationConnector Association="PHCNModel.FK_SoKSK_NhanVien" />
+        <EntityTypeShape EntityType="PHCNModel.BacSyKSK" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="PHCNModel.LuotKSK" Width="1.5" PointX="7.875" PointY="26" />
+        <AssociationConnector Association="PHCNModel.FK_LuotKSK_SoKSK" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

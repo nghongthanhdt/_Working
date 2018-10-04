@@ -1,6 +1,7 @@
 ﻿
 $(document).ready(function () {
     $('.date').mask('00/00/0000', { placeholder: "__/__/____" });
+    $('.huyetap').mask('000/00', { placeholder: "___/__" });
     $('.number').mask('00000000000');
     $('.decimal').mask('0.00', { placeholder: "_.__" });
     $('.giaoducphothong').mask('00/00', { placeholder: "__/__" });
@@ -133,4 +134,22 @@ function RewriteTieuDe(alias) {
 
     str = replaceAll(str, " ", "-");
     return str;
+}
+function bindSuggest(controlId, url) {
+    $(controlId).autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                type: "POST",
+                url: url,
+                dataType: "json",
+                data: {
+                    keyword: request.term
+                },
+                success: function (data) {
+                    response(data);
+                }
+            });
+        },
+        delay: 200
+    });
 }

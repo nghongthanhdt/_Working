@@ -61,6 +61,11 @@ namespace PHCN.NhanVien.Models
         public virtual DbSet<HinhAnh> HinhAnh { get; set; }
         public virtual DbSet<LyLichVienChuc> LyLichVienChuc { get; set; }
         public virtual DbSet<ChuyenMuc> ChuyenMuc { get; set; }
+        public virtual DbSet<SoKSK_Benh> SoKSK_Benh { get; set; }
+        public virtual DbSet<NoiDungKSK> NoiDungKSK { get; set; }
+        public virtual DbSet<PhanLoaiSK> PhanLoaiSK { get; set; }
         public virtual DbSet<SoKSK> SoKSK { get; set; }
+        public virtual DbSet<BacSyKSK> BacSyKSK { get; set; }
+        public virtual DbSet<LuotKSK> LuotKSK { get; set; }
     }
 }

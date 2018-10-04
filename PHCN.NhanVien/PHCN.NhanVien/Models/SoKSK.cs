@@ -14,6 +14,12 @@ namespace PHCN.NhanVien.Models
     
     public partial class SoKSK
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public SoKSK()
+        {
+            this.LuotKSK = new HashSet<LuotKSK>();
+        }
+    
         public int MaSoKSK { get; set; }
         public Nullable<int> MaNhanVien { get; set; }
         public string MaSo { get; set; }
@@ -40,5 +46,7 @@ namespace PHCN.NhanVien.Models
         public Nullable<System.DateTime> NgayXoa { get; set; }
     
         public virtual NhanVien NhanVien { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LuotKSK> LuotKSK { get; set; }
     }
 }

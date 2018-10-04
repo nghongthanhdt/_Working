@@ -1088,5 +1088,183 @@ namespace PHCN.NhanVien.Controllers
                 return ex.Message;
             }
         }
+
+
+        public ActionResult _pPhanLoaiSK(string timkiem)
+        {
+            var listPhanLoaiSK = new List<PhanLoaiSK>();
+            if (timkiem != "")
+            {
+                listPhanLoaiSK = db.PhanLoaiSK.Where(x => x.Xoa == false && x.TenPhanLoaiSK.Contains(timkiem)).OrderBy(x => x.STT).ThenBy(x => x.MaPhanLoaiSK).ToList();
+            }
+            else
+            {
+                listPhanLoaiSK = db.PhanLoaiSK.Where(x => x.Xoa == false).OrderBy(x => x.STT).ThenBy(x => x.MaPhanLoaiSK).ToList();
+            }
+
+            return View(listPhanLoaiSK);
+        }
+        [HttpPost]
+        public string LuuPhanLoaiSK(int MaDanhMuc, string TenDanhMuc, int STT)
+        {
+
+            try
+            {
+                if (MaDanhMuc > 0)
+                {
+                    var dm = db.PhanLoaiSK.Find(MaDanhMuc);
+                    dm.TenPhanLoaiSK = TenDanhMuc;
+                    dm.STT = STT;
+                    db.SaveChanges();
+                    return "ok";
+                }
+                else
+                {
+                    PhanLoaiSK dm = new PhanLoaiSK();
+                    dm.TenPhanLoaiSK = TenDanhMuc;
+                    dm.STT = STT;
+                    db.PhanLoaiSK.Add(dm);
+                    db.SaveChanges();
+                    return "ok";
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+        [HttpPost]
+        public string XoaPhanLoaiSK(int MaDanhMuc)
+        {
+            try
+            {
+                var dm = db.PhanLoaiSK.Find(MaDanhMuc);
+                dm.Xoa = true;
+                db.SaveChanges();
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
+        public ActionResult _pBacSyKSK(string timkiem)
+        {
+            var listBacSyKSK = new List<BacSyKSK>();
+            if (timkiem != "")
+            {
+                listBacSyKSK = db.BacSyKSK.Where(x => x.Xoa == false && x.TenBacSyKSK.Contains(timkiem)).OrderBy(x => x.STT).ThenBy(x => x.MaBacSyKSK).ToList();
+            }
+            else
+            {
+                listBacSyKSK = db.BacSyKSK.Where(x => x.Xoa == false).OrderBy(x => x.STT).ThenBy(x => x.MaBacSyKSK).ToList();
+            }
+
+            return View(listBacSyKSK);
+        }
+        [HttpPost]
+        public string LuuBacSyKSK(int MaDanhMuc, string TenDanhMuc, int STT)
+        {
+
+            try
+            {
+                if (MaDanhMuc > 0)
+                {
+                    var dm = db.BacSyKSK.Find(MaDanhMuc);
+                    dm.TenBacSyKSK = TenDanhMuc;
+                    dm.STT = STT;
+                    db.SaveChanges();
+                    return "ok";
+                }
+                else
+                {
+                    BacSyKSK dm = new BacSyKSK();
+                    dm.TenBacSyKSK = TenDanhMuc;
+                    dm.STT = STT;
+                    db.BacSyKSK.Add(dm);
+                    db.SaveChanges();
+                    return "ok";
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+        [HttpPost]
+        public string XoaBacSyKSK(int MaDanhMuc)
+        {
+            try
+            {
+                var dm = db.BacSyKSK.Find(MaDanhMuc);
+                dm.Xoa = true;
+                db.SaveChanges();
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
+        public ActionResult _pNoiDungKSK(string timkiem)
+        {
+            var listNoiDungKSK = new List<NoiDungKSK>();
+            if (timkiem != "")
+            {
+                listNoiDungKSK = db.NoiDungKSK.Where(x => x.Xoa == false && x.TenNoiDungKSK.Contains(timkiem)).OrderBy(x => x.STT).ThenBy(x => x.MaNoiDungKSK).ToList();
+            }
+            else
+            {
+                listNoiDungKSK = db.NoiDungKSK.Where(x => x.Xoa == false).OrderBy(x => x.STT).ThenBy(x => x.MaNoiDungKSK).ToList();
+            }
+
+            return View(listNoiDungKSK);
+        }
+        [HttpPost]
+        public string LuuNoiDungKSK(int MaDanhMuc, string TenDanhMuc, int STT)
+        {
+
+            try
+            {
+                if (MaDanhMuc > 0)
+                {
+                    var dm = db.NoiDungKSK.Find(MaDanhMuc);
+                    dm.TenNoiDungKSK = TenDanhMuc;
+                    dm.STT = STT;
+                    db.SaveChanges();
+                    return "ok";
+                }
+                else
+                {
+                    NoiDungKSK dm = new NoiDungKSK();
+                    dm.TenNoiDungKSK = TenDanhMuc;
+                    dm.STT = STT;
+                    db.NoiDungKSK.Add(dm);
+                    db.SaveChanges();
+                    return "ok";
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+        [HttpPost]
+        public string XoaNoiDungKSK(int MaDanhMuc)
+        {
+            try
+            {
+                var dm = db.NoiDungKSK.Find(MaDanhMuc);
+                dm.Xoa = true;
+                db.SaveChanges();
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
     }
 }

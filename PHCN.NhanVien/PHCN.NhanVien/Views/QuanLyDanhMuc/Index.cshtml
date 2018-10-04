@@ -25,7 +25,67 @@
     var _danhmuc = '@danhmuc';
 </script>
 
+<nav class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menuDanhMuc">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="menuDanhMuc">
+            <ul class="nav navbar-nav">
+                
+                <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Lý lịch viên chức <b class="caret"></b></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li class="tabDanhMuc" data-tendanhmuc="LoaiHopDong"><a href="javascript:void(0);" data-toggle="tab">Loại hợp đồng</a></li>
+                        <li class="tabDanhMuc" data-tendanhmuc="DonVi"><a href="javascript:void(0);" data-toggle="tab">Cơ quan đơn vị</a></li>
+                        <li class="tabDanhMuc" data-tendanhmuc="HocHam"><a href="javascript:void(0);" data-toggle="tab">Học hàm</a></li>
+                        <li class="tabDanhMuc" data-tendanhmuc="HocVi"><a href="javascript:void(0);" data-toggle="tab">Học vị</a></li>
+                        <li class="tabDanhMuc" data-tendanhmuc="ChuyenMon"><a href="javascript:void(0);" data-toggle="tab">Chuyên môn</a></li>
+                        <li class="tabDanhMuc" data-tendanhmuc="ChinhQuyen"><a href="javascript:void(0);" data-toggle="tab">Chính quyền</a></li>
+                        <li class="tabDanhMuc" data-tendanhmuc="DoanThe"><a href="javascript:void(0);" data-toggle="tab">Đoàn thể</a></li>
+                        <li class="tabDanhMuc" data-tendanhmuc="Dang"><a href="javascript:void(0);" data-toggle="tab">Đảng</a></li>
+                        <li class="tabDanhMuc" data-tendanhmuc="HinhThucDaoTao"><a href="javascript:void(0);" data-toggle="tab">Hình thức đào tạo</a></li>
+                        <li class="tabDanhMuc" data-tendanhmuc="DanToc"><a href="javascript:void(0);" data-toggle="tab">Dân tộc</a></li>
+                        <li class="tabDanhMuc" data-tendanhmuc="TonGiao"><a href="javascript:void(0);" data-toggle="tab">Tôn giáo</a></li>
+                        <li class="tabDanhMuc" data-tendanhmuc="MaCCHN"><a href="javascript:void(0);" data-toggle="tab">Mã CCHN</a></li>
+                        <li class="tabDanhMuc" data-tendanhmuc="PhamViHoatDongChuyenMon"><a href="javascript:void(0);" data-toggle="tab">Phạm vi hoạt động chuyên môn</a></li>
+                        <li class="tabDanhMuc" data-tendanhmuc="NgheNghiep"><a href="javascript:void(0);" data-toggle="tab">Nghề nghiệp khi được tuyển dụng</a></li>
+                        <li class="divider"></li>
+                        <li class="tabDanhMuc" data-tendanhmuc="TinhThanh"><a href="javascript:void(0);" data-toggle="tab">Tỉnh thành</a></li>
+                        <li class="tabDanhMuc" data-tendanhmuc="HuyenThi"><a href="javascript:void(0);" data-toggle="tab">Huyện thị</a></li>
+                        <li class="tabDanhMuc" data-tendanhmuc="XaPhuong"><a href="javascript:void(0);" data-toggle="tab">Xã phường</a></li>
+                    </ul>                    
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Website <b class="caret"></b></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li class="tabDanhMuc" data-tendanhmuc="ChuyenMuc"><a href="javascript:void(0);" data-toggle="tab">Chuyên mục</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Sức khỏe định kỳ <b class="caret"></b></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li class="tabDanhMuc" data-tendanhmuc="PhanLoaiSK"><a href="javascript:void(0);" data-toggle="tab">Phân loại sức khỏe</a></li>
+                        <li class="tabDanhMuc" data-tendanhmuc="BacSyKSK"><a href="javascript:void(0);" data-toggle="tab">Bác sỹ KSK</a></li>
+                        <li class="tabDanhMuc" data-tendanhmuc="NoiDungKSK"><a href="javascript:void(0);" data-toggle="tab">Nội dung KSK</a></li>
 
+                    </ul>
+                </li>
+            </ul>
+            
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
 
 
 <div id="divFormTimKiem">
@@ -46,44 +106,14 @@
 
 <div class="row">
     <div class="col-md-12">
-        <div class="panel">
-            <div class="tabbable tabs-left clearfix">
-                <ul id="myTab1" class="nav nav-tabs">
-                    <li style="background-color:#002f05;"><div style="padding:10px; color:white;">Lý lịch viên chức</div></li>
-                    <li class="tabDanhMuc" data-tendanhmuc="LoaiHopDong"><a href="javascript:void(0);" data-toggle="tab">Loại hợp đồng</a></li>                    
-                    <li class="tabDanhMuc" data-tendanhmuc="DonVi"><a href="javascript:void(0);" data-toggle="tab">Cơ quan đơn vị</a></li>                    
-                    <li class="tabDanhMuc" data-tendanhmuc="HocHam"><a href="javascript:void(0);" data-toggle="tab">Học hàm</a></li>                    
-                    <li class="tabDanhMuc" data-tendanhmuc="HocVi"><a href="javascript:void(0);" data-toggle="tab">Học vị</a></li>                    
-                    <li class="tabDanhMuc" data-tendanhmuc="ChuyenMon"><a href="javascript:void(0);" data-toggle="tab">Chuyên môn</a></li>                    
-                    <li class="tabDanhMuc" data-tendanhmuc="ChinhQuyen"><a href="javascript:void(0);" data-toggle="tab">Chính quyền</a></li>                    
-                    <li class="tabDanhMuc" data-tendanhmuc="DoanThe"><a href="javascript:void(0);" data-toggle="tab">Đoàn thể</a></li>                    
-                    <li class="tabDanhMuc" data-tendanhmuc="Dang"><a href="javascript:void(0);" data-toggle="tab">Đảng</a></li>                    
-                    <li class="tabDanhMuc" data-tendanhmuc="HinhThucDaoTao"><a href="javascript:void(0);" data-toggle="tab">Hình thức đào tạo</a></li>                    
-                    <li class="tabDanhMuc" data-tendanhmuc="DanToc"><a href="javascript:void(0);" data-toggle="tab">Dân tộc</a></li>                    
-                    <li class="tabDanhMuc" data-tendanhmuc="TonGiao"><a href="javascript:void(0);" data-toggle="tab">Tôn giáo</a></li>                    
-                    <li class="tabDanhMuc" data-tendanhmuc="MaCCHN"><a href="javascript:void(0);" data-toggle="tab">Mã CCHN</a></li>                    
-                    <li class="tabDanhMuc" data-tendanhmuc="PhamViHoatDongChuyenMon"><a href="javascript:void(0);" data-toggle="tab">Phạm vi hoạt động chuyên môn</a></li>                    
-                    <li class="tabDanhMuc" data-tendanhmuc="NgheNghiep"><a href="javascript:void(0);" data-toggle="tab">Nghề nghiệp khi được tuyển dụng</a></li>                    
-                    <li style="background-color:#002f05;"><div style="padding:10px; color:white;">Website</div></li>
-                    <li class="tabDanhMuc" data-tendanhmuc="ChuyenMuc"><a href="javascript:void(0);" data-toggle="tab">Chuyên mục</a></li>                    
-                    <li style="background-color:#002f05;"><div style="padding:10px; color:white;">Địa phương</div></li>
-                    <li class="tabDanhMuc"  data-tendanhmuc="TinhThanh"><a href="javascript:void(0);" data-toggle="tab">Tỉnh thành</a></li>
-                    <li class="tabDanhMuc"  data-tendanhmuc="HuyenThi"><a href="javascript:void(0);" data-toggle="tab">Huyện thị</a></li>
-                    <li class="tabDanhMuc"  data-tendanhmuc="XaPhuong"><a href="javascript:void(0);" data-toggle="tab">Xã phường</a></li>
-                </ul>
-                <div id="myTabContent" class="tab-content">
-                    <div class="" id="tabcontentDonVi" style="overflow-y:scroll; overflow-x:hidden; height:500px;">
-                        
-                        <div class="row">
-                            <div class="col-md-12" id="divDanhMuc">
-                                
-                            </div>
-                        </div>
-                        
-                    </div>
+        <div class="" id="tabcontentDonVi" style="overflow-y:scroll; overflow-x:hidden; height:500px;">
+
+            <div class="row">
+                <div class="col-md-12" id="divDanhMuc">
 
                 </div>
             </div>
+
         </div>
     </div>
 </div>

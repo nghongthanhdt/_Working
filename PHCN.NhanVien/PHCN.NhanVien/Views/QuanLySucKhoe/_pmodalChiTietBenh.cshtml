@@ -1,32 +1,37 @@
-﻿<div class="modal" id="modalChiTietBenh">
+﻿
+
+<div class="modal" id="modalChiTietBenh">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title">Contact</h4>
+                <h4 class="modal-title">Tiền sử bệnh</h4>
             </div>
-            <div class="modal-body">
-                <p>Feel free to contact us for any issues you might have with our products.</p>
+            <div class="modal-body">                
                 <div class="row">
                     <div class="col-xs-6">
-                        <label>Name</label>
-                        <input type="text" class="form-control" placeholder="Name">
+                        <label>Loại bệnh</label>
+                        <select class="form-control" id="selectLoaiBenh">
+                            <option value="false">Bệnh</option>
+                            <option value="true">Bệnh nghề nghiệp</option>
+                        </select>
                     </div>
                     <div class="col-xs-6">
-                        <label>Email</label>
-                        <input type="text" class="form-control" placeholder="Email">
+                        <label>Phát hiện năm</label>
+                        <input type="text" class="form-control number" id="txtPhatHienNam">
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-12">
-                        <label>Message</label>
-                        <textarea class="form-control" rows="3">Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac</textarea>
+                    <div class="col-xs-12">                        
+                        <label>Tên bệnh</label>
+                        <input type="text" class="form-control" id="txtTenBenh">
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success">Send</button>
+                <button type="button" class="btn btn-success" id="btnLuuBenh">Lưu thông tin</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                
             </div>
         </div>
     </div>
