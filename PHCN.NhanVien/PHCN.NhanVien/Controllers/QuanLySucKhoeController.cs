@@ -69,6 +69,7 @@ namespace PHCN.NhanVien.Controllers
 
         // ajax 
         [ValidateInput(false)]
+
         public ActionResult LuuSoKSK(SoKSK soKSK)
         {
             Thread.Sleep(1000);
@@ -86,6 +87,24 @@ namespace PHCN.NhanVien.Controllers
                 return Content(ex.Message);
             }            
         }        
+        public ActionResult XoaSoKSK(int id)
+        {
+            try
+            {
+                //id : mã sổ KSK
+                int? maNhanVien = 0;
+                var soKSK = db.SoKSK.Find(id);
+                maNhanVien = soKSK.MaNhanVien;
+                soKSK.Xoa = true;
+                db.SaveChanges();
+                return RedirectToAction("Xem", "QuanLyNhanVien", new { @id = maNhanVien});
+            } catch (Exception ex)
+            {
+                return Content(ex.Message);
+            }
+        }
+
+
         [HttpPost]
         public ActionResult GetBenhSoKSK(int id)
         {   

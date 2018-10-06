@@ -46,10 +46,9 @@
                     </div>
                     <div class="col-md-6">
                         <label>Năm sinh</label>
-                        <div class="row">
-                            
-                            <div class="col-md-4">
-                                <input class="form-control text-right number" placeholder="" type="text" id="txtNamSinh" maxlength="11" value="@Model.NamSinh">
+                        <div class="row">                            
+                            <div class="col-md-12">
+                                <input class="form-control number" placeholder="" type="text" id="txtNamSinh" maxlength="4" value="@Model.NamSinh">
                             </div>
                         </div>
                     </div>
@@ -64,7 +63,7 @@
                         <label>3. Số CMND hoặc Hộ chiếu</label>
                         <div class="row">
                             <div class="col-md-12">
-                                <input class="form-control text-right number" placeholder="" type="text" id="txtSoCMND" value="@Model.SoCMND">
+                                <input class="form-control number" placeholder="" type="text" id="txtSoCMND" value="@Model.SoCMND">
                             </div>
                         </div>
                     </div>
@@ -72,7 +71,7 @@
                         <label>Cấp ngày</label>
                         <div class="row">
                             <div class="col-md-12">
-                                <input class="form-control text-right date" placeholder="" type="text" id="txtNgayCapCMND" value="@Model.NgayCapCMND">
+                                <input class="form-control date" placeholder="" type="text" id="txtNgayCapCMND" value="@Model.NgayCapCMND">
                             </div>
                         </div>
                     </div>
@@ -80,7 +79,7 @@
                         <label>Tại</label>
                         <div class="row">
                             <div class="col-md-12">
-                                <input class="form-control text-right" placeholder="" type="text" id="txtNoiCapCMND" value="@Model.NoiCapCMND">
+                                <input class="form-control" placeholder="" type="text" id="txtNoiCapCMND" value="@Model.NoiCapCMND">
                             </div>
                         </div>
                     </div>
@@ -198,7 +197,12 @@
         <div class="row">
             <div class="col-sm-12">
                 <br/>
-                <button class="btn btn-lg btn-success pull-right" id="btnLuu">Lưu sổ KSK</button>
+                <button class="btn btn-lg btn-success" id="btnLuu">Lưu sổ KSK</button>
+                @if (Model.Xoa != true)
+                {
+                    <a class="btn btn-lg btn-danger" onclick="return confirm('Bạn thật sự muốn xóa ?');" href="@Url.Action("XoaSoKSK", "QuanLySucKhoe", new { id = Model.MaSoKSK })">Xóa</a>
+                }
+                
             </div>
         </div>
     </div>
