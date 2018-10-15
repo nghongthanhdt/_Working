@@ -1,0 +1,209 @@
+﻿
+@{ 
+    PHCN.NhanVien.Models.PHCNEntities db = new PHCN.NhanVien.Models.PHCNEntities();
+    
+    string hopdong = ViewBag.HopDong;
+    string hoten = ViewBag.HoTen;
+    string khoaphong = ViewBag.KhoaPhong;
+    List<int> listIntHopDong = hopdong.Split(',').Select(Int32.Parse).ToList();
+    List<string> listIntKhoaPhong = khoaphong.Split(',').ToList();
+    
+
+
+
+    var listKhoaPhong = db.KhoaPhong.OrderBy(x => x.STT).Where(x => x.Xoa != true && listIntKhoaPhong.Contains(x.MaKhoa)).ToList();
+    var listNhanVien = db.NhanVien.OrderBy(x => x.STT).Where(x => x.Xoa != true).ToList();
+    var listLyLichVienChuc = db.LyLichVienChuc.Where(x => x.Xoa != true && x.HoTenKhaiSinh.Contains(hoten) &&  listIntHopDong.Contains(x.MaLoaiHopDong)).ToList();
+    var listDienBienQuaTrinhLuong = db.DienBienQuaTrinhLuong.Where(x => x.Xoa != true).ToList();
+
+
+}
+
+
+
+<div id="table-scroll" class="table-scroll">
+    <div class="table-wrap">
+        <table class="main-table" id="tableLyLichVienChuc">
+            <thead>
+                <tr>
+
+
+                    <th scope="col" class="fixed-side">STT</th>
+                    <th scope="col" class="fixed-side">TT</th>                    
+                    <th scope="col" class="fixed-side">Họ và tên</th>
+                    <th scope="col">Hợp đồng</th>
+                    <th scope="col">Ngày sinh</th>
+                    <th scope="col">Giới tính</th>
+                    <th scope="col">Nơi sinh</th>
+                    <th scope="col">Quê quán</th>
+                    <th scope="col">Dân tộc</th>
+                    <th scope="col">Tôn giáo</th>
+                    <th scope="col">Hộ khẩu thường trú</th>
+                    <th scope="col">Nơi ở hiện nay</th>
+                    <th scope="col">Nghề nghiệp khi được tuyển dụng</th>
+                    <th scope="col">Ngày tuyển dụng</th>
+                    <th scope="col">Cơ quan tuyển dụng</th>
+                    <th scope="col">Chức vụ: Chính quyền</th>
+                    <th scope="col">Chức vụ: Đảng</th>
+                    <th scope="col">Chức vụ: Đoàn thể</th>
+                    <th scope="col">Ngày bổ nhiệm, bổ nhiệm lại</th>
+                    <th scope="col">Chức danh nghề nghiệp</th>
+                    <th scope="col">Mã số</th>
+                    <th scope="col">Bậc lương</th>
+                    <th scope="col">Hệ số</th>
+                    <th scope="col">Ngày hưởng</th>
+                    <th scope="col">Phụ cấp chức vụ</th>
+                    <th scope="col">Phụ cấp khác</th>
+                    <th scope="col">Trình độ GDPT</th>
+                    <th scope="col">Học hàm</th>
+                    <th scope="col">Học vị</th>
+                    <th scope="col">Chuyên môn</th>
+                    <th scope="col">Lý luận chính trị</th>
+                    <th scope="col">Quản lý nhà nước</th>
+                    <th scope="col">Ngoại ngữ</th>
+                    <th scope="col">Tin học</th>
+                    <th scope="col">Ngày vào đảng</th>
+                    <th scope="col">Ngày chính thức</th>
+                    <th scope="col">Ngày vào đoàn</th>
+                    <th scope="col">Ngày nhập ngũ</th>
+                    <th scope="col">Ngày xuất ngũ</th>
+                    <th scope="col">Quân hàm cao nhất</th>
+                    <th scope="col">Danh hiệu được phong tặng cao nhất</th>
+                    <th scope="col">Tình trạng sức khỏe</th>
+                    <th scope="col">Chiều cao</th>
+                    <th scope="col">Cân nặng</th>
+                    <th scope="col">Nhóm máu</th>
+                    <th scope="col">Thương binh hạng</th>
+                    <th scope="col">Con gia đình chính sách</th>
+                    <th scope="col">Số CMND</th>
+                    <th scope="col">Ngày cấp</th>
+                    <th scope="col">Số BHXH</th>
+                    <th scope="col">Ghi chú</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @{
+                    int STT = 0;
+                }
+
+                @foreach (var khoa in listKhoaPhong)
+                {
+                    int TT = 0;
+                    foreach (var nhanvien in listNhanVien.Where(x => x.MaKhoa == khoa.MaKhoa).ToList())
+                    {
+                        foreach (var lylich in listLyLichVienChuc.Where(x => x.MaNhanVien == nhanvien.MaNhanVien).ToList())
+                        {
+                            STT++;
+                            TT++;
+                            if (TT == 1)
+                            {
+                                <tr>
+                                    <td colspan="51" class="fixed-side" style="font-weight:bold; text-transform:uppercase;">@khoa.MaKhoa - @khoa.TenKhoa</td>
+                                </tr>
+                            }
+                            <tr>
+                                <td scope="col" class="fixed-side">@STT</td>
+                                <td scope="col" class="fixed-side" style="font-weight:bold;">@TT</td>
+                                
+                                <td scope="col" class="fixed-side">@lylich.HoTenKhaiSinh</td>
+                                <td scope="col">@lylich.LoaiHopDong.TenLoaiHopDong</td>
+                                <td scope="col" style="text-align:right;">
+                                    @(
+                                                        ((lylich.NgaySinh != null) ? ((int.Parse(lylich.NgaySinh.ToString()).ToString("00")) + "/") : "") + ((lylich.ThangSinh != null) ? ((int.Parse(lylich.ThangSinh.ToString()).ToString("00")) + "/") : "") + lylich.NamSinh)
+                                </td>
+                                <td scope="col">@((lylich.GioiTinh == 1) ? "Nam" : ((lylich.GioiTinh == 2) ? "Nữ" : ""))</td>
+                                <td scope="col">@(((lylich.NoiSinh_Xa != null) ? (lylich.NoiSinh_Xa + ", ") : "") + ((lylich.NoiSinh_Huyen != null) ? (lylich.NoiSinh_Huyen + ", ") : "") + lylich.NoiSinh_Tinh)</td>
+                                <td scope="col">@(((lylich.QueQuan_Xa != null) ? (lylich.QueQuan_Xa + ", ") : "") + ((lylich.QueQuan_Huyen != null) ? (lylich.QueQuan_Huyen + ", ") : "") + lylich.QueQuan_Tinh)</td>
+                                <td scope="col">@lylich.DanToc</td>
+                                <td scope="col">@lylich.TonGiao</td>
+                                <td scope="col">@(((lylich.NoiDangKyHKTT_SoNha != null) ? (lylich.NoiDangKyHKTT_SoNha + ", ") : "") + ((lylich.NoiDangKyHKTT_Duong != null) ? (lylich.NoiDangKyHKTT_Duong + ", ") : "") + ((lylich.NoiDangKyHKTT_Xa != null) ? (lylich.NoiDangKyHKTT_Xa + ", ") : "") + ((lylich.NoiDangKyHKTT_Huyen != null) ? (lylich.NoiDangKyHKTT_Huyen + ", ") : "") + lylich.NoiDangKyHKTT_Tinh)</td>
+                                <td scope="col">@(((lylich.NoiOHienNay_SoNha != null) ? (lylich.NoiOHienNay_SoNha + ", ") : "") + ((lylich.NoiOHienNay_Duong != null) ? (lylich.NoiOHienNay_Duong + ", ") : "") + ((lylich.NoiOHienNay_Xa != null) ? (lylich.NoiOHienNay_Xa + ", ") : "") + ((lylich.NoiOHienNay_Huyen != null) ? (lylich.NoiOHienNay_Huyen + ", ") : "") + lylich.NoiOHienNay_Tinh)</td>
+                                <td scope="col">@lylich.NgheNghiepKhiDuocTuyenDung</td>
+                                <td scope="col">@((lylich.NgayTuyenDung != null) ? (DateTime.Parse(lylich.NgayTuyenDung.ToString()).ToShortDateString()) : "") </td>
+                                <td scope="col">@((lylich.DonVi1 != null) ? lylich.DonVi1.TenDonVi : "")</td>
+                                <td scope="col">@((lylich.ChinhQuyen != null) ? lylich.ChinhQuyen.TenChinhQuyen : "")</td>
+                                <td scope="col">@((lylich.Dang != null) ? lylich.Dang.TenDang : "")</td>
+                                <td scope="col">@((lylich.DoanThe != null) ? lylich.DoanThe.TenDoanThe : "")</td>
+                                <td scope="col">@((lylich.NgayBoNhiemBoNhiemLai != null) ? (DateTime.Parse(lylich.NgayBoNhiemBoNhiemLai.ToString()).ToShortDateString()) : "")</td>
+
+                                @{
+                                    var listdbqtLuong = listDienBienQuaTrinhLuong.Where(x => x.MaLyLichVienChuc == lylich.MaLyLichVienChuc).OrderByDescending(x => x.NgayHuong).ToList();
+                                    if (listdbqtLuong.Any())
+                                    {
+                                        var dbqtluong = listdbqtLuong.First();
+
+                                        <td scope="col">@dbqtluong.ChucDanhNgheNghiep.TenChucDanhNgheNghiep</td>
+                                        <td scope="col">@dbqtluong.ChucDanhNgheNghiep.MaSo</td>
+                                            <td scope="col">@dbqtluong.BacLuong</td>
+                                            <td scope="col">@dbqtluong.HeSo</td>
+                                            <td scope="col">@((dbqtluong.NgayHuong != null) ? (DateTime.Parse(dbqtluong.NgayHuong.ToString()).ToShortDateString()) : "")</td>
+                                            <td scope="col">@dbqtluong.PhuCapChucVu</td>
+                                            <td scope="col">@dbqtluong.PhuCapKhac</td>
+                                    }
+                                    else
+                                    {
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                            <td scope="col"></td>
+                                            <td scope="col"></td>
+                                            <td scope="col"></td>
+                                            <td scope="col"></td>
+                                            <td scope="col"></td>
+                                    }
+                                }
+
+
+
+                                <td scope="col">@lylich.TrinhDoGiaoDucPhoThong</td>
+                                <td scope="col">@((lylich.HocHam != null) ? lylich.HocHam.TenHocHam : "")</td>
+                                <td scope="col">@((lylich.HocVi != null) ? lylich.HocVi.TenHocVi : "")</td>
+                                <td scope="col">@((lylich.ChuyenMon != null) ? lylich.ChuyenMon.TenChuyenMon : "")</td>
+                                <td scope="col">@lylich.LyLuanChinhTri</td>
+                                <td scope="col">@lylich.QuanLyNhaNuoc</td>
+                                <td scope="col" style="text-transform:uppercase; text-align:center;">@lylich.NgoaiNgu</td>
+                                <td scope="col" style="text-transform:uppercase; text-align:center;">@lylich.TinHoc</td>
+                                <td scope="col">@((lylich.NgayVaoDangCSVN != null) ? (DateTime.Parse(lylich.NgayVaoDangCSVN.ToString()).ToShortDateString()) : "")</td>
+                                <td scope="col">@((lylich.NgayVaoDangCSVNChinhThuc != null) ? (DateTime.Parse(lylich.NgayVaoDangCSVNChinhThuc.ToString()).ToShortDateString()) : "")</td>
+                                <td scope="col">@((lylich.ToChucChinhTriXH_NgayThamGia != null) ? (DateTime.Parse(lylich.ToChucChinhTriXH_NgayThamGia.ToString()).ToShortDateString()) : "")</td>
+                                <td scope="col">@((lylich.NgayNhapNgu != null) ? (DateTime.Parse(lylich.NgayNhapNgu.ToString()).ToShortDateString()) : "")</td>
+                                <td scope="col">@((lylich.NgayXuatNgu != null) ? (DateTime.Parse(lylich.NgayXuatNgu.ToString()).ToShortDateString()) : "")</td>
+                                <td scope="col">@lylich.QuanHamCaoNhat</td>
+                                <td scope="col">@lylich.DanhHieuDuocPhongTangCaoNhat</td>
+                                <td scope="col">@lylich.TinhTrangSucKhoe</td>
+                                <td scope="col" style="text-align:center;">@((lylich.ChieuCao != null) ? (lylich.ChieuCao + " m") : "")</td>
+                                <td scope="col" style="text-align:center;">@((lylich.CanNang != null) ? (lylich.CanNang + " kg") : "")</td>
+                                <td scope="col" style="text-transform:uppercase; text-align:center;">@lylich.NhomMau</td>
+                                <td scope="col">@lylich.LaThuongBinhHang</td>
+                                <td scope="col">@lylich.LaConGiaDinhChinhSach</td>
+                                <td scope="col">@lylich.SoChungMinhNhanDan</td>
+                                <td scope="col">@((lylich.NgayCap != null) ? (DateTime.Parse(lylich.NgayCap.ToString()).ToShortDateString()) : "")</td>
+                                <td scope="col">@lylich.SoSoBHXH</td>
+                                <td scope="col">@lylich.GhiChu</td>
+                            </tr>
+                                            }
+                                        }
+                                    }
+
+
+            </tbody>
+            @*<tfoot>
+                    <tr>
+                        <th class="fixed-side">&nbsp;</th>
+                        <td>Footer 2</td>
+                        <td>Footer 3</td>
+                        <td>Footer 4</td>
+                        <td>Footer 5</td>
+                        <td>Footer 6</td>
+                        <td>Footer 7</td>
+                        <td>Footer 8</td>
+                    </tr>
+                </tfoot>*@
+        </table>
+    </div>
+</div>
+<script>
+    jQuery(document).ready(function () {
+        jQuery(".main-table").clone(true).appendTo('#table-scroll').addClass('clone');
+    });
+</script>

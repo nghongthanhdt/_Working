@@ -31,6 +31,7 @@
                                 <input type="text" class="form-control date" placeholder="" id="txtNgay" value="@(DateTime.Parse(Model.Ngay.ToString()).ToShortDateString())">
                             </div>
                         </div>
+                        
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -63,7 +64,7 @@
 
                             <div class="form-group">
                                 <label style="font-weight:normal;">Chỉ số BMI</label>
-                                <input type="text" class="form-control decimal" placeholder="" id="txtTL_ChiSoBMI" value="@Model.TL_ChiSoBMI" maxlength="5">
+                                <input type="text" class="form-control bmi" placeholder="" id="txtTL_ChiSoBMI" value="@Model.TL_ChiSoBMI" maxlength="5">
                             </div>
                         </div>
 
@@ -812,7 +813,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             
-                            <button class="btn btn-lg btn-success" id="btnLuu">Lưu dữ liệu</button>
+                            
                             <a href="@Url.Action("XoaLuotKham", "QuanLySucKhoe", new { @id = Model.MaLuotKSK})" class="btn btn-lg btn-danger" id="btnXoa" onclick="return confirm('Bạn thật sự muốn xóa ?');">Xóa</a>
                             
                         </div>
@@ -824,7 +825,7 @@
     </div>
 </div>
 <div style="position:fixed; bottom:10px; right:10px; z-index:1000;">
-    
+    <button class="btn btn-lg btn-success" id="btnLuu">Lưu dữ liệu</button>
     <a class="btn btn-lg btn-default" id="btnTroVe" href="@(Url.Action("CapNhat", "QuanLySucKhoe", new { @id = Model.MaSoKSK}))#divTabLuotKham">Trở về sổ KSK</a>
     
 </div>

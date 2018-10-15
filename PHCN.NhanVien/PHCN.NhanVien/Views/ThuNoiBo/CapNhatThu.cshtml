@@ -3,6 +3,8 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     PHCN.NhanVien.Models.PHCNEntities db = new PHCN.NhanVien.Models.PHCNEntities();
     var idBaiViet = HttpContext.Current.Request.RequestContext.RouteData.Values["id"];
+    int _idBaiviet = int.Parse(idBaiViet.ToString());
+    var baiViet = db.BaiViet.Find(_idBaiviet);
     int maNhanVienDangNhap = (int)(ViewBag.MaNhanVienDangNhap);
     string tenDonVi = PHCN.NhanVien.Controllers.CodeController.layThamSoHeThong("tendonvi").ToUpper();
 }
@@ -18,12 +20,12 @@
         <form role="form">
             <div class="form-group">
                 <label for="txtTieuDe">Tiêu đề</label>
-                <input class="form-control" id="txtTieuDe" placeholder="" />
+                <input class="form-control" id="txtTieuDe" placeholder="" value="@baiViet.TieuDe" />
             </div>
         </form>
     </div>
 </div>
-<textarea id="txtNoiDung"></textarea>
+<textarea id="txtNoiDung">@baiViet.NoiDung</textarea>
 <script>
     CKEDITOR.replace('txtNoiDung');
 </script>
@@ -31,35 +33,35 @@
     @*lấy ajax hiển thị ra đây*@
 </div>
 <script>
-    
-   
-    $(document).ready(function () {        
-        loadDanhSachFileDinhKem();        
+
+
+    $(document).ready(function () {
+        loadDanhSachFileDinhKem();
     });
 </script>
-<button class="btn btn-success" style="width:230px;" id="btnGui">Gửi</button>
+<button class="btn btn-success" style="width:230px;" id="btnGui">Lưu</button>
 <button class="btn btn-default btn-sm" id="btnThemFileDinhKem">Thêm file đính kèm...</button>
 <button class="btn btn-default btn-sm" id="btnThemHinhAnh">Thêm hình ảnh...</button>
 <div class="form-group" style="display:none;">
     <form id="formFileDinhKem" action="@Url.Action("UploadFile", "Upload")" method="post" enctype="multipart/form-data">
         <label>Thêm file</label>
         <input id="fileuploadDinhKem" type="file" name="file" accept=".xls,.xlsx,.ppt,.pptx,.doc,.docx,.pdf,.zip,.rar,.jpg,.jpeg,.png,.gif">
-        <input type="hidden" value="@idBaiViet" name="id" />        
+        <input type="hidden" value="@idBaiViet" name="id" />
     </form>
 </div>
 <div class="form-group" style="display:none;">
     <form id="formHinhAnh" action="@Url.Action("UploadFileHinhAnh", "Upload")" method="post" enctype="multipart/form-data">
         <label>Thêm file</label>
-        <input id="fileuploadHinhAnh" type="file" name="file" accept=".jpg,.jpeg,.png,.gif,.bmp">        
+        <input id="fileuploadHinhAnh" type="file" name="file" accept=".jpg,.jpeg,.png,.gif,.bmp">
     </form>
 </div>
 <script>
     $("#btnThemFileDinhKem").click(function () {
-        $("input#fileuploadDinhKem").trigger('click'); 
-    });    
+        $("input#fileuploadDinhKem").trigger('click');
+    });
     $("#btnThemHinhAnh").click(function () {
-        $("input#fileuploadHinhAnh").trigger('click'); 
-    }); 
+        $("input#fileuploadHinhAnh").trigger('click');
+    });
     $("input#fileuploadDinhKem").on('change', function(){
         var allowedExtensions = /(\.xls|\.xlsx|\.ppt|\.pptx|\.doc|\.docx|\.pdf|\.zip|\.rar|\.jpg|\.jpeg|\.png|\.gif)$/i;
         if(!allowedExtensions.exec(this.value)){
@@ -104,8 +106,8 @@
         var url = '@Url.Action("_pDanhSachFileDinhKem", "ThuNoiBo", new { id = idBaiViet, xem = false } )';
         var danhSachFileDinhKem = $.get(url, function (data) {
             $("#divDanhSachFileDinhKem").html(data);
-        });        
-    } 
+        });
+    }
     function loadHinhAnhVaoBaiViet(result) {
 
         if (result != "false") {
@@ -114,10 +116,10 @@
             CKEDITOR.instances.txtNoiDung.insertElement(imgHtml);
         } else {
             alert("Lỗi hệ thống: " + result);
-        } 
-    } 
+        }
+    }
 </script>
-<div class="">
+@*<div class="">
     <h4 class="content-row-title">Nhận thư</h4>
     <ul class="checktree">
         <li>
@@ -151,10 +153,10 @@
 	$(function(){
 		$("ul.checktree").checktree();
 	});
-</script>
+</script>*@
 <script>
 
-    
+
     $("#btnGui").click(function () {
 
         // validate
@@ -169,25 +171,23 @@
             return;
         }
 
-        var listCheckedNhanVien = $('.checkboxNhanVien:checkbox:checked').map(function () {
-            return $(this).data("ma-nhan-vien");
-        }).get();
-        listNguoiNhan = listCheckedNhanVien.join(",");
-        if (listNguoiNhan == "") {
-            alert("Chưa chọn người nhận");
-            return;
-        }
+        //var listCheckedNhanVien = $('.checkboxNhanVien:checkbox:checked').map(function () {
+        //    return $(this).data("ma-nhan-vien");
+        //}).get();
+        //listNguoiNhan = listCheckedNhanVien.join(",");
+        //if (listNguoiNhan == "") {
+        //    alert("Chưa chọn người nhận");
+        //    return;
+        //}
 
-        // send ajax 
+        // send ajax
         //alert(listCheckedNhanVien.join(",") + "send ajax...");
 
-        var url = '@Url.Action("GuiThu", "ThuNoiBo")';
+        var url = '@Url.Action("LuuThu", "ThuNoiBo")';
         var param = {
-            maBaiViet: idBaiViet,
-            tieuDe: tieuDe,
-            noiDung: noiDung,
-            nguoiGui: maNhanVienDangNhap,
-            listNguoiNhan: listNguoiNhan
+            MaBaiViet: idBaiViet,
+            TieuDe: tieuDe,
+            NoiDung: noiDung            
         }
         //$.post(url, param).done(function (result) {
         //    alert(data);
@@ -199,14 +199,14 @@
             data: param,
             success: function (result) {
                 if (result == "true") {
-                    alert("Đã lưu thư thành công!");
+                    alert("Đã gửi thư thành công!");
                     window.location = '@Url.Action("Index", "ThuNoiBo", new { box = "DaGui"})';
                 } else {
                     alert (result);
                 }
             },
             dataType: "html"
-        });    
+        });
     });
 
 

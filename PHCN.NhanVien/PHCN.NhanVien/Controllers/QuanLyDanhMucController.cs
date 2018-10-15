@@ -996,6 +996,7 @@ namespace PHCN.NhanVien.Controllers
                     var dm = db.NgheNghiep.Find(MaDanhMuc);
                     dm.TenNgheNghiep = TenDanhMuc;
                     dm.STT = STT;
+                    
                     db.SaveChanges();
                     return "ok";
                 }
@@ -1004,6 +1005,7 @@ namespace PHCN.NhanVien.Controllers
                     NgheNghiep dm = new NgheNghiep();
                     dm.TenNgheNghiep = TenDanhMuc;
                     dm.STT = STT;
+                    dm.Xoa = false;
                     db.NgheNghiep.Add(dm);
                     db.SaveChanges();
                     return "ok";
@@ -1063,6 +1065,7 @@ namespace PHCN.NhanVien.Controllers
                     ChuyenMuc dm = new ChuyenMuc();
                     dm.TenChuyenMuc = TenDanhMuc;
                     dm.STT = STT;
+                    dm.Xoa = false;
                     db.ChuyenMuc.Add(dm);
                     db.SaveChanges();
                     return "ok";
@@ -1115,6 +1118,7 @@ namespace PHCN.NhanVien.Controllers
                     var dm = db.PhanLoaiSK.Find(MaDanhMuc);
                     dm.TenPhanLoaiSK = TenDanhMuc;
                     dm.STT = STT;
+
                     db.SaveChanges();
                     return "ok";
                 }
@@ -1123,6 +1127,7 @@ namespace PHCN.NhanVien.Controllers
                     PhanLoaiSK dm = new PhanLoaiSK();
                     dm.TenPhanLoaiSK = TenDanhMuc;
                     dm.STT = STT;
+                    dm.Xoa = false;
                     db.PhanLoaiSK.Add(dm);
                     db.SaveChanges();
                     return "ok";
@@ -1182,6 +1187,7 @@ namespace PHCN.NhanVien.Controllers
                     BacSyKSK dm = new BacSyKSK();
                     dm.TenBacSyKSK = TenDanhMuc;
                     dm.STT = STT;
+                    dm.Xoa = false;
                     db.BacSyKSK.Add(dm);
                     db.SaveChanges();
                     return "ok";
@@ -1257,6 +1263,69 @@ namespace PHCN.NhanVien.Controllers
             try
             {
                 var dm = db.NoiDungKSK.Find(MaDanhMuc);
+                dm.Xoa = true;
+                db.SaveChanges();
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
+
+        public ActionResult _pChucDanhNgheNghiep(string timkiem)
+        {
+            var listChucDanhNgheNghiep = new List<ChucDanhNgheNghiep>();
+            if (timkiem != "")
+            {
+                listChucDanhNgheNghiep = db.ChucDanhNgheNghiep.Where(x => x.Xoa == false && x.TenChucDanhNgheNghiep.Contains(timkiem)).OrderBy(x => x.STT).ThenBy(x => x.MaChucDanhNgheNghiep).ToList();
+            }
+            else
+            {
+                listChucDanhNgheNghiep = db.ChucDanhNgheNghiep.Where(x => x.Xoa == false).OrderBy(x => x.STT).ThenBy(x => x.MaChucDanhNgheNghiep).ToList();
+            }
+
+            return View(listChucDanhNgheNghiep);
+        }
+        [HttpPost]
+        public string LuuChucDanhNgheNghiep(int MaDanhMuc, string MaSo, string TenDanhMuc, int STT)
+        {
+
+            try
+            {
+                if (MaDanhMuc > 0)
+                {
+                    var dm = db.ChucDanhNgheNghiep.Find(MaDanhMuc);
+                    dm.MaSo = MaSo;
+                    dm.TenChucDanhNgheNghiep = TenDanhMuc;                    
+                    dm.STT = STT;
+                    db.SaveChanges();
+                    return "ok";
+                }
+                else
+                {
+                    ChucDanhNgheNghiep dm = new ChucDanhNgheNghiep();
+                    dm.MaSo = MaSo;
+                    dm.TenChucDanhNgheNghiep = TenDanhMuc;
+                    dm.STT = STT;
+                    dm.Xoa = false;
+                    db.ChucDanhNgheNghiep.Add(dm);
+                    db.SaveChanges();
+                    return "ok";
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+        [HttpPost]
+        public string XoaChucDanhNgheNghiep(int MaDanhMuc)
+        {
+            try
+            {
+                var dm = db.ChucDanhNgheNghiep.Find(MaDanhMuc);
                 dm.Xoa = true;
                 db.SaveChanges();
                 return "ok";

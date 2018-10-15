@@ -4,6 +4,7 @@ $(document).ready(function () {
     $('.huyetap').mask('000/00', { placeholder: "___/__" });
     $('.number').mask('00000000000');
     $('.decimal').mask('0.00', { placeholder: "_.__" });
+    $('.bmi').mask('00.0', { placeholder: "__._" });
     $('.giaoducphothong').mask('00/00', { placeholder: "__/__" });
     $('.thangnam').mask('00/0000', { placeholder: "__/____" });
 });

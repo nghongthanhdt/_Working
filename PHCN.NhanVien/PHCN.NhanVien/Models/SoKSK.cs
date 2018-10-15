@@ -45,8 +45,8 @@ namespace PHCN.NhanVien.Models
         public Nullable<bool> Xoa { get; set; }
         public Nullable<System.DateTime> NgayXoa { get; set; }
     
-        public virtual NhanVien NhanVien { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LuotKSK> LuotKSK { get; set; }
+        public virtual NhanVien NhanVien { get; set; }
     }
 }

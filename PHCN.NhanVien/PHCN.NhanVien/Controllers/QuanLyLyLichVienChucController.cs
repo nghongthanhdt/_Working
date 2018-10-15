@@ -26,7 +26,7 @@ namespace PHCN.NhanVien.Controllers
             if (id == null || id == "")
             {
                 lyLich = new LyLichVienChuc();
-                lyLich.HoTenKhaiSinh = "< nhân viên mới >";
+                lyLich.HoTenKhaiSinh = "";
                 lyLich.Xoa = true;
                 db.LyLichVienChuc.Add(lyLich);
                 db.SaveChanges();

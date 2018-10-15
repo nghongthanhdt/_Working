@@ -1,32 +1,49 @@
 ﻿@model PHCN.NhanVien.Models.NhanVien
 
+<style>
+    #tableThongTinLienHe td, #tableThongTinLienHe th{
+        border:none;
+    }
+</style>
+<div class="row">
+    <div class="col-xs-3">
 
-<table class="table">
-    <tr>
-        <th style="width:40%;">Email </th>
-        <td>@Model.Email</td>
-    </tr>
-    <tr>
-        <th>Điện thoại </th>
-        <td>@Model.SoDienThoai</td>
-    </tr>
-    <tr>
-        <th>Điện thoại nội bộ </th>
-        <td>@Model.SoDienThoaiNoiBo</td>
-    </tr>
-    <tr>
-        <th>Tài khoản</th>
-        <td>@Model.TenDangNhap</td>
-    </tr>
-    <tr>
-        <th>Mật khẩu</th>
-        <td>******</td>
-    </tr>
-    <tr>
-        <td colspan="2">
-            <a href="javascript:void(0);" id="btnCapNhatThongTinLienHe"> <i class="glyphicon glyphicon-pencil"></i> Cập nhật </a>
-            - <a href="javascript:void(0);" id="btnDoiMatKhauNhanVien">Đổi mật khẩu</a>
-        </td>
-    </tr>
-</table>
+    </div>
+    <div class="col-xs-9">
+        <table class="table" id="tableThongTinLienHe">
+            <tr>
+                <th>Tài khoản</th>
+                <td>@Model.TenDangNhap</td>
+            </tr>
+            <tr>
+                <th style="width:40%;">Email </th>
+                <td>@Model.Email</td>
+            </tr>
+            <tr>
+                <th>Điện thoại </th>
+                <td>@Model.SoDienThoai</td>
+            </tr>
+            <tr>
+                <th>Điện thoại nội bộ </th>
+                <td>@Model.SoDienThoaiNoiBo</td>
+            </tr>
+            
+            
+            <tr>
+                <td colspan="2">
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <a href="javascript:void(0);" id="btnCapNhatThongTinLienHe" class="btn btn-default btn-block"> <i class="glyphicon glyphicon-pencil"></i> Cập nhật </a>
+                        </div>
+                        <div class="col-xs-4">
+                            <a href="javascript:void(0);" id="btnDoiMatKhauNhanVien" class="btn btn-default btn-block">Đổi mật khẩu</a>
+                        </div>
+                    </div>                   
+                    
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
 

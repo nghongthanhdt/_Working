@@ -17,12 +17,13 @@ namespace PHCN.NhanVien.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public NhanVien()
         {
+            this.BaiViet = new HashSet<BaiViet>();
+            this.BaiViet1 = new HashSet<BaiViet>();
+            this.BaiVietWeb = new HashSet<BaiVietWeb>();
             this.GuiNhan = new HashSet<GuiNhan>();
             this.GuiNhan1 = new HashSet<GuiNhan>();
-            this.PhanQuyen = new HashSet<PhanQuyen>();
-            this.BaiViet = new HashSet<BaiViet>();
-            this.BaiVietWeb = new HashSet<BaiVietWeb>();
             this.LyLichVienChuc = new HashSet<LyLichVienChuc>();
+            this.PhanQuyen = new HashSet<PhanQuyen>();
             this.SoKSK = new HashSet<SoKSK>();
         }
     
@@ -40,18 +41,20 @@ namespace PHCN.NhanVien.Models
         public string SoDienThoaiNoiBo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BaiViet> BaiViet { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BaiViet> BaiViet1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BaiVietWeb> BaiVietWeb { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GuiNhan> GuiNhan { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GuiNhan> GuiNhan1 { get; set; }
         public virtual KhoaPhong KhoaPhong { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PhanQuyen> PhanQuyen { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BaiViet> BaiViet { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BaiVietWeb> BaiVietWeb { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LyLichVienChuc> LyLichVienChuc { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PhanQuyen> PhanQuyen { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SoKSK> SoKSK { get; set; }
     }

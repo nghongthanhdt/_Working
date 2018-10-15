@@ -3,12 +3,83 @@
     ViewBag.Title = "NhanVien";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewBag.PanelTitle = "Nhân viên";
+
+
+    PHCN.NhanVien.Models.PHCNEntities db = new PHCN.NhanVien.Models.PHCNEntities();
+    var listNhanVien = db.NhanVien.Where(x => x.Xoa != true).OrderBy(x => x.STT).ToList();
 }
 
 
-<a href="@Url.Action("ThongTinNhanVien", "Admin")" class="btn btn-success">Thêm nhân viên mới</a>
-<a href="@Url.Action("PhanQuyen", "Admin")" class="btn btn-default">Phân quyền</a>
-<table class="table table-condensed">
+
+
+<br />
+<div class="row">
+    <div class="col-sm-8">
+        <div class="panel-group panel-group-lists collapse" id="accordion2" style="">
+            @foreach (var khoaphong in Model)
+            {
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion2" href="#collapse_@khoaphong.MaKhoa" class="collapsed">
+                                <strong>@khoaphong.MaKhoa - @khoaphong.TenKhoa</strong>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse_@khoaphong.MaKhoa" class="panel-collapse collapse" style="height: 0px;">
+                        <div class="panel-body">
+
+                            <table class="table">
+                                @{
+                                    var listNhanVienKhoa = listNhanVien.Where(x => x.MaKhoa == khoaphong.MaKhoa).OrderBy(x => x.STT).ToList();
+                                }
+                                <tr>
+                                    <th style="width:3%; text-align:center;">#</th>
+                                    <th style="width:47%">Họ tên</th>
+                                    <th style="width:20%">Nhận thư</th>
+                                    <th style="width:10%"></th>
+                                </tr>
+                                @foreach (var item in listNhanVienKhoa)
+                                {
+
+                                    <tr>
+                                        
+                                        <td>@item.STT</td>
+                                        <td style="font-size:16px;">
+                                            <a href="@Url.Action("ThongTinNhanVien", "Admin", new { @id = item.MaNhanVien})">
+                                                @item.HoTen
+                                            </a> 
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" class="checkboxNhanThu" disabled="disabled" @((item.NhanThu) ? "checked='checked'" : "") />
+                                        </td>
+                                        <td>
+                                            
+                                            <a href="@Url.Action("DanhDauXoaNhanVien", "Admin", new { @maNhanVien = item.MaNhanVien})" class="btn btn-danger btn-xs" onclick="return confirm('Bạn thật sự muốn xóa ?');">Xóa</a>
+                                        </td>
+                                    </tr>
+                                }
+
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+                                    }
+
+
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <a href="@Url.Action("ThongTinNhanVien", "Admin")" class="btn btn-success">Thêm nhân viên mới</a>
+        <br /><br />
+        <a href="@Url.Action("PhanQuyen", "Admin")" class="btn btn-default">Phân quyền</a>
+
+    </div>
+</div>
+
+
+@*<table class="table table-condensed">
     <thead>
         <tr>
             <th style="width:3%; text-align:center;">#</th>
@@ -18,6 +89,9 @@
         </tr>
     </thead>
     <tbody>
+
+        
+
 
         @foreach (PHCN.NhanVien.Models.KhoaPhong khoaphong in Model)
         {
@@ -54,7 +128,7 @@
         }
 
     </tbody>
-</table>
+</table>*@
 
 
 

@@ -4,7 +4,13 @@
 
     PHCN.NhanVien.Models.PHCNEntities db = new PHCN.NhanVien.Models.PHCNEntities();
     string fontSize = db.ThamSoHeThong.Find("kichthuocfontchu").GiaTri;
-    PHCN.NhanVien.Models.NhanVien nhanVienDangNhap = (PHCN.NhanVien.Models.NhanVien)Session["NhanVienDangNhap"];    
+    PHCN.NhanVien.Models.NhanVien nhanVienDangNhap = (PHCN.NhanVien.Models.NhanVien)Session["NhanVienDangNhap"];
+    var listQuyenAdmin = nhanVienDangNhap.PhanQuyen.Where(x => x.MaQuyen == "admin").ToList();
+    bool isAdmin = false;
+    if (listQuyenAdmin.Any())
+    {
+        isAdmin = true;
+    }
 }
 
 <table class="table table-condensed table-hover" style="font-size:@(fontSize)px;">
@@ -57,8 +63,13 @@
                     
                 </td>
                 <td>
-                    <a href="@Url.Action("XemThu", "ThuNoiBo", new { id = item.ID })" style="display:block;">
-                        <span style="font-size:12px; color:gray;">
+                    @if (isAdmin)
+                    {
+                        <span class="pull-left">[<a href="@Url.Action("CapNhatThu", "ThuNoiBo", new { @id = item.MaBaiViet })" style="font-size:12px;">Sửa</a>]</span>
+                    }
+                    
+                    <a href="@Url.Action("XemThu", "ThuNoiBo", new { id = item.ID })" style="float:left;">
+                        <span style="font-size:12px; color:gray;">                            
                             <strong>@item.NhanVien.HoTen</strong> - @item.BaiViet.Ngay.ToString("dd/MM/yyyy HH:mm:ss")
                         </span>
                     </a>

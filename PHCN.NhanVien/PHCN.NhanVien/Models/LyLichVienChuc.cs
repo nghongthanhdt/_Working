@@ -27,7 +27,7 @@ namespace PHCN.NhanVien.Models
         public int MaLyLichVienChuc { get; set; }
         public Nullable<int> MaDonVi { get; set; }
         public Nullable<int> MaDonViThamQuyenQuanLy { get; set; }
-        public Nullable<int> MaLoaiHopDong { get; set; }
+        public int MaLoaiHopDong { get; set; }
         public string SoHieuVienChuc { get; set; }
         public string HoTenKhaiSinh { get; set; }
         public string TenGoiKhac { get; set; }
@@ -122,6 +122,7 @@ namespace PHCN.NhanVien.Models
         public virtual ICollection<DienBienQuaTrinhLuong> DienBienQuaTrinhLuong { get; set; }
         public virtual DoanThe DoanThe { get; set; }
         public virtual DonVi DonVi { get; set; }
+        public virtual DonVi DonVi1 { get; set; }
         public virtual HocHam HocHam { get; set; }
         public virtual HocVi HocVi { get; set; }
         public virtual LoaiHopDong LoaiHopDong { get; set; }

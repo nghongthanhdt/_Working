@@ -2,7 +2,8 @@
     bindbtnLuu_OnClick();
     bindlinkThemBenh_OnClick();
     loadDanhSachBenh();
-
+    bindbtnSaoChepLanTruoc_OnClick();
+    bindbtnTaoNgayKhamMau_OnClick();
 });
 function bindcheckboxNamNuClick() {
     $("#checkboxGioiTinhNam").unbind("click").click(function () {
@@ -14,6 +15,9 @@ function bindcheckboxNamNuClick() {
 
 }
 function bindbtnLuu_OnClick() {
+    $("#linkLuuSoKSK").unbind("click").click(function () {
+        $("#btnLuu").click();
+    });
     $("#btnLuu").unbind("click").click(function () {
         var pMaSoKSK = $("#hiddenMaSoKSK").val();
         var pMaNhanVien = $("#hiddenMaNhanVien").val();
@@ -196,5 +200,40 @@ function bindbtnLuuBenh_OnClick() {
             }
         });
 
+    });
+}
+function bindbtnSaoChepLanTruoc_OnClick() {
+    $("#btnSaoChepLanTruoc").unbind("click").click(function () {
+        
+        var maSoKSK = $("#hiddenMaSoKSK").val();
+        var url = urlController + "SaoChepLanTruoc";
+
+        param = {
+            id: maSoKSK
+        };
+        thAjaxAction(url, param, function (result) {
+            if (result == "ok") {
+                location.reload();
+            } else {
+                alert(result);
+            }
+        });
+    });
+}
+function bindbtnTaoNgayKhamMau_OnClick() {
+    $("#btnTaoNgayKhamMau").unbind("click").click(function () {
+        var maSoKSK = $("#hiddenMaSoKSK").val();
+        var url = urlController + "TaoNgayKhamMau";
+
+        param = {
+            id: maSoKSK
+        };
+        thAjaxAction(url, param, function (result) {
+            if (result == "ok") {
+                location.reload();
+            } else {
+                alert(result);
+            }
+        });
     });
 }

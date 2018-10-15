@@ -18,6 +18,7 @@ namespace PHCN.NhanVien.Models
         public DonVi()
         {
             this.LyLichVienChuc = new HashSet<LyLichVienChuc>();
+            this.LyLichVienChuc1 = new HashSet<LyLichVienChuc>();
         }
     
         public int MaDonVi { get; set; }
@@ -27,5 +28,7 @@ namespace PHCN.NhanVien.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LyLichVienChuc> LyLichVienChuc { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LyLichVienChuc> LyLichVienChuc1 { get; set; }
     }
 }

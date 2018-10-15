@@ -47,5 +47,17 @@ namespace PHCN.NhanVien.Controllers
 
             return View(nv);
         }
+
+        public ActionResult TraCuuLyLichVienChuc()
+        {
+            return View();
+        }
+        public ActionResult _pDanhSachLyLichVienChuc(string hopdong, string khoaphong, string hoten)
+        {
+            ViewBag.HopDong = hopdong;
+            ViewBag.KhoaPhong = khoaphong;
+            ViewBag.HoTen = hoten;
+            return View();
+        }
     }
 }

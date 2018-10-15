@@ -525,6 +525,7 @@
     <Content Include="Content\ckeditor\skins\moono-lisa\images\spinner.gif" />
     <Content Include="Content\ckeditor\styles.js" />
     <Content Include="Content\css\admin-layout.css" />
+    <Content Include="Content\css\fixedTable.css" />
     <Content Include="Content\img\content-loading.gif" />
     <Content Include="Content\img\file-icon.png" />
     <Content Include="Content\ImageManager\ClickChonAnhDaiDien.jpg" />
@@ -582,6 +583,7 @@
     <Content Include="Content\img\together.png" />
     <Content Include="Content\img\wild_flowers.png" />
     <Content Include="Content\css\jquery-ui.css" />
+    <Content Include="Content\js\fixedTable.js" />
     <Content Include="Content\js\site.min.js" />
     <Content Include="Content\img\mini-banner.jpg" />
     <Content Include="Content\plugins\back-to-top\css\demo.css" />
@@ -656,6 +658,7 @@
     </Content>
     <None Include="Properties\PublishProfiles\PHCN.NhanVien.pubxml" />
     <None Include="scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="scripts\app_scripts\BaoCaoLyLichVienChuc.js" />
     <Content Include="scripts\app_scripts\CapNhatBaiVietWeb.js" />
     <Content Include="scripts\app_scripts\LuotKham.js" />
     <Content Include="scripts\app_scripts\CapNhatLyLichVienChuc.js" />
@@ -677,6 +680,7 @@
     <Content Include="scripts\jquery.form.js" />
     <Content Include="scripts\jquery.form.min.js" />
     <Content Include="scripts\jquery.mask.js" />
+    <Content Include="scripts\table2excel.min.js" />
     <Content Include="Web.config" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\ThuNoiBo\SoanThu.cshtml" />
@@ -949,6 +953,10 @@
     <Content Include="Views\QuanLyDanhMuc\_pPhanLoaiSK.cshtml" />
     <Content Include="Views\QuanLyDanhMuc\_pBacSyKSK.cshtml" />
     <Content Include="Views\QuanLyDanhMuc\_pNoiDungKSK.cshtml" />
+    <Content Include="Views\QuanLyDanhMuc\_pChucDanhNgheNghiep.cshtml" />
+    <Content Include="Views\ThuNoiBo\CapNhatThu.cshtml" />
+    <Content Include="Views\QuanLyNhanVien\TraCuuLyLichVienChuc.cshtml" />
+    <Content Include="Views\QuanLyNhanVien\_pDanhSachLyLichVienChuc.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

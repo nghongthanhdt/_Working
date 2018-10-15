@@ -6,7 +6,7 @@
 
     PHCN.NhanVien.Models.PHCNEntities db = new PHCN.NhanVien.Models.PHCNEntities();
 
-    var listLuotKham = db.LuotKSK.Where(x => x.MaSoKSK == Model.MaSoKSK && x.Xoa == false).OrderBy(x => x.Ngay).ToList();
+    var listLuotKham = db.LuotKSK.Where(x => x.MaSoKSK == Model.MaSoKSK && x.Xoa != true).OrderBy(x => x.Ngay).ToList();
 }
 
 
@@ -40,10 +40,12 @@
                         @if (Model.Xoa == false)
                         {
                             <li class="active"><a href="@Url.Action("ThemLuotKSK", "QuanLySucKhoe", new { @id = Model.MaSoKSK})">Thêm ngày khám</a></li>
+                            <li class=""><a href="javascript:void(0);" id="btnTaoNgayKhamMau">Tạo ngày khám mẫu</a></li>
+                            <li class="" ><a href="javascript:void(0);" id="btnSaoChepLanTruoc">Sao chép lần trước</a></li>
                         }
                         else
                         {
-                            <li><a href="javascript:void(0);">Lưu sổ KSK để thêm ngày khám...</a></li>
+                            <li><a href="javascript:void(0);" id="linkLuuSoKSK">Lưu sổ KSK để thêm ngày khám...</a></li>
                         }
 
                     </ul>

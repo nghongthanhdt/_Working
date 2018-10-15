@@ -15,18 +15,24 @@
         $("#txtNgay").val("");
     }    
     $("#txtNgay").focus();
+
+
+    $(':input').focus(function () {
+        var center = $(window).height() / 3;
+        var top = $(this).offset().top;
+        if (top > center) {
+            $('html, body').animate({ scrollTop: top - center }, 'fast');
+        }
+    });
+
+    
 });
-
-
-
 function bindtxtNgay_OnChange() {
     $("#txtNgay").unbind("change").change(function () {
         var ngay = $(this).val();
         $("#txtKL_NgayKy").val(ngay);
     });
 }
-
-
 function bindbtnLuu_OnClick() {
     $("#btnLuu").unbind("click").click(function () {
         
@@ -230,5 +236,6 @@ function bindbtnLuu_OnClick() {
         });
     });
 }
+
 
 

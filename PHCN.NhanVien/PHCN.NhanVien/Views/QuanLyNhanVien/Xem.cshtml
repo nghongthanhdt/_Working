@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.PanelTitle = "Danh sách nhân viên";
+    ViewBag.PanelTitle = "Nhập liệu thông tin nhân viên";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     PHCN.NhanVien.Models.PHCNEntities db = new PHCN.NhanVien.Models.PHCNEntities();
 
@@ -21,7 +21,7 @@
     catch { };
     var listKhoaPhong = db.KhoaPhong.Where(x => x.Xoa == false).OrderBy(x => x.STT).ToList();
     var listLyLichVienChuc = db.LyLichVienChuc.Where(x => x.MaNhanVien == id && (x.Xoa == false || x.Xoa == null)).OrderBy(x => x.MaLyLichVienChuc).ToList();
-    var listSoKSK = db.SoKSK.Where(x => x.MaNhanVien == id && (x.Xoa == false || x.Xoa == null)).OrderBy(x => x.MaSoKSK).ToList();
+    var listSoKSK = db.SoKSK.Where(x => x.MaNhanVien == id && x.Xoa != true).OrderBy(x => x.MaSoKSK).ToList();
 
 
     PHCN.NhanVien.Models.LyLichVienChuc lylich = new PHCN.NhanVien.Models.LyLichVienChuc();
@@ -43,596 +43,279 @@
 
 }
 
+<style>
+    #tableLyLich * {
+        border: 0px;
+        font-size:12px;
+    }
+    #tableDanhSachNhanVien td {
+        border-bottom:1px solid #eeeeee;
+    }
+    #tableDanhSachNhanVien a {
+        color: #004f02;
+        display:block;
+    }
+    #tableDanhSachNhanVien a:hover {        
+        color: #00810b;
+    }
+</style>
 
 <div class="row">
-    
-    <div class="col-md-6">
+
+    <div class="col-md-8">
         <form method="get" action="@Url.Action("Xem", "QuanLyNhanVien")">
             <div class="input-group form-search">
-
                 <input class="form-control search-query" type="text" placeholder="Họ tên nhân viên.." name="hoten" value="@hoTenTimKiem">
                 <span class="input-group-btn">
                     <button data-type="last" class="btn btn-primary" type="submit">Tìm kiếm</button>
                 </span>
-
             </div>
-        </form>            
+        </form>
     </div>
-    <div class="col-md-6">
-        <div class="form-group">
-            <button class="btn btn-success pull-right" style="margin-bottom:10px;">Thêm nhân viên</button>
-        </div>
-    </div>
-
-    
+    @*<div class="col-md-4">
+        <a href="@Url.Action("NhanVien", "Admin")" class="btn btn-default pull-right" style=""> <i class=" glyphicon glyphicon-user "></i> Tài khoản & Nhân viên</a>
+    </div>*@
     
 </div>
+<br/>
+<div class="row">
+    
+    
+        
+    
+    <div class="col-sm-3" style="max-height:600px; overflow-y:scroll;  box-shadow:2px 2px 2px #808080; border:1px solid #808080; margin-bottom:10px; margin-left:2%;">
+        <div>
 
+            <div class="row">
 
-    <div class="row">
-        <div class="col-sm-3" style="height:450px; overflow-y:scroll;  box-shadow:2px 2px 2px #808080; border:1px solid #808080; margin-bottom:10px; margin-left:2%;">
-            <div>
-                <div class="row">
-
-                    <div class="col-xs-12 pull-left">
-                        <table class="table table-condensed">
-                            <thead>
-                                <tr>
-                                    <th style="width:3%; text-align:center;">#</th>
-                                    <th style="width:97%;">Họ tên</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var khoaphong in listKhoaPhong)
-    {
-        var listNhanVien = khoaphong.NhanVien.Where(x => x.Xoa == false && (hoTenTimKiem == "" || x.HoTen.ToLower().Contains(hoTenTimKiem.ToLower()))).OrderBy(x => x.STT).ThenBy(x => x.HoTen).ToList();
-        if (listNhanVien.Any())
-        {
+                <div class="col-xs-12 pull-left">
+                    <table class="table table-condensed table-hover" id="tableDanhSachNhanVien">
+                        <thead>
+                            <tr>
+                                <th style="width:3%; text-align:center;">#</th>
+                                <th style="width:97%;">Họ tên</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var khoaphong in listKhoaPhong)
+                            {
+                                var listNhanVien = khoaphong.NhanVien.Where(x => x.Xoa == false && (hoTenTimKiem == "" || x.HoTen.ToLower().Contains(hoTenTimKiem.ToLower()))).OrderBy(x => x.STT).ThenBy(x => x.HoTen).ToList();
+                                if (listNhanVien.Any())
+                                {
+                                    <tr>
+                                        <td colspan="2" style="">
+                                            <strong>@khoaphong.MaKhoa - @khoaphong.TenKhoa</strong>
+                                        </td>
+                                    </tr>
+                                    foreach (PHCN.NhanVien.Models.NhanVien nhanvien in listNhanVien)
+                                    {
                                         <tr>
-                                            <td colspan="2" style="background-color:#dbdbdb">
-                                                <strong>@khoaphong.MaKhoa - @khoaphong.TenKhoa</strong>
+                                            <td style="text-align:center;">
+                                                @nhanvien.STT
                                             </td>
+                                            <td>
+                                                <a style="display:block; width:100%;" href="@Url.Action("Xem", "QuanLyNhanVien", new { @id = nhanvien.MaNhanVien, @hoten = hoTenTimKiem })">
+                                                    @nhanvien.HoTen
+                                                </a>
+                                            </td>
+
+
                                         </tr>
-                                        foreach (PHCN.NhanVien.Models.NhanVien nhanvien in listNhanVien)
-            {
-                                            <tr>
-                                                <td style="text-align:center;">
-                                                    @nhanvien.STT
-                                                </td>
-                                                <td>
-                                                    <a href="@Url.Action("Xem", "QuanLyNhanVien", new { @id = nhanvien.MaNhanVien, @hoten = hoTenTimKiem })">
-                                                        @nhanvien.HoTen
-                                                    </a>
-                                                </td>
-
-
-                                            </tr>
-                                        }
-        }
-    }
+                                    }
+                                }
+                            }
 
 
 
-                            </tbody>
-                        </table>
-                    </div>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-@if (id == 0)
-{
-    <div class="col-sm-8">
-        <div class="alert alert-success alert-dismissable">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            Mời chọn nhân viên...
-        </div>
+
+
+
+        
+        
     </div>
-    
-}
-else
-{
+    @if (id == 0)
+    {
+        <div class="col-sm-8">
+            <div class="alert alert-success alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                Mời chọn nhân viên...
+            </div>
+        </div>
+
+    }
+    else
+    {
+        
+
+
+
         <div class="col-sm-8">
 
+            
+            
 
-            <img src="@duongDanHinhDaiDien" class="pull-left" style="width:20%; border:1px solid #808080; padding:2px;" />
-
-            <div class="panel panel-success pull-right" style="width:77%; margin-left:3%; box-shadow:2px 2px 2px #808080; border:1px solid #808080;">
+            <div class="panel panel-success" style="box-shadow:2px 2px 2px #808080; border:1px solid #808080;">
                 <div class="panel-heading" style="background-color:#004f02;">
                     <h3 class="panel-title"><i class="glyphicon glyphicon-user"></i> <strong>@nv.HoTen</strong> - @nv.KhoaPhong.TenKhoa</h3>
                 </div>
                 <div class="panel-body">
-                    <div class="tabbable  clearfix">
-                        <ul id="myTab1" class="nav nav-tabs nav-justified">
-                            <li class="active"><a href="#lylich" data-toggle="tab">Lý lịch viên chức</a></li>
-                            <li class=""><a href="#suckhoe" data-toggle="tab">Sức khỏe định kỳ</a></li>
-                            
 
-                        </ul>
-                        <style>
-                            #tableLyLich * {
-                                border: 0px;
-                            }
-                        </style>
-
-                        <div id="myTabContent" class="tab-content">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><i class="glyphicon glyphicon-folder-open"></i> &nbsp; Lý lịch viên chức</h3>
+                        </div>
+                        <div class="panel-body">
                             <div class="tab-pane fade active in" id="lylich">
-                                @if (listLyLichVienChuc.Any())
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <img src="@duongDanHinhDaiDien" class="" style="width:100%; border:1px solid #808080; padding:2px; margin:10px; margin-left:0px;" />
+                                    </div>
+                                    <div class="col-xs-9">
+                                        @if (listLyLichVienChuc.Any())
                                         {
 
                                             var lyLichVienChuc = listLyLichVienChuc.Last();
 
-                                    <div id="thongtinLyich">
+                                            <div id="thongtinLyLich" style="">
 
-                                        <table class="table" id="tableLyLich">
-                                            <tr>
-                                                <th style="width:30%;">Họ và tên</th>
-                                                <td>@lyLichVienChuc.HoTenKhaiSinh</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Ngày sinh</th>
-                                                <td>@lyLichVienChuc.NamSinh</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Giới tính</th>
-                                                <td>@(((lyLichVienChuc.GioiTinh == 1) ? "Nam" : "") + "" + ((lyLichVienChuc.GioiTinh == 2) ? "Nữ" : ""))</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Nơi ở hiện nay</th>
-                                                <td>@(lyLichVienChuc.NoiOHienNay_SoNha + ", " + lyLichVienChuc.NoiOHienNay_Duong + "," + lyLichVienChuc.NoiOHienNay_Xa + "," + lyLichVienChuc.NoiOHienNay_Huyen + "," + lyLichVienChuc.NoiOHienNay_Tinh)</td>
-                                            </tr>
-                                            <tr style="border-top:1px solid #ccc">
-                                                <th>Hợp đồng</th>
-                                                <td>@lyLichVienChuc.LoaiHopDong.TenLoaiHopDong</td>
-                                            </tr>
-                                        </table>
-                                        <a class="btn btn-default" id="btnXemChiTiet" style="margin-bottom:10px; display:none;">Xem chi tiết</a>                                        
-                                        <a href="@Url.Action("CapNhat", "QuanLyLyLichVienChuc", new { @id = lyLichVienChuc.MaLyLichVienChuc})" class="btn btn-primary" style="margin-bottom:10px;">Cập nhật</a>
-                                        
+                                                <table class="table" id="tableLyLich" style="width:75%;">
+                                                    <tr>
+                                                        <th style="width:30%;">Họ và tên</th>
+                                                        <td>@lyLichVienChuc.HoTenKhaiSinh</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Ngày sinh</th>
+                                                        <td>@( (((lyLichVienChuc.NgaySinh != null) ? (lyLichVienChuc.NgaySinh.ToString().PadLeft(2, '0') + "/") : "") + ((lyLichVienChuc.ThangSinh != null)?(lyLichVienChuc.ThangSinh.ToString().PadLeft(2, '0') + "/"):"") + (lyLichVienChuc.NamSinh.ToString())))</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Giới tính</th>
+                                                        <td>@(((lyLichVienChuc.GioiTinh == 1) ? "Nam" : "") + "" + ((lyLichVienChuc.GioiTinh == 2) ? "Nữ" : ""))</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Nơi ở hiện nay</th>
+                                                        <td>
+                                                            @(lyLichVienChuc.NoiOHienNay_SoNha + 
+                                                                ((lyLichVienChuc.NoiOHienNay_SoNha!= null)?", ":"") + 
+                                                                lyLichVienChuc.NoiOHienNay_Duong + 
+                                                                ((lyLichVienChuc.NoiOHienNay_Duong!= null) ? ", " : "") + 
+                                                                lyLichVienChuc.NoiOHienNay_Xa + 
+                                                                ((lyLichVienChuc.NoiOHienNay_Xa != null) ? ", " : "") + 
+                                                                lyLichVienChuc.NoiOHienNay_Huyen + 
+                                                                ((lyLichVienChuc.NoiOHienNay_Huyen!= null) ? ", " : "") + 
+                                                                lyLichVienChuc.NoiOHienNay_Tinh)
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="">
+                                                        <th>Hợp đồng</th>
+                                                        <td>@lyLichVienChuc.LoaiHopDong.TenLoaiHopDong</td>
+                                                    </tr>
+                                                </table>
+
+                                                <a href="@Url.Action("CapNhat", "QuanLyLyLichVienChuc", new { @id = lyLichVienChuc.MaLyLichVienChuc})" class="btn btn-primary btn-block" style="margin-bottom:10px;">Cập nhật</a>
+
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <span>Chưa có lý lịch viên chức, hãy bắt đầu thêm mới...</span>
+
+
+                                            <br /><br />
+                                            <div class="text-center">
+
+                                                <a href="@Url.Action("TaoLyLichVienChuc", "QuanLyNhanVien", new { @id = id})" class="btn btn-primary btn-block" style="margin-bottom:10px;">Thêm lý lịch viên chức</a>
+                                            </div>
+                                        }
                                     </div>
-                                } else
-                                {
-                                    <span>Chưa có thông tin, hãy bắt đầu cập nhật...</span>
-
-
-                                    <br /><br />
-                                    <div class="text-center">
-                                        <a href="@Url.Action("TaoLyLichVienChuc", "QuanLyNhanVien", new { @id = id})" class="btn btn-primary">Cập nhật</a>
-                                    </div>
-                                }
-
-
+                                </div>
+                                
                                 
 
-                               
+
+
+
+
 
 
                             </div>
-                            <div class="tab-pane fade" id="suckhoe">
-                                @if (listSoKSK.Any())
-                                {
-                                    var soKSK = listSoKSK.Last();
-                                    var listLuotKSK = db.LuotKSK.Where(x => x.MaSoKSK == soKSK.MaSoKSK && x.Xoa == false && x.Ngay != null).OrderByDescending(x => x.Ngay);
+                        </div>
+                    </div>
 
-                                    if (listLuotKSK.Any())
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><i class="glyphicon glyphicon-hand-right"></i> &nbsp; Sức khỏe định kỳ</h3>
+                        </div>
+                        <div class="panel-body">
+
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    @if (listSoKSK.Any())
                                     {
-                                        <ul>
-                                            @foreach (var item in listLuotKSK)
-                                            {
-                                                <li><a href="@Url.Action("LuotKham", "QuanLySucKhoe", new { @id = item.MaLuotKSK})">@(DateTime.Parse(item.Ngay.ToString()).ToShortDateString())</a></li>
-                                            }
-                                            
-                                        </ul>
-                                    }
+                                        var soKSK = listSoKSK.Last();
+                                        var listLuotKSK = db.LuotKSK.Where(x => x.MaSoKSK == soKSK.MaSoKSK && x.Xoa == false && x.Ngay != null).OrderByDescending(x => x.Ngay);
 
-                                                            <a href="@Url.Action("CapNhat", "QuanLySucKhoe", new { @id = soKSK.MaSoKSK})" class="btn btn-primary">Cập nhật sổ</a>
-                                }
-                                else
-                                {
-                                    <span>Chưa có thông tin, hãy bắt đầu cập nhật...</span>
-                                    <a href="@Url.Action("TaoSoKSK", "QuanLySucKhoe", new { @id = nv.MaNhanVien})" class="btn btn-primary">Cập nhật sổ</a>
-                                }
-                            </div>
+                                        if (listLuotKSK.Any())
+                                        {
+                                            <ul>
+                                                @foreach (var item in listLuotKSK)
+                                                {
+                                                    <li><a href="@Url.Action("LuotKham", "QuanLySucKhoe", new { @id = item.MaLuotKSK})">@(DateTime.Parse(item.Ngay.ToString()).ToShortDateString())</a></li>
+                                                }
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="panel panel-default pull-right" style="width:77%; margin-left:3%; border:1px solid #808080;">
-                <div class="panel-heading">
-                    <h3 class="panel-title"> <i class="glyphicon glyphicon-phone-alt"></i> Thông tin liên hệ</h3>
-                </div>
-                <div class="panel-body" id="divThongTinLienHe">
-                    
-                    
-                </div>
-            </div>
-
-
-
-
-
-
-        </div>
-}
-    </div>
-
-
-
-
-
-
-<div class="modal" id="modalXemChiTiet">
-    <div class="modal-dialog  modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title">LÝ LỊCH VIÊN CHỨC</h4>
-            </div>
-            <div class="modal-body">
-                
-                <div class="row">
-                    <div class="col-md-12">
-                        <table class="table">
-                            <tr>
-                                <th style="width:30%;">Cơ quan, đơn vị có thẩm quyền quản lý viên chức</th>
-                                <td>Sở Y Tế Đồng Tháp</td>
-                            </tr>
-                            <tr>
-                                <th>Số hiệu viên chức</th>
-                                <td>VC123</td>
-                            </tr>
-                            <tr>
-                                <th>Cơ quan đơn vị sử dụng viên chức</th>
-                                <td>Bệnh viện Phục hồi chức năng Đồng Tháp</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-3">
-                        
-                        <img src="@duongDanHinhDaiDien" style="width:100%; border:1px solid #808080; padding:5px;" id="modalTuyChonAnh_imgXemAnh" />
-                    </div>
-                    <div class="col-sm-9">
-
-                        <style>
-                            .tableLyLichChiTiet * {
-                                /*border: 0px;*/
-                                font-size:14px;
-                                
-                            }
-                            .tableLyLichChiTiet th {
-                                font-weight:normal;
-                            }
-                            .tableLyLichChiTiet th {
-                                background-color:#cccccc;
-                            }
-                        </style>
-                        <table class="table tableLyLichChiTiet">
-                            
-                            <tr>
-                                <th style="width:30%;">1. Họ và tên khai sinh</th>
-                                <td style="text-transform:uppercase;">Nguyễn Hồng Thanh</td>
-                            </tr>
-                            <tr>
-                                <th>2. Ngày sinh</th>
-                                <td>17/04/1991</td>
-                            </tr>
-                            <tr>
-                                <th>3. Giới tính</th>
-                                <td>Nam</td>
-                            </tr>
-                            <tr>
-                                <th>4. Nơi sinh</th>
-                                <td>46 Trần Văn Phụng, Xã Mỹ Trà, Thành phố Cao Lãnh, Tỉnh Đồng Tháp</td>
-                            </tr>
-                            <tr>
-                                <th>5. Quê quán</th>
-                                <td>46 Trần Văn Phụng, Xã Mỹ Trà, Thành phố Cao Lãnh, Tỉnh Đồng Tháp</td>
-                            </tr>
-                            <tr>
-                                <th>6. Dân tộc</th>
-                                <td>Kinh</td>
-                            </tr>
-                            <tr>
-                                <th>7. Tôn giáo</th>
-                                <td>Không</td>
-                            </tr>
-                            <tr>
-                                <th>8. Nơi đăng ký hộ khẩu thường trú</th>
-                                <td>46 Trần Văn Phụng, Xã Mỹ Trà, Thành phố Cao Lãnh, Tỉnh Đồng Tháp</td>
-                            </tr>
-                            <tr>
-                                <th>9. Nơi ở hiện nay</th>
-                                <td>46 Trần Văn Phụng, Xã Mỹ Trà, Thành phố Cao Lãnh, Tỉnh Đồng Tháp</td>
-                            </tr>
-                            <tr>
-                                <th>10. Nghề nghiệp khi được tuyển dụng</th>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>11. Ngày tuyển dụng</th>
-                                <td>12/02/2013 - <strong>Cơ quan tuyển dụng</strong>: Bệnh viện Phục hồi Chức Năng Đồng Tháp</td>
-                            </tr>
-                            <tr>
-                                <th>12. Chức vụ (chức danh) hiện tại</th>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>13. Công việc chính được giao</th>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>14. Chức danh nghề nghiệp viên chức</th>
-                                <td>
-                                    Kỹ sư Công nghệ thông tin
-                                </td>
-                            </tr>
-                            <tr>
-                                <th></th>
-                                <td>
-                                    <ul class="list-group">
-                                        <li class="list-group-item" style="border:0px;"><span class="badge">14</span>Mã số:</li>
-                                        <li class="list-group-item" style="border:0px;"><span class="badge">14</span>Bậc lương:</li>
-                                        <li class="list-group-item" style="border:0px;"><span class="badge">14</span>Hệ số:</li>
-                                        <li class="list-group-item" style="border:0px;"><span class="badge">14</span>Ngày hưởng:</li>
-                                        <li class="list-group-item" style="border:0px;"><span class="badge">14</span>Phụ cấp chức vụ:</li>
-                                        <li class="list-group-item" style="border:0px;"><span class="badge">14</span>Phụ cấp khác:</li>
+                                            </ul>
+                                        }
                                         
-                                    </ul>
+                                    }
                                     
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>15.1. Trình độ giáo dục phổ thông</th>
-                                <td>
-                                    12/12
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>15.2. Trình độ chuyên môn cao nhất</th>
-                                <td>
-                                    Đại học
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>15.3. Lý luận chính trị</th>
-                                <td>
-                                    Đại học
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>15.4. Quản lý nhà nước</th>
-                                <td>
-                                    Đại học
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>15.5. Bồi dưỡng theo tiêu chuẩn chức danh nghề nghiệp</th>
-                                <td>
-                                    Đại học
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>15.6. Ngoại ngữ</th>
-                                <td>
-                                    A
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>15.7. Tin học</th>
-                                <td>
-                                    B
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>16. Ngày vào Đảng cộng sản Việt Nam</th>
-                                <td>
-                                    12/02/2014 - <strong>Ngày chính thức</strong>: 15/03/2015
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>17. Ngày tham gia tổ chức chính trị xã hội</th>
-                                <td>
-                                    26/03/2015 - Đoàn viên
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>18. Ngày nhập ngũ</th>
-                                <td>
-                                    12/02/2014 - <strong>Ngày xuất ngũ</strong>: 15/03/2015 - <strong>Quân hàm cao nhất</strong>: Đại Úy
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>19. Danh hiệu được phong tặng cao nhất</th>
-                                <td>
-                                    Anh hùng lao động
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>20. Sở trường công tác</th>
-                                <td>
-                                    Anh hùng lao động
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>21. Khen thưởng</th>
-                                <td>
-                                    Anh hùng lao động
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>22. Kỷ luật</th>
-                                <td>
-                                    Anh hùng lao động
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>23. Tình trạng sức khỏe</th>
-                                <td>
-                                    Tốt
-                                </td>
-                            </tr>
-                            <tr>
-                                <th></th>
-                                <td>
-                                    <ul class="list-group">
-                                        <li class="list-group-item" style="border:0px;"><span class="badge">14</span>Chiều cao (m)</li>
-                                        <li class="list-group-item" style="border:0px;"><span class="badge">14</span>Cân nặng (kg)</li>
-                                        <li class="list-group-item" style="border:0px;"><span class="badge">14</span>Nhóm máu</li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>24. Là thương binh hạng</th>
-                                <td>
-                                    2/4 - <strong>Là con gia đình chính sách</strong>: gia đình liệt sĩ
-                                </td>
-                            </tr>
+                                </div>
+                                <div class="col-xs-9">
+                                    @if (listSoKSK.Any())
+                                    {
+                                        var soKSK = listSoKSK.Last();
+                                        var listLuotKSK = db.LuotKSK.Where(x => x.MaSoKSK == soKSK.MaSoKSK && x.Xoa != true && x.Ngay != null).OrderByDescending(x => x.Ngay);
+
+                                        <a href="@Url.Action("CapNhat", "QuanLySucKhoe", new { @id = soKSK.MaSoKSK})" class="btn btn-primary btn-block">Cập nhật</a>
+                                    }
+                                    else
+                                    {
+                                        <span>Chưa có sổ KSK, hãy bắt đầu thêm mới...</span>
+                                        <br /><br />
+                                        <a href="@Url.Action("TaoSoKSK", "QuanLySucKhoe", new { @id = nv.MaNhanVien})" class="btn btn-primary btn-block">Thêm sổ khám sức khỏe</a>
+                                    }
+                                </div>
+                            </div>
                             
-                            <tr>
-                                <th>25. Số CMND </th>
-                                <td>
-                                    341634488 - <strong>Ngày cấp</strong>: 26/07/2008
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>26. Số sổ BHXH </th>
-                                <td>
-                                    123456789
-                                </td>
-                            </tr>
-                        </table>
-                        
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <table class="table table-bordered">
-                            <tr>
-                                <th colspan="5" style="background-color:#CCC;">
-                                    27. ĐÀO TẠO BỒI DƯỠNG VỀ CHUYÊN MÔN, NGHIỆP VỤ, LÝ LUẬN CHÍNH TRỊ, NGOẠI NGỮ, TIN HỌC
-                                </th>
-                            </tr>
-                            <tr>
-                                <th>Tên trường</th>
-                                <th>Chuyên ngành đào tạo bồi dưỡng</th>
-                                <th>Từ tháng năm đến tháng năm</th>
-                                <th>Hình thức đào tạo</th>
-                                <th>Văn bằng chứng chỉ trình độ</th>
-                            </tr>
-                            <tr>
-                                <td>Trường Đại Học Kỹ thuật công nghệ TPHCM</td>
-                                <td>Công nghệ thông tin</td>
-                                <td>11/2012 - 11/2014</td>
-                                <td>Chính quy</td>
-                                <td>Kỹ sư</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <table class="table table-bordered">
-                            <tr>
-                                <th colspan="2" style="background-color:#CCC;">
-                                    28. TÓM TẮT QUÁ TRÌNH CÔNG TÁC
-                                </th>
-                            </tr>
-                            <tr>
 
-                                <th>Từ tháng năm đến tháng năm</th>
-                                <th>Chức danh, chức vụ, đơn vị công tác (đảng, chính quyền, đoàn thể, tổ chức xã hội), kể cả thời gian được đào tạo, bồi dưỡng về chuyên môn, nghiệp vụ,...</th>
-
-                            </tr>
-                            <tr>
-                                <td>11/2012 - 11/2014</td>
-                                <td>Kỹ sư tại bệnh viện PHCN ĐT</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div> 
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="">
-                            <table class="table table-bordered">
-                                <tr>
-                                    <th style="background-color:#CCC;" colspan="4">29. DIỄN BIẾN QUÁ TRÌNH LƯƠNG CỦA VIÊN CHỨC</th>                                    
-
-                                </tr>
-                                <tr>
-                                    <th>Tháng/năm</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th>Mã CDNN/bậc</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th>Hệ số lương</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr> 
-                            </table>
+                            
                         </div>
                     </div>
-                </div> 
-                                  
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="">
-                            <table class="table table-bordered">
-                                <tr>
-                                    <th style="background-color:#CCC;">30. NHẬN XÉT, ĐÁNH GIÁ CỦA CƠ QUAN, ĐƠN VỊ QUẢN LÝ HOẶC SỬ DỤNG VIÊN CHỨC</th>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <br /><br/><br/>
-                                    </td>
-                                </tr>
-                            </table>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"> <i class="glyphicon glyphicon-phone-alt"></i> &nbsp; Thông tin liên hệ</h3>
+                        </div>
+                        <div class="panel-body" id="divThongTinLienHe">
                         </div>
                     </div>
-                </div> 
-                <div class="row">
-                    <div class="col-md-12">
-                        <table class="table table-bordered">
-                            <tr>
-                                <th style="background-color:#CCC;">Người khai</th>
-                                <th style="background-color:#CCC;">Thủ trưởng ký</th>
-                            </tr>
-                            <tr>
-                                <td>Nguyễn Hồng Thanh</td>
-                                <td>Nguyễn Thị Nhiệm</td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" style="text-align:center;"><i>Đồng Tháp, Ngày 10 tháng 08 năm 2014</i></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>                    
-                <div class="row">
-                    <div class="col-md-12">
-                        <button class="btn btn-lg btn-default btn-block" data-dismiss="modal">Đóng</button>
-                        <br />
-                    </div>
-                </div>                    
-                    
-
                 </div>
-
             </div>
 
+
+            
         </div>
-    </div>
+    }
+</div>
+
+
+
+
+
+
+
 <div class="modal" id="modalThongTinLienHe">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -668,7 +351,7 @@ else
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success" data-manhanvien="@nv.MaNhanVien" id="modalThongTinLienHe_btnLuu">Lưu thông tin</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>                
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
             </div>
         </div>
 
@@ -682,7 +365,7 @@ else
                 <h4 class="modal-title">Đổi mật khẩu</h4>
             </div>
             <div class="modal-body">
-                
+
                 <div class="row">
 
                     <div class="col-md-12">
@@ -692,11 +375,11 @@ else
                 </div>
                 @*<div class="row">
 
-                    <div class="col-md-12">
-                        <strong>Mật khẩu cũ</strong>
-                        <input type="password" class="form-control" id="modalDoiMatKhau_txtMatKhauCu" />
-                    </div>
-                </div>*@
+                        <div class="col-md-12">
+                            <strong>Mật khẩu cũ</strong>
+                            <input type="password" class="form-control" id="modalDoiMatKhau_txtMatKhauCu" />
+                        </div>
+                    </div>*@
                 <div class="row">
 
                     <div class="col-md-12">
@@ -704,7 +387,7 @@ else
                         <input type="password" class="form-control" id="modalDoiMatKhau_txtMatKhauMoi" />
                     </div>
                 </div>
-                
+
                 <div class="row">
 
                     <div class="col-md-12">

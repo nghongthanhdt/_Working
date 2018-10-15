@@ -19,6 +19,7 @@ namespace PHCN.NhanVien.Models
         public Nullable<System.DateTime> TuThangNam { get; set; }
         public Nullable<System.DateTime> DenThangNam { get; set; }
         public string NoiDungCongTac { get; set; }
+        public Nullable<bool> DenNay { get; set; }
     
         public virtual LyLichVienChuc LyLichVienChuc { get; set; }
     }

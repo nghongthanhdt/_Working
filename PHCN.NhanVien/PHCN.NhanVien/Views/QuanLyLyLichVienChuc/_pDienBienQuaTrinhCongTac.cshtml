@@ -19,7 +19,7 @@
             count++;
             <tr>
                 <td>@count</td>
-                <td>@(DateTime.Parse(item.TuThangNam.ToString()).ToString("MM/yyyy")) - @(DateTime.Parse(item.DenThangNam.ToString()).ToString("MM/yyyy"))</td>
+                <td>@(DateTime.Parse(item.TuThangNam.ToString()).ToString("MM/yyyy")) - @((item.DenThangNam != null)?DateTime.Parse(item.DenThangNam.ToString()).ToString("MM/yyyy"):"Đến nay")</td>
                 <td>
                     @item.NoiDungCongTac
                 </td>

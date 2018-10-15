@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.PanelTitle = "Tra cứu lý lịch viên chức";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+    PHCN.NhanVien.Models.PHCNEntities db = new PHCN.NhanVien.Models.PHCNEntities();
+    var listKhoaPhong = db.KhoaPhong.OrderBy(x => x.STT).Where(x => x.Xoa != true).ToList();
+    var listLoaiHopDong = db.LoaiHopDong.OrderBy(x => x.STT).Where(x => x.Xoa != true).ToList();
+
+
+}
+
+<script src="~/scripts/table2excel.min.js"></script>
+<div class="row">
+    <div class="col-sm-8">
+        <input type="text" placeholder="Họ tên nhân viên..." class="form-control" id="txtHoTenNhanVien" />
+        @*<a href="javascript:void(0);" class="btn btn-default btn-block" id="btnTimKiemNangCao">Tìm kiếm nâng cao</a>*@
+    </div>
+    <div class="col-sm-4">
+        <button class="btn btn-block btn-primary" id="btnTimKiem">Tìm kiếm</button>
+        <button class="btn btn-default btn-block text-left" id="btnXuatExcel">Xuất Excel</button>
+    </div>
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-3">
+                <label>
+                    Loại hợp đồng
+                </label>
+                @foreach (var item in listLoaiHopDong)
+                {
+                    <div class="checkbox">
+                        <input type="checkbox" class="checkboxLoaiHopDong" id="checkboxLoaiHopDong_@item.MaLoaiHopDong" checked value="@item.MaLoaiHopDong">
+                        <label for="checkboxLoaiHopDong_@item.MaLoaiHopDong">@item.TenLoaiHopDong</label>
+                    </div>
+                }
+                
+                
+            </div>
+            <div class="col-sm-5">
+                <label>
+                    Khoa phòng
+                </label>
+                
+                @foreach (var item in listKhoaPhong)
+                {                   
+                    <div class="checkbox">
+                        <input type="checkbox" class="checkboxKhoaPhong" id="checkboxKhoaPhong_@item.MaKhoa" checked value="@item.MaKhoa">
+                        <label for="checkboxKhoaPhong_@item.MaKhoa">@item.TenKhoa</label>
+                    </div>
+                }
+                
+               
+            </div>
+            <div class="col-sm-4">
+                
+            </div>
+        </div>
+        
+    </div>
+    
+    
+</div>
+
+
+
+
+<br />
+<div id="divDanhSachLyLichVienChuc">
+    
+</div>
+
+
+<script>
+    var urlController = '@(HttpContext.Current.Request.Url.Scheme)://@(HttpContext.Current.Request.Url.Authority)/QuanLyNhanVien/';
+</script>
+
+<link href="~/Content/css/fixedTable.css" rel="stylesheet" />
+<script src="~/Content/js/fixedTable.js"></script>
+<script src="~/scripts/app_scripts/BaoCaoLyLichVienChuc.js"></script>

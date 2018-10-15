@@ -23,7 +23,7 @@ namespace PHCN.NhanVien.Models
         public Nullable<int> MaHinhThucDaoTao { get; set; }
         public string VanBangChungChiTrinhDo { get; set; }
     
-        public virtual HinhThucDaoTao HinhThucDaoTao { get; set; }
         public virtual LyLichVienChuc LyLichVienChuc { get; set; }
+        public virtual HinhThucDaoTao HinhThucDaoTao { get; set; }
     }
 }

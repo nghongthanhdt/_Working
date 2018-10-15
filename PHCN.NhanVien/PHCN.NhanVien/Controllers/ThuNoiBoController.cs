@@ -45,6 +45,7 @@ namespace PHCN.NhanVien.Controllers
             PHCN.NhanVien.Models.NhanVien nhanVienDangNhap = (PHCN.NhanVien.Models.NhanVien)Session["NhanVienDangNhap"];
             if (nhanVienDangNhap != null)
             {
+                
                 List<GuiNhan> listBaiViet = new List<GuiNhan>();
                 switch (TrangThai)
                 {
@@ -56,7 +57,8 @@ namespace PHCN.NhanVien.Controllers
                                                                 && (TieuDe == "" || x.BaiViet.TieuDe.Contains(TieuDe))
                                                                 && (NguoiGui == 0 || x.BaiViet.MaNhanVien == NguoiGui)
                                                                 && (NgayGui == null || (x.BaiViet.Ngay <= ngayGuiAdd1 && x.BaiViet.Ngay >= NgayGui))
-                                                                ).OrderByDescending(x => x.BaiViet.MaBaiViet).ToList();                        
+                                                                ).OrderByDescending(x => x.BaiViet.MaBaiViet).ToList();
+                        ViewBag.DaGui = false;
                         break;
                     case "DaGui":
                         listBaiViet = db.GuiNhan.Where(x => x.BaiViet.MaNhanVien == nhanVienDangNhap.MaNhanVien
@@ -64,6 +66,7 @@ namespace PHCN.NhanVien.Controllers
                                                                 && x.DaNhan == true                                                                
                                                                 && x.DaXoa == false
                                                                 && x.STTGui == 1).OrderByDescending(x => x.BaiViet.MaBaiViet).ToList();
+                        ViewBag.DaGui = true;
                         // gửi cho 5 người thì bảng GuiNhan cột STTGui se đánh số từ 1 đến 5, nên chỉ cần lấy ra STTGui là 1
                         break;                    
                     case "DaXoa":
@@ -71,8 +74,10 @@ namespace PHCN.NhanVien.Controllers
                                                                 && x.Xoa == false
                                                                 && x.DaNhan == true                                                                
                                                                 && x.DaXoa == true).OrderByDescending(x => x.BaiViet.MaBaiViet).ToList();
+                        ViewBag.DaGui = false;
                         break;
                     default:
+                        ViewBag.DaGui = false;
                         break;
                 }
                 ViewBag.ListBaiViet = listBaiViet;
@@ -132,6 +137,51 @@ namespace PHCN.NhanVien.Controllers
                     return RedirectToAction("ThongBao", "Loi", new { id = "khongtimthaybaiviet"});
                 }
                 
+            }
+            
+        }
+        public ActionResult CapNhatThu(string id)
+        {
+            PHCN.NhanVien.Models.NhanVien nhanVienDangNhap = (PHCN.NhanVien.Models.NhanVien)Session["NhanVienDangNhap"];
+
+            if (nhanVienDangNhap == null)
+            {
+                return RedirectToAction("DangNhap", "Home");
+            }
+            ViewBag.MaNhanVienDangNhap = nhanVienDangNhap.MaNhanVien;
+            try
+            {
+                int _id = int.Parse(id);
+                db.BaiViet.Find(_id);
+                return View(new { id = _id });
+            }
+            catch
+            {
+                return RedirectToAction("ThongBao", "Loi", new { id = "khongtimthaybaiviet" });
+            }
+        }
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult LuuThu(int MaBaiViet, string TieuDe, string NoiDung)
+        {
+            try
+            {
+                PHCN.NhanVien.Models.NhanVien nhanVienDangNhap = (PHCN.NhanVien.Models.NhanVien)Session["NhanVienDangNhap"];
+                if (nhanVienDangNhap == null)
+                {
+                    return RedirectToAction("DangNhap", "Home");
+                }
+                ViewBag.MaNhanVienDangNhap = nhanVienDangNhap.MaNhanVien;
+                BaiViet baiviet = db.BaiViet.Find(MaBaiViet);
+                baiviet.TieuDe = TieuDe;
+                baiviet.NoiDung = NoiDung;
+                baiviet.NgayCapNhat = DateTime.Now;
+                baiviet.MaNhanVienCapNhat = nhanVienDangNhap.MaNhanVien;
+                db.SaveChanges();
+                return Content("true");
+            } catch (Exception ex)
+            {
+                return Content(ex.Message);
             }
             
         }

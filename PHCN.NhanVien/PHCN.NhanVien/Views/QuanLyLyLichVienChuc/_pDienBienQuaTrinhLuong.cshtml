@@ -28,7 +28,7 @@
 
                 @foreach (var item in Model)
             {
-                    <td>@item.BacLuong</td>
+                    <td>@("" + item.ChucDanhNgheNghiep.MaSo.ToString() + " / ") <strong>@item.BacLuong.ToString()</strong></td>
                 }
                 <td></td>
                 <td></td>

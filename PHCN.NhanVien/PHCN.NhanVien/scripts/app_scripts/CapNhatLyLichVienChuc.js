@@ -110,7 +110,13 @@ $(document).ready(function () {
     bindbtnLuu();
 
 
-    
+    $(':input').focus(function () {
+        var center = $(window).height() / 3;
+        var top = $(this).offset().top;
+        if (top > center) {
+            $('html, body').animate({ scrollTop: top - center }, 'fast');
+        }
+    });
     // end document ready
 
     
@@ -439,8 +445,8 @@ function bindbtn_modalDaoTaoBoiDuongNghiepVuChuyenMon_btnLuu(idDienBien) {
             MaLyLichVienChuc: _maLyLichVienChuc,
             TenTruong: _TenTruong,
             ChuyenNganhDaoTaoBoiDuong: _ChuyenNganhDaoTaoBoiDuong,
-            TuThangNam: _TuThangNam,
-            DenThangNam: _DenThangNam,
+            strTuThangNam: _TuThangNam,
+            strDenThangNam: _DenThangNam,
             MaHinhThucDaoTao: _maHinhThucDaoTao,
             VanBangChungChiTrinhDo: _VanBangChungChiTrinhDo            
             
@@ -551,6 +557,11 @@ function showModalDienBienQuaTrinhCongTac(idDienBien) {
                 _selectedDienBien = result;
                 $("#modalDienBienQuaTrinhCongTac_txtTuThangNam").val(_selectedDienBien.TuThangNam);
                 $("#modalDienBienQuaTrinhCongTac_txtDenThangNam").val(_selectedDienBien.DenThangNam);
+                if (_selectedDienBien.DenNay == true) {
+                    $("#modalDienBienQuaTrinhCongTac_checkboxDenNay").prop("checked", true);
+                } else {
+                    $("#modalDienBienQuaTrinhCongTac_checkboxDenNay").prop("checked", false);
+                }
                 $("#modalDienBienQuaTrinhCongTac_txtNoiDungCongTac").val(_selectedDienBien.NoiDungCongTac);
                 $("#modalDienBienQuaTrinhCongTac_btnLuu").text("Lưu diễn biến");
             }
@@ -559,6 +570,7 @@ function showModalDienBienQuaTrinhCongTac(idDienBien) {
         $("#modalDienBienQuaTrinhCongTac_txtTuThangNam").val("");
         $("#modalDienBienQuaTrinhCongTac_txtDenThangNam").val("");
         $("#modalDienBienQuaTrinhCongTac_txtNoiDungCongTac").val("");
+        $("#modalDienBienQuaTrinhCongTac_checkboxDenNay").prop("checked", false);
         $("#modalDienBienQuaTrinhCongTac_btnLuu").text("Thêm diễn biến");        
     }
     $("#modalDienBienQuaTrinhCongTac").modal("show");
@@ -571,7 +583,8 @@ function bindbtn_modalDienBienQuaTrinhCongTac_btnLuu(idDienBien) {
         var _TuThangNam = "01/" + $("#modalDienBienQuaTrinhCongTac_txtTuThangNam").val();
         var _DenThangNam = "01/" + $("#modalDienBienQuaTrinhCongTac_txtDenThangNam").val();
         var _NoiDungCongTac = $("#modalDienBienQuaTrinhCongTac_txtNoiDungCongTac").val();
-
+        var _DenNay = $("#modalDienBienQuaTrinhCongTac_checkboxDenNay").is(":checked");
+        
         //alert(_ngayHuong);
         //return;
         
@@ -582,32 +595,47 @@ function bindbtn_modalDienBienQuaTrinhCongTac_btnLuu(idDienBien) {
             return;
         }
         if (_DenThangNam == "01/") {
-            alert("Chưa nhập \"Đến tháng năm\"");
-            return;
+            if (_DenNay == false) {
+                alert("Chưa nhập \"Đến tháng năm\" hoặc chọn \"Đến nay\"");
+                return;
+            }            
+        } else {
+            if (_DenNay == true) {
+                alert("Chú ý: Chỉ được nhập \"Đến tháng năm\" hoặc chọn \"Đến nay\"");
+                return;
+            }
         }
-
+        
         var pattern = /^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/;
         if (!pattern.test(_TuThangNam)) {
             //alert(_TuThangNam);
             alert("Ngày \"Từ tháng năm\" chưa đúng định dạng");
             return;
         }
-        if (!pattern.test(_DenThangNam)) {
-            alert("Ngày \"Đến tháng năm\" chưa đúng định dạng");
-            return;
+        if (_DenNay == false) {
+            if (!pattern.test(_DenThangNam)) {
+                alert("Ngày \"Đến tháng năm\" chưa đúng định dạng");
+                return;
+            }
         }
+        
         var ngayTuThangNamSplit = _TuThangNam.split("/");
         if (!isValidDate(ngayTuThangNamSplit[0], ngayTuThangNamSplit[1], ngayTuThangNamSplit[2])) {
             alert("Ngày \"Từ tháng năm\" không có thật, vui lòng kiểm tra lại");
             return;
         }
-        var ngayDenThangNamSplit = _DenThangNam.split("/");
-        if (!isValidDate(ngayDenThangNamSplit[0], ngayDenThangNamSplit[1], ngayDenThangNamSplit[2])) {
-            alert("Ngày \"Đến tháng năm\" không có thật, vui lòng kiểm tra lại");
-            return;
+        if (_DenNay == false) {
+            var ngayDenThangNamSplit = _DenThangNam.split("/");
+            if (!isValidDate(ngayDenThangNamSplit[0], ngayDenThangNamSplit[1], ngayDenThangNamSplit[2])) {
+                alert("Ngày \"Đến tháng năm\" không có thật, vui lòng kiểm tra lại");
+                return;
+            }
         }
+        
 
-
+        if (_DenNay == true) {
+            _DenThangNam = null;
+        }
 
 
         if (_NoiDungCongTac == "") {
@@ -623,8 +651,9 @@ function bindbtn_modalDienBienQuaTrinhCongTac_btnLuu(idDienBien) {
             MaLyLichVienChuc: _maLyLichVienChuc,
             TuThangNam: _TuThangNam,
             DenThangNam: _DenThangNam,
+            DenNay: _DenNay,
             NoiDungCongTac: _NoiDungCongTac
-
+            
         }
         $.ajax({
             method: "POST",

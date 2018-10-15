@@ -20,14 +20,16 @@ namespace PHCN.NhanVien.Controllers
         {
 
             // id: MaNhanVien
-            var list = db.SoKSK.Where(x => x.MaNhanVien == id && x.Xoa == false).ToList();
+            var list = db.SoKSK.Where(x => x.MaNhanVien == id && x.Xoa != true).ToList();
             if (list.Any())
             {
                 SoKSK soKSK = list.Last();
                 return RedirectToAction("CapNhat", new { id = soKSK.MaSoKSK });
             } else
             {
+                var nv = db.NhanVien.Find(id);
                 SoKSK soKSK = new SoKSK();
+                soKSK.HoTen = nv.HoTen;
                 soKSK.MaNhanVien = id;
                 soKSK.Xoa = true;
                 db.SoKSK.Add(soKSK);
@@ -214,7 +216,48 @@ namespace PHCN.NhanVien.Controllers
             return Json(list);
         }
 
+        public ActionResult SaoChepLanTruoc(int id)
+        {
+            //id: mã sổ KSK
+            try
+            {
+                var listLuotKham = db.LuotKSK.Where(x => x.MaSoKSK == id).OrderBy(x => x.Ngay).ToList();
+                if (listLuotKham.Any())
+                {
+                    var lk = listLuotKham.Last();
+                    db.LuotKSK.Add(lk);
+                    db.SaveChanges();
+                    return Content("ok");
+                }
+                else
+                {
+                    return Content("Chưa có lượt khám");
+                }
+            } catch (Exception ex)
+            {
+                return Content(ex.Message);
+            }            
+        }
+        public ActionResult TaoNgayKhamMau(int id)
+        {
+            //id: mã sổ KSK
 
+            try
+            {
+                int maLuotKhamMau = 1;
+                var luotKhamMau = db.LuotKSK.Find(maLuotKhamMau);
+                LuotKSK lk = new LuotKSK(); 
+                lk = luotKhamMau;
+                lk.MaSoKSK = id;
+                db.LuotKSK.Add(lk);
+                db.SaveChanges();
+                return Content("ok");                
+            }
+            catch (Exception ex)
+            {
+                return Content(ex.Message);
+            }
+        }
 
 
     }

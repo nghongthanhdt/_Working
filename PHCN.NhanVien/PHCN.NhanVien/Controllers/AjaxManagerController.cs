@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -191,15 +192,19 @@ namespace PHCN.NhanVien.Controllers
             };
             return Json(_dienbien, JsonRequestBehavior.AllowGet);
         }
-        public string LuuDienBienDaoTaoBoiDuong(DienBienDaoTaoBoiDuong dienbien)
+        public string LuuDienBienDaoTaoBoiDuong(DienBienDaoTaoBoiDuong dienbien, string strTuThangNam, string strDenThangNam)
         {
             if (dienbien.MaDienBienDaoTaoBoiDuong == 0)
             {
+                dienbien.TuThangNam = DateTime.ParseExact(strTuThangNam, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                dienbien.DenThangNam = DateTime.ParseExact(strDenThangNam, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 db.DienBienDaoTaoBoiDuong.Add(dienbien);
                 db.SaveChanges();
             }
             else
             {
+                dienbien.TuThangNam = DateTime.ParseExact(strTuThangNam, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                dienbien.DenThangNam = DateTime.ParseExact(strDenThangNam, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 db.Entry(dienbien).State = EntityState.Modified;
                 db.SaveChanges();
             }
@@ -222,10 +227,11 @@ namespace PHCN.NhanVien.Controllers
 
             object _dienbien = new
             {
-                
+
                 TuThangNam = DateTime.Parse(dienbien.TuThangNam.ToString()).ToString("MM/yyyy"),
-                DenThangNam = DateTime.Parse(dienbien.DenThangNam.ToString()).ToString("MM/yyyy"),                
-                NoiDungCongTac = dienbien.NoiDungCongTac
+                DenThangNam = (dienbien.DenThangNam != null)?(DateTime.Parse(dienbien.DenThangNam.ToString()).ToString("MM/yyyy")):null,
+                NoiDungCongTac = dienbien.NoiDungCongTac,
+                DenNay = dienbien.DenNay
             };
             return Json(_dienbien, JsonRequestBehavior.AllowGet);
         }
