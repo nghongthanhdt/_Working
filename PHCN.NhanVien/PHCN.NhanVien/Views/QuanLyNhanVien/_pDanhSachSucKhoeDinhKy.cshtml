@@ -1,0 +1,313 @@
+﻿
+@{
+    PHCN.NhanVien.Models.PHCNEntities db = new PHCN.NhanVien.Models.PHCNEntities();
+
+    string hopdong = ViewBag.HopDong;
+    string hoten = ViewBag.HoTen;
+    string khoaphong = ViewBag.KhoaPhong;
+    string thoidiem = ViewBag.ThoiDiem;
+
+
+
+
+    DateTime? dateThoiDiem = null;
+
+    if (thoidiem != "")
+    {
+        dateThoiDiem = DateTime.Parse(thoidiem).AddDays(1);
+    }
+    else
+    {
+        dateThoiDiem = DateTime.Parse(DateTime.Now.ToShortDateString()).AddDays(1);
+    }
+
+
+
+    List<int> listIntHopDong = hopdong.Split(',').Select(Int32.Parse).ToList();
+    List<string> listIntKhoaPhong = khoaphong.Split(',').ToList();
+
+
+
+
+    var listKhoaPhong = db.KhoaPhong.OrderBy(x => x.STT).Where(x => x.Xoa != true && listIntKhoaPhong.Contains(x.MaKhoa)).ToList();
+    var listNhanVien = db.NhanVien.OrderBy(x => x.STT).Where(x => x.Xoa != true).ToList();
+    var listSoKSK = db.SoKSK.Where(x => x.Xoa != true).ToList();
+    var listLuotKSK = db.LuotKSK.Where(x => x.Xoa != true && x.Ngay < dateThoiDiem).OrderBy(x => x.Ngay).ToList();
+
+}
+
+
+
+<div id="table-scroll" class="table-scroll">
+    <div class="table-wrap">
+        <table class="main-table" id="tableSucKhoeDinhKy">
+            <thead>
+                <tr>
+                    <th scope="col" class="fixed-side">STT</th>
+                    <th scope="col" class="fixed-side">TT</th>
+                    <th scope="col" class="fixed-side">Họ và tên</th>
+                    <th scope="col">Ngày sinh</th>
+                    <th scope="col">Giới tính</th>
+                    <th scope="col">Chiều cao</th>
+                    <th scope="col">Cân nặng</th>
+                    <th scope="col">Chỉ số BMI</th>
+                    <th scope="col">Mạch</th>
+                    <th scope="col">Huyết áp</th>
+                    <th scope="col">Thể lực</th>
+                    <th scope="col">Tuần hoàn</th>
+                    <th scope="col"></th>
+                    <th scope="col">Hô hấp</th>
+                    <th scope="col"></th>
+                    <th scope="col">Tiêu hóa</th>
+                    <th scope="col"></th>
+                    <th scope="col">Thận - Tiết niệu</th>
+                    <th scope="col"></th>
+                    <th scope="col">Nội tiết</th>
+                    <th scope="col"></th>
+                    <th scope="col">Cơ xương khớp</th>
+                    <th scope="col"></th>
+                    <th scope="col">Thần kinh</th>
+                    <th scope="col"></th>
+                    <th scope="col">Tâm thần</th>
+                    <th scope="col"></th>
+                    <th scope="col">Ngoại khoa</th>
+                    <th scope="col"></th>
+                    <th scope="col">Sản phụ khoa</th>
+                    <th scope="col"></th>
+                    <th scope="col">Mắt</th> 
+                    <th scope="col">Các bệnh về mắt</th> 
+                    <th scope="col">Không kính mắt phải</th>
+                    <th scope="col">Không kính mắt trái</th>
+                    <th scope="col">Có kính mắt phải</th>
+                    <th scope="col">Có kính mắt trái</th>                    
+                    <th scope="col">Tai mũi họng</th> 
+                    <th scope="col">Các bệnh về tai mũi họng</th> 
+                    <th scope="col">Tai trái nói thường</th>
+                    <th scope="col">Tai trái nói thầm</th>
+                    <th scope="col">Tai phải nói thường</th>
+                    <th scope="col">Tai phải nói thầm</th>                    
+                    <th scope="col">Các bệnh về tai mũi họng</th> 
+                    <th scope="col">Răng hàm mặt</th>
+                    <th scope="col">Các bệnh về răng hàm mặt</th> 
+                    <th scope="col">Hàm trên</th>     
+                    <th scope="col">Hàm dưới</th>
+                    <th scope="col">Da liễu</th> 
+                    <th scope="col"></th>     
+                    <th scope="col">XN máu</th>  
+                    <th scope="col">Hồng cầu</th>  
+                    <th scope="col">Bạch cầu</th>  
+                    <th scope="col">Tiểu cầu</th>  
+                    <th scope="col">HCT</th>  
+                    <th scope="col">Glucose</th> 
+                    <th scope="col">XN nước tiểu</th>  
+                    <th scope="col">Glucose</th>  
+                    <th scope="col">Protein</th>  
+                    <th scope="col">PH</th>  
+                    <th scope="col">XN Phân</th>  
+                    <th scope="col">Các xét nghiệm khác</th>  
+                    <th scope="col">Đánh giá </th>  
+                    <th scope="col">Phân loại sức khỏe</th>  
+                    <th scope="col">Ghi chú</th>  
+                    <th scope="col">Các bệnh tật khác</th>                      
+                </tr>
+            </thead>
+
+            <tbody>
+                @{
+                    int STT = 0;
+                }
+
+                @foreach (var khoa in listKhoaPhong)
+                {
+                    int TT = 0;
+                    foreach (var nhanvien in listNhanVien.Where(x => x.MaKhoa == khoa.MaKhoa).ToList())
+                    {
+                        foreach (var soKSK in listSoKSK.Where(x => x.MaNhanVien == nhanvien.MaNhanVien).ToList())
+                        {
+                            STT++;
+                            TT++;
+                            if (TT == 1)
+                            {
+                                <tr>
+                                    <td colspan="51" class="fixed-side" style="font-weight:bold; text-transform:uppercase;">@khoa.MaKhoa - @khoa.TenKhoa</td>
+                                </tr>
+                            }
+                            <tr>
+                                <td scope="col" class="fixed-side">@STT</td>
+                                <td scope="col" class="fixed-side" style="font-weight:bold;">@TT</td>
+
+                                <td scope="col" class="fixed-side">@soKSK.HoTen</td>
+                                
+                                <td scope="col" style="text-align:right;">
+                                    @(((soKSK.NamSinh != null) ? ((int.Parse(soKSK.NamSinh.ToString()).ToString("00"))) : ""))
+                                </td>
+                                <td scope="col">@((soKSK.GioiTinh == 1) ? "Nam" : ((soKSK.GioiTinh == 2) ? "Nữ" : ""))</td>
+                                
+
+                                @{
+                                    var _listLuotKSK = listLuotKSK.Where(x => x.MaSoKSK == soKSK.MaSoKSK).OrderByDescending(x => x.MaLuotKSK).ToList();
+                                    if (_listLuotKSK.Any())
+                                    {
+                                        var luotKSK = _listLuotKSK.First();
+
+                                        <td scope="col">@luotKSK.TL_ChieuCao</td>
+                                        <td scope="col">@luotKSK.TL_CanNang</td>
+                                        <td scope="col">@luotKSK.TL_ChiSoBMI</td>
+                                        <td scope="col">@luotKSK.TL_Mach</td>
+                                        <td scope="col">@luotKSK.TL_HuyetAp</td>
+                                        <td scope="col">@luotKSK.TL_PhanLoaiTheLuc</td>
+                                        <td scope="col">@luotKSK.LS_NoiKhoa_TuanHoan_PhanLoai</td>
+                                        <td scope="col">@luotKSK.LS_NoiKhoa_TuanHoan</td>
+                                        <td scope="col">@luotKSK.LS_NoiKhoa_HoHap_PhanLoai</td>
+                                        <td scope="col">@luotKSK.LS_NoiKhoa_HoHap</td>
+                                        <td scope="col">@luotKSK.LS_NoiKhoa_TieuHoa_PhanLoai</td>
+                                        <td scope="col">@luotKSK.LS_NoiKhoa_TieuHoa</td>
+                                        <td scope="col">@luotKSK.LS_NoiKhoa_ThanTietNieu_PhanLoai</td>
+                                        <td scope="col">@luotKSK.LS_NoiKhoa_ThanTietNieu</td>
+                                        <td scope="col">@luotKSK.LS_NoiKhoa_NoiTiet_PhanLoai</td>
+                                        <td scope="col">@luotKSK.LS_NoiKhoa_NoiTiet</td>
+                                        <td scope="col">@luotKSK.LS_NoiKhoa_CoXuongKhop_PhanLoai</td>
+                                        <td scope="col">@luotKSK.LS_NoiKhoa_CoXuongKhop</td>
+                                        <td scope="col">@luotKSK.LS_NoiKhoa_ThanKinh_PhanLoai</td>
+                                        <td scope="col">@luotKSK.LS_NoiKhoa_ThanKinh</td>
+                                        <td scope="col">@luotKSK.LS_NoiKhoa_ThamThan_PhanLoai</td>
+                                        <td scope="col">@luotKSK.LS_NoiKhoa_TamThan</td>
+                                        <td scope="col">@luotKSK.LS_NgoaiKhoa_PhanLoai</td>
+                                        <td scope="col">@luotKSK.LS_NgoaiKhoa</td>
+                                        <td scope="col">@luotKSK.LS_SanPhuKhoa_PhanLoai</td>
+                                        <td scope="col">@luotKSK.LS_SanPhuKhoa</td>
+                                        <td scope="col">@luotKSK.LS_Mat_PhanLoai</td>
+                                        <td scope="col">@luotKSK.LS_Mat_CacBenhVeMat</td>
+                                        <td scope="col">@luotKSK.LS_Mat_KhongKinhMatPhai</td>
+                                        <td scope="col">@luotKSK.LS_Mat_KhongKinhMatTrai</td>
+                                        <td scope="col">@luotKSK.LS_Mat_CoKinhMatPhai</td>
+                                        <td scope="col">@luotKSK.LS_Mat_CoKinhMatTrai</td>
+                                        <td scope="col">@luotKSK.LS_TaiMuiHong_PhanLoai</td>
+                                        <td scope="col">@luotKSK.LS_TaiMuiHong_CacBenhVeTaiMuiHong</td>
+                                        <td scope="col">@luotKSK.LS_TaiMuiHong_TaiTraiNoiThuong</td>
+                                        <td scope="col">@luotKSK.LS_TaiMuiHong_TaiTraiNoiTham</td>
+                                        <td scope="col">@luotKSK.LS_TaiMuiHong_TaiPhaiNoiThuong</td>
+                                        <td scope="col">@luotKSK.LS_TaiMuiHong_TaiPhaiNoiTham</td>
+                                        <td scope="col">@luotKSK.LS_TaiMuiHong_CacBenhVeTaiMuiHong</td>
+                                        <td scope="col">@luotKSK.LS_RangHamMat_PhanLoai</td>
+                                        <td scope="col">@luotKSK.LS_RangHamMat_CacBenhVeRangHamMat</td>
+                                        <td scope="col">@luotKSK.LS_RangHamMat_HamTren</td>
+                                        <td scope="col">@luotKSK.LS_RangHamMat_HamDuoi</td>
+                                        <td scope="col">@luotKSK.LS_DaLieu_PhanLoai</td>
+                                        <td scope="col">@luotKSK.LS_DaLieu</td>
+                                        <td scope="col">@luotKSK.CLS_XetNghiemMau</td>
+                                        <td scope="col">@luotKSK.CLS_XetNghiemMau_HongCau</td>
+                                        <td scope="col">@luotKSK.CLS_XetNghiemMau_BachCau</td>
+                                        <td scope="col">@luotKSK.CLS_XetNghiemMau_TieuCau</td>
+                                        <td scope="col">@luotKSK.CLS_XetNghiemMau_HCT</td>
+                                        <td scope="col">@luotKSK.CLS_XetNghiemMau_Glucose</td>
+                                        <td scope="col">@luotKSK.CLS_XetNghiemNuocTieu</td>
+                                        <td scope="col">@luotKSK.CLS_XetNghiemNuocTieu_Glucose</td>
+                                        <td scope="col">@luotKSK.CLS_XetNghiemNuocTieu_Protein</td>
+                                        <td scope="col">@luotKSK.CLS_XetNghiemNuocTieu_pH</td>
+                                        <td scope="col">@luotKSK.CLS_XetNghiemPhan</td>
+                                        <td scope="col">@luotKSK.CLS_CacXetNghiemKhac</td>
+                                        <td scope="col">@luotKSK.CLS_DanhGia</td>
+                                        <td scope="col">@luotKSK.KL_PhanLoaiSucKhoe</td>
+                                        <td scope="col">@luotKSK.KL_PhanLoaiSucKhoe_GhiChu</td>
+                                        <td scope="col">@luotKSK.KL_CacBenhTatNeuCo</td>
+                                        <td scope="col">@((luotKSK.Ngay != null)?(DateTime.Parse(luotKSK.Ngay.ToString()).ToShortDateString()):"")</td>
+                                    }
+                                    else
+                                    {
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                    }
+                                }
+
+
+
+                                
+                            </tr>
+                                            }
+                                        }
+                                    }
+
+
+            </tbody>
+            @*<tfoot>
+                    <tr>
+                        <th class="fixed-side">&nbsp;</th>
+                        <td>Footer 2</td>
+                        <td>Footer 3</td>
+                        <td>Footer 4</td>
+                        <td>Footer 5</td>
+                        <td>Footer 6</td>
+                        <td>Footer 7</td>
+                        <td>Footer 8</td>
+                    </tr>
+                </tfoot>*@
+        </table>
+    </div>
+</div>
+<script>
+    jQuery(document).ready(function () {
+        jQuery(".main-table").clone(true).appendTo('#table-scroll').addClass('clone');
+    });
+</script>
+

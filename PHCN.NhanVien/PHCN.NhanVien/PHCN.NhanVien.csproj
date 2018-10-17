@@ -957,6 +957,7 @@
     <Content Include="Views\ThuNoiBo\CapNhatThu.cshtml" />
     <Content Include="Views\QuanLyNhanVien\TraCuuLyLichVienChuc.cshtml" />
     <Content Include="Views\QuanLyNhanVien\_pDanhSachLyLichVienChuc.cshtml" />
+    <Content Include="Views\QuanLyNhanVien\_pDanhSachSucKhoeDinhKy.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

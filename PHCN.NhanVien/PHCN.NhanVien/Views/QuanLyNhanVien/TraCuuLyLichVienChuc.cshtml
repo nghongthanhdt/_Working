@@ -7,13 +7,39 @@
     var listKhoaPhong = db.KhoaPhong.OrderBy(x => x.STT).Where(x => x.Xoa != true).ToList();
     var listLoaiHopDong = db.LoaiHopDong.OrderBy(x => x.STT).Where(x => x.Xoa != true).ToList();
 
-
+    DateTime dateTimeNow = DateTime.Parse(DateTime.Now.ToShortDateString());
+    string thoidiem = "";
+    if (Request.QueryString["thoidiem"] == null || Request.QueryString["thoidiem"] == "")
+    {
+        thoidiem = dateTimeNow.ToShortDateString();
+    } else
+    {
+        thoidiem = Request.QueryString["thoidiem"];
+    }
 }
 
 <script src="~/scripts/table2excel.min.js"></script>
 <div class="row">
     <div class="col-sm-8">
-        <input type="text" placeholder="Họ tên nhân viên..." class="form-control" id="txtHoTenNhanVien" />
+        <div class="row">
+            <div class="col-sm-6">
+                <label>Báo cáo</label>
+                <select class="form-control" id="selectLoaiBaoCao">
+                    <option value="lylichvienchuc">Lý lịch viên chức</option>
+                    <option value="suckhoedinhky">Sức khỏe định kỳ</option>
+                </select>
+            </div>
+
+            <div class="col-sm-6">
+                <label>Thời điểm</label>
+                <input type="text" placeholder="" class="form-control date" id="txtThoiDiem" value="@thoidiem" />
+            </div>
+            <div class="col-sm-12">
+                <input type="text" placeholder="Họ tên nhân viên..." class="form-control" id="txtHoTenNhanVien" />
+            </div>
+            
+        </div>
+        
         @*<a href="javascript:void(0);" class="btn btn-default btn-block" id="btnTimKiemNangCao">Tìm kiếm nâng cao</a>*@
     </div>
     <div class="col-sm-4">
