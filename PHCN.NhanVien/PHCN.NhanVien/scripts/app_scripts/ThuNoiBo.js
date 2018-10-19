@@ -9,7 +9,7 @@
     setInterval(function () {
         loadDanhSachThu();
         loadThongTinSoThu(_trangThai);
-    }, 15000);
+    }, 60000);
     
 });
 function loadDanhSachThu() {

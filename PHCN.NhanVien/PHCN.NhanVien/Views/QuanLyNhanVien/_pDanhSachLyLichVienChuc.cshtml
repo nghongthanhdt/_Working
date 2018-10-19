@@ -1,21 +1,30 @@
 ﻿
 @{ 
     PHCN.NhanVien.Models.PHCNEntities db = new PHCN.NhanVien.Models.PHCNEntities();
-    
+
     string hopdong = ViewBag.HopDong;
     string hoten = ViewBag.HoTen;
     string khoaphong = ViewBag.KhoaPhong;
+    string thoidiem = ViewBag.ThoiDiem;
+
+    DateTime? dateThoiDiem = null;
+
+    if (thoidiem != "")
+    {
+        dateThoiDiem = DateTime.Parse(thoidiem).AddDays(1);
+    }
+    else
+    {
+        dateThoiDiem = DateTime.Parse(DateTime.Now.ToShortDateString()).AddDays(1);
+    }
+
+
     List<int> listIntHopDong = hopdong.Split(',').Select(Int32.Parse).ToList();
     List<string> listIntKhoaPhong = khoaphong.Split(',').ToList();
-    
-
-
-
     var listKhoaPhong = db.KhoaPhong.OrderBy(x => x.STT).Where(x => x.Xoa != true && listIntKhoaPhong.Contains(x.MaKhoa)).ToList();
     var listNhanVien = db.NhanVien.OrderBy(x => x.STT).Where(x => x.Xoa != true).ToList();
     var listLyLichVienChuc = db.LyLichVienChuc.Where(x => x.Xoa != true && x.HoTenKhaiSinh.Contains(hoten) &&  listIntHopDong.Contains(x.MaLoaiHopDong)).ToList();
-    var listDienBienQuaTrinhLuong = db.DienBienQuaTrinhLuong.Where(x => x.Xoa != true).ToList();
-
+    var listDienBienQuaTrinhLuong = db.DienBienQuaTrinhLuong.Where(x => x.Xoa != true && x.NgayHuong < dateThoiDiem).ToList();
 
 }
 

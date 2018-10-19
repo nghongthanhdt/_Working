@@ -2,6 +2,7 @@
 
 var listSelectedLoaiHopDong = "";
 var listSelectedKhoaPhong = "";
+
 jQuery(document).ready(function () {
     jQuery(".main-table").clone(true).appendTo('#table-scroll').addClass('clone');
     bindbtnXuatExel_OnClick();
@@ -9,20 +10,34 @@ jQuery(document).ready(function () {
     getSelectedKhoaPhong();
     bindcheckboxLoaiHopDong_OnChange();
     bindcheckboxKhoaPhong_OnChange();
-    
+    bindselectLoaiBaoCao_OnChange();
     loadDanhSach();
     bindbtnTimKiem_OnClick();
     bindtxtHoTenNhanVien_OnEnterKeyPress();
-
-    
+    bindlinkTuyChonNangCao_OnClick();
+    bindmodalTuyChonNangCao_btnDongY_OnClick();
+    bindtxtThoiDiem_EnterKeyPress();
 
 });
 function loadDanhSach() {
     var loaiBaoCao = $("#selectLoaiBaoCao").val();
+    var thoidiem = $("#txtThoiDiem").val();
+    if (thoidiem == "") {
+        thAlertShowError("Chưa nhập thời điểm");
+        return;
+    }
+    var thoidiemSplit = thoidiem.split("/");
+    if (!isValidDate(thoidiemSplit[0], thoidiemSplit[1], thoidiemSplit[2])) {
+        thAlertShowError("Thời điểm không có thật, vui lòng kiểm tra lại");
+        return;
+    }
+    
     if (loaiBaoCao == "lylichvienchuc") {
         loadDanhSachLyLichVienChuc();
+        $("#h3TenDanhSach").html("DANH SÁCH LÝ LỊCH VIÊN CHỨC ĐẾN NGÀY " + $("#txtThoiDiem").val());
     } else {
         loadDanhSachSucKhoeDinhKy();
+        $("#h3TenDanhSach").html("DANH SÁCH LÝ SỨC KHỎE ĐỊNH KỲ ĐẾN NGÀY " + $("#txtThoiDiem").val());
     }
 }
 
@@ -64,15 +79,22 @@ function getSelectedKhoaPhong() {
     }).get();
     listSelectedKhoaPhong = listCheckedKhoaPhong.join(",");
 }
+function bindlinkTuyChonNangCao_OnClick() {
+    $("#linkTuyChonNangCao").unbind("click").click(function () {
+        $("#modalTuyChonNangCao").modal("show");
+    });
+}
 
 function loadDanhSachLyLichVienChuc() {
     var _hoten = $("#txtHoTenNhanVien").val();
+    var _thoidiem = $("#txtThoiDiem").val();
     getSelectedKhoaPhong();
     var url = urlController + "_pDanhSachLyLichVienChuc";
     var param = {
         hopdong: listSelectedLoaiHopDong,
         khoaphong: listSelectedKhoaPhong,
-        hoten: _hoten
+        hoten: _hoten,
+        thoidiem: _thoidiem
     };
     thAjaxLoadHtml(url, param, function (result) {
         $("#divDanhSachLyLichVienChuc").html(result);
@@ -96,6 +118,10 @@ function loadDanhSachSucKhoeDinhKy() {
 
 function bindbtnTimKiem_OnClick() {
     $("#btnTimKiem").unbind("click").click(function () {
+        var tdiem = $("#txtThoiDiem").val();
+        if (tdiem == "") {
+            thAlertShowError("Chưa nhập thời điểm");
+        }
 
         if (listSelectedLoaiHopDong == "") {
             thAlertShowError("Chưa chọn loại hợp đồng");
@@ -105,16 +131,46 @@ function bindbtnTimKiem_OnClick() {
             thAlertShowError("Chưa chọn khoa phòng");
             return;
         }
+        
+        
         loadDanhSach();
-        if (history.pushState) {
-            var tdiem = $("#txtThoiDiem").val();
-            var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?thoidiem=' + tdiem;
-            window.history.pushState({ path: newurl }, '', newurl);
-        }
+        //if (history.pushState) {
+            
+        //    var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?thoidiem=' + tdiem;
+        //    window.history.pushState({ path: newurl }, '', newurl);
+        //}
     });
 }
 function bindtxtHoTenNhanVien_OnEnterKeyPress() {
     $("#txtHoTenNhanVien").keypress(function (e) {
+        if (e.which == 13) {
+            $("#btnTimKiem").click();
+        }
+    });
+}
+
+function bindselectLoaiBaoCao_OnChange() {
+    $("#selectLoaiBaoCao").unbind("change").change(function () {
+        var loai = $(this).val();
+        if (loai == "lylichvienchuc") {
+            $("#divLoaiHopDong").fadeIn(300);
+            
+        } else {
+            $("#divLoaiHopDong").fadeOut(300);
+            
+
+        }
+    });
+    
+}
+function bindmodalTuyChonNangCao_btnDongY_OnClick() {
+    $("#modalTuyChonNangCao_btnDongY").unbind("click").click(function () {
+        $("#modalTuyChonNangCao").modal("hide");
+        $("#btnTimKiem").click();
+    });
+}
+function bindtxtThoiDiem_EnterKeyPress() {
+    $("#txtThoiDiem").keypress(function (e) {
         if (e.which == 13) {
             $("#btnTimKiem").click();
         }

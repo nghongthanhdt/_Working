@@ -154,18 +154,18 @@
 </script>
 <script>
 
-    
+
     $("#btnGui").click(function () {
 
         // validate
         var tieuDe = $("#txtTieuDe").val();
         if (tieuDe == "") {
-            alert("Chưa nhập tiêu đề");
+            thAlertShowError("Chưa nhập tiêu đề");
             return;
         };
         var noiDung = CKEDITOR.instances.txtNoiDung.getData();
         if (noiDung == "") {
-            alert("Chưa nhập nội dung");
+            thAlertShowError("Chưa nhập nội dung");
             return;
         }
 
@@ -174,11 +174,11 @@
         }).get();
         listNguoiNhan = listCheckedNhanVien.join(",");
         if (listNguoiNhan == "") {
-            alert("Chưa chọn người nhận");
+            thAlertShowError("Chưa chọn người nhận");
             return;
         }
 
-        // send ajax 
+        // send ajax
         //alert(listCheckedNhanVien.join(",") + "send ajax...");
 
         var url = '@Url.Action("GuiThu", "ThuNoiBo")';
@@ -199,14 +199,17 @@
             data: param,
             success: function (result) {
                 if (result == "true") {
-                    alert("Đã lưu thư thành công!");
-                    window.location = '@Url.Action("Index", "ThuNoiBo", new { box = "DaGui"})';
+                    thAlertShowSuccess("Đã gửi thư");
+                    setInterval(function(){
+                        window.location = '@Url.Action("Index", "ThuNoiBo")';
+                    }, 1500);
+
                 } else {
-                    alert (result);
+                    alert ("Lỗi hệ thống: " + result);
                 }
             },
             dataType: "html"
-        });    
+        });
     });
 
 

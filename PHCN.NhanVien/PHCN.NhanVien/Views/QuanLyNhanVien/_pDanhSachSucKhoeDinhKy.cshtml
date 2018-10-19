@@ -30,7 +30,7 @@
 
 
     var listKhoaPhong = db.KhoaPhong.OrderBy(x => x.STT).Where(x => x.Xoa != true && listIntKhoaPhong.Contains(x.MaKhoa)).ToList();
-    var listNhanVien = db.NhanVien.OrderBy(x => x.STT).Where(x => x.Xoa != true).ToList();
+    var listNhanVien = db.NhanVien.OrderBy(x => x.STT).Where(x => x.Xoa != true && hoten == "" || x.HoTen.Contains(hoten)).ToList();
     var listSoKSK = db.SoKSK.Where(x => x.Xoa != true).ToList();
     var listLuotKSK = db.LuotKSK.Where(x => x.Xoa != true && x.Ngay < dateThoiDiem).OrderBy(x => x.Ngay).ToList();
 

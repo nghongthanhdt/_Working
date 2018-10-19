@@ -9,3 +9,15 @@
 <script>
     var urlController = '@(HttpContext.Current.Request.Url.Scheme)://@(HttpContext.Current.Request.Url.Authority)/@(HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString())/';        
 </script>
+
+
+## kiểm tra hợp lệ ngày tháng
+if (_ngayHuong == "") {
+            alert("Chưa nhập ngày hưởng");
+            return;
+        }
+        var ngayHuongSplit = _ngayHuong.split("/");
+        if (!isValidDate(ngayHuongSplit[2], ngayHuongSplit[1], ngayHuongSplit[0])) {
+            alert("Ngày hưởng không có thật, vui lòng kiểm tra lại");
+            return;
+        }

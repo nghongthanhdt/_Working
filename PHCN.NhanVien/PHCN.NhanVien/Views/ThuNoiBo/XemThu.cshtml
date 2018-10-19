@@ -32,6 +32,12 @@
 <div style="clear:both;"></div>
 
 <div class="well" style="font-size:@(fontSize)px; box-shadow:3px 3px 5px gray; border:1px solid #008000; border-radius:0px; margin-top:10px; padding:15px;">
+    @*<span style="font-weight:bold; color:#045600; font-size:18px;">
+        @baiViet.TieuDe
+    </span>
+    <hr/>*@
+    
+    
     @Html.Raw(baiViet.NoiDung)
 </div>
 
@@ -58,7 +64,7 @@
     });
 </script>
 
-<a href="javascript:history.back();" class="btn btn-primary btn-lg btn-block"><i class="glyphicon glyphicon-arrow-left"></i> Trở lại</a>
+<a href="@Url.Action("Index", "ThuNoiBo")" class="btn btn-primary btn-lg btn-block"><i class="glyphicon glyphicon-arrow-left"></i> Trở lại</a>
 
 
 

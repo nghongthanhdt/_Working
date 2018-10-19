@@ -129,6 +129,7 @@
   <ItemGroup>
     <Content Include="Content\ckeditor\adapters\jquery.js" />
     <Content Include="Content\ckeditor\build-config.js" />
+    <Content Include="Content\img\chao-mung-2010.jpg" />
     <Content Include="Content\ckeditor\ckeditor.js" />
     <Content Include="Content\ckeditor\config.js" />
     <Content Include="Content\ckeditor\contents.css" />

@@ -57,16 +57,25 @@ namespace PHCN.NhanVien.Controllers
                                                                 && (TieuDe == "" || x.BaiViet.TieuDe.Contains(TieuDe))
                                                                 && (NguoiGui == 0 || x.BaiViet.MaNhanVien == NguoiGui)
                                                                 && (NgayGui == null || (x.BaiViet.Ngay <= ngayGuiAdd1 && x.BaiViet.Ngay >= NgayGui))
+                                                                && x.STTGui != 0 // <<-- chừng nữa bỏ chổ này để lấy đúng hơn danh sách thư đã gửi
                                                                 ).OrderByDescending(x => x.BaiViet.MaBaiViet).ToList();
                         ViewBag.DaGui = false;
                         break;
                     case "DaGui":
                         listBaiViet = db.GuiNhan.Where(x => x.BaiViet.MaNhanVien == nhanVienDangNhap.MaNhanVien
-                                                                && x.Xoa == false 
-                                                                && x.DaNhan == true                                                                
+                                                                && x.Xoa == false
+                                                                && x.DaNhan == true
                                                                 && x.DaXoa == false
-                                                                && x.STTGui == 1).OrderByDescending(x => x.BaiViet.MaBaiViet).ToList();
+                                                                && (x.STTGui == 1)
+                                                                //&& x.NguoiGui == x.NguoiNhan
+                                                                ).OrderByDescending(x => x.BaiViet.MaBaiViet).ToList();
                         ViewBag.DaGui = true;
+                        //listBaiViet = db.GuiNhan.Where(x => x.BaiViet.MaNhanVien == nhanVienDangNhap.MaNhanVien
+                        //                                        && x.Xoa == false 
+                        //                                        && x.DaNhan == true                                                                
+                        //                                        && x.DaXoa == false
+                        //                                        && x.STTGui == 1).OrderByDescending(x => x.BaiViet.MaBaiViet).ToList();
+                        //ViewBag.DaGui = true;
                         // gửi cho 5 người thì bảng GuiNhan cột STTGui se đánh số từ 1 đến 5, nên chỉ cần lấy ra STTGui là 1
                         break;                    
                     case "DaXoa":
@@ -205,6 +214,8 @@ namespace PHCN.NhanVien.Controllers
                 baiViet.Xoa = false;
                 var listIntNguoiNhan = listNguoiNhan.Split(',').Select(Int32.Parse).ToList();
                 int i = 1;
+
+                
                 foreach (var item in listIntNguoiNhan)
                 {
                     
@@ -233,7 +244,16 @@ namespace PHCN.NhanVien.Controllers
 
             NhanVien.Models.NhanVien nhanVienDangNhap = (NhanVien.Models.NhanVien)Session["NhanVienDangNhap"];
             GuiNhan guiNhan = db.GuiNhan.Find(id);
-            guiNhan.DaXem = true;            
+            guiNhan.DaXem = true;
+            if (guiNhan.BaiViet.MaNhanVien == nhanVienDangNhap.MaNhanVien)
+            {
+                
+                if (guiNhan.STTGui == 1 && guiNhan.BaiViet.MaNhanVien == guiNhan.NguoiGui && guiNhan.NhanVien.MaNhanVien != guiNhan.NhanVien1.MaNhanVien)
+                {
+                    guiNhan.DaXem = false;
+                } 
+            }
+            
             db.SaveChanges();
             BaiViet baiViet = db.BaiViet.Find(guiNhan.MaBaiViet);            
             ViewBag.BaiViet = baiViet;            

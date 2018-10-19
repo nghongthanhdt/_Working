@@ -2,11 +2,11 @@
 
     // chạy dev
 
-    PHCN.NhanVien.Models.PHCNEntities db = new PHCN.NhanVien.Models.PHCNEntities(); var nhanVienDangNhap = db.NhanVien.Find(1); Session["NhanVienDangNhap"] = nhanVienDangNhap; var listPhanQuyen = nhanVienDangNhap.PhanQuyen.ToList(); string box = "";
+    //PHCN.NhanVien.Models.PHCNEntities db = new PHCN.NhanVien.Models.PHCNEntities(); var nhanVienDangNhap = db.NhanVien.Find(1); Session["NhanVienDangNhap"] = nhanVienDangNhap; var listPhanQuyen = nhanVienDangNhap.PhanQuyen.ToList(); string box = "";
 
     //chạy thật
 
-    //var nhanVienDangNhap = (PHCN.NhanVien.Models.NhanVien)Session["NhanVienDangNhap"]; if (nhanVienDangNhap == null) {Response.Redirect(Url.Action("DangNhap", "Home")); } var listPhanQuyen = nhanVienDangNhap.PhanQuyen.ToList(); int _maNhanVienDangNhap = nhanVienDangNhap.MaNhanVien; string box = ""; try {box = Request.QueryString["box"].ToString();} catch { }
+    var nhanVienDangNhap = (PHCN.NhanVien.Models.NhanVien)Session["NhanVienDangNhap"]; if (nhanVienDangNhap == null) {Response.Redirect(Url.Action("DangNhap", "Home")); } var listPhanQuyen = nhanVienDangNhap.PhanQuyen.ToList(); int _maNhanVienDangNhap = nhanVienDangNhap.MaNhanVien; string box = ""; try {box = Request.QueryString["box"].ToString();} catch { }
 }
 <!DOCTYPE html>
 <html>
@@ -82,7 +82,8 @@
 
 
                 
-                
+
+                <img src="~/Content/img/chao-mung-2010.jpg" style="width:100%;" />
 
                 <ul class="list-group panel">
                     <li class="list-group-item">
@@ -203,9 +204,9 @@
                 </div>
             </div>
             <div class="col-xs-12 col-sm-8 content">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
+                <div class="panel panel-default" style="border-radius:0px; border:1px solid #d0d0d0;">
+                    <div class="panel-heading"  style="background-color:#e9e9e9;">
+                        <h3 class="panel-title" style="color:#004f02;">
                             <a href="javascript:void(0);" class="toggle-sidebar"><span class="fa fa-angle-double-left" data-toggle="offcanvas" title="Maximize Panel"></span></a>
                             <span style="font-size:18px; font-weight:bold;">
                                 @ViewBag.PanelTitle

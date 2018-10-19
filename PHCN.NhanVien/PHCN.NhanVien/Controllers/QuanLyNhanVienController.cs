@@ -23,7 +23,7 @@ namespace PHCN.NhanVien.Controllers
         public ActionResult TaoLyLichVienChuc(int id)
         {
             // id: mã nhân viên
-            Models.NhanVien nv = db.NhanVien.Find(id);           
+            Models.NhanVien nv = db.NhanVien.Find(id);
             LyLichVienChuc lylich = new LyLichVienChuc();
             lylich.MaDonVi = int.Parse(CodeController.layThamSoHeThong("madonvisudungvienchucmacdinh"));
             lylich.MaLoaiHopDong = int.Parse(CodeController.layThamSoHeThong("loaihopdongvienchucmacdinh"));
@@ -34,7 +34,7 @@ namespace PHCN.NhanVien.Controllers
             lylich.NguoiKhai = nv.HoTen;
             lylich.ThuTruongKyTen = CodeController.layThamSoHeThong("thutruongdonvi");
             lylich.ThuTruongKy_NoiKy = CodeController.layThamSoHeThong("noikymacdinh");
-            
+
             db.LyLichVienChuc.Add(lylich);
             db.SaveChanges();
             return RedirectToAction("CapNhat", "QuanLyLyLichVienChuc", new { @id = lylich.MaLyLichVienChuc });
@@ -50,13 +50,17 @@ namespace PHCN.NhanVien.Controllers
 
         public ActionResult TraCuuLyLichVienChuc()
         {
+            
+            
+            
             return View();
         }
-        public ActionResult _pDanhSachLyLichVienChuc(string hopdong, string khoaphong, string hoten)
+        public ActionResult _pDanhSachLyLichVienChuc(string hopdong, string khoaphong, string hoten, string thoidiem)
         {
             ViewBag.HopDong = hopdong;
             ViewBag.KhoaPhong = khoaphong;
             ViewBag.HoTen = hoten;
+            ViewBag.ThoiDiem = thoidiem;
             return View();
         }
         public ActionResult _pDanhSachSucKhoeDinhKy(string hopdong, string khoaphong, string hoten, string thoidiem)
