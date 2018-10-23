@@ -563,6 +563,7 @@
     <Content Include="Content\img\index.png" />
     <Content Include="Content\img\Jumbotron.jpg" />
     <Content Include="Content\img\logo-index.png" />
+    <Content Include="Content\img\logo.ico" />
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\mail.ico" />
     <Content Include="Content\img\no-image.jpg" />
@@ -666,6 +667,8 @@
     <Content Include="scripts\app_scripts\CapNhatSoKSK.js" />
     <Content Include="scripts\app_scripts\DanhSachBaiViet.js" />
     <Content Include="scripts\app_scripts\QuanLyDanhMuc.js" />
+    <Content Include="scripts\app_scripts\QuanLyDeTaiSangKien.js" />
+    <Content Include="scripts\app_scripts\QuanLyDeTaiSangKienCapNhat.js" />
     <Content Include="scripts\app_scripts\QuanLyNhanVien.js" />
     <Content Include="scripts\app_scripts\Snipet.txt" />
     <Content Include="scripts\app_scripts\SoanThu.js" />
@@ -699,6 +702,7 @@
     <Compile Include="Controllers\NoiBoController.cs" />
     <Compile Include="Controllers\QuanLyBaiVietController.cs" />
     <Compile Include="Controllers\QuanLyDanhMucController.cs" />
+    <Compile Include="Controllers\QuanLyDeTaiSangKienController.cs" />
     <Compile Include="Controllers\QuanLyLyLichVienChucController.cs" />
     <Compile Include="Controllers\QuanLyNhanVienController.cs" />
     <Compile Include="Controllers\QuanLySucKhoeController.cs" />
@@ -738,6 +742,9 @@
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DanToc.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DeTaiSangKien.cs">
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DienBienDaoTaoBoiDuong.cs">
@@ -959,6 +966,10 @@
     <Content Include="Views\QuanLyNhanVien\TraCuuLyLichVienChuc.cshtml" />
     <Content Include="Views\QuanLyNhanVien\_pDanhSachLyLichVienChuc.cshtml" />
     <Content Include="Views\QuanLyNhanVien\_pDanhSachSucKhoeDinhKy.cshtml" />
+    <Content Include="Views\QuanLyDeTaiSangKien\Index.cshtml" />
+    <Content Include="Views\QuanLyDeTaiSangKien\CapNhat.cshtml" />
+    <Content Include="Views\TraCuu\CoCauNhanSu.cshtml" />
+    <Content Include="Views\TraCuu\SoDoToChuc.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

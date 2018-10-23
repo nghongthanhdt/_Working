@@ -21,3 +21,34 @@ if (_ngayHuong == "") {
             alert("Ngày hưởng không có thật, vui lòng kiểm tra lại");
             return;
         }
+
+// kiểm tra ngày
+        if (_TuThangNam == "01/") {
+            alert("Chưa nhập \"Từ tháng năm\"");
+            return;
+        }
+        if (_DenThangNam == "01/") {
+            alert("Chưa nhập \"Đến tháng năm\"");
+            return;
+        }
+
+        var pattern = /^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/;
+        if (!pattern.test(_TuThangNam)) {
+            //alert(_TuThangNam);
+            alert("Ngày \"Từ tháng năm\" chưa đúng định dạng");
+            return;
+        }
+        if (!pattern.test(_DenThangNam)) {
+            alert("Ngày \"Đến tháng năm\" chưa đúng định dạng");
+            return;
+        }
+        var ngayTuThangNamSplit = _TuThangNam.split("/");
+        if (!isValidDate(ngayTuThangNamSplit[0], ngayTuThangNamSplit[1], ngayTuThangNamSplit[2])) {
+            alert("Ngày \"Từ tháng năm\" không có thật, vui lòng kiểm tra lại");
+            return;
+        }
+        var ngayDenThangNamSplit = _DenThangNam.split("/");
+        if (!isValidDate(ngayDenThangNamSplit[0], ngayDenThangNamSplit[1], ngayDenThangNamSplit[2])) {
+            alert("Ngày \"Đến tháng năm\" không có thật, vui lòng kiểm tra lại");
+            return;
+        }

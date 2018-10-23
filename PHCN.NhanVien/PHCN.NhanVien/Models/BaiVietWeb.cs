@@ -34,8 +34,8 @@ namespace PHCN.NhanVien.Models
         public Nullable<System.DateTime> CapNhatLanCuoi { get; set; }
     
         public virtual ChuyenMuc ChuyenMuc { get; set; }
-        public virtual NhanVien NhanVien { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FileDinhKem> FileDinhKem { get; set; }
+        public virtual NhanVien NhanVien { get; set; }
     }
 }

@@ -1,13 +1,13 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.PageTitle = "Bảng giá viện phí";
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
 }
 
 <div id="breadcrumb">
     <div class="container">
         <div class="breadcrumb">
-            <li><a href="index.html">Trang chủ</a></li>
+            <li><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
             <li>Tra cứu</li>
         </div>
     </div>
@@ -31,7 +31,8 @@
                             <ul class="blog_archieve">
                                 <li><a href="@Url.Action("BangGiaVienPhi", "TraCuu")"><i class="fa fa-angle-double-right"></i> Bảng giá viện phí </a></li>
                                 <li><a href="@Url.Action("DanhMucKyThuat", "TraCuu")"><i class="fa fa-angle-double-right"></i> Danh mục kỹ thuật </a></li>
-
+                                <li><a href="@Url.Action("SoDoToChuc", "TraCuu")"><i class="fa fa-angle-double-right"></i> Sơ đồ tổ chức</a></li>
+                                <li><a href="@Url.Action("CoCauNhanSu", "TraCuu")"><i class="fa fa-angle-double-right"></i> Cơ cấu nhân sự </a></li>
                             </ul>
                         </div>
                     </div>

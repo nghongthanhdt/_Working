@@ -21,5 +21,13 @@ namespace PHCN.NhanVien.Controllers
         {
             return View();
         }
+        public ActionResult CoCauNhanSu()
+        {
+            return View();
+        }
+        public ActionResult SoDoToChuc()
+        {
+            return View();
+        }
     }
 }

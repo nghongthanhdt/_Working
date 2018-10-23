@@ -55,7 +55,6 @@ namespace PHCN.NhanVien.Models
         public virtual DbSet<LyLichVienChuc> LyLichVienChuc { get; set; }
         public virtual DbSet<MaCCHN> MaCCHN { get; set; }
         public virtual DbSet<NgheNghiep> NgheNghiep { get; set; }
-        public virtual DbSet<NhanVien> NhanVien { get; set; }
         public virtual DbSet<NoiDungKSK> NoiDungKSK { get; set; }
         public virtual DbSet<PhamViHoatDongChuyenMon> PhamViHoatDongChuyenMon { get; set; }
         public virtual DbSet<PhanLoaiSK> PhanLoaiSK { get; set; }
@@ -67,5 +66,7 @@ namespace PHCN.NhanVien.Models
         public virtual DbSet<TinhThanh> TinhThanh { get; set; }
         public virtual DbSet<TonGiao> TonGiao { get; set; }
         public virtual DbSet<XaPhuong> XaPhuong { get; set; }
+        public virtual DbSet<DeTaiSangKien> DeTaiSangKien { get; set; }
+        public virtual DbSet<NhanVien> NhanVien { get; set; }
     }
 }

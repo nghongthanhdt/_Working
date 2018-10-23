@@ -128,7 +128,7 @@
                 }
                 @foreach (var khoa in listKhoaPhong)
                 {
-                    var listNhanVien = khoa.NhanVien.Where(x => x.NhanThu == true).ToList();
+                    var listNhanVien = khoa.NhanVien.Where(x => x.NhanThu == true).OrderBy(x => x.STT).ToList();
                     if (listNhanVien.Any())
                     {
                         <li>

@@ -1,0 +1,113 @@
+﻿
+@{
+    ViewBag.PageTitle = "Sơ đồ tổ chức";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+
+    PHCN.NhanVien.Models.PHCNEntities db = new PHCN.NhanVien.Models.PHCNEntities();
+    var listBanGiamDoc = db.KhoaPhong.Where(x => x.Xoa != true && x.LoaiKhoa == "bangiamdoc").OrderBy(x => x.STT).ToList();
+    var listPhong = db.KhoaPhong.Where(x => x.Xoa != true && x.LoaiKhoa == "phong").OrderBy(x => x.STT).ToList();
+    var listKhoa = db.KhoaPhong.Where(x => x.Xoa != true && x.LoaiKhoa == "khoa").OrderBy(x => x.STT).ToList();
+
+
+}
+
+<div id="breadcrumb">
+    <div class="container">
+        <div class="breadcrumb">
+            <li><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
+            <li>Tra cứu</li>
+        </div>
+    </div>
+</div>
+
+<section id="blog" class="container">
+    <div class="blog">
+        <div class="row">
+            <aside class="col-md-4">
+
+                <!--/.search-->
+
+
+
+
+
+                <div class="widget archieve">
+                    <h3>TRA CỨU</h3>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <ul class="blog_archieve">
+                                <li><a href="@Url.Action("BangGiaVienPhi", "TraCuu")"><i class="fa fa-angle-double-right"></i> Bảng giá viện phí </a></li>
+                                <li><a href="@Url.Action("DanhMucKyThuat", "TraCuu")"><i class="fa fa-angle-double-right"></i> Danh mục kỹ thuật </a></li>
+                                <li><a href="@Url.Action("SoDoToChuc", "TraCuu")"><i class="fa fa-angle-double-right"></i> Sơ đồ tổ chức</a></li>
+                                <li><a href="@Url.Action("CoCauNhanSu", "TraCuu")"><i class="fa fa-angle-double-right"></i> Cơ cấu nhân sự </a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--/.archieve-->
+
+
+
+            </aside>
+            <div class="col-md-8">
+                <style>
+                    #tableSoDoToChuc td, #tableSoDoToChuc th{
+                        padding:10px;
+                    }
+                </style>
+                <h2>SƠ ĐỒ TỔ CHỨC</h2>
+                <div style="color:black;">
+                    <table id="tableSoDoToChuc">
+                        @foreach (var item in listBanGiamDoc)
+                        {
+                            <tr>
+                                <th style="text-transform:uppercase; font-size:18px;">
+                                    @item.TenKhoa
+                                </th>
+                            </tr>
+                        }
+                        <tr>
+                            
+                            <td style="color:gray">
+                                <i>Các phòng chức năng</i>
+                            </td>
+                        </tr>
+                        @foreach (var item in listPhong)
+                        {
+                            <tr>
+                                <td></td>
+                                <td style="color:gray; font-weight:bold; color:black;">
+                                    @item.TenKhoa
+                                </td>
+                            </tr>
+                        }
+                        
+                        <tr>
+                            
+                            <td style="color:gray">
+                                <i>Các khoa lâm sàng</i>
+                            </td>
+                        </tr>
+                        
+                        @foreach (var item in listKhoa)
+                        {
+                            <tr>
+                                <td></td>
+                                <td style="color:gray; font-weight:bold; color:black;">
+                                    @item.TenKhoa
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            </div>
+            <!--/.col-md-8-->
+
+
+        </div>
+        <!--/.row-->
+    </div>
+</section>
+<!--/#blog-->

@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewBag.PageTitle = "Cơ cấu nhân sự";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+
+    PHCN.NhanVien.Models.PHCNEntities db = new PHCN.NhanVien.Models.PHCNEntities();
+    var listKhoaPhong = db.KhoaPhong.Where(x => x.Xoa != true).OrderBy(x => x.STT).ToList();
+    var listNhanVien = db.NhanVien.Where(x => x.Xoa != true && x.CoCauNhanSu != false).OrderBy(x => x.STT).ToList();
+}
+
+<div id="breadcrumb">
+    <div class="container">
+        <div class="breadcrumb">
+            <li><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
+            <li>Tra cứu</li>
+        </div>
+    </div>
+</div>
+
+<section id="blog" class="container">
+    <div class="blog">
+        <div class="row">
+            <aside class="col-md-4">
+
+                <!--/.search-->
+
+
+
+
+
+                <div class="widget archieve">
+                    <h3>TRA CỨU</h3>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <ul class="blog_archieve">
+                                <li><a href="@Url.Action("BangGiaVienPhi", "TraCuu")"><i class="fa fa-angle-double-right"></i> Bảng giá viện phí </a></li>
+                                <li><a href="@Url.Action("DanhMucKyThuat", "TraCuu")"><i class="fa fa-angle-double-right"></i> Danh mục kỹ thuật </a></li>
+                                <li><a href="@Url.Action("SoDoToChuc", "TraCuu")"><i class="fa fa-angle-double-right"></i> Sơ đồ tổ chức</a></li>
+                                <li><a href="@Url.Action("CoCauNhanSu", "TraCuu")"><i class="fa fa-angle-double-right"></i> Cơ cấu nhân sự </a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--/.archieve-->
+
+
+
+            </aside>
+            <div class="col-md-8">
+                <h2>CƠ CẤU NHÂN SỰ</h2>
+                <div style="color:black;">
+                    <table class="table">
+                        <tr>
+                            <th style="width:10%; text-align:center;">STT</th>
+                            <th style="width:50%">Họ tên</th>
+                            <th style="width:40%">Chức vụ</th>
+                        </tr>
+                        @{ 
+                            int stt = 0;
+                        }
+                        @foreach (var khoaphong in listKhoaPhong)
+                        {
+                            var countNhanVien = khoaphong.NhanVien.Where(x => x.Xoa != true && x.CoCauNhanSu != false).OrderBy(x => x.STT).Count();
+                            if (countNhanVien > 0)
+                            {
+                                <tr>
+                                    <th colspan="3" style="background-color: #f1f1f1;">@khoaphong.TenKhoa</th>
+                                </tr>
+                                foreach (var nv in listNhanVien.Where(x => x.MaKhoa == khoaphong.MaKhoa).ToList())
+                                {
+                                    stt++;
+                                    <tr>
+                                        <td style="text-align:center;">@stt</td>
+                                        <td>@nv.HoTen</td>
+                                        <td>@nv.ChucVu</td>
+                                    </tr>
+                                }
+
+                            }
+                        }
+                        
+                        
+
+                    </table>
+                </div>
+            </div>
+            <!--/.col-md-8-->
+
+
+        </div>
+        <!--/.row-->
+    </div>
+</section>
+<!--/#blog-->

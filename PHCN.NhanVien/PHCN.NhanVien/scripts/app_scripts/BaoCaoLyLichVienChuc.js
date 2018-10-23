@@ -153,10 +153,10 @@ function bindselectLoaiBaoCao_OnChange() {
     $("#selectLoaiBaoCao").unbind("change").change(function () {
         var loai = $(this).val();
         if (loai == "lylichvienchuc") {
-            $("#divLoaiHopDong").fadeIn(300);
+            $("#divLoaiHopDong").show();
             
         } else {
-            $("#divLoaiHopDong").fadeOut(300);
+            $("#divLoaiHopDong").hide();
             
 
         }

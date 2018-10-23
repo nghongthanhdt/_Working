@@ -1,0 +1,189 @@
+﻿@model PHCN.NhanVien.Models.DeTaiSangKien
+@{
+    ViewBag.PanelTitle = "Đề tài sáng kiến";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    PHCN.NhanVien.Models.PHCNEntities db = new PHCN.NhanVien.Models.PHCNEntities();
+
+
+    var listKhoaPhong = db.KhoaPhong.Where(x => x.Xoa != true).ToList();
+
+    string tuThang = (Model.TuThang != null) ? (DateTime.Parse(Model.TuThang.ToString()).ToString("MM/yyyy")) : "";
+    string denThang = (Model.DenThang != null) ? (DateTime.Parse(Model.DenThang.ToString()).ToString("MM/yyyy")) : "";
+
+
+}
+
+
+
+<input type="hidden" value="@Model.MaDeTaiSangKien" id="hiddenMaDeTaiSangKien" />
+<div class="row">
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Tên đề tài</label>
+                    <input type="text" class="form-control" id="txtTenDeTai" value="@Model.TenDeTaiSangKien">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Cấp đề tài</label>
+                    <select class="form-control" id="selectCapDeTai">
+                        <option value="coso" @((Model.CapDeTai == "coso")?"selected":"")>Cơ sở</option>
+                        <option value="tinh" @((Model.CapDeTai == "tinh")?"selected":"")>Tỉnh</option>
+                        <option value="trunguong" @((Model.CapDeTai == "trunguong")?"selected":"")>Trung ương</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Chủ đề tài</label>
+                    <select class="form-control" id="selectChuDeTai">
+                        <option value=""></option>
+                        @foreach (var khoa in listKhoaPhong)
+                        {
+                            if (khoa.NhanVien.Any())
+                            {
+                                var listNhanVien = khoa.NhanVien.Where(x => x.Xoa != true).OrderBy(x => x.STT).ToList();
+                                <optgroup label="@khoa.TenKhoa">
+                                    @foreach (var nhanvien in listNhanVien)
+                                    {
+                                        <option value="@nhanvien.MaNhanVien" @((Model.MaNhanVien == nhanvien.MaNhanVien)?"selected":"")>@nhanvien.HoTen</option>
+                                    }
+                                </optgroup>
+                            }                            
+                        }
+                        
+
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Cộng sự</label>
+                    <select class="form-control" id="selectCongSu1">
+                        <option value=""></option>
+                        @foreach (var khoa in listKhoaPhong)
+                        {
+                            if (khoa.NhanVien.Any())
+                            {
+                                var listNhanVien = khoa.NhanVien.Where(x => x.Xoa != true).OrderBy(x => x.STT).ToList();
+                                <optgroup label="@khoa.TenKhoa">
+                                    @foreach (var nhanvien in listNhanVien)
+                                    {
+                                        <option value="@nhanvien.MaNhanVien" @((Model.MaNhanVien1 == nhanvien.MaNhanVien)?"selected":"")>@nhanvien.HoTen</option>
+                                    }
+                                </optgroup>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Cộng sự</label>
+                    <select class="form-control" id="selectCongSu2">
+                        <option value=""></option>
+                        @foreach (var khoa in listKhoaPhong)
+                        {
+                            if (khoa.NhanVien.Any())
+                            {
+                                var listNhanVien = khoa.NhanVien.Where(x => x.Xoa != true).OrderBy(x => x.STT).ToList();
+                                <optgroup label="@khoa.TenKhoa">
+                                    @foreach (var nhanvien in listNhanVien)
+                                    {
+                                        <option value="@nhanvien.MaNhanVien" @((Model.MaNhanVien2 == nhanvien.MaNhanVien)?"selected":"")>@nhanvien.HoTen</option>
+                                    }
+                                </optgroup>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Cộng sự</label>
+                    <select class="form-control" id="selectCongSu3">
+                        <option value=""></option>
+                        @foreach (var khoa in listKhoaPhong)
+                        {
+                            if (khoa.NhanVien.Any())
+                            {
+                                var listNhanVien = khoa.NhanVien.Where(x => x.Xoa != true).OrderBy(x => x.STT).ToList();
+                                <optgroup label="@khoa.TenKhoa">
+                                    @foreach (var nhanvien in listNhanVien)
+                                    {
+                                        <option value="@nhanvien.MaNhanVien" @((Model.MaNhanVien3 == nhanvien.MaNhanVien)?"selected":"")>@nhanvien.HoTen</option>
+                                    }
+                                </optgroup>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Cộng sự</label>
+                    <select class="form-control" id="selectCongSu4">
+                        <option value=""></option>
+                        @foreach (var khoa in listKhoaPhong)
+                        {
+                            if (khoa.NhanVien.Any())
+                            {
+                                var listNhanVien = khoa.NhanVien.Where(x => x.Xoa != true).OrderBy(x => x.STT).ToList();
+                                <optgroup label="@khoa.TenKhoa">
+                                    @foreach (var nhanvien in listNhanVien)
+                                    {
+                                        <option value="@nhanvien.MaNhanVien" @((Model.MaNhanVien4 == nhanvien.MaNhanVien)?"selected":"")>@nhanvien.HoTen</option>
+                                    }
+                                </optgroup>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Kinh phí</label>
+                    <input type="text" class="form-control" id="txtKinhPhi" value="@Model.KinhPhi">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Thực hiện từ tháng</label>
+                    <input type="text" class="form-control thangnam" id="txtTuThang" value="@tuThang">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Đến tháng</label>
+                    <input type="text" class="form-control thangnam" id="txtDenThang" value="@denThang">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        
+        <button class="btn btn-success btn-block" id="btnLuu">Lưu dữ liệu</button>
+        <a class="btn btn-default btn-block" id="btnTroVeDanhSach" href="@Url.Action("Index", "QuanLyDeTaiSangKien")">Trở về danh sách</a>
+    </div>
+</div>
+
+
+<script src="~/scripts/app_scripts/QuanLyDeTaiSangKienCapNhat.js?@("v="+DateTime.Now.ToString("yyMMddhhmmss"))"></script>

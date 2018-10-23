@@ -1,0 +1,76 @@
+﻿@model List<PHCN.NhanVien.Models.DeTaiSangKien>
+@{
+    ViewBag.PanelTitle = "Quản lý đề tài sáng kiến";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+
+<div class="row">
+    <div class="col-md-12"  >
+        <div style="overflow:scroll; min-height:500px;">
+            <div style="width:1800px;">
+                <table class="table" style="font-size:14px;">
+                    <tr>
+                        
+                        <th style="width:6%;">Từ tháng</th>
+                        <th style="width:7%;">Đến tháng</th>
+                        
+                        <th style="width:25%;">Tên</th>
+                        <th style="width:7%;">Cấp</th>
+                        <th style="width:15%;">Chủ đề tài</th>
+                        <th style="width:20%;">Công sự</th>                        
+                        
+                        <th style="width:10%;">Kinh phí</th>
+                        <th style=""></th>
+                    </tr>
+                    
+                    @foreach (var item in Model)
+                    {
+                
+                        <tr>
+                            
+                            <td>@((item.TuThang != null) ? (DateTime.Parse(item.TuThang.ToString()).ToString("MM/yyyy")) : "")</td>
+                            <td>@((item.DenThang != null) ? (DateTime.Parse(item.DenThang.ToString()).ToString("MM/yyyy")) : "")</td>                            
+                            <td>
+                                <a href="@Url.Action("CapNhat", "QuanLyDeTaiSangKien", new { @id = item.MaDeTaiSangKien})">@item.TenDeTaiSangKien</a>
+                            </td>
+                            <td>@((item.CapDeTai == "tinh") ? "Tỉnh" : (item.CapDeTai == "coso") ? "Cơ sở" : (item.CapDeTai == "trunguong") ? "Trung ương" : "")</td>
+                            <td>@item.NhanVien.HoTen</td>
+                            <td>
+                                @((item.NhanVien1 != null) ? (item.NhanVien1.HoTen + ",") : "")
+                                @((item.NhanVien2 != null) ? (item.NhanVien2.HoTen + ",") : "")
+                                @((item.NhanVien3 != null) ? (item.NhanVien3.HoTen + ",") : "")
+                                @((item.NhanVien4 != null) ? (item.NhanVien4.HoTen) : "")
+
+
+                            </td>
+                            
+                            <td>@item.KinhPhi</td>
+                            <td>
+                                <a href="@Url.Action("CapNhat", "QuanLyDeTaiSangKien", new { @id = item.MaDeTaiSangKien})" class="rowCapNhat btn btn-xs btn-default">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                    ...
+                                </a>
+                                <button data-madetaisangkien="@item.MaDeTaiSangKien" class="rowXoaDeTaiSangKien btn btn-xs btn-danger">
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                    Xóa
+                                </button>
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+        
+    </div>
+
+</div>
+<br/>
+<script>
+    var urlController = '@(HttpContext.Current.Request.Url.Scheme)://@(HttpContext.Current.Request.Url.Authority)/@(HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString())/';
+</script>
+<a href="@Url.Action("CapNhat", "QuanLyDeTaiSangKien")" class="btn btn-success">Thêm mới</a>
+<script src="~/scripts/app_scripts/QuanLyDeTaiSangKien.js?@("v="+DateTime.Now.ToString("yyMMddhhmmss"))"></script>

@@ -25,7 +25,11 @@
     <script src="~/scripts/jquery.mask.js"></script>
     <tag autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" >
 </head>
+
 <body>
+    <script>
+    var urlController = '@(HttpContext.Current.Request.Url.Scheme)://@(HttpContext.Current.Request.Url.Authority)/@(HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString())/';
+    </script>
     <nav role="navigation" class="navbar navbar-custom" style="background-color:#004f02;">
         <div class="container-fluid">            
             <div class="navbar-default" >
@@ -74,6 +78,7 @@
                     bool isAdmin = listPhanQuyen.Where(x => x.MaQuyen == "admin").Any();
                     bool isQuanLyNhanVien = listPhanQuyen.Where(x => x.MaQuyen == "quanlynhanvien").Any();
                     bool isQuanLyWebsite = listPhanQuyen.Where(x => x.MaQuyen == "quanlywebsite").Any();
+                    bool isQuanLyDeTaiSangKien = listPhanQuyen.Where(x => x.MaQuyen == "quanlydetaisangkien").Any();
                     if (nhanVienDangNhap.TenDangNhap == "admin")
                     {
                         isAdmin = true;
@@ -83,7 +88,7 @@
 
                 
 
-                <img src="~/Content/img/chao-mung-2010.jpg" style="width:100%;" />
+                
 
                 <ul class="list-group panel">
                     <li class="list-group-item">
@@ -201,6 +206,36 @@
                         </div>
                     </div>
                     }
+
+                    @if (isAdmin || isQuanLyDeTaiSangKien)
+                    {
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" href="#collapseQuanLyDeTaiSangKien" class="tieu-de-menu" style="color:white;">
+                                        <i class="glyphicon glyphicon-star-empty"></i>
+                                        Đề tài sáng kiến
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseQuanLyDeTaiSangKien" class="panel-collapse collapse " style="">
+
+
+
+                                <div class="list-group">
+                                    <a href="@Url.Action("Index", "QuanLyDeTaiSangKien")" class="list-group-item">
+                                        @*<i class="glyphicon glyphicon-transfer"></i>*@
+                                        
+                                        Danh sách đề tài
+                                    </a>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    }
+                    
                 </div>
             </div>
             <div class="col-xs-12 col-sm-8 content">

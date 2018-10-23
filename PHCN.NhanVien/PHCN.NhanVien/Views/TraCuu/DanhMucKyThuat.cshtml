@@ -1,13 +1,13 @@
 ﻿
 @{
-    ViewBag.Title = "PhanTuyenKyThuat";
+    ViewBag.PageTitle = "Danh mục kỹ thuật";
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
 }
 
 <div id="breadcrumb">
     <div class="container">
         <div class="breadcrumb">
-            <li><a href="index.html">Trang chủ</a></li>
+            <li><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
             <li>Tra cứu</li>
         </div>
     </div>
@@ -31,6 +31,8 @@
                             <ul class="blog_archieve">
                                 <li><a href="@Url.Action("BangGiaVienPhi", "TraCuu")"><i class="fa fa-angle-double-right"></i> Bảng giá viện phí </a></li>
                                 <li><a href="@Url.Action("DanhMucKyThuat", "TraCuu")"><i class="fa fa-angle-double-right"></i> Danh mục kỹ thuật </a></li>
+                                <li><a href="@Url.Action("SoDoToChuc", "TraCuu")"><i class="fa fa-angle-double-right"></i> Sơ đồ tổ chức</a></li>
+                                <li><a href="@Url.Action("CoCauNhanSu", "TraCuu")"><i class="fa fa-angle-double-right"></i> Cơ cấu nhân sự </a></li>
                             </ul>
                         </div>
                     </div>
@@ -123,12 +125,12 @@
                     <FONT FACE="Calibri Light, serif">
                         <FONT SIZE=5 STYLE="font-size: 17pt">
                             <B>
-                                DANH MỤC KỸ THUẬT ĐÃ ĐƯỢC PHÊ DUYỆT  
+                                DANH MỤC KỸ THUẬT ĐÃ ĐƯỢC PHÊ DUYỆT
                             </B>
                         </FONT>
                     </FONT>
                 </P>
-                
+
                 <TABLE WIDTH=646 CELLPADDING=7 CELLSPACING=0 STYLE="page-break-before: always">
                     <COLGROUP>
                         <COL WIDTH=40>

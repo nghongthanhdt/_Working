@@ -2,7 +2,10 @@
 
 @{
     Layout = null;
-
+    if (ViewBag.PageImage == null)
+    {
+        ViewBag.PageImage = "/Content/home/images/slider/bvphcndt-banner.jpg";
+    }
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -19,12 +22,14 @@
     <link rel="stylesheet" href="~/Content/home/css/animate.css">
     <link href="~/Content/home/css/prettyPhoto.css" rel="stylesheet">
     <link href="~/Content/home/css/style.css" rel="stylesheet" />
-
+    <link rel="icon" href="~/Content/img/logo.ico" type="image/x-icon">
+    
     <meta property="og:url" content="@ViewBag.PageUrl" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="@ViewBag.PageTitle" />
     <meta property="og:description" content="@ViewBag.PageDescription" />
     <meta property="og:image" content="http://bvphcndt.com@(ViewBag.PageImage)" />
+    
 
 </head>
 
@@ -42,7 +47,7 @@
                             <span class="icon-bar"></span>
                         </button>
                         <div class="navbar-brand">
-                            <a href="javascript:void(0);"><h1><span>BV</span>PHCNĐT</h1></a>
+                            <a href="@Url.Action("Index", "Home")"><h1><span>BV</span>PHCNĐT</h1></a>
                         </div>
                     </div>
 
@@ -62,8 +67,7 @@
             </div>
         </nav>
     </header>
-
-@RenderBody()
+    @RenderBody()
     <div id="LienHe"></div>
     <section id="conatcat-info">
         <div class="container">
@@ -86,10 +90,10 @@
                 </div>
             </div>
         </div>
-        <!--/.container-->
+    
     </section>
 
-    <!--/#partner-->
+    
     <footer>
         <section id="partner" style="background-position:bottom; background-size:100% auto; text-shadow:1px 1px 1px black;">
             <div class="container">
@@ -98,30 +102,16 @@
                     <p>Chung tay góp sức cho ngày mai</p>
                 </div>
 
-                @*<div class="partners">
-                        <ul>
-                            <li> <a href="#"><img class="img-responsive wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms" src="~/Content/home/images/partners/partner1.png"></a></li>
-                            <li> <a href="#"><img class="img-responsive wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms" src="~/Content/home/images/partners/partner2.png"></a></li>
-                            <li> <a href="#"><img class="img-responsive wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="900ms" src="~/Content/home/images/partners/partner3.png"></a></li>
-                            <li> <a href="#"><img class="img-responsive wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="1200ms" src="~/Content/home/images/partners/partner4.png"></a></li>
-                            <li> <a href="#"><img class="img-responsive wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="1500ms" src="~/Content/home/images/partners/partner5.png"></a></li>
-                        </ul>
-                    </div>*@
             </div>
-            <!--/.container-->
+            
         </section>
-    </footer>
-
-    <!--/#conatcat-info-->
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="~/Content/home/js/jquery-2.1.1.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    </footer>    
+    <script src="~/Content/home/js/jquery-2.1.1.min.js"></script>    
     <script src="~/Content/home/js/bootstrap.min.js"></script>
     <script src="~/Content/home/js/jquery.prettyPhoto.js"></script>
     <script src="~/Content/home/js/jquery.isotope.min.js"></script>
     <script src="~/Content/home/js/wow.min.js"></script>
     <script src="~/Content/home/js/functions.js"></script>
-
 </body>
 
 </html>

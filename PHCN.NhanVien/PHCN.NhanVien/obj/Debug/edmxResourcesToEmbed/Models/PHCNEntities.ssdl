@@ -108,6 +108,24 @@
     <Property Name="STT" Type="int" Nullable="false" />
     <Property Name="Xoa" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="DeTaiSangKien">
+    <Key>
+      <PropertyRef Name="MaDeTaiSangKien" />
+    </Key>
+    <Property Name="MaDeTaiSangKien" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenDeTaiSangKien" Type="nvarchar" MaxLength="2000" />
+    <Property Name="MaNhanVien" Type="int" />
+    <Property Name="MaNhanVien1" Type="int" />
+    <Property Name="MaNhanVien2" Type="int" />
+    <Property Name="MaNhanVien3" Type="int" />
+    <Property Name="MaNhanVien4" Type="int" />
+    <Property Name="KinhPhi" Type="nvarchar" MaxLength="1000" />
+    <Property Name="TuThang" Type="datetime2" Precision="7" />
+    <Property Name="DenThang" Type="datetime2" Precision="7" />
+    <Property Name="CapDeTai" Type="nvarchar" MaxLength="20" />
+    <Property Name="Xoa" Type="bit" />
+    <Property Name="NgayXoa" Type="bit" />
+  </EntityType>
   <EntityType Name="DienBienDaoTaoBoiDuong">
     <Key>
       <PropertyRef Name="MaDienBienDaoTaoBoiDuong" />
@@ -261,6 +279,7 @@
     <Property Name="TenKhoa" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="STT" Type="int" Nullable="false" />
     <Property Name="Xoa" Type="bit" Nullable="false" />
+    <Property Name="LoaiKhoa" Type="nvarchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="LoaiBaiViet">
     <Key>
@@ -486,6 +505,7 @@
     </Key>
     <Property Name="MaNhanVien" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="MaKhoa" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="ChucVu" Type="nvarchar" MaxLength="200" />
     <Property Name="HoTen" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="TenDangNhap" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="MatKhau" Type="nvarchar" MaxLength="50" />
@@ -496,6 +516,7 @@
     <Property Name="Email" Type="nvarchar" MaxLength="200" />
     <Property Name="SoDienThoai" Type="nvarchar" MaxLength="200" />
     <Property Name="SoDienThoaiNoiBo" Type="nvarchar" MaxLength="50" />
+    <Property Name="CoCauNhanSu" Type="bit" />
   </EntityType>
   <EntityType Name="NoiDungKSK">
     <Key>
@@ -731,6 +752,66 @@
       </Principal>
       <Dependent Role="BoSungPhamViHDCM">
         <PropertyRef Name="MaLyLichVienChuc" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DeTaiSangKien_NhanVien">
+    <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="0..1" />
+    <End Role="DeTaiSangKien" Type="Self.DeTaiSangKien" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NhanVien">
+        <PropertyRef Name="MaNhanVien" />
+      </Principal>
+      <Dependent Role="DeTaiSangKien">
+        <PropertyRef Name="MaNhanVien" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DeTaiSangKien_NhanVien1">
+    <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="0..1" />
+    <End Role="DeTaiSangKien" Type="Self.DeTaiSangKien" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NhanVien">
+        <PropertyRef Name="MaNhanVien" />
+      </Principal>
+      <Dependent Role="DeTaiSangKien">
+        <PropertyRef Name="MaNhanVien1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DeTaiSangKien_NhanVien2">
+    <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="0..1" />
+    <End Role="DeTaiSangKien" Type="Self.DeTaiSangKien" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NhanVien">
+        <PropertyRef Name="MaNhanVien" />
+      </Principal>
+      <Dependent Role="DeTaiSangKien">
+        <PropertyRef Name="MaNhanVien2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DeTaiSangKien_NhanVien3">
+    <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="0..1" />
+    <End Role="DeTaiSangKien" Type="Self.DeTaiSangKien" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NhanVien">
+        <PropertyRef Name="MaNhanVien" />
+      </Principal>
+      <Dependent Role="DeTaiSangKien">
+        <PropertyRef Name="MaNhanVien3" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DeTaiSangKien_NhanVien4">
+    <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="0..1" />
+    <End Role="DeTaiSangKien" Type="Self.DeTaiSangKien" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NhanVien">
+        <PropertyRef Name="MaNhanVien" />
+      </Principal>
+      <Dependent Role="DeTaiSangKien">
+        <PropertyRef Name="MaNhanVien4" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -997,6 +1078,7 @@
     <EntitySet Name="ChuyenMuc" EntityType="Self.ChuyenMuc" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Dang" EntityType="Self.Dang" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DanToc" EntityType="Self.DanToc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DeTaiSangKien" EntityType="Self.DeTaiSangKien" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DienBienDaoTaoBoiDuong" EntityType="Self.DienBienDaoTaoBoiDuong" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DienBienQuaTrinhCongTac" EntityType="Self.DienBienQuaTrinhCongTac" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DienBienQuaTrinhLuong" EntityType="Self.DienBienQuaTrinhLuong" Schema="dbo" store:Type="Tables" />
@@ -1068,6 +1150,26 @@
     <AssociationSet Name="FK_BoSungPhamViHDCM_LyLichVienChuc" Association="Self.FK_BoSungPhamViHDCM_LyLichVienChuc">
       <End Role="LyLichVienChuc" EntitySet="LyLichVienChuc" />
       <End Role="BoSungPhamViHDCM" EntitySet="BoSungPhamViHDCM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DeTaiSangKien_NhanVien" Association="Self.FK_DeTaiSangKien_NhanVien">
+      <End Role="NhanVien" EntitySet="NhanVien" />
+      <End Role="DeTaiSangKien" EntitySet="DeTaiSangKien" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DeTaiSangKien_NhanVien1" Association="Self.FK_DeTaiSangKien_NhanVien1">
+      <End Role="NhanVien" EntitySet="NhanVien" />
+      <End Role="DeTaiSangKien" EntitySet="DeTaiSangKien" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DeTaiSangKien_NhanVien2" Association="Self.FK_DeTaiSangKien_NhanVien2">
+      <End Role="NhanVien" EntitySet="NhanVien" />
+      <End Role="DeTaiSangKien" EntitySet="DeTaiSangKien" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DeTaiSangKien_NhanVien3" Association="Self.FK_DeTaiSangKien_NhanVien3">
+      <End Role="NhanVien" EntitySet="NhanVien" />
+      <End Role="DeTaiSangKien" EntitySet="DeTaiSangKien" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DeTaiSangKien_NhanVien4" Association="Self.FK_DeTaiSangKien_NhanVien4">
+      <End Role="NhanVien" EntitySet="NhanVien" />
+      <End Role="DeTaiSangKien" EntitySet="DeTaiSangKien" />
     </AssociationSet>
     <AssociationSet Name="FK_DienBienDaoTaoBoiDuong_HinhThucDaoTao" Association="Self.FK_DienBienDaoTaoBoiDuong_HinhThucDaoTao">
       <End Role="HinhThucDaoTao" EntitySet="HinhThucDaoTao" />
