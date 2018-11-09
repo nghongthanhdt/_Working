@@ -705,6 +705,7 @@
     <Compile Include="Controllers\QuanLyDeTaiSangKienController.cs" />
     <Compile Include="Controllers\QuanLyLyLichVienChucController.cs" />
     <Compile Include="Controllers\QuanLyNhanVienController.cs" />
+    <Compile Include="Controllers\QuanLySoLieuChuyenMonController.cs" />
     <Compile Include="Controllers\QuanLySucKhoeController.cs" />
     <Compile Include="Controllers\ThuNoiBoController.cs" />
     <Compile Include="Controllers\TinTucController.cs" />
@@ -970,6 +971,7 @@
     <Content Include="Views\QuanLyDeTaiSangKien\CapNhat.cshtml" />
     <Content Include="Views\TraCuu\CoCauNhanSu.cshtml" />
     <Content Include="Views\TraCuu\SoDoToChuc.cshtml" />
+    <Content Include="Views\QuanLySoLieuChuyenMon\CauHinhThamSo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -280,6 +280,7 @@
     <Property Name="STT" Type="int" Nullable="false" />
     <Property Name="Xoa" Type="bit" Nullable="false" />
     <Property Name="LoaiKhoa" Type="nvarchar" MaxLength="20" />
+    <Property Name="BaoCaoSoLieuChuyenMon" Type="bit" />
   </EntityType>
   <EntityType Name="LoaiBaiViet">
     <Key>
@@ -508,7 +509,6 @@
     <Property Name="ChucVu" Type="nvarchar" MaxLength="200" />
     <Property Name="HoTen" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="TenDangNhap" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="MatKhau" Type="nvarchar" MaxLength="50" />
     <Property Name="STT" Type="int" Nullable="false" />
     <Property Name="Xoa" Type="bit" Nullable="false" />
     <Property Name="NhanThu" Type="bit" Nullable="false" />
@@ -517,6 +517,7 @@
     <Property Name="SoDienThoai" Type="nvarchar" MaxLength="200" />
     <Property Name="SoDienThoaiNoiBo" Type="nvarchar" MaxLength="50" />
     <Property Name="CoCauNhanSu" Type="bit" />
+    <Property Name="MatKhau" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="NoiDungKSK">
     <Key>

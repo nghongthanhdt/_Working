@@ -285,6 +285,7 @@
           <Property Name="STT" Type="int" Nullable="false" />
           <Property Name="Xoa" Type="bit" Nullable="false" />
           <Property Name="LoaiKhoa" Type="nvarchar" MaxLength="20" />
+          <Property Name="BaoCaoSoLieuChuyenMon" Type="bit" />
         </EntityType>
         <EntityType Name="LoaiBaiViet">
           <Key>
@@ -513,7 +514,6 @@
           <Property Name="ChucVu" Type="nvarchar" MaxLength="200" />
           <Property Name="HoTen" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="TenDangNhap" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="MatKhau" Type="nvarchar" MaxLength="50" />
           <Property Name="STT" Type="int" Nullable="false" />
           <Property Name="Xoa" Type="bit" Nullable="false" />
           <Property Name="NhanThu" Type="bit" Nullable="false" />
@@ -522,6 +522,7 @@
           <Property Name="SoDienThoai" Type="nvarchar" MaxLength="200" />
           <Property Name="SoDienThoaiNoiBo" Type="nvarchar" MaxLength="50" />
           <Property Name="CoCauNhanSu" Type="bit" />
+          <Property Name="MatKhau" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="NoiDungKSK">
           <Key>
@@ -1483,7 +1484,7 @@
           <NavigationProperty Name="GuiNhan" Relationship="PHCNModel.FK_GuiNhan_BaiViet" FromRole="BaiViet" ToRole="GuiNhan" />
           <NavigationProperty Name="NhanVien" Relationship="PHCNModel.FK_BaiViet_NhanVien" FromRole="BaiViet" ToRole="NhanVien" />
           <NavigationProperty Name="NhanVien1" Relationship="PHCNModel.FK_BaiViet_NhanVien1" FromRole="BaiViet" ToRole="NhanVien" />
-        </EntityType>
+          </EntityType>
         <EntityType Name="BaiVietWeb">
           <Key>
             <PropertyRef Name="MaBaiViet" />
@@ -1745,8 +1746,9 @@
           <Property Name="TenKhoa" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="STT" Type="Int32" Nullable="false" />
           <Property Name="Xoa" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="NhanVien" Relationship="PHCNModel.FK_NhanVien_KhoaPhong" FromRole="KhoaPhong" ToRole="NhanVien" />
           <Property Name="LoaiKhoa" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="BaoCaoSoLieuChuyenMon" Type="Boolean" />
+          <NavigationProperty Name="NhanVien" Relationship="PHCNModel.FK_NhanVien_KhoaPhong" FromRole="KhoaPhong" ToRole="NhanVien" />
         </EntityType>
         <EntityType Name="LoaiBaiViet">
           <Key>
@@ -2398,9 +2400,9 @@
           </Key>
           <Property Name="MaNhanVien" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MaKhoa" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ChucVu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="HoTen" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="TenDangNhap" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MatKhau" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="STT" Type="Int32" Nullable="false" />
           <Property Name="Xoa" Type="Boolean" Nullable="false" />
           <Property Name="NhanThu" Type="Boolean" Nullable="false" />
@@ -2409,6 +2411,7 @@
           <Property Name="SoDienThoai" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="SoDienThoaiNoiBo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CoCauNhanSu" Type="Boolean" />
+          <Property Name="MatKhau" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="BaiViet" Relationship="PHCNModel.FK_BaiViet_NhanVien" FromRole="NhanVien" ToRole="BaiViet" />
           <NavigationProperty Name="BaiViet1" Relationship="PHCNModel.FK_BaiViet_NhanVien1" FromRole="NhanVien" ToRole="BaiViet" />
           <NavigationProperty Name="BaiVietWeb" Relationship="PHCNModel.FK_BaiVietWeb_NhanVien" FromRole="NhanVien" ToRole="BaiVietWeb" />
@@ -2423,7 +2426,6 @@
           <NavigationProperty Name="LyLichVienChuc" Relationship="PHCNModel.FK_LyLichVienChuc_NhanVien" FromRole="NhanVien" ToRole="LyLichVienChuc" />
           <NavigationProperty Name="PhanQuyen" Relationship="PHCNModel.FK_PhanQuyen_NhanVien" FromRole="NhanVien" ToRole="PhanQuyen" />
           <NavigationProperty Name="SoKSK" Relationship="PHCNModel.FK_SoKSK_NhanVien" FromRole="NhanVien" ToRole="SoKSK" />
-          <Property Name="ChucVu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_BaiViet_NhanVien">
           <End Type="PHCNModel.NhanVien" Role="NhanVien" Multiplicity="1" />
@@ -2877,6 +2879,7 @@
           <EntitySetMapping Name="KhoaPhong">
             <EntityTypeMapping TypeName="PHCNModel.KhoaPhong">
               <MappingFragment StoreEntitySet="KhoaPhong">
+                <ScalarProperty Name="BaoCaoSoLieuChuyenMon" ColumnName="BaoCaoSoLieuChuyenMon" />
                 <ScalarProperty Name="LoaiKhoa" ColumnName="LoaiKhoa" />
                 <ScalarProperty Name="Xoa" ColumnName="Xoa" />
                 <ScalarProperty Name="STT" ColumnName="STT" />
@@ -3260,7 +3263,7 @@
           <EntitySetMapping Name="NhanVien">
             <EntityTypeMapping TypeName="PHCNModel.NhanVien">
               <MappingFragment StoreEntitySet="NhanVien">
-                <ScalarProperty Name="ChucVu" ColumnName="ChucVu" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
                 <ScalarProperty Name="CoCauNhanSu" ColumnName="CoCauNhanSu" />
                 <ScalarProperty Name="SoDienThoaiNoiBo" ColumnName="SoDienThoaiNoiBo" />
                 <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
@@ -3269,9 +3272,9 @@
                 <ScalarProperty Name="NhanThu" ColumnName="NhanThu" />
                 <ScalarProperty Name="Xoa" ColumnName="Xoa" />
                 <ScalarProperty Name="STT" ColumnName="STT" />
-                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
                 <ScalarProperty Name="TenDangNhap" ColumnName="TenDangNhap" />
                 <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="ChucVu" ColumnName="ChucVu" />
                 <ScalarProperty Name="MaKhoa" ColumnName="MaKhoa" />
                 <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
               </MappingFragment>

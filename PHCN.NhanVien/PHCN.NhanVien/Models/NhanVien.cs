@@ -34,9 +34,9 @@ namespace PHCN.NhanVien.Models
     
         public int MaNhanVien { get; set; }
         public string MaKhoa { get; set; }
+        public string ChucVu { get; set; }
         public string HoTen { get; set; }
         public string TenDangNhap { get; set; }
-        public string MatKhau { get; set; }
         public int STT { get; set; }
         public bool Xoa { get; set; }
         public bool NhanThu { get; set; }
@@ -45,7 +45,7 @@ namespace PHCN.NhanVien.Models
         public string SoDienThoai { get; set; }
         public string SoDienThoaiNoiBo { get; set; }
         public Nullable<bool> CoCauNhanSu { get; set; }
-        public string ChucVu { get; set; }
+        public string MatKhau { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BaiViet> BaiViet { get; set; }

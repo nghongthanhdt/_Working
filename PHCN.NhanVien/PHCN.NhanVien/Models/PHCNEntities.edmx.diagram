@@ -69,7 +69,7 @@
         <AssociationConnector Association="PHCNModel.FK_LuotKSK_SoKSK" />
         <AssociationConnector Association="PHCNModel.FK_PhanQuyen_Quyen" />
         <EntityTypeShape EntityType="PHCNModel.DeTaiSangKien" Width="1.5" PointX="3" PointY="50" />
-        <EntityTypeShape EntityType="PHCNModel.NhanVien" Width="1.5" PointX="3.75" PointY="55.625" />
+        <EntityTypeShape EntityType="PHCNModel.NhanVien" Width="1.5" PointX="3.75" PointY="55.75" />
         <AssociationConnector Association="PHCNModel.FK_BaiViet_NhanVien" />
         <AssociationConnector Association="PHCNModel.FK_BaiViet_NhanVien1" />
         <AssociationConnector Association="PHCNModel.FK_BaiVietWeb_NhanVien" />

@@ -43,15 +43,29 @@ function loadDanhSach() {
 
 function bindbtnXuatExel_OnClick() {
     $("#btnXuatExcel").unbind("click").click(function () {
-        $("#tableLyLichVienChuc").table2excel({
-            exclude: ".noExl",
-            name: "Excel Document Name",
-            filename: "DanhSachVienChuc.xls",
-            fileext: ".xls",
-            exclude_img: true,
-            exclude_links: true,
-            exclude_inputs: true
-        });
+        var loaibaocao = $("#selectLoaiBaoCao").val();
+        if (loaibaocao == "lylichvienchuc") {
+            $("#tableLyLichVienChuc").table2excel({
+                exclude: ".noExl",
+                name: "Excel Document Name",
+                filename: "DanhSachVienChuc.xls",
+                fileext: ".xls",
+                exclude_img: true,
+                exclude_links: true,
+                exclude_inputs: true
+            });
+        } else {            
+            $("#tableSucKhoeDinhKy").table2excel({
+                exclude: ".noExl",
+                name: "Excel Document Name",
+                filename: "DanhSachSucKhoeDinhKy.xls",
+                fileext: ".xls",
+                exclude_img: true,
+                exclude_links: true,
+                exclude_inputs: true
+            });
+        }
+        
     });
 }
 

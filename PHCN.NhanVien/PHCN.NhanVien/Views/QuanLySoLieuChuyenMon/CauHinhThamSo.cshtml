@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.PageTitle = "Cấu hình tham số số liệu chuyên môn";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div style="overflow:scroll; min-height:500px;">
+            <div style="width:1800px;">
+                <table class="table" style="font-size:14px;">
+                    <tbody>
+                        <tr>
+
+                            <th style="width:6%;">Từ tháng</th>
+                            <th style="width:7%;">Đến tháng</th>
+
+                            <th style="width:25%;">Tên</th>
+                            <th style="width:7%;">Cấp</th>
+                            <th style="width:15%;">Chủ đề tài</th>
+                            <th style="width:20%;">Công sự</th>
+
+                            <th style="width:10%;">Kinh phí</th>
+                            <th style=""></th>
+                        </tr>
+
+                        <tr>
+
+                            <td>08/2018</td>
+                            <td>10/2018</td>
+                            <td>
+                                <a href="/QuanLyDeTaiSangKien/CapNhat/4">Cải tiến hệ thống phần mềm nội bộ Bệnh viện Phục Hồi Chức năng</a>
+                            </td>
+                            <td>Cơ sở</td>
+                            <td>BS. Võ Trọng Hoàng</td>
+                            <td>
+                                Nguyễn Hồng Thanh,
+                                Bạch Hữu Nhân,
+
+
+
+
+                            </td>
+
+                            <td></td>
+                            <td>
+                                <a href="/QuanLyDeTaiSangKien/CapNhat/4" class="rowCapNhat btn btn-xs btn-default">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                    ...
+                                </a>
+                                <button data-madetaisangkien="4" class="rowXoaDeTaiSangKien btn btn-xs btn-danger">
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                    Xóa
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>

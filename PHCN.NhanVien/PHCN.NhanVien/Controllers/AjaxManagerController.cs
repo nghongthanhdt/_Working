@@ -312,6 +312,24 @@ namespace PHCN.NhanVien.Controllers
                 return ex.Message;
             }
         }
+        [HttpPost]
+        public string DoiMatKhauPhucTap(int id, string MatKhauMoi)
+        {
+            try
+            {
+                PHCN.NhanVien.Models.NhanVien nv = db.NhanVien.Find(id);
+                nv.MatKhau = MatKhauMoi;
+                nv.MatKhauMD5 = CodeController.GetMD5(MatKhauMoi);
+                db.Entry(nv).State = EntityState.Modified;
+                db.SaveChanges();
+                return "ok";
+
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
 
         // diễn biến bổ sung phạm vi hoạt động chuyên môn
         public JsonResult GetDienBienBoSungPhamViHDCM(int id)

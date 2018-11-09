@@ -279,6 +279,7 @@
     <EntitySetMapping Name="KhoaPhong">
       <EntityTypeMapping TypeName="PHCNModel.KhoaPhong">
         <MappingFragment StoreEntitySet="KhoaPhong">
+          <ScalarProperty Name="BaoCaoSoLieuChuyenMon" ColumnName="BaoCaoSoLieuChuyenMon" />
           <ScalarProperty Name="LoaiKhoa" ColumnName="LoaiKhoa" />
           <ScalarProperty Name="Xoa" ColumnName="Xoa" />
           <ScalarProperty Name="STT" ColumnName="STT" />
@@ -662,7 +663,7 @@
     <EntitySetMapping Name="NhanVien">
       <EntityTypeMapping TypeName="PHCNModel.NhanVien">
         <MappingFragment StoreEntitySet="NhanVien">
-          <ScalarProperty Name="ChucVu" ColumnName="ChucVu" />
+          <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
           <ScalarProperty Name="CoCauNhanSu" ColumnName="CoCauNhanSu" />
           <ScalarProperty Name="SoDienThoaiNoiBo" ColumnName="SoDienThoaiNoiBo" />
           <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
@@ -671,9 +672,9 @@
           <ScalarProperty Name="NhanThu" ColumnName="NhanThu" />
           <ScalarProperty Name="Xoa" ColumnName="Xoa" />
           <ScalarProperty Name="STT" ColumnName="STT" />
-          <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
           <ScalarProperty Name="TenDangNhap" ColumnName="TenDangNhap" />
           <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+          <ScalarProperty Name="ChucVu" ColumnName="ChucVu" />
           <ScalarProperty Name="MaKhoa" ColumnName="MaKhoa" />
           <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
         </MappingFragment>
