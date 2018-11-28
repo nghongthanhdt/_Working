@@ -98,5 +98,36 @@ namespace PHCN.NhanVien.Controllers
                 }
             }
         }
+
+        public ActionResult DuyetBai(int id)
+        {
+            PHCN.NhanVien.Models.BaiVietWeb baiviet = db.BaiVietWeb.Find(id);
+            return View(baiviet);
+        }
+        [HttpPost]
+        public ActionResult KichHoatBaiViet(int id)
+        {
+            var baiviet = db.BaiVietWeb.Find(id);
+            baiviet.HienThiTrenTrangChu = true;
+            db.SaveChanges();
+            return RedirectToAction("DuyetBai", new { @id = id});
+        }
+        [HttpPost]
+        public ActionResult KhoaBaiViet(int id)
+        {
+            var baiviet = db.BaiVietWeb.Find(id);
+            baiviet.HienThiTrenTrangChu = false;
+            db.SaveChanges();
+            return RedirectToAction("DuyetBai", new { @id = id });
+        }
+        [HttpPost]
+        public ActionResult XoaBaiViet(int id)
+        {
+            var baiviet = db.BaiVietWeb.Find(id);
+            baiviet.HienThiTrenTrangChu = false;
+            baiviet.Xoa = true;
+            db.SaveChanges();            
+            return RedirectToAction("DuyetBai", new { @id = id });
+        }
     }
 }

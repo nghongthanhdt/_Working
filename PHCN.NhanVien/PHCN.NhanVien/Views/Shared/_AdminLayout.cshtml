@@ -1,12 +1,30 @@
-﻿@{ 
+﻿@{
 
     // chạy dev
 
-    //HCN.NhanVien.Models.PHCNEntities db = new PHCN.NhanVien.Models.PHCNEntities(); var nhanVienDangNhap = db.NhanVien.Find(1); Session["NhanVienDangNhap"] = nhanVienDangNhap; var listPhanQuyen = nhanVienDangNhap.PhanQuyen.ToList(); string box = "";
+    PHCN.NhanVien.Models.PHCNEntities db = new PHCN.NhanVien.Models.PHCNEntities(); var nhanVienDangNhap = db.NhanVien.Find(35); Session["NhanVienDangNhap"] = nhanVienDangNhap; var listPhanQuyen = nhanVienDangNhap.PhanQuyen.ToList(); string box = "";
 
     //chạy thật
 
-    var nhanVienDangNhap = (PHCN.NhanVien.Models.NhanVien)Session["NhanVienDangNhap"]; if (nhanVienDangNhap == null) {Response.Redirect(Url.Action("DangNhap", "Home")); } var listPhanQuyen = nhanVienDangNhap.PhanQuyen.ToList(); int _maNhanVienDangNhap = nhanVienDangNhap.MaNhanVien; string box = ""; try {box = Request.QueryString["box"].ToString();} catch { }
+    //PHCN.NhanVien.Models.PHCNEntities db = new PHCN.NhanVien.Models.PHCNEntities();
+    //var nhanVienDangNhap = (PHCN.NhanVien.Models.NhanVien)Session["NhanVienDangNhap"]; if (nhanVienDangNhap == null) { Response.Redirect(Url.Action("DangNhap", "Home")); }
+    //    var listPhanQuyen = nhanVienDangNhap.PhanQuyen.ToList();
+    //string box = "";
+    int _maNhanVienDangNhap = nhanVienDangNhap.MaNhanVien;  try { box = Request.QueryString["box"].ToString(); } catch { }
+    var listMenuLeftLevel1 = db.Menu.Where(x => x.MenuType == "left" && x.MenuLevel == 1 && x.Xoa != true).OrderBy(x => x.STT).ToList();
+    var listMenuLeftLevel2 = db.Menu.Where(x => x.MenuType == "left" && x.MenuLevel == 2 && x.Xoa != true).OrderBy(x => x.STT).ToList();
+
+    bool modeDeploy = false;
+
+    bool isAdmin = listPhanQuyen.Where(x => x.MaQuyen == "admin").Any();
+    bool isQuanLyNhanVien = listPhanQuyen.Where(x => x.MaQuyen == "quanlynhanvien").Any();
+    bool isQuanLyWebsite = listPhanQuyen.Where(x => x.MaQuyen == "quanlywebsite").Any();
+    bool isQuanLyDeTaiSangKien = listPhanQuyen.Where(x => x.MaQuyen == "quanlydetaisangkien").Any();
+    //if (nhanVienDangNhap.TenDangNhap == "admin")
+    //{
+    //    isAdmin = true;
+    //}
+
 }
 <!DOCTYPE html>
 <html>
@@ -23,12 +41,14 @@
     <link href="~/Content/css/admin-layout.css?@("v="+DateTime.Now.ToString("yyMMddhhmmss"))" rel="stylesheet" />
     <link href="~/Content/css/jquery-ui.css" rel="stylesheet" />
     <script src="~/scripts/jquery.mask.js"></script>
+
+    
     <tag autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" >
 </head>
 
 <body>
     <script>
-    var urlController = '@(HttpContext.Current.Request.Url.Scheme)://@(HttpContext.Current.Request.Url.Authority)/@(HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString())/';
+        var urlController = '@(HttpContext.Current.Request.Url.Scheme)://@(HttpContext.Current.Request.Url.Authority)/@(HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString())/';
     </script>
     <nav role="navigation" class="navbar navbar-custom" style="background-color:#004f02;">
         <div class="container-fluid">            
@@ -42,7 +62,7 @@
 
                 <a href="@Url.Action("Index", "ThuNoiBo")" class="navbar-brand" style="color:white;">
                     <i class="glyphicon glyphicon-home"></i>                        
-                    NỘI BỘ
+                    BỆNH VIỆN PHỤC HỒI CHỨC NĂNG ĐỒNG THÁP
                 </a>
             </div>
             <div id="bs-content-row-navbar-collapse-5" class="collapse navbar-collapse" style="background-color:transparent;">
@@ -74,16 +94,7 @@
         
         <div class="row row-offcanvas row-offcanvas-left">
             <div class="col-xs-6 col-sm-4 sidebar-offcanvas" role="navigation">
-                @{ 
-                    bool isAdmin = listPhanQuyen.Where(x => x.MaQuyen == "admin").Any();
-                    bool isQuanLyNhanVien = listPhanQuyen.Where(x => x.MaQuyen == "quanlynhanvien").Any();
-                    bool isQuanLyWebsite = listPhanQuyen.Where(x => x.MaQuyen == "quanlywebsite").Any();
-                    bool isQuanLyDeTaiSangKien = listPhanQuyen.Where(x => x.MaQuyen == "quanlydetaisangkien").Any();
-                    if (nhanVienDangNhap.TenDangNhap == "admin")
-                    {
-                        isAdmin = true;
-                    }
-                }
+                
 
 
                 
@@ -100,7 +111,41 @@
                 
                  
                 <div style="clear:both;"></div>
-                <div class="panel-group panel-group-lists" style="">
+                <div class="panel-group panel-group-lists" style="" id="menuLeft">
+                    @foreach (var menuLevel1 in listMenuLeftLevel1)
+                    {
+                        if (isAdmin || listPhanQuyen.Where(x => x.MaQuyen == menuLevel1.MaQuyen || menuLevel1.MaQuyen == null).ToList().Any())
+                        {
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" href="#menu-@menuLevel1.MenuId" class="tieu-de-menu" style="color:white;"><i class="@menuLevel1.IconClass"></i> @menuLevel1.Ten</a>
+                                    </h4>
+                                </div>
+                                <div id="menu-@menuLevel1.MenuId" class="panel-collapse collapse @((menuLevel1.ExpandStartup)?"in":"")" style="">
+                                    <div class="list-group">
+                                        @foreach (var menuLevel2 in listMenuLeftLevel2.Where(x => x.ParentId == menuLevel1.MenuId).OrderBy(x => x.STT).ToList())
+                                        {
+                                            if (modeDeploy == true)
+                                            {
+                                                <a href="@(menuLevel2.DeployHost + menuLevel2.Url)" class="list-group-item "><i class="@menuLevel2.IconClass"></i> @menuLevel2.Ten</a>
+                                            }
+                                            else
+                                            {
+                                                <a href="@(menuLevel2.LocalHost + menuLevel2.Url)" class="list-group-item "><i class="@menuLevel2.IconClass"></i> @menuLevel2.Ten</a>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    }
+                    
+                </div>
+
+
+                @*<div class="panel-group panel-group-lists" style="">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
@@ -138,9 +183,13 @@
                                             <i class="glyphicon glyphicon-transfer"></i>
                                             Nhập liệu thông tin
                                         </a>   
-                                        <a href="@Url.Action("TraCuuLyLichVienChuc", "QuanLyNhanVien")" class="list-group-item">
+                                        <a href="@Url.Action("TraCuuLyLichVienChuc", "QuanLyNhanVien", new { @baocao = "lylichvienchuc"})" class="list-group-item">
                                             <i class="glyphicon glyphicon-screenshot"></i>
                                             Tra cứu lý lịch viên  chức
+                                        </a>
+                                        <a href="@Url.Action("TraCuuLyLichVienChuc", "QuanLyNhanVien", new { @baocao = "suckhoedinhky"})" class="list-group-item">
+                                            <i class="glyphicon glyphicon-screenshot"></i>
+                                            Tra cứu sức khỏe định kỳ
                                         </a>
                                 </div>
                             
@@ -224,7 +273,7 @@
 
                                 <div class="list-group">
                                     <a href="@Url.Action("Index", "QuanLyDeTaiSangKien")" class="list-group-item">
-                                        @*<i class="glyphicon glyphicon-transfer"></i>*@
+                                        
                                         
                                         Danh sách đề tài
                                     </a>
@@ -236,7 +285,7 @@
                         </div>
                     }
                     
-                </div>
+                </div>*@
             </div>
             <div class="col-xs-12 col-sm-8 content">
                 <div class="panel panel-default" style="border-radius:0px; border:1px solid #d0d0d0;">
@@ -254,6 +303,8 @@
                         @RenderBody()
                     </div><!-- panel body -->
                 </div>
+
+                
             </div><!-- content -->
         </div>
 
@@ -274,6 +325,7 @@
     <script src="~/scripts/jquery.mask.js"></script>
     <script src="~/scripts/core-scripts/sweetalert2.all.min.js"></script>
     <script src="~/scripts/core-scripts/th.core.js"></script>
+    
     
 </body>
 </html>

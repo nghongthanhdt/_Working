@@ -300,8 +300,8 @@ namespace PHCN.NhanVien.Controllers
             try
             {
                 PHCN.NhanVien.Models.NhanVien nv = db.NhanVien.Find(id);
-                nv.MatKhau = MatKhauMoi;
-                nv.MatKhauMD5 = CodeController.GetMD5(MatKhauMoi);
+                nv.MatKhau = MatKhauMoi.ToLower();                
+                nv.MatKhauMD5 = CodeController.GetMD5(MatKhauMoi.ToLower());
                 db.Entry(nv).State = EntityState.Modified;
                 db.SaveChanges();
                 return "ok";
@@ -318,8 +318,8 @@ namespace PHCN.NhanVien.Controllers
             try
             {
                 PHCN.NhanVien.Models.NhanVien nv = db.NhanVien.Find(id);
-                nv.MatKhau = MatKhauMoi;
-                nv.MatKhauMD5 = CodeController.GetMD5(MatKhauMoi);
+                nv.MatKhau = MatKhauMoi.ToLower();
+                nv.MatKhauMD5 = CodeController.GetMD5(MatKhauMoi.ToLower());
                 db.Entry(nv).State = EntityState.Modified;
                 db.SaveChanges();
                 return "ok";

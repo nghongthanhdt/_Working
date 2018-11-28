@@ -57,8 +57,17 @@ namespace PHCN.NhanVien.Controllers
             {
                 string matkhauMD5 = CodeController.GetMD5(matKhau);
                 var nhanVien = db.NhanVien.Where(x => x.TenDangNhap == tenDangNhap && x.MatKhauMD5 == matkhauMD5).ToList();
+
                 if (nhanVien.Any())
                 {
+                    // kiểm tra phân quyền đăng nhập
+                    var nv = nhanVien.First();
+                    var listQuyenNhanVien = nv.PhanQuyen.Where(x => x.MaQuyen == "admin" || x.MaQuyen == "dangnhapthietbididong").ToList();
+                    if (!listQuyenNhanVien.Any())
+                    {
+                        return RedirectToAction("TuChoiTruyCap", "Admin");
+                    }
+                       
                     this.Session["NhanVienDangNhap"] = nhanVien.First();
                     Session.Timeout = 86000;
                     return RedirectToAction("Index", "ThuNoiBo");

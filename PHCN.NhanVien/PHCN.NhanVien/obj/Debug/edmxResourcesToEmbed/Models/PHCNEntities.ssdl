@@ -491,6 +491,24 @@
     <Property Name="STT" Type="int" Nullable="false" />
     <Property Name="Xoa" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="MenuId" />
+    </Key>
+    <Property Name="MenuId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MenuType" Type="nvarchar" MaxLength="50" />
+    <Property Name="Ten" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Url" Type="nvarchar" MaxLength="200" />
+    <Property Name="STT" Type="int" Nullable="false" />
+    <Property Name="ParentId" Type="int" Nullable="false" />
+    <Property Name="MenuLevel" Type="int" Nullable="false" />
+    <Property Name="IconClass" Type="nvarchar" MaxLength="100" />
+    <Property Name="MaQuyen" Type="nvarchar" MaxLength="50" />
+    <Property Name="Xoa" Type="bit" Nullable="false" />
+    <Property Name="LocalHost" Type="nvarchar" MaxLength="100" />
+    <Property Name="DeployHost" Type="nvarchar" MaxLength="100" />
+    <Property Name="ExpandStartup" Type="bit" Nullable="false" />
+  </EntityType>
   <EntityType Name="NgheNghiep">
     <Key>
       <PropertyRef Name="MaNgheNghiep" />
@@ -1099,6 +1117,7 @@
     <EntitySet Name="LuotKSK" EntityType="Self.LuotKSK" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LyLichVienChuc" EntityType="Self.LyLichVienChuc" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MaCCHN" EntityType="Self.MaCCHN" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NgheNghiep" EntityType="Self.NgheNghiep" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NhanVien" EntityType="Self.NhanVien" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NoiDungKSK" EntityType="Self.NoiDungKSK" Schema="dbo" store:Type="Tables" />

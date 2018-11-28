@@ -10,3 +10,43 @@
     box-shadow:1px 1px 3px black;
     border:1px solid white;
 }
+
+.btn-success {
+    background-color:#187d00;
+    border-radius:0px;
+    position:relative;
+}
+.btn-success:hover {
+    background-color:#008f0c;
+    top:-1px;
+    left:-1px;
+    border:1px solid white;
+    box-shadow:1px 1px 3px black;
+}
+#accordion1 .ten-nhan-vien {
+    display:block;
+    width:100%;
+
+    color:#005e02;
+}
+#accordion1 .ten-nhan-vien:hover {
+    color:#00be04;
+}
+.btn, .form-control {
+    border-radius:0px;
+
+}
+.dropdown-menu {
+    background-color:white;
+    color:black;
+}
+.dropdown-menu li a {
+    color:black;
+}
+.dropdown-menu li a:hover{
+    background-color:green;
+}
+.selecter .selecter-selected{
+    border-radius:0px;
+    font-size:14px;
+}

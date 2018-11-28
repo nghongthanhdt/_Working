@@ -12,13 +12,20 @@ namespace PHCN.NhanVien.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PhanQuyen
+    public partial class Menu
     {
-        public int ID { get; set; }
-        public int MaNhanVien { get; set; }
+        public int MenuId { get; set; }
+        public string MenuType { get; set; }
+        public string Ten { get; set; }
+        public string Url { get; set; }
+        public int STT { get; set; }
+        public int ParentId { get; set; }
+        public int MenuLevel { get; set; }
+        public string IconClass { get; set; }
         public string MaQuyen { get; set; }
-    
-        public virtual NhanVien NhanVien { get; set; }
-        public virtual Quyen Quyen { get; set; }
+        public bool Xoa { get; set; }
+        public string LocalHost { get; set; }
+        public string DeployHost { get; set; }
+        public bool ExpandStartup { get; set; }
     }
 }

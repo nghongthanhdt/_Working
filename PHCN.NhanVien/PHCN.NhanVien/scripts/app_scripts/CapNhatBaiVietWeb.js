@@ -212,7 +212,7 @@ function bindfileuploadDinhKem_Change() {
     });
 }
 
-/// còn lỗi lưu ảnh đại diện chưa chính xác
+
 function bindmodalFileDinhKem_btnXoaFile_Click() {
     $("#modalFileDinhKem_btnXoaFile").unbind("click").click(function () {
         if (!confirm("Bạn thật sự muốn xóa ?")) {

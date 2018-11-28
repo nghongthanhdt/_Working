@@ -93,7 +93,7 @@ namespace PHCN.NhanVien.Controllers
                 return PartialView("_pDanhSachThu");
             } else
             {
-                string result = "Phiên làm việc hết hạn, vui lòng click <a href='" + Url.Action("DangNhap", "Home") + "'>vào đây</a> " + "để đăng nhập lại.";
+                string result = "<div style='font-size:14px;'>Phiên làm việc hết hạn, vui lòng click nút <strong>Đến hộp thư</strong> trên máy tính để vào lại.</h4>";
                 return Content(result);
             }
 

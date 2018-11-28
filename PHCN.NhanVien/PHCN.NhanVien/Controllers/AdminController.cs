@@ -45,6 +45,7 @@ namespace PHCN.NhanVien.Controllers
             if (mode == "edit")
             {
                 db.Entry(nv).State = EntityState.Modified;
+                nv.MatKhau = nv.MatKhau.ToLower();
                 nv.MatKhauMD5 = CodeController.GetMD5(nv.MatKhau);
                 db.SaveChanges();
             } else
@@ -172,6 +173,12 @@ namespace PHCN.NhanVien.Controllers
             db.Entry(thamSo).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("ThamSoHeThong", "Admin");
+        }
+
+
+        public ActionResult TuChoiTruyCap()
+        {
+            return View();
         }
     }
 }

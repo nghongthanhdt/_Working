@@ -10,7 +10,7 @@
         loadDanhSachThu();
         loadThongTinSoThu(_trangThai);
     }, 60000);
-    
+
 });
 function loadDanhSachThu() {
     var url = _urlDanhSachThu;
@@ -262,3 +262,5 @@ function bindbtnDanhDauDaXemTatCa() {
         });
     });
 }
+
+

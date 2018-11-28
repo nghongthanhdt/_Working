@@ -28,8 +28,8 @@ namespace PHCN.NhanVien.Models
             this.GuiNhan = new HashSet<GuiNhan>();
             this.GuiNhan1 = new HashSet<GuiNhan>();
             this.LyLichVienChuc = new HashSet<LyLichVienChuc>();
-            this.PhanQuyen = new HashSet<PhanQuyen>();
             this.SoKSK = new HashSet<SoKSK>();
+            this.PhanQuyen = new HashSet<PhanQuyen>();
         }
     
         public int MaNhanVien { get; set; }
@@ -71,8 +71,8 @@ namespace PHCN.NhanVien.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LyLichVienChuc> LyLichVienChuc { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PhanQuyen> PhanQuyen { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SoKSK> SoKSK { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PhanQuyen> PhanQuyen { get; set; }
     }
 }

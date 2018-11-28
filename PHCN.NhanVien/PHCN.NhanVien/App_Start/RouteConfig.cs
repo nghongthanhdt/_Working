@@ -25,6 +25,12 @@ namespace PHCN.NhanVien
                 defaults: new { controller = "TinTuc", action = "Index", TenChuyenMucRewrite = UrlParameter.Optional }
             );
 
+            routes.MapRoute(
+                name: "QuanLyTaiKhoan",
+                url: "admin/tai-khoan",
+                defaults: new { controller = "Admin", action = "NhanVien" }
+            );
+
 
             routes.MapRoute(
                 name: "Default",

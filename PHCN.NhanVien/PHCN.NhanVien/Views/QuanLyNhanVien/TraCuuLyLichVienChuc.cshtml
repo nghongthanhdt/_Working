@@ -16,6 +16,17 @@
     {
         thoidiem = Request.QueryString["thoidiem"];
     }
+
+    string baocao = "";
+    if (Request.QueryString["baocao"] == null || Request.QueryString["baocao"] == "")
+    {
+        baocao = "lylichvienchuc";
+    }
+    else
+    {
+        baocao = Request.QueryString["baocao"];
+    }
+
 }
 
 <script src="~/scripts/table2excel.min.js"></script>
@@ -25,8 +36,8 @@
             <div class="col-sm-6">
                 <label>Báo cáo</label>
                 <select class="form-control" id="selectLoaiBaoCao">
-                    <option value="lylichvienchuc">Lý lịch viên chức</option>
-                    <option value="suckhoedinhky">Sức khỏe định kỳ</option>
+                    <option value="lylichvienchuc" @((baocao == "lylichvienchuc")?"selected":"")>Lý lịch viên chức</option>
+                    <option value="suckhoedinhky" @((baocao == "suckhoedinhky")?"selected":"")>Sức khỏe định kỳ</option>
                 </select>
             </div>
 

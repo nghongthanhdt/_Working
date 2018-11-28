@@ -1,0 +1,192 @@
+﻿@model PHCN.NhanVien.Models.NhanVien
+@{
+    ViewBag.PanelTitle = "Nhân viên " + Model.HoTen;
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    List<PHCN.NhanVien.Models.KhoaPhong> listKhoaPhong = ViewBag.ListKhoaPhong;
+    List<PHCN.NhanVien.Models.PhanQuyen> listPhanQuyen = ViewBag.ListPhanQuyen;
+
+}
+<div class="form-horizontal">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"> <i class="glyphicon glyphicon-user"></i> Thông tin chung</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Họ tên</label>
+                        <div class="col-md-9">
+                            <input type="text" value="@Model.HoTen" id="txtHoTen" class="form-control" />
+                            <input type="hidden" value="@Model.MaNhanVien" id="hiddenMaNhanVien" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Chức vụ</label>
+                        <div class="col-md-9">
+                            <input type="text" value="@Model.ChucVu" id="txtChucVu" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Khoa phòng</label>
+                        <div class="col-md-9">
+                            <select class="form-control selecter_1" id="selectKhoa">
+                                <option value=""> - chọn khoa phòng - </option>
+                                @foreach (var item in listKhoaPhong)
+                                {
+                                    <option value="@item.MaKhoa" @((item.MaKhoa == Model.MaKhoa) ? "selected='selected'" : "")>@item.MaKhoa - @item.TenKhoa</option>
+                                }
+                            </select>
+                            
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">STT</label>
+                        <div class="col-md-3">
+                            <input type="text" value="@Model.STT" id="txtSTT" class="form-control" />
+                            
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Email</label>
+                        <div class="col-md-9">
+                            <input type="text" value="@Model.Email" id="txtEmail" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Điện thoại</label>
+                        <div class="col-md-9">
+                            <input type="text" value="@Model.SoDienThoai" id="txtSoDienThoai" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Điện thoại nội bộ</label>
+                        <div class="col-md-6">
+                            <input type="text" value="@Model.SoDienThoaiNoiBo" id="txtSoDienThoaiNoiBo" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-key"></i> Tài khoản đăng nhập</h3>
+                </div>
+                <div class="panel-body">
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Tên đăng nhập</label>
+                        <div class="col-md-9">
+                            <input type="text" value="@Model.TenDangNhap" id="txtTenDangNhap" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Mật khẩu</label>
+                        <div class="col-md-9">                            
+                                <div>
+                                    <span><input type="password" value="" id="txtMatKhau" class="form-control" /></span>
+                                </div>                            
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"></label>
+                        <div class="col-md-9">
+                            <div class="checkbox">
+                                @Html.CheckBoxFor(x => x.NhanThu, new { @id = "checkboxNhanThu", @class = "" })
+                                <label for="checkboxNhanThu">Cho phép nhận thư</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+
+                        <div class="col-md-offset-3 col-md-9">
+                            <button class="btn btn-success" type="button" id="btnLuuNhanVien"><i class=" glyphicon glyphicon-ok"></i> Lưu nhân viên</button>
+                            
+                            <a href="@Url.Action("Index", "AdminNhanVien")" class="btn btn-default" type="button"><i class="glyphicon glyphicon-step-backward"></i> Trở lại danh sách</a>
+                            @if (Model.MaNhanVien != 0)
+                            {
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-cog"></i> Tùy chọn <span class="caret"></span></button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="javascript:void(0);" id="btnDoiMatKhau" class="list-group-item"><i class="glyphicon glyphicon-refresh"></i> Đổi mật khẩu</a></li>
+                                        <li><a href="javascript:void(0);" id="btnXoaNhanVien" class="list-group-item"><i class="glyphicon glyphicon-trash"></i> Xóa nhân viên</a></li>
+                                    </ul>
+                                </div>
+                            }
+                            
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class=" glyphicon glyphicon-flash"></i> Phân quyền</h3>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        @foreach (var phanquyen in listPhanQuyen)
+                        {
+                            <li class="list-group-item">
+                                <a href="javascript:void(0);"> @phanquyen.Quyen.TenQuyen </a>
+                                <button class="btn btn-xs btn-default pull-right">Xóa</button>
+                            </li>
+                        }
+                        
+                        
+                    </ul>
+                    <div class="list-group">
+                        
+                        <a href="javascript:void(0);" id="btnThemPhanQuyen" class="list-group-item active">
+                            <i class="glyphicon glyphicon-plus"></i>
+                            Thêm
+                        </a>
+                        
+                    </div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<div class="modal" id="modalDoiMatKhau">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Đổi mật khẩu</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <label>Mật khẩu mới</label>
+                        <input class="form-control" type="password" id="modalDoiMatKhau_txtMatKhauMoi">
+                    </div>
+                    <div class="col-xs-12">
+                        <label>Nhập lại mật khẩu mới</label>
+                        <input class="form-control" type="password" id="modalDoiMatKhau_txtNhapLaiMatKhauMoi">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span style="color:red; margin-right:10px;" id="modalDoiMatKhau_spanThongBao"></span>
+                <button type="button" class="btn btn-success" id="modalDoiMatKhau_btnLuu">Lưu mật khẩu</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var urlController = '@(HttpContext.Current.Request.Url.Scheme)://@(HttpContext.Current.Request.Url.Authority)/@(HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString())/';
+    var maNhanVien = '@Model.MaNhanVien';    
+</script>
+<script src="~/scripts/app_scripts/AdminNhanVienEdit.js?@("v="+DateTime.Now.ToString("yyMMddhhmmss"))"></script>

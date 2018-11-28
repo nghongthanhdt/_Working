@@ -129,6 +129,8 @@
   <ItemGroup>
     <Content Include="Content\ckeditor\adapters\jquery.js" />
     <Content Include="Content\ckeditor\build-config.js" />
+    <Content Include="Content\css\phcn.css" />
+    <Content Include="Content\home\images\slider\bvphcndt-banner2.jpg" />
     <Content Include="Content\img\chao-mung-2010.jpg" />
     <Content Include="Content\ckeditor\ckeditor.js" />
     <Content Include="Content\ckeditor\config.js" />
@@ -660,8 +662,10 @@
     </Content>
     <None Include="Properties\PublishProfiles\PHCN.NhanVien.pubxml" />
     <None Include="scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="scripts\app_scripts\AdminNhanVienEdit.js" />
     <Content Include="scripts\app_scripts\BaoCaoLyLichVienChuc.js" />
     <Content Include="scripts\app_scripts\CapNhatBaiVietWeb.js" />
+    <Content Include="scripts\app_scripts\DuyetBaiViet.js" />
     <Content Include="scripts\app_scripts\LuotKham.js" />
     <Content Include="scripts\app_scripts\CapNhatLyLichVienChuc.js" />
     <Content Include="scripts\app_scripts\CapNhatSoKSK.js" />
@@ -695,6 +699,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AdminNhanVienController.cs" />
     <Compile Include="Controllers\AjaxManagerController.cs" />
     <Compile Include="Controllers\CodeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -803,6 +808,9 @@
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MaCCHN.cs">
+      <DependentUpon>PHCNEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Menu.cs">
       <DependentUpon>PHCNEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\NgheNghiep.cs">
@@ -972,6 +980,10 @@
     <Content Include="Views\TraCuu\CoCauNhanSu.cshtml" />
     <Content Include="Views\TraCuu\SoDoToChuc.cshtml" />
     <Content Include="Views\QuanLySoLieuChuyenMon\CauHinhThamSo.cshtml" />
+    <Content Include="Views\QuanLyBaiViet\DuyetBai.cshtml" />
+    <Content Include="Views\Admin\TuChoiTruyCap.cshtml" />
+    <Content Include="Views\AdminNhanVien\Index.cshtml" />
+    <Content Include="Views\AdminNhanVien\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -986,6 +998,7 @@
     <Folder Include="Content\home\css\" />
     <Folder Include="Content\home\fonts\" />
     <Folder Include="Content\home\js\" />
+    <Folder Include="Views\AdminTaiKhoan\" />
     <Folder Include="Views\AjaxManager\" />
     <Folder Include="Views\Code\" />
     <Folder Include="Views\Lib\" />

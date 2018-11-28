@@ -496,6 +496,24 @@
           <Property Name="STT" Type="int" Nullable="false" />
           <Property Name="Xoa" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="MenuId" />
+          </Key>
+          <Property Name="MenuId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MenuType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Ten" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Url" Type="nvarchar" MaxLength="200" />
+          <Property Name="STT" Type="int" Nullable="false" />
+          <Property Name="ParentId" Type="int" Nullable="false" />
+          <Property Name="MenuLevel" Type="int" Nullable="false" />
+          <Property Name="IconClass" Type="nvarchar" MaxLength="100" />
+          <Property Name="MaQuyen" Type="nvarchar" MaxLength="50" />
+          <Property Name="Xoa" Type="bit" Nullable="false" />
+          <Property Name="LocalHost" Type="nvarchar" MaxLength="100" />
+          <Property Name="DeployHost" Type="nvarchar" MaxLength="100" />
+          <Property Name="ExpandStartup" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="NgheNghiep">
           <Key>
             <PropertyRef Name="MaNgheNghiep" />
@@ -1104,6 +1122,7 @@
           <EntitySet Name="LuotKSK" EntityType="Self.LuotKSK" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LyLichVienChuc" EntityType="Self.LyLichVienChuc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MaCCHN" EntityType="Self.MaCCHN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NgheNghiep" EntityType="Self.NgheNghiep" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NhanVien" EntityType="Self.NhanVien" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NoiDungKSK" EntityType="Self.NoiDungKSK" Schema="dbo" store:Type="Tables" />
@@ -1300,8 +1319,6 @@
           <EntitySet Name="NoiDungKSK" EntityType="PHCNModel.NoiDungKSK" />
           <EntitySet Name="PhamViHoatDongChuyenMon" EntityType="PHCNModel.PhamViHoatDongChuyenMon" />
           <EntitySet Name="PhanLoaiSK" EntityType="PHCNModel.PhanLoaiSK" />
-          <EntitySet Name="PhanQuyen" EntityType="PHCNModel.PhanQuyen" />
-          <EntitySet Name="Quyen" EntityType="PHCNModel.Quyen" />
           <EntitySet Name="SoKSK" EntityType="PHCNModel.SoKSK" />
           <EntitySet Name="SoKSK_Benh" EntityType="PHCNModel.SoKSK_Benh" />
           <EntitySet Name="ThamSoHeThong" EntityType="PHCNModel.ThamSoHeThong" />
@@ -1392,10 +1409,6 @@
             <End Role="SoKSK" EntitySet="SoKSK" />
             <End Role="LuotKSK" EntitySet="LuotKSK" />
           </AssociationSet>
-          <AssociationSet Name="FK_PhanQuyen_Quyen" Association="PHCNModel.FK_PhanQuyen_Quyen">
-            <End Role="Quyen" EntitySet="Quyen" />
-            <End Role="PhanQuyen" EntitySet="PhanQuyen" />
-          </AssociationSet>
           <EntitySet Name="DeTaiSangKien" EntityType="PHCNModel.DeTaiSangKien" />
           <EntitySet Name="NhanVien" EntityType="PHCNModel.NhanVien" />
           <AssociationSet Name="FK_BaiViet_NhanVien" Association="PHCNModel.FK_BaiViet_NhanVien">
@@ -1446,13 +1459,20 @@
             <End Role="NhanVien" EntitySet="NhanVien" />
             <End Role="LyLichVienChuc" EntitySet="LyLichVienChuc" />
           </AssociationSet>
+          <AssociationSet Name="FK_SoKSK_NhanVien" Association="PHCNModel.FK_SoKSK_NhanVien">
+            <End Role="NhanVien" EntitySet="NhanVien" />
+            <End Role="SoKSK" EntitySet="SoKSK" />
+          </AssociationSet>
+          <EntitySet Name="Menu" EntityType="PHCNModel.Menu" />
+          <EntitySet Name="PhanQuyen" EntityType="PHCNModel.PhanQuyen" />
+          <EntitySet Name="Quyen" EntityType="PHCNModel.Quyen" />
           <AssociationSet Name="FK_PhanQuyen_NhanVien" Association="PHCNModel.FK_PhanQuyen_NhanVien">
             <End Role="NhanVien" EntitySet="NhanVien" />
             <End Role="PhanQuyen" EntitySet="PhanQuyen" />
           </AssociationSet>
-          <AssociationSet Name="FK_SoKSK_NhanVien" Association="PHCNModel.FK_SoKSK_NhanVien">
-            <End Role="NhanVien" EntitySet="NhanVien" />
-            <End Role="SoKSK" EntitySet="SoKSK" />
+          <AssociationSet Name="FK_PhanQuyen_Quyen" Association="PHCNModel.FK_PhanQuyen_Quyen">
+            <End Role="Quyen" EntitySet="Quyen" />
+            <End Role="PhanQuyen" EntitySet="PhanQuyen" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="BacSyKSK">
@@ -2012,24 +2032,6 @@
           <Property Name="STT" Type="Int32" Nullable="false" />
           <Property Name="Xoa" Type="Boolean" Nullable="false" />
         </EntityType>
-        <EntityType Name="PhanQuyen">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MaNhanVien" Type="Int32" Nullable="false" />
-          <Property Name="MaQuyen" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Quyen" Relationship="PHCNModel.FK_PhanQuyen_Quyen" FromRole="PhanQuyen" ToRole="Quyen" />
-          <NavigationProperty Name="NhanVien" Relationship="PHCNModel.FK_PhanQuyen_NhanVien" FromRole="PhanQuyen" ToRole="NhanVien" />
-        </EntityType>
-        <EntityType Name="Quyen">
-          <Key>
-            <PropertyRef Name="MaQuyen" />
-          </Key>
-          <Property Name="MaQuyen" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TenQuyen" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="PhanQuyen" Relationship="PHCNModel.FK_PhanQuyen_Quyen" FromRole="Quyen" ToRole="PhanQuyen" />
-        </EntityType>
         <EntityType Name="SoKSK">
           <Key>
             <PropertyRef Name="MaSoKSK" />
@@ -2359,18 +2361,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PhanQuyen_Quyen">
-          <End Type="PHCNModel.Quyen" Role="Quyen" Multiplicity="1" />
-          <End Type="PHCNModel.PhanQuyen" Role="PhanQuyen" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Quyen">
-              <PropertyRef Name="MaQuyen" />
-            </Principal>
-            <Dependent Role="PhanQuyen">
-              <PropertyRef Name="MaQuyen" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="DeTaiSangKien">
           <Key>
             <PropertyRef Name="MaDeTaiSangKien" />
@@ -2424,8 +2414,8 @@
           <NavigationProperty Name="GuiNhan1" Relationship="PHCNModel.FK_GuiNhan_NhanVien_NguoiNhan" FromRole="NhanVien" ToRole="GuiNhan" />
           <NavigationProperty Name="KhoaPhong" Relationship="PHCNModel.FK_NhanVien_KhoaPhong" FromRole="NhanVien" ToRole="KhoaPhong" />
           <NavigationProperty Name="LyLichVienChuc" Relationship="PHCNModel.FK_LyLichVienChuc_NhanVien" FromRole="NhanVien" ToRole="LyLichVienChuc" />
-          <NavigationProperty Name="PhanQuyen" Relationship="PHCNModel.FK_PhanQuyen_NhanVien" FromRole="NhanVien" ToRole="PhanQuyen" />
           <NavigationProperty Name="SoKSK" Relationship="PHCNModel.FK_SoKSK_NhanVien" FromRole="NhanVien" ToRole="SoKSK" />
+          <NavigationProperty Name="PhanQuyen" Relationship="PHCNModel.FK_PhanQuyen_NhanVien" FromRole="NhanVien" ToRole="PhanQuyen" />
         </EntityType>
         <Association Name="FK_BaiViet_NhanVien">
           <End Type="PHCNModel.NhanVien" Role="NhanVien" Multiplicity="1" />
@@ -2571,6 +2561,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SoKSK_NhanVien">
+          <End Type="PHCNModel.NhanVien" Role="NhanVien" Multiplicity="0..1" />
+          <End Type="PHCNModel.SoKSK" Role="SoKSK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="MaNhanVien" />
+            </Principal>
+            <Dependent Role="SoKSK">
+              <PropertyRef Name="MaNhanVien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="MenuId" />
+          </Key>
+          <Property Name="MenuId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MenuType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Ten" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="STT" Type="Int32" Nullable="false" />
+          <Property Name="ParentId" Type="Int32" Nullable="false" />
+          <Property Name="MenuLevel" Type="Int32" Nullable="false" />
+          <Property Name="IconClass" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MaQuyen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Xoa" Type="Boolean" Nullable="false" />
+          <Property Name="LocalHost" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DeployHost" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ExpandStartup" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PhanQuyen">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaNhanVien" Type="Int32" Nullable="false" />
+          <Property Name="MaQuyen" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="NhanVien" Relationship="PHCNModel.FK_PhanQuyen_NhanVien" FromRole="PhanQuyen" ToRole="NhanVien" />
+          <NavigationProperty Name="Quyen" Relationship="PHCNModel.FK_PhanQuyen_Quyen" FromRole="PhanQuyen" ToRole="Quyen" />
+        </EntityType>
+        <EntityType Name="Quyen">
+          <Key>
+            <PropertyRef Name="MaQuyen" />
+          </Key>
+          <Property Name="MaQuyen" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TenQuyen" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PhanQuyen" Relationship="PHCNModel.FK_PhanQuyen_Quyen" FromRole="Quyen" ToRole="PhanQuyen" />
+        </EntityType>
         <Association Name="FK_PhanQuyen_NhanVien">
           <End Type="PHCNModel.NhanVien" Role="NhanVien" Multiplicity="1" />
           <End Type="PHCNModel.PhanQuyen" Role="PhanQuyen" Multiplicity="*" />
@@ -2583,15 +2621,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SoKSK_NhanVien">
-          <End Type="PHCNModel.NhanVien" Role="NhanVien" Multiplicity="0..1" />
-          <End Type="PHCNModel.SoKSK" Role="SoKSK" Multiplicity="*" />
+        <Association Name="FK_PhanQuyen_Quyen">
+          <End Type="PHCNModel.Quyen" Role="Quyen" Multiplicity="1" />
+          <End Type="PHCNModel.PhanQuyen" Role="PhanQuyen" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="NhanVien">
-              <PropertyRef Name="MaNhanVien" />
+            <Principal Role="Quyen">
+              <PropertyRef Name="MaQuyen" />
             </Principal>
-            <Dependent Role="SoKSK">
-              <PropertyRef Name="MaNhanVien" />
+            <Dependent Role="PhanQuyen">
+              <PropertyRef Name="MaQuyen" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3143,23 +3181,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PhanQuyen">
-            <EntityTypeMapping TypeName="PHCNModel.PhanQuyen">
-              <MappingFragment StoreEntitySet="PhanQuyen">
-                <ScalarProperty Name="MaQuyen" ColumnName="MaQuyen" />
-                <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Quyen">
-            <EntityTypeMapping TypeName="PHCNModel.Quyen">
-              <MappingFragment StoreEntitySet="Quyen">
-                <ScalarProperty Name="TenQuyen" ColumnName="TenQuyen" />
-                <ScalarProperty Name="MaQuyen" ColumnName="MaQuyen" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="SoKSK">
             <EntityTypeMapping TypeName="PHCNModel.SoKSK">
               <MappingFragment StoreEntitySet="SoKSK">
@@ -3277,6 +3298,42 @@
                 <ScalarProperty Name="ChucVu" ColumnName="ChucVu" />
                 <ScalarProperty Name="MaKhoa" ColumnName="MaKhoa" />
                 <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menu">
+            <EntityTypeMapping TypeName="PHCNModel.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="ExpandStartup" ColumnName="ExpandStartup" />
+                <ScalarProperty Name="DeployHost" ColumnName="DeployHost" />
+                <ScalarProperty Name="LocalHost" ColumnName="LocalHost" />
+                <ScalarProperty Name="Xoa" ColumnName="Xoa" />
+                <ScalarProperty Name="MaQuyen" ColumnName="MaQuyen" />
+                <ScalarProperty Name="IconClass" ColumnName="IconClass" />
+                <ScalarProperty Name="MenuLevel" ColumnName="MenuLevel" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="STT" ColumnName="STT" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="MenuType" ColumnName="MenuType" />
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhanQuyen">
+            <EntityTypeMapping TypeName="PHCNModel.PhanQuyen">
+              <MappingFragment StoreEntitySet="PhanQuyen">
+                <ScalarProperty Name="MaQuyen" ColumnName="MaQuyen" />
+                <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Quyen">
+            <EntityTypeMapping TypeName="PHCNModel.Quyen">
+              <MappingFragment StoreEntitySet="Quyen">
+                <ScalarProperty Name="TenQuyen" ColumnName="TenQuyen" />
+                <ScalarProperty Name="MaQuyen" ColumnName="MaQuyen" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

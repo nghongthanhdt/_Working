@@ -60,13 +60,10 @@
 <script src="~/scripts/jquery.mask.js"></script>
 <script src="~/scripts/jquery-ui-1.12.1.min.js"></script>
 
-
-
 <div style="width:100%; height:500px; overflow-y:scroll;" id="divDanhSachThu">
     <div class="text-center">
         <br /><br /><br /><br />
-        Đang tải, vui lòng chờ ...
-                 
+        Đang tải, vui lòng chờ ...                 
     </div>
     
 </div>
@@ -151,86 +148,11 @@
 </div>
 
 
-<div class="modal" id="modalDoiMatKhau">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title">Tổ CNTT Thông báo</h4>
-            </div>
-            <div class="modal-body">
-                <p style="font-size:16px;">
-                    Để bảo mật hơn cho hệ thống thư nội bộ, anh chị vui lòng đổi mật khẩu bảo mật hơn tối thiểu 6 ký tự gồm ít nhất 1 chữ cái, 1 chữ số, và 1 ký tự đặc biệt (@("~!@#$%^&*")) <br/>
-                    Mật khẩu này dùng để đăng nhập gián tiếp qua website, còn trên máy tính có phần mềm, nhấn nút "Đến hộp thư" thì vẫn bình thường, mọi thắc mắc vui lòng từ từ liên hệ Thanh [121] để được hỗ trợ.
-                </p>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <label>Tên đăng nhập</label>
-                        <input type="text" class="form-control disabled" value="@nhanVienDangNhap.TenDangNhap" disabled="disabled">
-                    </div>
-
-                </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <label>Mật khẩu</label>
-                        <input type="password" class="form-control" id="txtMatKhau">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <label>Nhập lại mật khẩu</label>
-                        <input type="password" class="form-control" id="txtNhapLaiMatKhau" >
-                    </div>                
-                </div>
-                
-            </div>
-            <div class="modal-footer">
-
-                <span id="spanThongBao" style="color:red; display:none;"></span>
-                <button type="button" class="btn btn-success" id="btnLuuMatKhauPhucTap">Lưu mật khẩu</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Để sau</button>
-                
-            </div>
-        </div>
-    </div>
-</div>
-
-@{ 
-    string doiMatKhau = "show";
-    if (nhanVienDangNhap.MatKhauMD5 == "202cb962ac59075b964b07152d234b70")
-    {
-        doiMatKhau = "show";
-    } else
-    {
-        doiMatKhau = "hide";
-    }
-}
-
-<script>
-    @*$(document).ready(function () {
-        $("#modalDoiMatKhau").modal('@(doiMatKhau)');
-    });
-    function bindbtnLuuMatKhauPhucTap_OnClick() {
-        $("#btnLuuMatKhauPhucTap").unbind("click").click (function () {
-            var matkhau = $("#txtMatKhau").val();
-            var nhaplaimatkhau = $("#txtNhapLaiMatKhau").val();
-            if (matkhau == "") {
-                alert("Chưa nhập mật khẩu");
-                return;
-            }
-            if (nhaplaimatkhau == "") {
-                alert("Chưa nhập mật khẩu");
-                return;
-            }
-            if (matkhau != nhaplaimatkhau) {
-                alert("Nhập lại mật khẩu chưa trùng khớp");
-                return;
-            }
 
 
-        });
-    }*@
-</script>
+
+
+
 <script>
     var _urlDanhSachThu = '@Url.Action("_pDanhSachThu", "ThuNoiBo")';
     var _urlTraVeThuDen = '@Url.Action("TraVeThuDenList", "ThuNoiBo")';
@@ -240,6 +162,7 @@
     var _urlDanhDauDaXemList = '@Url.Action("DanhDauDaXemList", "ThuNoiBo")';
     var _urlDanhDauChuaXemList = '@Url.Action("DanhDauChuaXemList", "ThuNoiBo")';
     var _urlDanhDauDaXemTatCa = '@Url.Action("DanhDauDaXemTatCa", "ThuNoiBo")';
+    var _urlDoiMatKhauPhucTap = '@Url.Action("DoiMatKhauPhucTap", "AjaxManager")';
 </script>
 
 

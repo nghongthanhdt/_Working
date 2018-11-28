@@ -1,0 +1,115 @@
+﻿@model PHCN.NhanVien.Models.BaiVietWeb
+@{
+
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int id = int.Parse(ViewContext.RouteData.Values["id"].ToString());
+    PHCN.NhanVien.Models.PHCNEntities db = new PHCN.NhanVien.Models.PHCNEntities();
+    ViewBag.PanelTitle = "Duyệt bài viết: " + Model.TieuDe;
+    var listAnhDaiDien = db.HinhAnh.Where(x => x.LoaiHinhAnh == "baivietweb" && x.Xoa != true && x.MaBaiViet == Model.MaBaiViet && x.DaiDienBaiVietWeb == true).OrderByDescending(x => x.MaHinhAnh).ToList();
+    var anhDaiDien = new PHCN.NhanVien.Models.HinhAnh();
+    int _maAnhDaiDien = 0;
+    if (listAnhDaiDien.Any())
+    {
+        anhDaiDien = listAnhDaiDien.First();
+        _maAnhDaiDien = anhDaiDien.MaHinhAnh;
+
+    }
+
+    var nhanVienDangNhap = (PHCN.NhanVien.Models.NhanVien)Session["NhanVienDangNhap"];
+    var listPhanQuyen = nhanVienDangNhap.PhanQuyen.ToList();
+
+    bool isGuiBaiVietWebsite = listPhanQuyen.Where(x => x.MaQuyen == "guibaivietwebsite").Any();
+    bool isDuyetBaiVietWebsite = listPhanQuyen.Where(x => x.MaQuyen == "duyetbaivietwebsite").Any();
+
+
+    
+    var listFileDinhKem = db.FileDinhKem.Where(x => x.MaBaiVietWeb == Model.MaBaiViet && x.Xoa != true).OrderBy(x => x.MaFile).ToList();
+    
+    
+
+}
+
+
+<div class="row">
+    <div class="col-md-9">
+        
+        <p>
+            Ngày gửi: <strong>@Model.Ngay.ToString()</strong> - Chuyên mục: <strong>@Model.ChuyenMuc.TenChuyenMuc</strong>
+            - Trạng thái: 
+                @if (Model.HienThiTrenTrangChu == true)
+                {
+
+                    <i class="glyphicon glyphicon-ok"></i> <span style="color:#008000;">Hoạt động</span>
+
+                }
+                else if (Model.HienThiTrenTrangChu == false)
+                {
+                    <i class="glyphicon glyphicon-lock"></i> <span style="color:maroon;">Khóa</span>
+                } else
+                {
+                    <span>Chờ duyệt</span>
+                }
+
+
+        </p>
+        <div class="well" style="font-size:16px; box-shadow:3px 3px 5px gray; border:1px solid #008000; border-radius:0px; margin-top:10px; padding:15px;">
+            
+
+
+            <img class="img-responsive" src="@((anhDaiDien.DaiDienBaiVietWeb == true) ? ("http://bvphcndt.com/" + anhDaiDien.DuongDan + anhDaiDien.TenFileDayDu) : Url.Content("~/Content/ImageManager/ClickChonAnhDaiDien.jpg"))" style="width:100%; border: 1px solid gray" alt="">
+            <br/>
+            <div style="font-family:Arial; text-align:justify; font-weight:bold;">
+                @Model.TomTat
+            </div>
+            <br />
+
+            @Html.Raw(Model.NoiDung)
+
+            <div style="text-align:right;">
+                <strong>Tác giả: </strong> @Model.TacGia
+            </div>
+            @if (listFileDinhKem.Any())
+            {
+                <div>
+                    <hr />
+                    <i class="glyphicon glyphicon-tags"></i> &nbsp; Đính kèm
+                    <ul style="list-style:none;">
+                        @foreach (var item in listFileDinhKem)
+                        {
+                            <li style="margin-top:5px; margin-bottom:5px; padding-right:10px;">
+                                <i class="glyphicon glyphicon-file"></i>
+                                <a href="@Url.Content("~/Content/FileManager/" + item.TenFileFull)" class="linkFileDinhKem" data-tenfile="@item.TenFile" data-tenfilefull="@item.TenFileFull" data-mafile="@item.MaFile">@item.TenFile</a>
+                            </li>
+                        }
+                        
+                        
+                    </ul>
+                </div>
+            }
+            
+        </div>
+    </div>
+    <div class="col-md-3">
+        
+        @if (isDuyetBaiVietWebsite)
+        {
+            <button type="button" id="btnDuyetBaiViet" class="btn btn-success btn-block" style="text-align:left;"><i class="glyphicon glyphicon-ok"></i> Duyệt bài viết</button>
+            <button type="button" id="btnKhoaBaiViet" class="btn btn-danger btn-block" style="text-align:left;"><i class="glyphicon glyphicon-lock"></i> Khóa bài viết</button>
+            <button type="button" id="btnXoaBaiViet" class="btn btn-default btn-block" style="text-align:left;"> <i class="glyphicon glyphicon-trash"></i> Xóa</button>
+        }
+        else if (isGuiBaiVietWebsite)
+        {
+            <button type="button" id="btnGuiBaiViet" class="btn btn-success btn-block" style="text-align:left;"><i class="glyphicon glyphicon-ok"></i> Gửi bài viết</button>
+            ViewBag.PanelTitle = "Gửi bài viết: " + Model.TieuDe;
+        }
+        <button type="button" id="btnTroLai" class="btn btn-default btn-block" style="text-align:left;"><i class="glyphicon glyphicon-arrow-left"></i> Trở lại</button>
+
+
+        
+    </div>
+</div>
+<script>
+    var urlController = '@(HttpContext.Current.Request.Url.Scheme)://@(HttpContext.Current.Request.Url.Authority)/@(HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString())/';
+
+</script>
+<script src="~/scripts/app_scripts/DuyetBaiViet.js?@("v="+DateTime.Now.ToString("yyMMddhhmmss"))"></script>
