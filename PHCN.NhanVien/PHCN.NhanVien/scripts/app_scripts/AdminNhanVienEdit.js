@@ -3,6 +3,8 @@
     btnLuuNhanVien_OnClick();
     btnDoiMatKhau_OnClick();
     btnXoaNhanVien_OnClick();
+    btnThemPhanQuyen_OnClick();
+    btnXoaPhanQuyen_OnClick();
 });
 
 function disabletxtMatKhau() {
@@ -89,7 +91,7 @@ function btnDoiMatKhau_OnClick() {
 }
 function btnXoaNhanVien_OnClick() {
     $("#btnXoaNhanVien").click(function () {
-        thConfirm("Bạn thật sự muốn xóa ?", function () {
+        thConfirm("Bạn thật sự muốn xóa nhân viên này ?", function () {
             var pMaNhanVien = maNhanVien;
             var url = urlController + "XoaNhanVien";
             var param = {
@@ -147,6 +149,61 @@ function modalDoiMatKhau_btnLuu_OnClick() {
                 return;
             }
         });
+        
+    });
+}
+
+
+function btnThemPhanQuyen_OnClick() {
+    $("#btnThemPhanQuyen").unbind("click").click(function () {
+        modalThemPhanQuyen_btnThem_OnClick();
+        $("#modalThemPhanQuyen").modal("show");
+    });
+    
+}
+
+function modalThemPhanQuyen_btnThem_OnClick() {
+    $(".modalThemPhanQuyen_btnThem").unbind("click").click(function () {
+        var pMaNhanVien = maNhanVien;
+        var pMaQuyen = $(this).data("maquyen");
+
+        var url = urlController + "ThemPhanQuyen";
+        var param = {
+            MaNhanVien:pMaNhanVien,
+            MaQuyen:pMaQuyen
+        }
+        thAjaxAction(url, param, function (result) {
+            if (result == "ok") {
+                window.location = window.location;
+            } else if (result == "phanquyendatontai") {
+                $("#modalThemPhanQuyen").modal("hide");
+                thAlert("Phân quyền đã tồn tại, vui lòng kiểm tra lại");
+            } else {
+                thAlertShowSystemError(result);
+            }
+        });
+    });
+}
+
+function btnXoaPhanQuyen_OnClick() {
+    $(".btnXoaPhanQuyen").unbind("click").click(function () {
+        var pMaPhanQuyen = $(this).data("maphanquyen");
+
+        thConfirm("Bạn thật sự muốn xóa phân quyền ?", function () {
+            var url = urlController + "XoaPhanQuyen";
+            var param = {
+                MaPhanQuyen: pMaPhanQuyen
+            }
+            thAjaxAction(url, param, function (result) {
+                if (result == "ok") {
+                    window.location = window.location;
+                } else {
+                    thAlertShowSystemError(result);
+                }
+            });
+        });
+        
+        
         
     });
 }

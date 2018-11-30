@@ -1,0 +1,61 @@
+﻿@model List<PHCN.NhanVien.Models.KhoaPhong>
+@{
+    ViewBag.Title = "KhoaPhong";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.PanelTitle = "Danh mục khoa phòng";
+}
+
+<a href="@Url.Action("Edit", "AdminKhoaPhong")" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Thêm mới</a>
+
+
+<div class="btn-group">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Tùy chọn &nbsp; <span class="caret"></span></button>
+    <ul class="dropdown-menu" role="menu">
+        <li><a href="@Url.Action("Index", "AdminNhanVien")" ><i class="fa fa-group"></i> Nhân viên</a></li>
+        <li><a href="javascript:void(0);" id="btnCapNhatSTT"><i class="glyphicon glyphicon-sort"></i> Cập nhật STT</a></li>
+        <li><a href="javascript:void(0);">Phân quyền nhân viên</a></li>
+    </ul>
+</div>
+<br /><br />
+
+<style>
+    #tableKhoaPhong a.tenkhoa {
+        color:#046700;
+    }
+    #tableKhoaPhong a.tenkhoa:hover {
+        color:#00aa18;
+    }
+    #tableKhoaPhong .txtSTT {
+        width:80px;
+        text-align:center;
+    }
+</style>
+<table class="table" style="font-size:16px;" id="tableKhoaPhong">
+    <tr>
+        <th style="width:5%; text-align:center">STT</th>
+        <th style="width:10%;">Mã khoa</th>
+        <th style="width:60%;">Tên khoa</th>
+        <th style="width:25%;"></th>
+    </tr>
+
+    @foreach (var khoaphong in Model)
+    {
+        <tr>
+            <td>
+                <input type="text" value="@khoaphong.STT" class="txtSTT number" data-makhoa="@khoaphong.MaKhoa" maxlength="4" />                
+            </td>
+            <td style="text-align:center; font-weight:bold;">
+                @khoaphong.MaKhoa
+            </td>
+            <td>
+                <a class="tenkhoa" href="@Url.Action("Edit", "AdminKhoaPhong", new { id = khoaphong.MaKhoa})">@khoaphong.TenKhoa</a>
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", "AdminKhoaPhong", new { id = khoaphong.MaKhoa})" class="btn btn-xs btn-success btnSua"><i class=" glyphicon glyphicon-pencil"></i> Sửa</a>
+                <a href="javascript:void(0);" class="btn btn-xs btn-danger btnXoa" data-makhoa="@khoaphong.MaKhoa"><i class=" glyphicon glyphicon-trash"></i> Xóa</a>
+            </td>
+        </tr>
+    }
+</table>
+
+<script src="~/scripts/app_scripts/AdminKhoaPhong.js?@("v="+DateTime.Now.ToString("yyMMddhhmmss"))"></script>

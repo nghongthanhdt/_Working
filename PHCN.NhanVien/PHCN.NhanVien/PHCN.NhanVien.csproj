@@ -662,6 +662,8 @@
     </Content>
     <None Include="Properties\PublishProfiles\PHCN.NhanVien.pubxml" />
     <None Include="scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="scripts\app_scripts\AdminKhoaPhong.js" />
+    <Content Include="scripts\app_scripts\AdminKhoaPhongEdit.js" />
     <Content Include="scripts\app_scripts\AdminNhanVienEdit.js" />
     <Content Include="scripts\app_scripts\BaoCaoLyLichVienChuc.js" />
     <Content Include="scripts\app_scripts\CapNhatBaiVietWeb.js" />
@@ -699,6 +701,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AdminKhoaPhongController.cs" />
     <Compile Include="Controllers\AdminNhanVienController.cs" />
     <Compile Include="Controllers\AjaxManagerController.cs" />
     <Compile Include="Controllers\CodeController.cs" />
@@ -984,6 +987,8 @@
     <Content Include="Views\Admin\TuChoiTruyCap.cshtml" />
     <Content Include="Views\AdminNhanVien\Index.cshtml" />
     <Content Include="Views\AdminNhanVien\Edit.cshtml" />
+    <Content Include="Views\AdminKhoaPhong\Index.cshtml" />
+    <Content Include="Views\AdminKhoaPhong\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

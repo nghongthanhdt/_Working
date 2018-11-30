@@ -4,6 +4,7 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     List<PHCN.NhanVien.Models.KhoaPhong> listKhoaPhong = ViewBag.ListKhoaPhong;
     List<PHCN.NhanVien.Models.PhanQuyen> listPhanQuyen = ViewBag.ListPhanQuyen;
+    List<PHCN.NhanVien.Models.Quyen> listTatCaQuyen = ViewBag.TatCaQuyen;
 
 }
 <div class="form-horizontal">
@@ -137,7 +138,7 @@
                         {
                             <li class="list-group-item">
                                 <a href="javascript:void(0);"> @phanquyen.Quyen.TenQuyen </a>
-                                <button class="btn btn-xs btn-default pull-right">Xóa</button>
+                                <button class="btn btn-xs btn-default pull-right btnXoaPhanQuyen" data-maphanquyen="@phanquyen.ID">Xóa</button>
                             </li>
                         }
                         
@@ -185,6 +186,37 @@
         </div>
     </div>
 </div>
+<div class="modal" id="modalThemPhanQuyen">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Thêm phân quyền</h4>
+            </div>
+            <div class="modal-body" style="max-height:300px; overflow-y:scroll;">
+                <ul class="list-group">
+                    @foreach (var item in listTatCaQuyen)
+                    {
+                        <li class="list-group-item">
+                            <p>
+                                <button class="btn btn-xs btn-success pull-right modalThemPhanQuyen_btnThem" data-maquyen="@item.MaQuyen" >Thêm</button>
+                                <strong>@item.TenQuyen</strong>                                
+                            </p>
+                        </li>
+                    }
+                    
+                    
+                    
+                </ul>
+            </div>
+            <div class="modal-footer">
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script>
     var urlController = '@(HttpContext.Current.Request.Url.Scheme)://@(HttpContext.Current.Request.Url.Authority)/@(HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString())/';
     var maNhanVien = '@Model.MaNhanVien';    

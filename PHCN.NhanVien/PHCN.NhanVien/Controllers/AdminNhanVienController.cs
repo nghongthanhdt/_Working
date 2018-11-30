@@ -26,10 +26,6 @@ namespace PHCN.NhanVien.Controllers
         {
             var listKhoaPhong = db.KhoaPhong.Where(x => x.Xoa == false).OrderBy(x => x.STT).ToList();
             ViewBag.ListKhoaPhong = listKhoaPhong;
-
-            
-
-
             if (id != 0)
             {
                 PHCN.NhanVien.Models.NhanVien nv = db.NhanVien.Find(id);
@@ -40,10 +36,13 @@ namespace PHCN.NhanVien.Controllers
                 {
                     var listPhanQuyen = nv.PhanQuyen.OrderBy(x => x.MaQuyen).ToList();
                     ViewBag.ListPhanQuyen = listPhanQuyen;
+                    var listTatCaQuyen = db.Quyen.OrderBy(x => x.MaQuyen).ToList();
+                    ViewBag.TatCaQuyen = listTatCaQuyen;
                     return View(nv);
                 }
                     
             }
+            
             NhanVien.Models.NhanVien nv2 = new Models.NhanVien();
             return View(nv2);
         }
@@ -91,6 +90,40 @@ namespace PHCN.NhanVien.Controllers
             }
             
         }
+        public ActionResult ThemPhanQuyen(int MaNhanVien, string MaQuyen) 
+        {
+            try
+            {
+                if (db.PhanQuyen.Where(x => x.MaNhanVien == MaNhanVien && x.MaQuyen == MaQuyen).ToList().Any())
+                {
+                    return Content("phanquyendatontai");
+                }
+                PhanQuyen phanquyen = new PhanQuyen();
+                phanquyen.MaNhanVien = MaNhanVien;
+                phanquyen.MaQuyen = MaQuyen;
+                db.PhanQuyen.Add(phanquyen);
+                db.SaveChanges();
+                return Content("ok");
+            } catch (Exception ex)
+            {
+                return Content(ex.Message);
+            }
+        }
+        public ActionResult XoaPhanQuyen(int MaPhanQuyen)
+        {
+            try
+            {
+                var phanquyen = db.PhanQuyen.Find(MaPhanQuyen);
+                db.PhanQuyen.Remove(phanquyen);
+                db.SaveChanges();
+                return Content("ok");
+            }
+            catch (Exception ex)
+            {
+                return Content(ex.Message);
+            }
+        }
+
 
         [HttpPost]
         public ActionResult AdminDoiMatKhau(int MaNhanVien, string MatKhau)
